@@ -5,10 +5,14 @@
  */
 package dao;
 
+import entity.Reservation;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
 /**
  *
  * @author Thanh Tung
  */
 public interface ReservationDAO {
-    
+    public ArrayList<Reservation> getReservations() throws SQLException;
 }
