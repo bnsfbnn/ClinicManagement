@@ -9,16 +9,21 @@ package entity;
  *
  * @author Thanh Tung
  */
-public class Package {
+public class ServicePackage {
     private int packageId;
     private String packageTitle;
     private String examinationDuration;
     private float price;
 
-    public Package() {
+    public ServicePackage() {
     }
 
-    public Package(int packageId, String packageTitle, String examinationDuration, float price) {
+    public ServicePackage(String packageTitle, String examinationDuration) {
+        this.packageTitle = packageTitle;
+        this.examinationDuration = examinationDuration;
+    }
+    
+    public ServicePackage(int packageId, String packageTitle, String examinationDuration, float price) {
         this.packageId = packageId;
         this.packageTitle = packageTitle;
         this.examinationDuration = examinationDuration;

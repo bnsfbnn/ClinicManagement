@@ -9,8 +9,12 @@
  */
 package controller;
 
+import dao.impl.ReservationDAOImpl;
+import entity.Reservation;
+import entity.User;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -33,7 +37,15 @@ public class ViewAllReservations extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("jsp/viewAllReservation.jsp").forward(request, response);
+        try {
+            ReservationDAOImpl reservationDAO = new ReservationDAOImpl();
+            ArrayList<Reservation> reservations = reservationDAO.getReservations();
+            ArrayList<User> doctors = reservationDAO.getDoctorsHasReservation();
+            request.setAttribute("doctors", doctors);
+            request.setAttribute("reservations", reservations);
+            request.getRequestDispatcher("jsp/viewAllReservation.jsp").forward(request, response);
+        } catch (Exception e) {
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

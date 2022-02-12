@@ -7,7 +7,8 @@
  * DATE            Version             AUTHOR           DESCRIPTION
  * 2022-02-08      1.0                 tungnt           First Implement 
 /-->
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib uri="/WEB-INF/functions.tld" prefix="f" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -49,79 +50,19 @@
                     </div>
                 </div>
                 <div class="container-fluid mt-3 m-0 p-0">
-                    <div class="table-responsive">
+                    <div class="table-responsive overflow-auto">
                         <table class="table table-bordered text-center ">
                             <thead>
                                 <tr>
-                                    <th scope="col" class="bg-light"></th>
-                                    <th scope="col" class="bg-dark text-white">Nguyễn Bác Sĩ<br/>(07:00AM-05:00PM)</th>
-                                    <th scope="col" class="bg-dark text-white">Nguyễn Bác Sĩ<br/>(07:00AM-05:00PM)</th>
-                                    <th scope="col" class="bg-dark text-white">Nguyễn Bác Sĩ<br/>(07:00AM-05:00PM)</th>
-                                    <th scope="col" class="bg-dark text-white">Nguyễn Bác Sĩ<br/>(07:00AM-05:00PM)</th>
-                                    <th scope="col" class="bg-dark text-white">Nguyễn Bác Sĩ<br/>(07:00AM-05:00PM)</th>
-                                    <th scope="col" class="bg-dark text-white">Nguyễn Bác Sĩ<br/>(07:00AM-05:00PM)</th>
+                                    <th  scope="col" class="bg-light"></th>
+                                        <c:forEach var="i" items="${doctors}">
+                                        <th scope="col" class="bg-dark text-white">Nguyễn Bác Sĩ<br/>(07:00AM-05:00PM)</th>
+                                        </c:forEach>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td class="bg-light text-dark">07:00AM</td>
-                                    <td class="bg-light text-secondary">07:00AM</td>
-                                    <td class="bg-light text-secondary">07:00AM</td>
-                                    <td class="bg-light text-secondary">07:00AM</td>
-                                    <td class="bg-light text-secondary">07:00AM</td>
-                                    <td class="bg-light text-secondary">07:00AM</td>
-                                    <td class="bg-light text-secondary">07:00AM</td>
-                                </tr>
-                                <tr>
-                                    <td class="bg-white text-dark">15</td>
-                                    <td class="bg-white text-secondary">07:15AM</td>
-                                    <td class="bg-white text-secondary">07:15AM</td>
-                                    <td class="bg-white text-secondary">07:15AM</td>
-                                    <td class="bg-white text-secondary">07:15AM</td>
-                                    <td class="bg-white text-secondary">07:15AM</td>
-                                    <td class="bg-white text-secondary">07:15AM</td>
-                                </tr>
-                                <tr>
-                                    <td class="bg-white text-dark">30</td>
-                                    <td class="bg-white text-secondary">07:30AM</td>
-                                    <td class="bg-white text-secondary">07:30AM</td>
-                                    <td class="bg-white text-secondary">07:30AM</td>
-                                    <td class="bg-white text-secondary">07:30AM</td>
-                                    <td class="bg-white text-secondary">07:30AM</td>
-                                    <td class="bg-white text-secondary">07:30AM</td>
-                                </tr>
-                                <tr>
-                                    <td class="bg-white text-dark">45</td>
-                                    <td class="bg-white text-secondary">07:45AM</td>
-                                    <td class="bg-white text-secondary">07:45AM</td>
-                                    <td rowspan="2" class="bg-white text-white">
-                                        <div class="bg-primary m-0 rounded">
-                                            <b>username</b>: benhnhan1<br/>
-                                            <b class="text-white">Nguyễn Bệnh Nhân</b><br/>
-                                            <i>Xét nghiệm (30 phút)</i>
-                                        </div>
-                                    </td>
-                                    <td class="bg-white text-secondary">07:45AM</td>
-                                    <td class="bg-white text-secondary">07:45AM</td>
-                                    <td class="bg-white text-secondary">07:45AM</td>
-                                </tr>
-                                <tr>
-                                    <td class="bg-white text-dark">60</td>
-                                    <td class="bg-white text-secondary">08:00AM</td>
-                                    <td class="bg-white text-secondary">08:00AM</td>
-                                    <td class="bg-white text-secondary">08:00AM</td>
-                                    <td class="bg-white text-secondary">08:00AM</td>
-                                    <td class="bg-white text-secondary">08:00AM</td>
-                                </tr>
-                                <tr>
-                                    <td class="bg-light text-dark">08:00AM</td>
-                                    <td class="bg-light text-secondary">08:00AM</td>
-                                    <td class="bg-light text-secondary">08:00AM</td>
-                                    <td class="bg-light text-secondary">08:00AM</td>
-                                    <td class="bg-light text-secondary">08:00AM</td>
-                                    <td class="bg-light text-secondary">08:00AM</td>
-                                    <td class="bg-light text-secondary">08:00AM</td>
-                                </tr>
+                                    ${f:renderTimeRow(7, 16,5)}
+
                             </tbody>
                         </table>
                     </div>

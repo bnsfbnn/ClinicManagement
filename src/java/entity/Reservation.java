@@ -13,11 +13,13 @@ import java.sql.Date;
  */
 public class Reservation {
     private int reservationId;
-    private int customerId;
-    private int serviceId;
-    private int packageId;
-    private Date examinationTime1;
-    private Date examinationTime2;
+    private User customer;
+    private Service service;
+    private ServicePackage servicePackage;
+    private User confirmedDoctor;
+    private Date requestExaminationTime1;
+    private Date requestExaminationTime2;
+    private Date confirmedExaminationTime;
     private Date reservationTime;
     private String reservationStatus;
     private String medicalRequest;
@@ -25,13 +27,15 @@ public class Reservation {
     public Reservation() {
     }
 
-    public Reservation(int reservationId, int customerId, int serviceId, int packageId, Date examinationTime1, Date examinationTime2, Date reservationTime, String reservationStatus, String medicalRequest) {
+    public Reservation(int reservationId, User customer, Service service, ServicePackage servicePackage, User confirmedDoctor, Date requestExaminationTime1, Date requestExaminationTime2, Date confirmedExaminationTime, Date reservationTime, String reservationStatus, String medicalRequest) {
         this.reservationId = reservationId;
-        this.customerId = customerId;
-        this.serviceId = serviceId;
-        this.packageId = packageId;
-        this.examinationTime1 = examinationTime1;
-        this.examinationTime2 = examinationTime2;
+        this.customer = customer;
+        this.service = service;
+        this.servicePackage = servicePackage;
+        this.confirmedDoctor = confirmedDoctor;
+        this.requestExaminationTime1 = requestExaminationTime1;
+        this.requestExaminationTime2 = requestExaminationTime2;
+        this.confirmedExaminationTime = confirmedExaminationTime;
         this.reservationTime = reservationTime;
         this.reservationStatus = reservationStatus;
         this.medicalRequest = medicalRequest;
@@ -45,44 +49,60 @@ public class Reservation {
         this.reservationId = reservationId;
     }
 
-    public int getCustomerId() {
-        return customerId;
+    public User getCustomer() {
+        return customer;
     }
 
-    public void setCustomerId(int customerId) {
-        this.customerId = customerId;
+    public void setCustomer(User customer) {
+        this.customer = customer;
     }
 
-    public int getServiceId() {
-        return serviceId;
+    public Service getService() {
+        return service;
     }
 
-    public void setServiceId(int serviceId) {
-        this.serviceId = serviceId;
+    public void setService(Service service) {
+        this.service = service;
     }
 
-    public int getPackageId() {
-        return packageId;
+    public ServicePackage getServicePackage() {
+        return servicePackage;
     }
 
-    public void setPackageId(int packageId) {
-        this.packageId = packageId;
+    public void setServicePackage(ServicePackage servicePackage) {
+        this.servicePackage = servicePackage;
     }
 
-    public Date getExaminationTime1() {
-        return examinationTime1;
+    public User getConfirmedDoctor() {
+        return confirmedDoctor;
     }
 
-    public void setExaminationTime1(Date examinationTime1) {
-        this.examinationTime1 = examinationTime1;
+    public void setConfirmedDoctor(User confirmedDoctor) {
+        this.confirmedDoctor = confirmedDoctor;
     }
 
-    public Date getExaminationTime2() {
-        return examinationTime2;
+    public Date getRequestExaminationTime1() {
+        return requestExaminationTime1;
     }
 
-    public void setExaminationTime2(Date examinationTime2) {
-        this.examinationTime2 = examinationTime2;
+    public void setRequestExaminationTime1(Date requestExaminationTime1) {
+        this.requestExaminationTime1 = requestExaminationTime1;
+    }
+
+    public Date getRequestExaminationTime2() {
+        return requestExaminationTime2;
+    }
+
+    public void setRequestExaminationTime2(Date requestExaminationTime2) {
+        this.requestExaminationTime2 = requestExaminationTime2;
+    }
+
+    public Date getConfirmedExaminationTime() {
+        return confirmedExaminationTime;
+    }
+
+    public void setConfirmedExaminationTime(Date confirmedExaminationTime) {
+        this.confirmedExaminationTime = confirmedExaminationTime;
     }
 
     public Date getReservationTime() {
@@ -108,5 +128,6 @@ public class Reservation {
     public void setMedicalRequest(String medicalRequest) {
         this.medicalRequest = medicalRequest;
     }
+    
     
 }

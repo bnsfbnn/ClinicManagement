@@ -19,6 +19,10 @@ public class Service {
     public Service() {
     }
 
+    public Service(String serviceName) {
+        this.serviceName = serviceName;
+    }
+    
     public Service(int serviceId, String serviceName, String serviceBrief, String serviceDescription, String serviceImage) {
         this.serviceId = serviceId;
         this.serviceName = serviceName;
