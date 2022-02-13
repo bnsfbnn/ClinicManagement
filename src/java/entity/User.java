@@ -13,7 +13,7 @@ import java.sql.Date;
  */
 public class User {
     private int userId;
-    private int roleId;
+    private String role;
     private int serviceId;
     private String username;
     private String email;
@@ -33,9 +33,9 @@ public class User {
         this.fullName = fullName;
     }
     
-    public User(int userId, int roleId, int serviceId, String username, String email, String password, String fullName, Date birthDate, boolean gender, String phone, String address, String avatarImage) {
+    public User(int userId, String role, int serviceId, String username, String email, String password, String fullName, Date birthDate, boolean gender, String phone, String address, String avatarImage) {
         this.userId = userId;
-        this.roleId = roleId;
+        this.role = role;
         this.serviceId = serviceId;
         this.username = username;
         this.email = email;
@@ -56,12 +56,12 @@ public class User {
         this.userId = userId;
     }
 
-    public int getRoleId() {
-        return roleId;
+    public String getRole() {
+        return role;
     }
 
-    public void setRoleId(int roleId) {
-        this.roleId = roleId;
+    public void setRole(String role) {
+        this.role = role;
     }
 
     public int getServiceId() {

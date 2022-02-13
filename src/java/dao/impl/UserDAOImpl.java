@@ -7,7 +7,6 @@ package dao.impl;
 
 import context.DBContext;
 import dao.UserDAO;
-import entity.Account;
 import entity.User;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -38,14 +37,14 @@ public class UserDAOImpl extends DBContext implements UserDAO {
         try {
             connecion = getConnection();
             // Get data
-            preparedStatement = connecion.prepareStatement("  select * from users where username = ? and password = ?");
+            preparedStatement = connecion.prepareStatement("select * from users c join roles r on c.role_id = r.role_id where username = ? and password = ?");
             preparedStatement.setNString(1, username);
             preparedStatement.setNString(2, password);
             rs = preparedStatement.executeQuery();
             while (rs.next()) {
                 User user = new User();
                 user.setUserId(rs.getInt("user_id"));
-                user.setRoleId(rs.getInt("role_id"));
+                user.setRole(rs.getString("role"));
                 user.setServiceId(rs.getInt("service_id"));
                 user.setUsername(username);
                 user.setEmail(rs.getString("email"));
@@ -70,19 +69,19 @@ public class UserDAOImpl extends DBContext implements UserDAO {
     }
 
     @Override
-    public List<Account> getAllAccount() {
+    public List<User> getAllAccount() {
               logger.log(Level.INFO, "Login Controller");
         Connection connecion = null;
         PreparedStatement preparedStatement = null;
         ResultSet rs = null;
-         List<Account> users = new ArrayList<>();
+         List<User> users = new ArrayList<>();
         try {
             connecion = getConnection();
             // Get data
             preparedStatement = connecion.prepareStatement("select * from users c join roles r on c.role_id = r.role_id");
             rs = preparedStatement.executeQuery();
             while (rs.next()) {
-                Account user = new Account();
+                User user = new User();
                 user.setUserId(rs.getInt("user_id"));
                 user.setRole(rs.getString("role_name"));
                 user.setServiceId(rs.getInt("service_id"));

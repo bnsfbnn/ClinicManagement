@@ -9,21 +9,16 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-       <title>Login</title>
+        <title>Login</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
         <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
-
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-
         <link rel="stylesheet" href="./assets/css/style.css">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-        
+
     </head>
-   <header>
-        <jsp:include page="./components/header.jsp" />
-    </header>
     <body>
         <section class="ftco-section">
             <div class="container">
@@ -86,7 +81,4 @@
         <script src="./assets/js/bootstrap.min.js"></script>
         <script src="./assets/js/main.js"></script>
     </body>
-    <footer>
-        <jsp:include page="./components/footer.jsp" />
-    </footer>
 </html>

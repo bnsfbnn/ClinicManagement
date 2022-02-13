@@ -20,11 +20,11 @@ import javax.naming.NamingException;
  */
 public class DBContext {
     
-      private String HOST = "DESKTOP-LA6HCO9\\SQLEXPRESS";
-    private String PORT = "1433";
-    private String DATABASE_NAME = "CMS";
-    private String USERNAME = "sa";
-    private String PASSWORD = "123456";
+    private String HOST = "";
+    private String PORT = "";
+    private String DATABASE_NAME = "";
+    private String USERNAME = "";
+    private String PASSWORD = "";
 
 
     /**
