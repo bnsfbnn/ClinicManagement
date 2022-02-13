@@ -16,11 +16,11 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8;">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Clinic Management System</title>
-        <link href="./assets/styles/styles.css" rel="stylesheet" type="text/css"/>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-        <link href="./assets/styles/jquery-ui.min.css" rel="stylesheet" type="text/css"/>
-        <link href="./assets/styles/jquery-ui.structure.min.css" rel="stylesheet" type="text/css"/>
-        <link href="./assets/styles/jquery-ui.theme.min.css" rel="stylesheet" type="text/css"/>
+        <link href="./assets/css/viewAllReservation.css" rel="stylesheet" type="text/css"/>
+        <link href="../assets/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href="./assets/css/jquery-ui.min.css" rel="stylesheet" type="text/css"/>
+        <link href="./assets/css/jquery-ui.structure.min.css" rel="stylesheet" type="text/css"/>
+        <link href="./assets/css/jquery-ui.theme.min.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
         <!--Import header-->
@@ -72,10 +72,10 @@
             <!--End main content-->
         </div>
         <!--Import js lib-->
-        <script src="./assets/scripts/jquery-3.6.0.min.js" type="text/javascript"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-        <script src="./assets/scripts/jquery-ui.min.js" type="text/javascript"></script>
+        <script src="./assets/js/jquery-3.6.0.min.js" type="text/javascript"></script>
+        <script src="../assets/js/popper.js" type="text/javascript"></script>
+        <script src="../assets/js/bootstrap.min.js" type="text/javascript"></script>
+        <script src="./assets/js/jquery-ui.min.js" type="text/javascript"></script>
         <!--Import js code-->
         <script>
             var today = new Date();
