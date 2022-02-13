@@ -4,9 +4,49 @@
         <servlet-name>ViewAllReservations</servlet-name>
         <servlet-class>controller.ViewAllReservations</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>LoginController</servlet-name>
+        <servlet-class>controller.LoginController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LogoutController</servlet-name>
+        <servlet-class>controller.LogoutController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ServiceController</servlet-name>
+        <servlet-class>controller.ServiceController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ServiceDetailController</servlet-name>
+        <servlet-class>controller.ServiceDetailController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GetAllAccountController</servlet-name>
+        <servlet-class>controller.GetAllAccountController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ViewAllReservations</servlet-name>
         <url-pattern>/viewallreservation</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LoginController</servlet-name>
+        <url-pattern>/LoginController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LogoutController</servlet-name>
+        <url-pattern>/LogoutController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServiceController</servlet-name>
+        <url-pattern>/ServiceController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServiceDetailController</servlet-name>
+        <url-pattern>/ServiceDetailController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetAllAccountController</servlet-name>
+        <url-pattern>/GetAllAccountController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
@@ -38,4 +78,7 @@
         <env-entry-type>java.lang.String</env-entry-type>
         <env-entry-value>123</env-entry-value>
     </env-entry>
+    <welcome-file-list>
+        <welcome-file>jsp/login.jsp</welcome-file>
+    </welcome-file-list>
 </web-app>
