@@ -11,6 +11,7 @@ package controller;
 
 import dao.impl.ReservationDAOImpl;
 import entity.Reservation;
+import entity.Service;
 import entity.User;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -41,7 +42,9 @@ public class ViewAllReservations extends HttpServlet {
             ReservationDAOImpl reservationDAO = new ReservationDAOImpl();
             ArrayList<Reservation> reservations = reservationDAO.getReservations();
             ArrayList<User> doctors = reservationDAO.getDoctorsHasReservation();
+            ArrayList<Service> services = reservationDAO.getServices();
             request.setAttribute("doctors", doctors);
+            request.setAttribute("services", services);
             request.setAttribute("reservations", reservations);
             request.getRequestDispatcher("jsp/viewAllReservation.jsp").forward(request, response);
         } catch (Exception e) {

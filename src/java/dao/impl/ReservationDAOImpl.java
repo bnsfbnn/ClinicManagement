@@ -116,12 +116,53 @@ public class ReservationDAOImpl extends DBContext implements ReservationDAO {
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
             /**
-             * set attributes for reservation from result set then add its to
-             * result list
+             * set attributes for doctors from result set then add its to result
+             * list
              */
             while (rs.next()) {
                 User doctor = new User(rs.getString("doctor_username"), rs.getString("doctor_full_name"));
                 result.add(doctor);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ReservationDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+            throw ex;
+        } catch (Exception ex) {
+            Logger.getLogger(ReservationDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+            /**
+             * close result set, prepared statement and connection by
+             * corresponding order
+             */
+        } finally {
+            this.closeResultSet(rs);
+            this.closePreparedStatement(ps);
+            this.closeConnection(con);
+        }
+        return result;
+    }
+
+    @Override
+    public ArrayList<Service> getServices() throws SQLException {
+        ArrayList<Service> result = new ArrayList<>();
+        String sql = "SELECT [service_id]\n"
+                + "      ,[service_name]\n"
+                + "      ,[service_brief]\n"
+                + "      ,[service_description]\n"
+                + "      ,[service_image]\n"
+                + "  FROM [CMS].[dbo].[services]";
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            con = getConnection(); //get connection
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+            /**
+             * set attributes for services from result set then add its to
+             * result list
+             */
+            while (rs.next()) {
+                Service service = new Service(rs.getInt("service_id"), rs.getString("service_name"), rs.getString("service_brief"), rs.getString("service_description"), rs.getString("service_image"));
+                result.add(service);
             }
         } catch (SQLException ex) {
             Logger.getLogger(ReservationDAOImpl.class.getName()).log(Level.SEVERE, null, ex);

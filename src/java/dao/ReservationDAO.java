@@ -6,6 +6,7 @@
 package dao;
 
 import entity.Reservation;
+import entity.Service;
 import entity.User;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -17,4 +18,5 @@ import java.util.ArrayList;
 public interface ReservationDAO {
     public ArrayList<Reservation> getReservations() throws SQLException;
     public ArrayList<User> getDoctorsHasReservation() throws SQLException;
+    public ArrayList<Service> getServices() throws SQLException;
 }

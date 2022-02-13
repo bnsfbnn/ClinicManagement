@@ -16,7 +16,7 @@
         <header class="navbar navbar-expand-lg navbar-light navbar-floating navbar-sticky">
             <div class="p-2">
                 <a href="#">
-                    <img src="../assets/images/logo.png" alt="" width="30" height="30">
+                    <img src="./assets/images/logo.png" alt="" width="30" height="30">
                 </a>
             </div>
             <div>
@@ -34,7 +34,7 @@
             </div>
             <div class="dropdown ml-auto">
                 <a class="avatar avatar-md p-0 show" href="">
-                    <img height="45" class="avatar-img rounded-circle" src="../assets/images/avatar01.jpg" alt="avatar">
+                    <img height="45" class="avatar-img rounded-circle" src="./assets/images/avatar01.jpg" alt="avatar">
                 </a>
             </div>
             <!--End header-->
