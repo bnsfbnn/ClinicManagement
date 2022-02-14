@@ -1,0 +1,63 @@
+
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>JSP Page</title>
+        <link href="./assets/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css" />
+        <link href="./assets/themes/krajee-fas/theme.css" media="all" rel="stylesheet" type="text/css"/>
+        <link rel="stylesheet" href="./assets/css/select2.min.css" />
+        <link rel="stylesheet" href="./assets/css/select2-bootstrap-5-theme.min.css" />
+        <link rel="stylesheet" href="./assets/css/custom.css" />
+    </head>
+
+    <header>
+        <jsp:include page="./components/managerHeader.jsp" />
+    </header>
+
+    <body>
+        <div class="container">
+            <div class="row mb-3">
+                <div class="col-md-12">
+                    <div id="gallerydetail" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-inner">
+                            <c:forEach items="${service.serviceImage}" var="image" varStatus="loop">
+                                <div class="carousel-item ${loop.first?'active':''}">
+                                    <img src="${service.serviceImage}" class="d-block w-100">
+                                </div>                                
+                            </c:forEach>
+                        </div>
+                        <div class="carousel-indicators">
+                            <c:forEach items="${service.serviceImage}" var="image" varStatus="loop">
+                                <img src="${service.serviceImage}" ${loop.first?'class="active"':''} data-bs-target="#gallerydetail" data-bs-slide-to="${loop.index}">
+                            </c:forEach>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-12">
+                    <h5 class="m-0">
+                        ${service.serviceName}
+                    </h5>
+                    <p class="text-secondary small"><i class="fas fa-map-marker-alt"></i> ${service.serviceBrief}</p>
+                    <p class="mb-0">Mô tả:</p>
+                    <p>                    
+                        ${service.serviceDescription}<br/></p>
+                </div>
+            </div>
+        </div>
+        <script src="./assets/js/jquery-3.6.0.min.js" crossorigin="anonymous"></script>
+        <script src="./assets/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+        <script src="./assets/js/star-rating.js" type="text/javascript"></script>
+        <script src="./assets/themes/krajee-fas/theme.js" type="text/javascript"></script>
+        <script src="./assets/js/select2.full.min.js"></script>
+        <script src="./assets/js/custom.js"></script>
+    </body>
+    <footer>
+        <jsp:include page="./components/footer.jsp" />
+    </footer>
+</html>

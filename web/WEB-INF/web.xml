@@ -32,6 +32,14 @@
         <servlet-name>CreateAccountController</servlet-name>
         <servlet-class>controller.CreateAccountController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ServiceManagementController</servlet-name>
+        <servlet-class>controller.ServiceManagementController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ServiceManagementDetailController</servlet-name>
+        <servlet-class>controller.ServiceManagementDetailController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
         <url-pattern>/LoginController</url-pattern>
@@ -63,6 +71,14 @@
     <servlet-mapping>
         <servlet-name>CreateAccountController</servlet-name>
         <url-pattern>/CreateAccountController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServiceManagementController</servlet-name>
+        <url-pattern>/ServiceManagementController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServiceManagementDetailController</servlet-name>
+        <url-pattern>/ServiceManagementDetailController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
