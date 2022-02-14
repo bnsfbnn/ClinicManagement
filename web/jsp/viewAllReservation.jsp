@@ -110,10 +110,10 @@
                                                     <c:if test="${(j.confirmedExaminationTime eq time) and (j.confirmedExaminationDate eq today) and (i.userId == j.confirmedDoctor.userId)}">
                                                         <c:set var="count" value="${count + 1}" scope="page"/>
                                                         <td class="m-0 p-0"><div class="rounded bg-primary text-white m-0 p-0"><b>${j.customer.fullName}</b><br/><i>${j.service.serviceName}</i></div></td>
-                                                                </c:if>
-                                                            </c:forEach>
-                                                        </c:forEach>
-                                                        <c:forEach begin="${count}" end="${doctors.size()-1}">
+                                                    </c:if>
+                                                </c:forEach>
+                                            </c:forEach>
+                                            <c:forEach begin="${count}" end="${doctors.size()-1}">
                                                 <td class="bg-white text-dark">${k}:15</td>
                                             </c:forEach>
                                         </tr>
@@ -126,10 +126,10 @@
                                                     <c:if test="${(j.confirmedExaminationTime eq time) and (j.confirmedExaminationDate eq today) and (i.userId == j.confirmedDoctor.userId)}">
                                                         <c:set var="count" value="${count + 1}" scope="page"/>
                                                         <td class="m-0 p-0"><div class="rounded bg-primary text-white m-0 p-0"><b>${j.customer.fullName}</b><br/><i>${j.service.serviceName}</i></div></td>
-                                                                </c:if>
-                                                            </c:forEach>
-                                                        </c:forEach>
-                                                        <c:forEach begin="${count}" end="${doctors.size()-1}">
+                                                    </c:if>
+                                                </c:forEach>
+                                            </c:forEach>
+                                            <c:forEach begin="${count}" end="${doctors.size()-1}">
                                                 <td class="bg-white text-dark">${k}:30</td>
                                             </c:forEach>
                                         </tr>
@@ -142,10 +142,10 @@
                                                     <c:if test="${(j.confirmedExaminationTime eq time) and (j.confirmedExaminationDate eq today) and (i.userId == j.confirmedDoctor.userId)}">
                                                         <c:set var="count" value="${count + 1}" scope="page"/>
                                                         <td class="m-0 p-0"><div class="rounded bg-primary text-white m-0 p-0"><b>${j.customer.fullName}</b><br/><i>${j.service.serviceName}</i></div></td>
-                                                                </c:if>
-                                                            </c:forEach>
-                                                        </c:forEach>
-                                                        <c:forEach begin="${count}" end="${doctors.size()-1}">
+                                                    </c:if>
+                                                </c:forEach>
+                                            </c:forEach>
+                                            <c:forEach begin="${count}" end="${doctors.size()-1}">
                                                 <td class="bg-white text-dark">${k}:45</td>
                                             </c:forEach>
                                         </tr>
@@ -158,10 +158,10 @@
                                                     <c:if test="${(j.confirmedExaminationTime eq time) and (j.confirmedExaminationDate eq today) and (i.userId == j.confirmedDoctor.userId)}">
                                                         <c:set var="count" value="${count + 1}" scope="page"/>
                                                         <td class="m-0 p-0"><div class="rounded bg-primary text-white m-0 p-0"><b>${j.customer.fullName}</b><br/><i>${j.service.serviceName}</i></div></td>
-                                                                </c:if>
-                                                            </c:forEach>
-                                                        </c:forEach>
-                                                        <c:forEach begin="${count}" end="${doctors.size()-1}">
+                                                    </c:if>
+                                                </c:forEach>
+                                            </c:forEach>
+                                            <c:forEach begin="${count}" end="${doctors.size()-1}">
                                                 <td class="bg-white text-dark">${k + 1}:00</td>
                                             </c:forEach>
                                         </tr>
@@ -182,10 +182,10 @@
                                                     <c:if test="${(j.confirmedExaminationTime eq time) and (j.confirmedExaminationDate eq today) and (i.userId == j.confirmedDoctor.userId)}">
                                                         <c:set var="count" value="${count + 1}" scope="page"/>
                                                         <td class="m-0 p-0"><div class="rounded bg-primary text-white m-0 p-0"><b>${j.customer.fullName}</b><br/><i>${j.service.serviceName}</i></div></td>
-                                                                </c:if>
-                                                            </c:forEach>
-                                                        </c:forEach>
-                                                        <c:forEach begin="${count}" end="${doctors.size()-1}">
+                                                    </c:if>
+                                                </c:forEach>
+                                            </c:forEach>
+                                            <c:forEach begin="${count}" end="${doctors.size()-1}">
                                                 <td class="bg-white text-dark">${k}:15</td>
                                             </c:forEach>
                                         </tr>
@@ -198,10 +198,10 @@
                                                     <c:if test="${(j.confirmedExaminationTime eq time) and (j.confirmedExaminationDate eq today) and (i.userId == j.confirmedDoctor.userId)}">
                                                         <c:set var="count" value="${count + 1}" scope="page"/>
                                                         <td class="m-0 p-0"><div class="rounded bg-primary text-white m-0 p-0"><b>${j.customer.fullName}</b><br/><i>${j.service.serviceName}</i></div></td>
-                                                                </c:if>
-                                                            </c:forEach>
-                                                        </c:forEach>
-                                                        <c:forEach begin="${count}" end="${doctors.size()-1}">
+                                                    </c:if>
+                                                </c:forEach>
+                                            </c:forEach>
+                                            <c:forEach begin="${count}" end="${doctors.size()-1}">
                                                 <td class="bg-white text-dark">${k}:30</td>
                                             </c:forEach>
                                         </tr>
@@ -214,10 +214,10 @@
                                                     <c:if test="${(j.confirmedExaminationTime eq time) and (j.confirmedExaminationDate eq today) and (i.userId == j.confirmedDoctor.userId)}">
                                                         <c:set var="count" value="${count + 1}" scope="page"/>
                                                         <td class="m-0 p-0"><div class="rounded bg-primary text-white m-0 p-0"><b>${j.customer.fullName}</b><br/><i>${j.service.serviceName}</i></div></td>
-                                                                </c:if>
-                                                            </c:forEach>
-                                                        </c:forEach>
-                                                        <c:forEach begin="${count}" end="${doctors.size()-1}">
+                                                    </c:if>
+                                                </c:forEach>
+                                            </c:forEach>
+                                            <c:forEach begin="${count}" end="${doctors.size()-1}">
                                                 <td class="bg-white text-dark">${k}:45</td>
                                             </c:forEach>
                                         </tr>
@@ -230,10 +230,10 @@
                                                     <c:if test="${(j.confirmedExaminationTime eq time) and (j.confirmedExaminationDate eq today) and (i.userId == j.confirmedDoctor.userId)}">
                                                         <c:set var="count" value="${count + 1}" scope="page"/>
                                                         <td class="m-0 p-0 "><div class="rounded bg-primary text-white m-0 p-0"><b>${j.customer.fullName}</b><br/><i>${j.service.serviceName}</i></div></td>
-                                                                </c:if>
-                                                            </c:forEach>
-                                                        </c:forEach>
-                                                        <c:forEach begin="${count}" end="${doctors.size()-1}">
+                                                    </c:if>
+                                                </c:forEach>
+                                            </c:forEach>
+                                            <c:forEach begin="${count}" end="${doctors.size()-1}">
                                                 <td class="bg-white text-dark">${k + 1}:00</td>
                                             </c:forEach>
                                         </tr>
