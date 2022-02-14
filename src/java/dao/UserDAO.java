@@ -5,10 +5,16 @@
  */
 package dao;
 
+import entity.User;
+import java.util.List;
+
 /**
  *
- * @author Thanh Tung
+ * @author nguye
  */
 public interface UserDAO {
-    
+
+    User login(String username, String password);
+
+    List<User> getAllAccount();
 }

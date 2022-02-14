@@ -1,7 +1,11 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Copyright(C) 2022, FPT University
+ * CMS
+ * CLINIC MANAGEMENT SYSTEM
+ *
+ * Record of change:
+ * DATE            Version             AUTHOR           DESCRIPTION
+ * 2022-02-08      1.0                 tungnt           First Implement 
  */
 package context;
 
@@ -25,6 +29,7 @@ public class DBContext {
     private String DATABASE_NAME = "";
     private String USERNAME = "";
     private String PASSWORD = "";
+
 
     /**
      * Lookup context parameters

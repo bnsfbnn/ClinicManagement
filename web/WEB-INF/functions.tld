@@ -13,6 +13,6 @@
     <function>
         <name>renderTimeRow</name>
         <function-class>util.TimeTableHtmlHelper</function-class>
-        <function-signature>String renderTimeRow(int, int, int)</function-signature>
+        <function-signature>String renderTimeRow()</function-signature>
     </function>
 </taglib>
