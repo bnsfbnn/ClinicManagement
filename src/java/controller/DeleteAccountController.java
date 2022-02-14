@@ -32,7 +32,7 @@ public class DeleteAccountController extends HttpServlet {
         int id = Integer.parseInt(request.getParameter("id"));
         UserDAO userDAO = new UserDAOImpl();
         userDAO.deleteAccount(id);
-        
+
         GetAllAccountController accountController = new GetAllAccountController();
         accountController.processRequest(request, response);
         

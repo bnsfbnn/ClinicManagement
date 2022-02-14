@@ -11,6 +11,7 @@ package dao.impl;
 
 import context.DBContext;
 import dao.UserDAO;
+import entity.Account;
 import entity.User;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -48,7 +49,7 @@ public class UserDAOImpl extends DBContext implements UserDAO {
             while (rs.next()) {
                 User user = new User();
                 user.setUserId(rs.getInt("user_id"));
-                user.setRole(rs.getString("role"));
+                user.setRoleId(rs.getInt("role_id"));
                 user.setServiceId(rs.getInt("service_id"));
                 user.setUsername(username);
                 user.setEmail(rs.getString("email"));
@@ -91,7 +92,7 @@ public class UserDAOImpl extends DBContext implements UserDAO {
             preparedStatement = connecion.prepareStatement("select * from users c join roles r on c.role_id = r.role_id");
             rs = preparedStatement.executeQuery();
             while (rs.next()) {
-                User user = new User();
+                Account user = new Account();
                 user.setUserId(rs.getInt("user_id"));
                 user.setRole(rs.getString("role_name"));
                 user.setServiceId(rs.getInt("service_id"));

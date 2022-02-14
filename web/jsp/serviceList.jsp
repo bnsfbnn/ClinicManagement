@@ -28,7 +28,7 @@
     </header>
     <body>
         <div class="container-fluid mt-3 p-0">
-            <div class="row">
+            <div class="row-fluid">
                 <img class="w-100" src="./assets/images/banner-sm.png" alt="Banner"/>
             </div>
             <div class="row mt-3">

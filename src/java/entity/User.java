@@ -6,7 +6,7 @@ import java.sql.Date;
 public class User {
 
     private int userId;
-    private String roleId;
+    private int roleId;
     private int serviceId;
     private String username;
     private String email;
@@ -27,7 +27,7 @@ public class User {
         this.fullName = fullName;
     }
 
-    public User(int userId, String roleId, int serviceId, String username, String email, String password, String fullName, Date birthDate, boolean gender, String phone, String address, String avatarImage) {
+    public User(int userId, int roleId, int serviceId, String username, String email, String password, String fullName, Date birthDate, boolean gender, String phone, String address, String avatarImage) {
         this.userId = userId;
         this.roleId = roleId;
         this.serviceId = serviceId;
@@ -50,11 +50,11 @@ public class User {
         this.userId = userId;
     }
 
-    public String getRole() {
+    public int getRoleId() {
         return roleId;
     }
 
-    public void setRole(String roleId) {
+    public void setRoleId(int roleId) {
         this.roleId = roleId;
     }
 
