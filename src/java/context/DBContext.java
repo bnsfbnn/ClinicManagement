@@ -1,7 +1,11 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Copyright(C) 2022, FPT University
+ * CMS
+ * CLINIC MANAGEMENT SYSTEM
+ *
+ * Record of change:
+ * DATE            Version             AUTHOR           DESCRIPTION
+ * 2022-02-08      1.0                 tungnt           First Implement 
  */
 package context;
 
@@ -20,11 +24,11 @@ import javax.naming.NamingException;
  */
 public class DBContext {
     
-      private String HOST = "DESKTOP-LA6HCO9\\SQLEXPRESS";
-    private String PORT = "1433";
-    private String DATABASE_NAME = "CMS";
-    private String USERNAME = "sa";
-    private String PASSWORD = "123456";
+    private String HOST = "";
+    private String PORT = "";
+    private String DATABASE_NAME = "";
+    private String USERNAME = "";
+    private String PASSWORD = "";
 
 
     /**

@@ -9,7 +9,6 @@
  */
 package dao;
 
-import entity.Account;
 import entity.User;
 import java.util.List;
 
@@ -20,7 +19,7 @@ import java.util.List;
  * @author Hoang Thi Thu Huong
  */
 public interface UserDAO {
-    
+
     User login(String username, String password);
     
     List<Account> getAllAccount();

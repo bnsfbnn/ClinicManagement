@@ -1,19 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package entity;
 
 import java.sql.Date;
 
-/**
- * 
- * @author Nguyen Thanh Tung
- */
+
 public class User {
+
     private int userId;
-    private int roleId;
+    private String roleId;
     private int serviceId;
     private String username;
     private String email;
@@ -28,14 +21,15 @@ public class User {
     public User() {
     }
 
-    public User(String username, String fullName) {
+    public User(int userId, String username, String fullName) {
+        this.userId = userId;
         this.username = username;
         this.fullName = fullName;
     }
 
     public User(int userId, int roleId, int serviceId, String username, String email, String password, String fullName, Date birthDate, boolean gender, String phone, String address, String avatarImage) {
         this.userId = userId;
-        this.roleId = roleId;
+        this.role = roleId;
         this.serviceId = serviceId;
         this.username = username;
         this.email = email;
@@ -56,12 +50,12 @@ public class User {
         this.userId = userId;
     }
 
-    public int getRoleId() {
+    public String getRole() {
         return roleId;
     }
 
-    public void setRoleId(int roleId) {
-        this.roleId = roleId;
+    public void setRole(String roleId) {
+        this.role = roleId;
     }
 
     public int getServiceId() {

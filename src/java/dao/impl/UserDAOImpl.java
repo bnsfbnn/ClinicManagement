@@ -11,7 +11,6 @@ package dao.impl;
 
 import context.DBContext;
 import dao.UserDAO;
-import entity.Account;
 import entity.User;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -42,14 +41,14 @@ public class UserDAOImpl extends DBContext implements UserDAO {
         try {
             connecion = getConnection();
             // Get data
-            preparedStatement = connecion.prepareStatement("  select * from users where username = ? and password = ?");
+            preparedStatement = connecion.prepareStatement("select * from users c join roles r on c.role_id = r.role_id where username = ? and password = ?");
             preparedStatement.setNString(1, username);
             preparedStatement.setNString(2, password);
             rs = preparedStatement.executeQuery();
             while (rs.next()) {
                 User user = new User();
                 user.setUserId(rs.getInt("user_id"));
-                user.setRoleId(rs.getInt("role_id"));
+                user.setRole(rs.getString("role"));
                 user.setServiceId(rs.getInt("service_id"));
                 user.setUsername(username);
                 user.setEmail(rs.getString("email"));
@@ -92,7 +91,7 @@ public class UserDAOImpl extends DBContext implements UserDAO {
             preparedStatement = connecion.prepareStatement("select * from users c join roles r on c.role_id = r.role_id");
             rs = preparedStatement.executeQuery();
             while (rs.next()) {
-                Account user = new Account();
+                User user = new User();
                 user.setUserId(rs.getInt("user_id"));
                 user.setRole(rs.getString("role_name"));
                 user.setServiceId(rs.getInt("service_id"));
