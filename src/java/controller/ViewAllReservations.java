@@ -10,7 +10,6 @@
 package controller;
 
 import dao.impl.ReservationDAOImpl;
-import dao.impl.ServiceDAOImpl;
 import entity.Reservation;
 import entity.Service;
 import entity.User;
@@ -21,35 +20,19 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import util.Utils;
 
 /**
- * * -This class uses function getReservations in
- * <code>dao.impl.reservationDAOImpl</code> to get an
- * <code>java.util.ArrayList</code> object that contains a series of
- * <code>entity.Reservation</code>
  *
- * @author Nguyen Thanh Tung
+ * @author Thanh Tung
  */
 public class ViewAllReservations extends HttpServlet {
 
     /**
-     * -Use function getReservations in <code>dao.impl.ReservationDAOImpl</code> to
-     * get an <code>java.util.ArrayList</code> object that contains a series of
-     * <code>entity.Reservation</code><br>
-     * -Use function getDoctorsHasReservation in <code>dao.impl.ReservationDAOImpl</code> to
-     * get an <code>java.util.ArrayList</code> object that contains a series of
-     * <code>entity.User</code><br> represent for a doctor
-     * -Use function getServices in <code>dao.impl.ServiceDAOImpl</code> to
-     * get an <code>java.util.ArrayList</code> object that contains a series of
-     * <code>entity.Service</code><br> 
-     * 
-     * -Set parameters: today, doctors, services, reservations<br>
-     * -Finally forward user to the <code>viewAllReservation.jsp</code> page. Processes
-     * requests for both HTTP <code>GET</code> and <code>POST</code> methods.
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
      *
      * @param request servlet request
-     * @param response servlet response is
+     * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
@@ -57,11 +40,9 @@ public class ViewAllReservations extends HttpServlet {
             throws ServletException, IOException {
         try {
             ReservationDAOImpl reservationDAO = new ReservationDAOImpl();
-            ServiceDAOImpl serviceDAO = new ServiceDAOImpl();
             ArrayList<Reservation> reservations = reservationDAO.getReservations();
             ArrayList<User> doctors = reservationDAO.getDoctorsHasReservation();
-            ArrayList<Service> services = serviceDAO.getServices();
-            request.setAttribute("today", Utils.getToday());
+            ArrayList<Service> services = reservationDAO.getServices();
             request.setAttribute("doctors", doctors);
             request.setAttribute("services", services);
             request.setAttribute("reservations", reservations);
