@@ -9,6 +9,7 @@
  */
 package dao;
 
+import entity.Account;
 import entity.User;
 import java.util.List;
 
