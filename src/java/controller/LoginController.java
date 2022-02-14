@@ -1,7 +1,11 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Copyright(C) 2022, FPT University
+ * CMS
+ * CLINIC MANAGEMENT SYSTEM
+ *
+ * Record of change:
+ * DATE            Version             AUTHOR           DESCRIPTION
+ * 2022-02-11      1.0                 namnv           First Implement 
  */
 package controller;
 
@@ -43,7 +47,7 @@ public class LoginController extends HttpServlet {
             session.setAttribute("user", user);
             request.getRequestDispatcher("./jsp/components/home.jsp").forward(request, response);
         } else {
-            request.setAttribute("message", "Username or password incorrect!!!");
+            request.setAttribute("message", "Tên đăng nhập hoặc mật khẩu không đúng!!!");
             request.getRequestDispatcher("./jsp/login.jsp").forward(request, response);
         }
 

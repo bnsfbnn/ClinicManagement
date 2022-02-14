@@ -44,7 +44,7 @@ public class UserDAOImpl extends DBContext implements UserDAO {
             while (rs.next()) {
                 User user = new User();
                 user.setUserId(rs.getInt("user_id"));
-                user.setRole(rs.getString("role"));
+                user.setRole(rs.getString("role_id"));
                 user.setServiceId(rs.getInt("service_id"));
                 user.setUsername(username);
                 user.setEmail(rs.getString("email"));
@@ -108,3 +108,7 @@ public class UserDAOImpl extends DBContext implements UserDAO {
     }
 
 }
+
+
+
+
