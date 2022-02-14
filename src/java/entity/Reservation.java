@@ -130,7 +130,7 @@ public class Reservation {
     }
 
     /**
-     * Set customer value of the <code>Reservation</code> object.
+     * Set service value of the <code>Reservation</code> object.
      *
      * @param service is a <code>java.lang.Service</code> this value is the
      * service of the reservation.
@@ -139,74 +139,166 @@ public class Reservation {
         this.service = service;
     }
 
+    /**
+     * Return the value of servicePackage attribute of the
+     * <code>Reservation</code> object.
+     */
     public ServicePackage getServicePackage() {
         return servicePackage;
     }
 
+    /**
+     * Set servicePackage value of the <code>Reservation</code> object.
+     *
+     * @param servicePackage is a <code>java.lang.ServicePackage</code> this
+     * value is the servicePackage of the reservation.
+     */
     public void setServicePackage(ServicePackage servicePackage) {
         this.servicePackage = servicePackage;
     }
 
+    /**
+     * Return the value of confirmedDoctor attribute of the
+     * <code>Reservation</code> object.
+     */
     public User getConfirmedDoctor() {
         return confirmedDoctor;
     }
 
+    /**
+     * Set confirmedDoctor value of the <code>Reservation</code> object.
+     *
+     * @param confirmedDoctor is a <code>java.lang.User</code> this value is the
+     * confirmedDoctor of the reservation.
+     */
     public void setConfirmedDoctor(User confirmedDoctor) {
         this.confirmedDoctor = confirmedDoctor;
     }
 
+    /**
+     * Return the value of requestExaminationDate attribute of the
+     * <code>Reservation</code> object.
+     */
     public Date getRequestExaminationDate() {
         return requestExaminationDate;
     }
 
+    /**
+     * Set requestExaminationDate value of the <code>Reservation</code> object.
+     *
+     * @param requestExaminationDate is a <code>java.lang.Date</code> this value
+     * is the requestExaminationDate of the reservation.
+     */
     public void setRequestExaminationDate(Date requestExaminationDate) {
         this.requestExaminationDate = requestExaminationDate;
     }
 
+    /**
+     * Return the value of requestExaminationTime attribute of the
+     * <code>Reservation</code> object.
+     */
     public Time getRequestExaminationTime() {
         return requestExaminationTime;
     }
 
+    /**
+     * Set requestExaminationTime value of the <code>Reservation</code> object.
+     *
+     * @param requestExaminationTime is a <code>java.lang.Time</code> this value
+     * is the requestExaminationTime of the reservation.
+     */
     public void setRequestExaminationTime(Time requestExaminationTime) {
         this.requestExaminationTime = requestExaminationTime;
     }
 
+    /**
+     * Return the value of confirmedExaminationDate attribute of the
+     * <code>Reservation</code> object.
+     */
     public Date getConfirmedExaminationDate() {
         return confirmedExaminationDate;
     }
 
+    /**
+     * Set confirmedExaminationDate value of the <code>Reservation</code>
+     * object.
+     *
+     * @param confirmedExaminationDate is a <code>java.lang.Date</code> this
+     * value is the confirmedExaminationDate of the reservation.
+     */
     public void setConfirmedExaminationDate(Date confirmedExaminationDate) {
         this.confirmedExaminationDate = confirmedExaminationDate;
     }
 
+    /**
+     * Return the value of confirmedExaminationTime attribute of the
+     * <code>Reservation</code> object.
+     */
     public Time getConfirmedExaminationTime() {
         return confirmedExaminationTime;
     }
 
+    /**
+     * Set confirmedExaminationTime value of the <code>Reservation</code>
+     * object.
+     *
+     * @param confirmedExaminationTime is a <code>java.lang.Time</code> this
+     * value is the confirmedExaminationTime of the reservation.
+     */
     public void setConfirmedExaminationTime(Time confirmedExaminationTime) {
         this.confirmedExaminationTime = confirmedExaminationTime;
     }
 
+    /**
+     * Return the value of reservationDate attribute of the
+     * <code>Reservation</code> object.
+     */
     public Date getReservationDate() {
         return reservationDate;
     }
 
+    /**
+     * Set setReservationDate value of the <code>Reservation</code> object.
+     *
+     * @param setReservationDate is a <code>java.lang.Date</code> this value is
+     * the setReservationDate of the reservation.
+     */
     public void setReservationDate(Date reservationDate) {
         this.reservationDate = reservationDate;
     }
 
+    /**
+     * Return the value of reservationStatus attribute of the
+     * <code>Reservation</code> object.
+     */
     public String getReservationStatus() {
         return reservationStatus;
     }
 
+    /**
+     * Set reservationStatus value of the <code>Reservation</code> object.
+     *
+     * @param reservationStatus is a <code>java.lang.String</code> this value is
+     * the reservationStatus of the reservation.
+     */
     public void setReservationStatus(String reservationStatus) {
         this.reservationStatus = reservationStatus;
     }
 
+    /**
+     * Return the value of medicalRequest attribute of the
+     * <code>Reservation</code> object.
+     */
     public String getMedicalRequest() {
         return medicalRequest;
     }
 
+    /**
+     * Set medicalRequest value of the <code>Reservation</code> object.
+     *
+     * @param medicalRequest is a <code>java.lang.String</code> this value is
+     * the reservationStatus of the reservation.
+     */
     public void setMedicalRequest(String medicalRequest) {
         this.medicalRequest = medicalRequest;
     }
