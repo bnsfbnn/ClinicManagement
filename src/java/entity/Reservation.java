@@ -97,7 +97,7 @@ public class Reservation {
      * Set reservationId value of the <code>Reservation</code> object.
      *
      * @param reservationId is a <code>java.lang.int</code> this value is the id
-     * of the reservation.
+     * of the <code>Reservation</code> object.
      */
     public void setReservationId(int reservationId) {
         this.reservationId = reservationId;
@@ -115,7 +115,7 @@ public class Reservation {
      * Set customer value of the <code>Reservation</code> object.
      *
      * @param customer is a <code>java.lang.User</code> this value is the
-     * customer of the reservation.
+     * customer of the <code>Reservation</code> object.
      */
     public void setCustomer(User customer) {
         this.customer = customer;
@@ -133,7 +133,7 @@ public class Reservation {
      * Set service value of the <code>Reservation</code> object.
      *
      * @param service is a <code>java.lang.Service</code> this value is the
-     * service of the reservation.
+     * service of the <code>Reservation</code> object.
      */
     public void setService(Service service) {
         this.service = service;
@@ -151,7 +151,7 @@ public class Reservation {
      * Set servicePackage value of the <code>Reservation</code> object.
      *
      * @param servicePackage is a <code>java.lang.ServicePackage</code> this
-     * value is the servicePackage of the reservation.
+     * value is the servicePackage of the <code>Reservation</code> object.
      */
     public void setServicePackage(ServicePackage servicePackage) {
         this.servicePackage = servicePackage;
@@ -169,7 +169,7 @@ public class Reservation {
      * Set confirmedDoctor value of the <code>Reservation</code> object.
      *
      * @param confirmedDoctor is a <code>java.lang.User</code> this value is the
-     * confirmedDoctor of the reservation.
+     * confirmedDoctor of the <code>Reservation</code> object.
      */
     public void setConfirmedDoctor(User confirmedDoctor) {
         this.confirmedDoctor = confirmedDoctor;
@@ -187,7 +187,7 @@ public class Reservation {
      * Set requestExaminationDate value of the <code>Reservation</code> object.
      *
      * @param requestExaminationDate is a <code>java.lang.Date</code> this value
-     * is the requestExaminationDate of the reservation.
+     * is the requestExaminationDate of the <code>Reservation</code> object.
      */
     public void setRequestExaminationDate(Date requestExaminationDate) {
         this.requestExaminationDate = requestExaminationDate;
@@ -205,7 +205,7 @@ public class Reservation {
      * Set requestExaminationTime value of the <code>Reservation</code> object.
      *
      * @param requestExaminationTime is a <code>java.lang.Time</code> this value
-     * is the requestExaminationTime of the reservation.
+     * is the requestExaminationTime of the <code>Reservation</code> object.
      */
     public void setRequestExaminationTime(Time requestExaminationTime) {
         this.requestExaminationTime = requestExaminationTime;
@@ -224,7 +224,7 @@ public class Reservation {
      * object.
      *
      * @param confirmedExaminationDate is a <code>java.lang.Date</code> this
-     * value is the confirmedExaminationDate of the reservation.
+     * value is the confirmedExaminationDate of the <code>Reservation</code> object.
      */
     public void setConfirmedExaminationDate(Date confirmedExaminationDate) {
         this.confirmedExaminationDate = confirmedExaminationDate;
@@ -243,7 +243,7 @@ public class Reservation {
      * object.
      *
      * @param confirmedExaminationTime is a <code>java.lang.Time</code> this
-     * value is the confirmedExaminationTime of the reservation.
+     * value is the confirmedExaminationTime of the <code>Reservation</code> object.
      */
     public void setConfirmedExaminationTime(Time confirmedExaminationTime) {
         this.confirmedExaminationTime = confirmedExaminationTime;
@@ -261,7 +261,7 @@ public class Reservation {
      * Set setReservationDate value of the <code>Reservation</code> object.
      *
      * @param setReservationDate is a <code>java.lang.Date</code> this value is
-     * the setReservationDate of the reservation.
+     * the setReservationDate of the <code>Reservation</code> object.
      */
     public void setReservationDate(Date reservationDate) {
         this.reservationDate = reservationDate;
@@ -279,7 +279,7 @@ public class Reservation {
      * Set reservationStatus value of the <code>Reservation</code> object.
      *
      * @param reservationStatus is a <code>java.lang.String</code> this value is
-     * the reservationStatus of the reservation.
+     * the reservationStatus of the <code>Reservation</code> object.
      */
     public void setReservationStatus(String reservationStatus) {
         this.reservationStatus = reservationStatus;
@@ -297,7 +297,7 @@ public class Reservation {
      * Set medicalRequest value of the <code>Reservation</code> object.
      *
      * @param medicalRequest is a <code>java.lang.String</code> this value is
-     * the reservationStatus of the reservation.
+     * the reservationStatus of the <code>Reservation</code> object.
      */
     public void setMedicalRequest(String medicalRequest) {
         this.medicalRequest = medicalRequest;

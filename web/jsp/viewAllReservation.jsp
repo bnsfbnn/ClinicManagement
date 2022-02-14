@@ -24,7 +24,7 @@
     </head>
     <body>
         <!--Import header-->
-        <%@include file="components/header.jsp" %>
+        <%@include file="components/managerHeader.jsp" %>
 
         <!--Start main content-->
         <div class="">

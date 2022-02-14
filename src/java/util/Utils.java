@@ -9,10 +9,24 @@
  */
 package util;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
- *
+ * This class include utility methods
+ * 
  * @author Thanh Tung
  */
 public class Utils {
-    
+
+    /**
+     * - Get today date
+     *
+     * @return a <code>String</code> objects.
+     */
+    public static String getToday() {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        String date = formatter.format(new Date());
+        return date;
+    }
 }

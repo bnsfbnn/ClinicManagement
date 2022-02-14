@@ -24,11 +24,23 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
+ * -The class contains method get information relate to Reservation<br>
+ * -The method will throw an object of <code>java.lang.Exception</code> class if
+ * there is any error occurring when reading data false.<br>
  *
- * @author Thanh Tung
+ * @author Nguyễn Thanh Tùng
  */
 public class ReservationDAOImpl extends DBContext implements ReservationDAO {
 
+    /**
+     * - Get full information about a reservation (such as customer information,
+     * service information, package information, all reservation information)
+     *
+     * @return a list of <code>Reservation</code> objects. <br>
+     * -It is a <code>java.util.ArrayList</code> object
+     * @throws SQLException
+     */
+    
     @Override
     public ArrayList<Reservation> getReservations() throws SQLException {
         ArrayList<Reservation> result = new ArrayList<>();
@@ -109,6 +121,14 @@ public class ReservationDAOImpl extends DBContext implements ReservationDAO {
         return result;
     }
 
+    /**
+     * - Get doctor information about a reservation (such as doctorId,
+     * doctorUserName, doctorFullName)
+     *
+     * @return a list of <code>Reservation</code> objects. <br>
+     * -It is a <code>java.util.ArrayList</code> object
+     * @throws SQLException
+     */
     @Override
     public ArrayList<User> getDoctorsHasReservation() throws SQLException {
         ArrayList<User> result = new ArrayList<>();
@@ -129,47 +149,6 @@ public class ReservationDAOImpl extends DBContext implements ReservationDAO {
             while (rs.next()) {
                 User doctor = new User(rs.getInt("doctor_id"), rs.getString("doctor_username"), rs.getString("doctor_full_name"));
                 result.add(doctor);
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(ReservationDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
-            throw ex;
-        } catch (Exception ex) {
-            Logger.getLogger(ReservationDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
-            /**
-             * close result set, prepared statement and connection by
-             * corresponding order
-             */
-        } finally {
-            this.closeResultSet(rs);
-            this.closePreparedStatement(ps);
-            this.closeConnection(con);
-        }
-        return result;
-    }
-
-    @Override
-    public ArrayList<Service> getServices() throws SQLException {
-        ArrayList<Service> result = new ArrayList<>();
-        String sql = "SELECT [service_id]\n"
-                + "      ,[service_name]\n"
-                + "      ,[service_brief]\n"
-                + "      ,[service_description]\n"
-                + "      ,[service_image]\n"
-                + "  FROM [CMS].[dbo].[services]";
-        Connection con = null;
-        PreparedStatement ps = null;
-        ResultSet rs = null;
-        try {
-            con = getConnection(); //get connection
-            ps = con.prepareStatement(sql);
-            rs = ps.executeQuery();
-            /**
-             * set attributes for services from result set then add its to
-             * result list
-             */
-            while (rs.next()) {
-                Service service = new Service(rs.getInt("service_id"), rs.getString("service_name"), rs.getString("service_brief"), rs.getString("service_description"), rs.getString("service_image"));
-                result.add(service);
             }
         } catch (SQLException ex) {
             Logger.getLogger(ReservationDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
