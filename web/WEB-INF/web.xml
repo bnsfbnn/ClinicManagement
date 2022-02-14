@@ -56,7 +56,7 @@
     <env-entry>
         <env-entry-name>host</env-entry-name>
         <env-entry-type>java.lang.String</env-entry-type>
-        <env-entry-value>localhost</env-entry-value>
+        <env-entry-value>DESKTOP-51P50IV\SQLEXPRESS</env-entry-value>
     </env-entry>
     <env-entry>
         <env-entry-name>port</env-entry-name>
@@ -76,7 +76,7 @@
     <env-entry>
         <env-entry-name>password</env-entry-name>
         <env-entry-type>java.lang.String</env-entry-type>
-        <env-entry-value>123</env-entry-value>
+        <env-entry-value>123456</env-entry-value>
     </env-entry>
     <welcome-file-list>
         <welcome-file>LoginController</welcome-file>

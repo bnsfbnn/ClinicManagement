@@ -23,16 +23,19 @@
         <link rel="stylesheet" href="./assets/css/select2-bootstrap-5-theme.min.css" />
         <link rel="stylesheet" href="./assets/css/custom.css" />
     </head>
-    <!--    <header>
-    <%--<jsp:include page="./components/header.jsp" />--%>
-</header>-->
+    <header>
+        <jsp:include page="./components/header.jsp" />
+    </header>
     <body>
-        <div class="container">
+        <div class="container-fluid mt-3">
             <div class="row">
+                <img src="./assets/images/banner.jpg" alt="Banner"/>
+            </div>
+            <div class="row mt-3">
                 <c:forEach items="${services.data}" var="service">
                     <div class="col-md-4 mb-3">
                         <div class="card">
-                            <img src="${service.serviceName}" class="card-img-top" alt="...">
+                            <img src="${service.serviceImage}" class="card-img-top" alt="...">
                             <div class="card-body">
                                 <h5 class="card-title m-0">${service.serviceName}</h5>
                                 <p class="card-text text-secondary">x</p>
