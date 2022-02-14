@@ -79,6 +79,6 @@
         <env-entry-value>123</env-entry-value>
     </env-entry>
     <welcome-file-list>
-        <welcome-file>jsp/login.jsp</welcome-file>
+        <welcome-file>LoginController</welcome-file>
     </welcome-file-list>
 </web-app>

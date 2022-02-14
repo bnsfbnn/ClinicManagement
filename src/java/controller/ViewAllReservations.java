@@ -15,6 +15,8 @@ import entity.Service;
 import entity.User;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -39,10 +41,13 @@ public class ViewAllReservations extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+            String date = formatter.format(new Date());
             ReservationDAOImpl reservationDAO = new ReservationDAOImpl();
             ArrayList<Reservation> reservations = reservationDAO.getReservations();
             ArrayList<User> doctors = reservationDAO.getDoctorsHasReservation();
             ArrayList<Service> services = reservationDAO.getServices();
+            request.setAttribute("today", date);
             request.setAttribute("doctors", doctors);
             request.setAttribute("services", services);
             request.setAttribute("reservations", reservations);
