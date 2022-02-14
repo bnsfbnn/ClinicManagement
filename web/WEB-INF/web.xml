@@ -24,6 +24,10 @@
         <servlet-name>GetAllAccountController</servlet-name>
         <servlet-class>controller.GetAllAccountController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>DeleteAccountController</servlet-name>
+        <servlet-class>controller.DeleteAccountController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ViewAllReservations</servlet-name>
         <url-pattern>/viewallreservation</url-pattern>
@@ -45,8 +49,16 @@
         <url-pattern>/ServiceDetailController</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>ViewAllReservations</servlet-name>
+        <url-pattern>/viewAllReservationController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>GetAllAccountController</servlet-name>
         <url-pattern>/GetAllAccountController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteAccountController</servlet-name>
+        <url-pattern>/DeleteAccountController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

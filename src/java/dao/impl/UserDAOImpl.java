@@ -1,7 +1,11 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Copyright(C) 2022, FPT University
+ * CMS
+ * CLINIC MANAGEMENT SYSTEM
+ *
+ * Record of change:
+ * DATE            Version          AUTHOR           DESCRIPTION
+ * 2022-02-08      1.0              HuongHTT         First Implement 
  */
 package dao.impl;
 
@@ -19,7 +23,7 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author nguye
+ * @author Thanh Tung
  */
 public class UserDAOImpl extends DBContext implements UserDAO {
 
@@ -69,13 +73,19 @@ public class UserDAOImpl extends DBContext implements UserDAO {
         return null;
     }
 
+    /*
+    * Get all accounts from database. 
+    * 
+    * @return a list of <code>Account</code> objects. It is
+    * a <code>java.util.List</code> object 
+    */
     @Override
     public List<Account> getAllAccount() {
-              logger.log(Level.INFO, "Login Controller");
+        logger.log(Level.INFO, "Login Controller");
         Connection connecion = null;
         PreparedStatement preparedStatement = null;
         ResultSet rs = null;
-         List<Account> users = new ArrayList<>();
+        List<Account> users = new ArrayList<>();
         try {
             connecion = getConnection();
             // Get data
@@ -106,6 +116,49 @@ public class UserDAOImpl extends DBContext implements UserDAO {
             closeConnection(connecion);
         }
         return users;
+    }
+
+    @Override
+    public void deleteAccount(int id) {
+        logger.log(Level.INFO, "Delete account with id");
+        Connection connecion = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet rs = null;
+        try {
+            connecion = getConnection();
+            // Get data
+            preparedStatement = connecion.prepareStatement("delete from users where user_id = ?;");
+            preparedStatement.setInt(1, id);
+            preparedStatement.executeUpdate();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            Logger.getLogger(UserDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            closePreparedStatement(preparedStatement);
+            closeConnection(connecion);
+        }
+    }
+
+    @Override
+    public void updateAccount(User user) {
+
+        logger.log(Level.INFO, "Delete account with id");
+        Connection connecion = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet rs = null;
+        try {
+            connecion = getConnection();
+            // Get data
+            preparedStatement = connecion.prepareStatement("delete from users where user_id = ?;");
+//            preparedStatement.setInt(1, id);
+            preparedStatement.executeUpdate();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            Logger.getLogger(UserDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            closePreparedStatement(preparedStatement);
+            closeConnection(connecion);
+        }
     }
 
 }

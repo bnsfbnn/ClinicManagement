@@ -32,7 +32,7 @@ public class User {
         this.username = username;
         this.fullName = fullName;
     }
-    
+
     public User(int userId, int roleId, int serviceId, String username, String email, String password, String fullName, Date birthDate, boolean gender, String phone, String address, String avatarImage) {
         this.userId = userId;
         this.roleId = roleId;
