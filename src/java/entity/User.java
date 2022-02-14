@@ -20,8 +20,9 @@ import java.sql.Date;
  * @author nguye
  */
 public class User {
+
     private int userId;
-    private String role;
+    private int roleId;
     private int serviceId;
     private String username;
     private String email;
@@ -88,7 +89,7 @@ public class User {
     
     public User(int userId, String role, int serviceId, String username, String email, String password, String fullName, Date birthDate, boolean gender, String phone, String address, String avatarImage) {
         this.userId = userId;
-        this.role = role;
+        this.roleId = roleId;
         this.serviceId = serviceId;
         this.username = username;
         this.email = email;

@@ -24,6 +24,22 @@
         <servlet-name>GetAllAccountController</servlet-name>
         <servlet-class>controller.GetAllAccountController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>DeleteAccountController</servlet-name>
+        <servlet-class>controller.DeleteAccountController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CreateAccountController</servlet-name>
+        <servlet-class>controller.CreateAccountController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ServiceManagementController</servlet-name>
+        <servlet-class>controller.ServiceManagementController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ServiceManagementDetailController</servlet-name>
+        <servlet-class>controller.ServiceManagementDetailController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
         <url-pattern>/LoginController</url-pattern>
@@ -41,12 +57,28 @@
         <url-pattern>/ServiceDetailController</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>ViewAllReservations</servlet-name>
+        <url-pattern>/viewAllReservationController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>GetAllAccountController</servlet-name>
         <url-pattern>/GetAllAccountController</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>ViewAllReservations</servlet-name>
-        <url-pattern>/viewAllReservationController</url-pattern>
+        <servlet-name>DeleteAccountController</servlet-name>
+        <url-pattern>/DeleteAccountController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CreateAccountController</servlet-name>
+        <url-pattern>/CreateAccountController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServiceManagementController</servlet-name>
+        <url-pattern>/ServiceManagementController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServiceManagementDetailController</servlet-name>
+        <url-pattern>/ServiceManagementDetailController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
@@ -79,6 +111,6 @@
         <env-entry-value>123456</env-entry-value>
     </env-entry>
     <welcome-file-list>
-        <welcome-file>jsp/login.jsp</welcome-file>
+        <welcome-file>LoginController</welcome-file>
     </welcome-file-list>
 </web-app>
