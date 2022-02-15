@@ -16,7 +16,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8;">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Clinic Management System</title>
-        <link href="./assets/css/viewAllReservation.css" rel="stylesheet" type="text/css"/>
+        <link href="./assets/css/header.css" rel="stylesheet" type="text/css"/>
         <link href="./assets/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <link href="./assets/css/jquery-ui.min.css" rel="stylesheet" type="text/css"/>
         <link href="./assets/css/jquery-ui.structure.min.css" rel="stylesheet" type="text/css"/>
@@ -30,14 +30,14 @@
         <div class="">
             <div class="container-fluid p-0">
                 <div class="row justify-content-center mt-3 mr-0">
-                    <h1>Danh sách tất cả lịch khám bệnh</h1>
+                    <h6>Danh sách tất cả lịch khám bệnh</h6>
                 </div>
                 <div class="row justify-content-end mt-3 mr-0">
                     <div class="mx-4">
                         <select name="serviceId" class="form-control">
                             <option value="-1">Tất cả dịch vụ</option>
                             <c:forEach items="${services}" var="i">
-                                <option value="${ca.id}" <c:if test="${requestScope.categoryFilter==ca.id}">selected="selected"</c:if>>${ca.category}</option>
+                                <option value="${i.serviceId}">${i.serviceName}</option>
                             </c:forEach>
                         </select>
                     </div>
@@ -107,13 +107,13 @@
                                             <c:set var="time" value="0${k}:00:00" scope="page"/>
                                             <c:forEach var="i" items="${doctors}">
                                                 <c:forEach var="j" items="${reservations}">
-                                                    <c:if test="${(j.confirmedExaminationTime eq time) and (j.confirmedExaminationDate eq today) and (i.userId == j.confirmedDoctor.userId)}">
+                                                    <c:if test="${(j.confirmedExaminationTime eq time) and (i.userId == j.confirmedDoctor.userId)}">
                                                         <c:set var="count" value="${count + 1}" scope="page"/>
                                                         <td class="m-0 p-0"><div class="rounded bg-primary text-white m-0 p-0"><b>${j.customer.fullName}</b><br/><i>${j.service.serviceName}</i></div></td>
-                                                                </c:if>
-                                                            </c:forEach>
-                                                        </c:forEach>
-                                                        <c:forEach begin="${count}" end="${doctors.size()-1}">
+                                                    </c:if>
+                                                </c:forEach>
+                                            </c:forEach>
+                                            <c:forEach begin="${count}" end="${doctors.size()-1}">
                                                 <td class="bg-white text-dark">${k}:15</td>
                                             </c:forEach>
                                         </tr>
@@ -123,13 +123,13 @@
                                             <c:set var="time" value="0${k}:15:00" scope="page"/>
                                             <c:forEach var="i" items="${doctors}">
                                                 <c:forEach var="j" items="${reservations}">
-                                                    <c:if test="${(j.confirmedExaminationTime eq time) and (j.confirmedExaminationDate eq today) and (i.userId == j.confirmedDoctor.userId)}">
+                                                    <c:if test="${(j.confirmedExaminationTime eq time) and (i.userId == j.confirmedDoctor.userId)}">
                                                         <c:set var="count" value="${count + 1}" scope="page"/>
                                                         <td class="m-0 p-0"><div class="rounded bg-primary text-white m-0 p-0"><b>${j.customer.fullName}</b><br/><i>${j.service.serviceName}</i></div></td>
-                                                                </c:if>
-                                                            </c:forEach>
-                                                        </c:forEach>
-                                                        <c:forEach begin="${count}" end="${doctors.size()-1}">
+                                                    </c:if>
+                                                </c:forEach>
+                                            </c:forEach>
+                                            <c:forEach begin="${count}" end="${doctors.size()-1}">
                                                 <td class="bg-white text-dark">${k}:30</td>
                                             </c:forEach>
                                         </tr>
@@ -139,13 +139,13 @@
                                             <c:set var="time" value="0${k}:30:00" scope="page"/>
                                             <c:forEach var="i" items="${doctors}">
                                                 <c:forEach var="j" items="${reservations}">
-                                                    <c:if test="${(j.confirmedExaminationTime eq time) and (j.confirmedExaminationDate eq today) and (i.userId == j.confirmedDoctor.userId)}">
+                                                    <c:if test="${(j.confirmedExaminationTime eq time) and (i.userId == j.confirmedDoctor.userId)}">
                                                         <c:set var="count" value="${count + 1}" scope="page"/>
                                                         <td class="m-0 p-0"><div class="rounded bg-primary text-white m-0 p-0"><b>${j.customer.fullName}</b><br/><i>${j.service.serviceName}</i></div></td>
-                                                                </c:if>
-                                                            </c:forEach>
-                                                        </c:forEach>
-                                                        <c:forEach begin="${count}" end="${doctors.size()-1}">
+                                                    </c:if>
+                                                </c:forEach>
+                                            </c:forEach>
+                                            <c:forEach begin="${count}" end="${doctors.size()-1}">
                                                 <td class="bg-white text-dark">${k}:45</td>
                                             </c:forEach>
                                         </tr>
@@ -155,13 +155,13 @@
                                             <c:set var="time" value="0${k}:45:00" scope="page"/>
                                             <c:forEach var="i" items="${doctors}">
                                                 <c:forEach var="j" items="${reservations}">
-                                                    <c:if test="${(j.confirmedExaminationTime eq time) and (j.confirmedExaminationDate eq today) and (i.userId == j.confirmedDoctor.userId)}">
+                                                    <c:if test="${(j.confirmedExaminationTime eq time) and (i.userId == j.confirmedDoctor.userId)}">
                                                         <c:set var="count" value="${count + 1}" scope="page"/>
                                                         <td class="m-0 p-0"><div class="rounded bg-primary text-white m-0 p-0"><b>${j.customer.fullName}</b><br/><i>${j.service.serviceName}</i></div></td>
-                                                                </c:if>
-                                                            </c:forEach>
-                                                        </c:forEach>
-                                                        <c:forEach begin="${count}" end="${doctors.size()-1}">
+                                                    </c:if>
+                                                </c:forEach>
+                                            </c:forEach>
+                                            <c:forEach begin="${count}" end="${doctors.size()-1}">
                                                 <td class="bg-white text-dark">${k + 1}:00</td>
                                             </c:forEach>
                                         </tr>
@@ -179,13 +179,13 @@
                                             <c:set var="time" value="${k}:00:00" scope="page"/>
                                             <c:forEach var="i" items="${doctors}">
                                                 <c:forEach var="j" items="${reservations}">
-                                                    <c:if test="${(j.confirmedExaminationTime eq time) and (j.confirmedExaminationDate eq today) and (i.userId == j.confirmedDoctor.userId)}">
+                                                    <c:if test="${(j.confirmedExaminationTime eq time) and (i.userId == j.confirmedDoctor.userId)}">
                                                         <c:set var="count" value="${count + 1}" scope="page"/>
                                                         <td class="m-0 p-0"><div class="rounded bg-primary text-white m-0 p-0"><b>${j.customer.fullName}</b><br/><i>${j.service.serviceName}</i></div></td>
-                                                                </c:if>
-                                                            </c:forEach>
-                                                        </c:forEach>
-                                                        <c:forEach begin="${count}" end="${doctors.size()-1}">
+                                                    </c:if>
+                                                </c:forEach>
+                                            </c:forEach>
+                                            <c:forEach begin="${count}" end="${doctors.size()-1}">
                                                 <td class="bg-white text-dark">${k}:15</td>
                                             </c:forEach>
                                         </tr>
@@ -195,13 +195,13 @@
                                             <c:set var="time" value="${k}:15:00" scope="page"/>
                                             <c:forEach var="i" items="${doctors}">
                                                 <c:forEach var="j" items="${reservations}">
-                                                    <c:if test="${(j.confirmedExaminationTime eq time) and (j.confirmedExaminationDate eq today) and (i.userId == j.confirmedDoctor.userId)}">
+                                                    <c:if test="${(j.confirmedExaminationTime eq time) and (i.userId == j.confirmedDoctor.userId)}">
                                                         <c:set var="count" value="${count + 1}" scope="page"/>
                                                         <td class="m-0 p-0"><div class="rounded bg-primary text-white m-0 p-0"><b>${j.customer.fullName}</b><br/><i>${j.service.serviceName}</i></div></td>
-                                                                </c:if>
-                                                            </c:forEach>
-                                                        </c:forEach>
-                                                        <c:forEach begin="${count}" end="${doctors.size()-1}">
+                                                    </c:if>
+                                                </c:forEach>
+                                            </c:forEach>
+                                            <c:forEach begin="${count}" end="${doctors.size()-1}">
                                                 <td class="bg-white text-dark">${k}:30</td>
                                             </c:forEach>
                                         </tr>
@@ -211,13 +211,13 @@
                                             <c:set var="time" value="${k}:30:00" scope="page"/>
                                             <c:forEach var="i" items="${doctors}">
                                                 <c:forEach var="j" items="${reservations}">
-                                                    <c:if test="${(j.confirmedExaminationTime eq time) and (j.confirmedExaminationDate eq today) and (i.userId == j.confirmedDoctor.userId)}">
+                                                    <c:if test="${(j.confirmedExaminationTime eq time) and (i.userId == j.confirmedDoctor.userId)}">
                                                         <c:set var="count" value="${count + 1}" scope="page"/>
                                                         <td class="m-0 p-0"><div class="rounded bg-primary text-white m-0 p-0"><b>${j.customer.fullName}</b><br/><i>${j.service.serviceName}</i></div></td>
-                                                                </c:if>
-                                                            </c:forEach>
-                                                        </c:forEach>
-                                                        <c:forEach begin="${count}" end="${doctors.size()-1}">
+                                                    </c:if>
+                                                </c:forEach>
+                                            </c:forEach>
+                                            <c:forEach begin="${count}" end="${doctors.size()-1}">
                                                 <td class="bg-white text-dark">${k}:45</td>
                                             </c:forEach>
                                         </tr>
@@ -227,13 +227,13 @@
                                             <c:set var="time" value="${k}:45:00" scope="page"/>
                                             <c:forEach var="i" items="${doctors}">
                                                 <c:forEach var="j" items="${reservations}">
-                                                    <c:if test="${(j.confirmedExaminationTime eq time) and (j.confirmedExaminationDate eq today) and (i.userId == j.confirmedDoctor.userId)}">
+                                                    <c:if test="${(j.confirmedExaminationTime eq time) and (i.userId == j.confirmedDoctor.userId)}">
                                                         <c:set var="count" value="${count + 1}" scope="page"/>
                                                         <td class="m-0 p-0 "><div class="rounded bg-primary text-white m-0 p-0"><b>${j.customer.fullName}</b><br/><i>${j.service.serviceName}</i></div></td>
-                                                                </c:if>
-                                                            </c:forEach>
-                                                        </c:forEach>
-                                                        <c:forEach begin="${count}" end="${doctors.size()-1}">
+                                                    </c:if>
+                                                </c:forEach>
+                                            </c:forEach>
+                                            <c:forEach begin="${count}" end="${doctors.size()-1}">
                                                 <td class="bg-white text-dark">${k + 1}:00</td>
                                             </c:forEach>
                                         </tr>
@@ -253,19 +253,19 @@
         <script src="./assets/js/jquery-ui.min.js" type="text/javascript"></script>
         <!--Import js code-->
         <script>
-            var today = new Date();
-            var dd = String(today.getDate()).padStart(2, '0');
-            var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-            var yyyy = today.getFullYear();
-            today = mm + '/' + dd + '/' + yyyy;
-            $("#datepicker").val(today);
+            var viewDay = new Date();
+            var dd = String(viewDay.getDate()).padStart(2, '0');
+            var mm = String(viewDay.getMonth() + 1).padStart(2, '0'); //January is 0!
+            var yyyy = viewDay.getFullYear();
+            viewDay = mm + '/' + dd + '/' + yyyy;
+            $("#datepicker").val(viewDay);
             $("#datepicker").datepicker({
                 changeMonth: true,
                 changeYear: true,
                 maxDate: '+6D',
             });
-            $("#today").click(function () {
-                $("#datepicker").val(today);
+            $("#viewDay").click(function () {
+                $("#datepicker").val(viewDay);
             });
         </script>
     </body>

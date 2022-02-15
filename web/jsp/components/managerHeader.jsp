@@ -8,7 +8,9 @@
  * 2022-02-08      1.0                 tungnt           First Implement 
 --%>
 
+<%@page import="entity.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
     <body>
@@ -22,13 +24,13 @@
             <div>
                 <ul class="navbar-nav">
                     <li class="nav-item active">
-                        <a class="nav-link py-3" href="#">Xem Tất cả lịch khám bệnh<span class="sr-only">(current)</span></a>
+                        <a class="nav-link py-3" href="#">Xem tất danh sách đặt chỗ<span class="sr-only">(current)</span></a>
                     </li>
                     <li class=nav-item">
                         <a class="nav-link py-3" href="#">Quản lý dịch vụ</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link py-3" href="#">Quản lý phản hồi</a>
+                    <li class=nav-item">
+                        <a class="nav-link py-3" href="#">Quản lý Phản hồi</a>
                     </li>
                 </ul>
             </div>

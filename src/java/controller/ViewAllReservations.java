@@ -44,7 +44,7 @@ public class ViewAllReservations extends HttpServlet {
      * get an <code>java.util.ArrayList</code> object that contains a series of
      * <code>entity.Service</code><br> 
      * 
-     * -Set parameters: today, doctors, services, reservations<br>
+     * -Set parameters: viewDay, doctors, services, reservations<br>
      * -Finally forward user to the <code>viewAllReservation.jsp</code> page. Processes
      * requests for both HTTP <code>GET</code> and <code>POST</code> methods.
      *
@@ -56,12 +56,13 @@ public class ViewAllReservations extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
+            String viewDay = Utils.getToday();
             ReservationDAOImpl reservationDAO = new ReservationDAOImpl();
             ServiceDAOImpl serviceDAO = new ServiceDAOImpl();
-            ArrayList<Reservation> reservations = reservationDAO.getReservations();
+            ArrayList<Reservation> reservations = reservationDAO.getReservationsByDay(viewDay);
             ArrayList<User> doctors = reservationDAO.getDoctorsHasReservation();
             ArrayList<Service> services = serviceDAO.getServices();
-            request.setAttribute("today", Utils.getToday());
+            request.setAttribute("viewDay", viewDay);
             request.setAttribute("doctors", doctors);
             request.setAttribute("services", services);
             request.setAttribute("reservations", reservations);

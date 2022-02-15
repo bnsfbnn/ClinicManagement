@@ -5,7 +5,7 @@
  *
  * Record of change:
  * DATE            Version             AUTHOR           DESCRIPTION
- * 2022-02-08      1.0                 TrangCT          Controller Service Detail
+ * 2022-02-08      1.0                 MinhVT          Controller Service Detail
  -->
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -25,24 +25,22 @@
         <link href="../assets/css/header.css" rel="stylesheet" type="text/css"/>
     </head>
     <header>
-        <jsp:include page="./components/customerHeader.jsp" />
+        <jsp:include page="./components/managerHeader.jsp" />
     </header>
     <body>
-        <div class="container-fluid mt-3 p-0">
+        <div class="container">
             <div class="row">
-                <img class="w-100" src="./assets/images/banner-sm.png" alt="Banner"/>
-            </div>
-            <div class="row mt-3">
                 <c:forEach items="${services.data}" var="service">
                     <div class="col-md-4 mb-3">
                         <div class="card">
-                            <img src="${service.serviceImage}" class="card-img-top w-50" alt="...">
+                            <img src="${service.serviceImage}" class="card-img-top" alt="...">
                             <div class="card-body">
                                 <h5 class="card-title m-0">${service.serviceName}</h5>
-                                <p class="card-text text-secondary">x</p>
+                                <p class="card-text text-secondary">${service.serviceBrief}</p>
+                                <p class="card-text text-secondary">Description: ${service.serviceDescription}</p>
                             </div>
                         </div>
-                        <a href="ServiceDetailController?Id=${service.serviceId}" class="btn btn-success">Xem thêm</a>
+                        <a href="ServiceManagementDetailController?Id=${service.serviceId}" class="btn btn-success">Xem thêm</a>
                     </div>
 
                 </c:forEach>

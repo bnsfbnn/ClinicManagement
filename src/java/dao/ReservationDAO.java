@@ -26,12 +26,14 @@ public interface ReservationDAO {
      * - Get full information about a reservation (such as customer information,
      * service information, package information, all reservation information)
      *
+     * @param viewDay is a <code>java.lang.String</code> object used to
+     * get reservation by date
      * @return a list of <code>Reservation</code> objects. <br>
      * -It is a <code>java.util.ArrayList</code> object
      * @throws SQLException when <code>java.sql.SQLException</code>
      * occurs.
      */
-    public ArrayList<Reservation> getReservations() throws SQLException;
+    public ArrayList<Reservation> getReservationsByDay(String viewDay) throws SQLException;
 
     /**
      * - Get doctor information about a reservation (such as doctorId, doctorUserName,

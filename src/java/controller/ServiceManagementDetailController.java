@@ -5,23 +5,32 @@
  *
  * Record of change:
  * DATE            Version             AUTHOR           DESCRIPTION
- * 2022-02-11      1.0                 namnv           First Implement 
+ * 2022-02-08      1.0                 MinhVT           First Implement 
  */
 package controller;
 
+import dao.ServiceDAO;
+import dao.impl.ServiceDAOImpl;
+import entity.Service;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
- *
- * @author nguye
+ * <h1>Service Management Controller</h1>
+ * Controller to view service management detail. Method process data form ServiceDAO and 
+ * forward data to file view
+ * <p>
+ * 
+ * 
+ * @author MinhVT
+ * @version 1.0
+ * @since 2022-02-08
  */
-public class LogoutController extends HttpServlet {
+public class ServiceManagementDetailController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,10 +44,15 @@ public class LogoutController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        HttpSession session = request.getSession();
-        session.invalidate();
-        request.getRequestDispatcher("./jsp/login.jsp").forward(request, response);
-
+        // get value of query string Id
+        int id = Integer.parseInt(request.getParameter("Id"));
+        ServiceDAO serviceDAO = new ServiceDAOImpl();
+        // get service management by id
+        Service service = serviceDAO.getById(id);
+        // set attribute service management with valuse service
+        request.setAttribute("service", service);
+        // forward request,reponse to serviceManagementDetail.jsp
+        request.getRequestDispatcher("./jsp/serviceManagementDetail.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

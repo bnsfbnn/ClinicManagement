@@ -42,7 +42,7 @@ public class ReservationDAOImpl extends DBContext implements ReservationDAO {
      */
     
     @Override
-    public ArrayList<Reservation> getReservations() throws SQLException {
+    public ArrayList<Reservation> getReservationsByDay(String viewDay) throws SQLException {
         ArrayList<Reservation> result = new ArrayList<>();
         String sql = "SELECT DISTINCT reservations.reservation_id,\n"
                 + "                users.[user_id],\n"
@@ -71,7 +71,7 @@ public class ReservationDAOImpl extends DBContext implements ReservationDAO {
                 + "          users.user_id AS doctor_id\n"
                 + "   FROM reservations\n"
                 + "   LEFT JOIN users ON reservations.confirmed_doctor_id = users.user_id) AS doctors ON reservations.confirmed_doctor_id = doctors.doctor_id\n"
-                + "\n"
+                + "WHERE reservations.confirmed_examination_date = ?\n"
                 + "";
         Connection con = null;
         PreparedStatement ps = null;
@@ -79,6 +79,7 @@ public class ReservationDAOImpl extends DBContext implements ReservationDAO {
         try {
             con = getConnection(); //get connection
             ps = con.prepareStatement(sql);
+            ps.setString(1, viewDay);
             rs = ps.executeQuery();
             /**
              * set attributes for reservation from result set then add its to
