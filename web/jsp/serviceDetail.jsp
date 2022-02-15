@@ -5,7 +5,7 @@
  *
  * Record of change:
  * DATE            Version             AUTHOR           DESCRIPTION
- * 2022-02-08      1.0                 TrangCT          Controller Service Detail
+ * 2022-02-08      1.0                 TrangCT          Service Detail 
  -->
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>

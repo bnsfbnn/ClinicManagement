@@ -5,7 +5,7 @@
  *
  * Record of change:
  * DATE            Version             AUTHOR           DESCRIPTION
- * 2022-02-08      1.0                 TrangCT          Controller Service Detail
+ * 2022-02-08      1.0                 TrangCT          List service
  -->
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -29,13 +29,23 @@
     <body>
         <div class="container">
             <div class="row">
+<<<<<<< Updated upstream
                 <c:forEach items="${services.data}" var="service">
                     <div class="col-md-4 mb-3">
                         <div class="card">
                             <img src="${service.serviceName}" class="card-img-top" alt="...">
+=======
+                <img src="./assets/images/banner.jpg" width="100%" height="600" alt="Banner"/>
+            </div>
+            <div class="row mt-3">
+                <c:forEach items="${services.data}" var="service">
+                    <div class="col-md-4 mb-3">
+                        <div class="card">
+                            <img src="${service.serviceImage}" width="200" height="300" class="card-img-top" alt="...">
+>>>>>>> Stashed changes
                             <div class="card-body">
                                 <h5 class="card-title m-0">${service.serviceName}</h5>
-                                <p class="card-text text-secondary">x</p>
+                               <!-- <p class="card-text text-secondary">x</p> -->
                             </div>
                         </div>
                         <a href="ServiceDetailController?Id=${service.serviceId}" class="btn btn-success">Xem thêm</a>
@@ -53,7 +63,7 @@
                     <div class="col-12 text-center">
                         <ul>
                             <c:if test="${services.currentPage > 1}">
-                                <a class="btn btn-light" href="${requestScope['javax.servlet.forward.request_uri']}?page=${restaurants.currentPage-1}">Trang trước</a>
+                                <a class="btn btn-light" href="${requestScope['javax.servlet.forward.request_uri']}?page=${restaurants.currentPage}">Trang trước</a>
                             </c:if>
                             <c:forEach var="pageNumber" begin="1" end="${services.totalPage}" step="1">
                                 <c:if test="${services.currentPage == pageNumber}">
@@ -64,7 +74,7 @@
                                 </c:if>
                             </c:forEach>
                             <c:if test="${services.currentPage < services.totalPage}">
-                                <a class="btn btn-light" href="${requestScope['javax.servlet.forward.request_uri']}?page=${services.currentPage+1}">Trang sau</a>
+                                <a class="btn btn-light" href="${requestScope['javax.servlet.forward.request_uri']}?page=${services.currentPage +2}">Trang sau</a>
                             </c:if>
                         </ul>
                     </div>
