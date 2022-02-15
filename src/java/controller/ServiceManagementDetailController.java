@@ -1,7 +1,11 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Copyright(C) 2022, FPT University
+ * CMS
+ * CLINIC MANAGEMENT SYSTEM
+ *
+ * Record of change:
+ * DATE            Version             AUTHOR           DESCRIPTION
+ * 2022-02-08      1.0                 MinhVT           First Implement 
  */
 package controller;
 
@@ -16,8 +20,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- *
- * @author lenovo
+ * <h1>Service Management Controller</h1>
+ * Controller to view service management detail. Method process data form ServiceDAO and 
+ * forward data to file view
+ * <p>
+ * 
+ * 
+ * @author MinhVT
+ * @version 1.0
+ * @since 2022-02-08
  */
 public class ServiceManagementDetailController extends HttpServlet {
 
@@ -33,10 +44,14 @@ public class ServiceManagementDetailController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        // get value of query string Id
         int id = Integer.parseInt(request.getParameter("Id"));
         ServiceDAO serviceDAO = new ServiceDAOImpl();
+        // get service management by id
         Service service = serviceDAO.getById(id);
+        // set attribute service management with valuse service
         request.setAttribute("service", service);
+        // forward request,reponse to serviceManagementDetail.jsp
         request.getRequestDispatcher("./jsp/serviceManagementDetail.jsp").forward(request, response);
     }
 
