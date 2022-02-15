@@ -12,6 +12,7 @@
         <link rel="stylesheet" href="./assets/css/select2.min.css" />
         <link rel="stylesheet" href="./assets/css/select2-bootstrap-5-theme.min.css" />
         <link rel="stylesheet" href="./assets/css/custom.css" />
+        <link href="../assets/css/header.css" rel="stylesheet" type="text/css"/>
     </head>
 
     <header>
