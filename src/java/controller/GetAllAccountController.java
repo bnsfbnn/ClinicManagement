@@ -29,21 +29,21 @@ import javax.servlet.http.HttpServletResponse;
  * @author Hoang Thi Thu Huong
  */
 public class GetAllAccountController extends HttpServlet {
-
-    /**
+    
+     /**
+     * Use function getAllAccount in <code>dao.impl.UserDAOImpl</code> to
+     * get a <code>java.util.List</code> object that contains a list of
+     * <code>entity.Account</code><br>
+     * Forward user to the <code>viewAllAccount.jsp</code> page.<br>
+     * 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
      *
      * @param request servlet request
+     * - users is a list that contains a series of account
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
-     */
-    
-     /**
-     * Use function getAllAccount in <code>dao.impl.UserDAOImpl</code> to
-     * get a <code>java.util.List</code> object that contains a series of
-     * <code>entity.Account</code><br>
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -51,7 +51,7 @@ public class GetAllAccountController extends HttpServlet {
         UserDAO userDAO = new UserDAOImpl();
         List<Account> users = userDAO.getAllAccount();
         request.setAttribute("users", users);
-          request.getRequestDispatcher("./jsp/viewAllAccount.jsp").forward(request, response);
+        request.getRequestDispatcher("./jsp/viewAllAccount.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

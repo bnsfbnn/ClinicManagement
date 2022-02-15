@@ -11,6 +11,7 @@ package dao.impl;
 
 import context.DBContext;
 import dao.UserDAO;
+import entity.Account;
 import entity.User;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -48,7 +49,7 @@ public class UserDAOImpl extends DBContext implements UserDAO {
             while (rs.next()) {
                 User user = new User();
                 user.setUserId(rs.getInt("user_id"));
-                user.setRole(rs.getString("role"));
+                user.setRole(rs.getString("role_id"));
                 user.setServiceId(rs.getInt("service_id"));
                 user.setUsername(username);
                 user.setEmail(rs.getString("email"));
@@ -73,10 +74,10 @@ public class UserDAOImpl extends DBContext implements UserDAO {
     }
 
     /*
-    * Get all accounts from database. 
+    * Get all accounts with information from database. 
     * 
     * @return a list of <code>Account</code> objects. It is
-    * a <code>java.util.List</code> object 
+    * a <code>java.util.List</code> object .
     */
     @Override
     public List<Account> getAllAccount() {
@@ -91,7 +92,7 @@ public class UserDAOImpl extends DBContext implements UserDAO {
             preparedStatement = connecion.prepareStatement("select * from users c join roles r on c.role_id = r.role_id");
             rs = preparedStatement.executeQuery();
             while (rs.next()) {
-                User user = new User();
+                Account user = new Account();
                 user.setUserId(rs.getInt("user_id"));
                 user.setRole(rs.getString("role_name"));
                 user.setServiceId(rs.getInt("service_id"));
@@ -117,6 +118,12 @@ public class UserDAOImpl extends DBContext implements UserDAO {
         return users;
     }
 
+    /**
+     * Delete a <code>entity.Account</code> entity by id.
+     *
+     * @param id is id of an account that will be deleted.
+     *
+     */
     @Override
     public void deleteAccount(int id) {
         logger.log(Level.INFO, "Delete account with id");

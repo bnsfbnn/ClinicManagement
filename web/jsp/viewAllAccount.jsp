@@ -71,15 +71,14 @@
                         </a>
                     </td>
                     <td style="text-align: center; border: 1px solid">
-                        <button type="button" class="btn btn-danger" onclick="myFunction()">Delete</button>
+                        <button type="button" class="btn btn-danger" onclick="myFunction('${user.userId}')">Delete</button>
                     </td>
                 </tr>
             </c:forEach>
         </table>
         <script>
-            function myFunction() {
-                var id = parseInt(document.getElementById("userId").value);
-                let text = "Do you wannaa delete user with ID : " + id;
+            function myFunction(id) {
+                let text = "Do you wanna delete user with ID : " + id;
                 if (confirm(text) == true) {
                     document.location.href = "DeleteAccountController?id=" + id;
                 }
