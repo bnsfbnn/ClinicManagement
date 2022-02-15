@@ -22,7 +22,18 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-
+/**
+ * <h1>Service DAO</h1>
+ * Data access object connect database and access data. - count : count list
+ * services - getAllService : get list services by paging - getById : get
+ * service by id
+ * <p>
+ *
+ *
+ * @author TrangCT
+ * @version 1.0
+ * @since 2022-02-08
+ */
 public class ServiceDAOImpl extends DBContext implements ServiceDAO {
 
     /**
