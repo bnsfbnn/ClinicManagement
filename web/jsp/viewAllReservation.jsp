@@ -103,25 +103,25 @@
                                             </c:forEach>
                                         </tr>
                                         <tr>
-                                            <td class="bg-white text-dark m-0 p-0">${k}:15</td>
+                                            <td class="bg-white text-dark m-0 p-0">15</td>
                                             <c:forEach var="i" items="${doctors}">
                                                 <td class="bg-white text-dark m-0 p-0" id="${i.userId}-0${k}:00:00">${k}:15</td>
                                             </c:forEach>
                                         </tr>
                                         <tr>
-                                            <td class="bg-white text-dark m-0 p-0">${k}:30</td>
+                                            <td class="bg-white text-dark m-0 p-0">30</td>
                                             <c:forEach var="i" items="${doctors}">
                                                 <td class="bg-white text-dark m-0 p-0" id="${i.userId}-0${k}:15:00">${k}:30</td>
                                             </c:forEach>
                                         </tr>
                                         <tr>
-                                            <td class="bg-white text-dark m-0 p-0">${k}:45</td>
+                                            <td class="bg-white text-dark m-0 p-0">45</td>
                                             <c:forEach var="i" items="${doctors}">
                                                 <td class="bg-white text-dark m-0 p-0" id="${i.userId}-0${k}:30:00">${k}:40</td>
                                             </c:forEach>
                                         </tr>
                                         <tr>
-                                            <td class="bg-white text-dark m-0 p-0">${k}:60</td>
+                                            <td class="bg-white text-dark m-0 p-0">60</td>
                                             <c:forEach var="i" items="${doctors}">
                                                 <td class="bg-white text-dark m-0 p-0" id="${i.userId}-0${k}:45:00">${k+1}:00</td>
                                             </c:forEach>
@@ -135,25 +135,25 @@
                                             </c:forEach>
                                         </tr>
                                         <tr>
-                                            <td class="bg-white text-dark m-0 p-0">${k}:15</td>
+                                            <td class="bg-white text-dark m-0 p-0">15</td>
                                             <c:forEach var="i" items="${doctors}">
                                                 <td class="bg-white text-dark m-0 p-0" id="${i.userId}-${k}:00:00">${k}:15</td>
                                             </c:forEach>
                                         </tr>
                                         <tr>
-                                            <td class="bg-white text-dark m-0 p-0">${k}:30</td>
+                                            <td class="bg-white text-dark m-0 p-0">30</td>
                                             <c:forEach var="i" items="${doctors}">
                                                 <td class="bg-white text-dark m-0 p-0" id="${i.userId}-${k}:15:00">${k}:30</td>
                                             </c:forEach>
                                         </tr>
                                         <tr>
-                                            <td class="bg-white text-dark m-0 p-0">${k}:45</td>
+                                            <td class="bg-white text-dark m-0 p-0">45</td>
                                             <c:forEach var="i" items="${doctors}">
                                                 <td class="bg-white text-dark m-0 p-0" id="${i.userId}-${k}:30:00">${k}:40</td>
                                             </c:forEach>
                                         </tr>
                                         <tr>
-                                            <td class="bg-white text-dark m-0 p-0">${k}:60</td>
+                                            <td class="bg-white text-dark m-0 p-0">60</td>
                                             <c:forEach var="i" items="${doctors}">
                                                 <td class="bg-white text-dark m-0 p-0" id="${i.userId}-${k}:45:00">${k+1}:00</td>
                                             </c:forEach>
@@ -196,6 +196,7 @@
                 var confirmDoctorId = '${i.confirmedDoctor.userId}';
                 var idProperties = confirmDoctorId + '-' + confirmedExaminationTime;
                 $("#" + idProperties).text("");
+                var reservationStatus = '${i.confirmedDoctor.userId}';
                 $("#" + idProperties).append("<div class=\"rounded bg-primary text-white m-0 p-0\"><b>${i.customer.fullName}</b><br/><b>Dịch vụ:  </b><i>${i.service.serviceName}</i></div>");
             </c:forEach>
             });

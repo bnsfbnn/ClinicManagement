@@ -26,10 +26,10 @@
                     </li>
                 </ul>
             </div>
-            <div class="dropdown ml-auto">
-                <a class="avatar avatar-md p-0 show" href="">
+            <div class="ml-auto">
+                <div class="avatar avatar-md p-0">
                     <img height="45" class="avatar-img rounded-circle" src="./assets/images/avatar01.jpg" alt="avatar">
-                </a>
+                </div>
             </div>
             <!--End header-->
         </header>
