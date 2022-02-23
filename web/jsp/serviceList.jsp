@@ -24,6 +24,15 @@
         <link rel="stylesheet" href="./assets/css/custom.css" />
         <link href="../assets/css/header.css" rel="stylesheet" type="text/css"/>
     </head>
+    <style>
+        .card{
+            border:none;
+            margin-top: 10px
+        }   
+        .col-4{
+            text-align: center
+        }
+    </style>
     <header>
         <jsp:include page="./components/customerHeader.jsp" />
     </header>
@@ -32,17 +41,19 @@
             <div class="row">
                 <img class="w-100" src="./assets/images/banner-sm.png" alt="Banner"/>
             </div>
-            <div class="row mt-3">
+           
+            <div class="row mt-3 items">
                 <c:forEach items="${services.data}" var="service">
-                    <div class="col-md-4 mb-3">
-                        <div class="card">
-                            <img src="${service.serviceImage}" class="card-img-top w-50" alt="...">
+                    <div class="col-4">
+                        <div >
+                            <!--<img src="${service.serviceImage}" class="card-img-top w-50" alt="...">-->
+                                                        <img src="https://o.rada.vn/data/image/2020/05/08/ta-bac-si-dang-kham-benh.jpg" class="card-img-top w-75" alt="...">
+
                             <div class="card-body">
                                 <h5 class="card-title m-0">${service.serviceName}</h5>
-                                <p class="card-text text-secondary">x</p>
                             </div>
                         </div>
-                        <a href="ServiceDetailController?Id=${service.serviceId}" class="btn btn-success">Xem thêm</a>
+                        <a href="ServiceDetailController?Id=${service.serviceId}" class="btn btn-success mb-4">Xem thêm</a>
                     </div>
 
                 </c:forEach>
@@ -52,6 +63,7 @@
                     </div>
                 </c:if>
             </div>
+                
             <c:if test="${services.totalPage > 1}">
                 <div class="row">
                     <div class="col-12 text-center">

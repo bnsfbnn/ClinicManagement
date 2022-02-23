@@ -31,7 +31,12 @@ public class UserDAOImpl extends DBContext implements UserDAO {
      * Logger for system
      */
     private static Logger logger = Logger.getLogger(UserDAOImpl.class.getName());
-
+/*
+    * Get all user from database. 
+    * 
+    * @return a list of <code>User</code> objects. It is
+    * a <code>java.util.List</code> object 
+    */
     @Override
     public User login(String username, String password) {
         logger.log(Level.INFO, "Login Controller");
