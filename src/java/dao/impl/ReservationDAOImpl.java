@@ -20,6 +20,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -40,14 +41,14 @@ public class ReservationDAOImpl extends DBContext implements ReservationDAO {
      * -It is a <code>java.util.ArrayList</code> object
      * @throws SQLException
      */
-    
     @Override
-    public ArrayList<Reservation> getReservationsByDay(String viewDay) throws SQLException {
+    public ArrayList<Reservation> getReservationsByDay(String viewDay, int serviceId) throws SQLException {
         ArrayList<Reservation> result = new ArrayList<>();
         String sql = "SELECT DISTINCT reservations.reservation_id,\n"
                 + "                users.[user_id],\n"
                 + "                users.[username],\n"
                 + "                users.full_name,\n"
+                + "                services.service_id,\n"
                 + "                services.service_name,\n"
                 + "                packages.package_title,\n"
                 + "                packages.examination_duration,\n"
@@ -71,8 +72,12 @@ public class ReservationDAOImpl extends DBContext implements ReservationDAO {
                 + "          users.user_id AS doctor_id\n"
                 + "   FROM reservations\n"
                 + "   LEFT JOIN users ON reservations.confirmed_doctor_id = users.user_id) AS doctors ON reservations.confirmed_doctor_id = doctors.doctor_id\n"
-                + "WHERE reservations.confirmed_examination_date = ?\n"
-                + "";
+                + "WHERE reservations.confirmed_examination_date = ? \n";
+
+        if (serviceId != -1) {
+            sql += " AND reservations.service_id = ? ";
+        }
+
         Connection con = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -80,6 +85,9 @@ public class ReservationDAOImpl extends DBContext implements ReservationDAO {
             con = getConnection(); //get connection
             ps = con.prepareStatement(sql);
             ps.setString(1, viewDay);
+            if (serviceId != -1) {
+                ps.setInt(2, serviceId);
+            }
             rs = ps.executeQuery();
             /**
              * set attributes for reservation from result set then add its to
@@ -88,7 +96,7 @@ public class ReservationDAOImpl extends DBContext implements ReservationDAO {
             while (rs.next()) {
                 Reservation reservation = new Reservation();
                 User customer = new User(rs.getInt("user_id"), rs.getString("username"), rs.getString("full_name"));
-                Service service = new Service(rs.getString("service_name"));
+                Service service = new Service(rs.getInt("service_id"), rs.getString("service_name"));
                 ServicePackage servicePackage = new ServicePackage(rs.getString("package_title"), rs.getString("examination_duration"));
                 User doctor = new User(rs.getInt("doctor_id"), rs.getString("doctor_username"), rs.getString("doctor_full_name"));
                 reservation.setReservationId(rs.getInt("reservation_id"));
@@ -131,17 +139,25 @@ public class ReservationDAOImpl extends DBContext implements ReservationDAO {
      * @throws SQLException
      */
     @Override
-    public ArrayList<User> getDoctorsHasReservation() throws SQLException {
+    public ArrayList<User> getDoctorsHasReservation(String viewDay, int serviceId) throws SQLException {
         ArrayList<User> result = new ArrayList<>();
         String sql = "SELECT DISTINCT users.user_id as doctor_id, users.username as doctor_username, users.full_name as doctor_full_name\n"
                 + "FROM     reservations\n"
-                + "LEFT JOIN users ON reservations.confirmed_doctor_id = users.user_id WHERE users.username IS NOT NULL OR users.full_name IS NOT NULL";
+                + "LEFT JOIN users ON reservations.confirmed_doctor_id = users.user_id \n"
+                + "WHERE (users.username IS NOT NULL OR users.full_name IS NOT NULL) AND reservations.confirmed_examination_date = ?";
+        if (serviceId != -1) {
+            sql += " AND reservations.service_id = ? ";
+        }
         Connection con = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
         try {
             con = getConnection(); //get connection
             ps = con.prepareStatement(sql);
+            ps.setString(1, viewDay);
+            if (serviceId != -1) {
+                ps.setInt(2, serviceId);
+            }
             rs = ps.executeQuery();
             /**
              * set attributes for doctors from result set then add its to result
