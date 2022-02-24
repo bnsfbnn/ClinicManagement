@@ -22,13 +22,7 @@
             <div>
                 <ul class="navbar-nav">
                     <li class="nav-item active">
-                        <a class="nav-link py-3" href="#">Xem Tất cả lịch khám bệnh<span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class=nav-item">
-                        <a class="nav-link py-3" href="#">Quản lý dịch vụ</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link py-3" href="#">Quản lý phản hồi</a>
+                        <a class="nav-link py-3" href="#">Quản lý tài khoản<span class="sr-only">(current)</span></a>
                     </li>
                 </ul>
             </div>

@@ -20,22 +20,35 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
+ * -The class contains method get information relate to Reservation<br>
+ * -The method will throw an object of <code>java.lang.Exception</code> class if
+ * there is any error occurring when reading data false.<br>
  *
- * @author Thanh Tung
+ * @author Nguyễn Thanh Tùng
  */
 public class ReservationDAOImpl extends DBContext implements ReservationDAO {
 
+    /**
+     * - Get full information about a reservation (such as customer information,
+     * service information, package information, all reservation information)
+     *
+     * @return a list of <code>Reservation</code> objects. <br>
+     * -It is a <code>java.util.ArrayList</code> object
+     * @throws SQLException
+     */
     @Override
-    public ArrayList<Reservation> getReservations() throws SQLException {
+    public ArrayList<Reservation> getReservationsByDay(String viewDay, int serviceId) throws SQLException {
         ArrayList<Reservation> result = new ArrayList<>();
         String sql = "SELECT DISTINCT reservations.reservation_id,\n"
                 + "                users.[user_id],\n"
                 + "                users.[username],\n"
                 + "                users.full_name,\n"
+                + "                services.service_id,\n"
                 + "                services.service_name,\n"
                 + "                packages.package_title,\n"
                 + "                packages.examination_duration,\n"
@@ -59,14 +72,22 @@ public class ReservationDAOImpl extends DBContext implements ReservationDAO {
                 + "          users.user_id AS doctor_id\n"
                 + "   FROM reservations\n"
                 + "   LEFT JOIN users ON reservations.confirmed_doctor_id = users.user_id) AS doctors ON reservations.confirmed_doctor_id = doctors.doctor_id\n"
-                + "\n"
-                + "";
+                + "WHERE reservations.confirmed_examination_date = ? \n";
+
+        if (serviceId != -1) {
+            sql += " AND reservations.service_id = ? ";
+        }
+
         Connection con = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
         try {
             con = getConnection(); //get connection
             ps = con.prepareStatement(sql);
+            ps.setString(1, viewDay);
+            if (serviceId != -1) {
+                ps.setInt(2, serviceId);
+            }
             rs = ps.executeQuery();
             /**
              * set attributes for reservation from result set then add its to
@@ -75,7 +96,7 @@ public class ReservationDAOImpl extends DBContext implements ReservationDAO {
             while (rs.next()) {
                 Reservation reservation = new Reservation();
                 User customer = new User(rs.getInt("user_id"), rs.getString("username"), rs.getString("full_name"));
-                Service service = new Service(rs.getString("service_name"));
+                Service service = new Service(rs.getInt("service_id"), rs.getString("service_name"));
                 ServicePackage servicePackage = new ServicePackage(rs.getString("package_title"), rs.getString("examination_duration"));
                 User doctor = new User(rs.getInt("doctor_id"), rs.getString("doctor_username"), rs.getString("doctor_full_name"));
                 reservation.setReservationId(rs.getInt("reservation_id"));
@@ -109,18 +130,34 @@ public class ReservationDAOImpl extends DBContext implements ReservationDAO {
         return result;
     }
 
+    /**
+     * - Get doctor information about a reservation (such as doctorId,
+     * doctorUserName, doctorFullName)
+     *
+     * @return a list of <code>Reservation</code> objects. <br>
+     * -It is a <code>java.util.ArrayList</code> object
+     * @throws SQLException
+     */
     @Override
-    public ArrayList<User> getDoctorsHasReservation() throws SQLException {
+    public ArrayList<User> getDoctorsHasReservation(String viewDay, int serviceId) throws SQLException {
         ArrayList<User> result = new ArrayList<>();
         String sql = "SELECT DISTINCT users.user_id as doctor_id, users.username as doctor_username, users.full_name as doctor_full_name\n"
                 + "FROM     reservations\n"
-                + "LEFT JOIN users ON reservations.confirmed_doctor_id = users.user_id WHERE users.username IS NOT NULL OR users.full_name IS NOT NULL";
+                + "LEFT JOIN users ON reservations.confirmed_doctor_id = users.user_id \n"
+                + "WHERE (users.username IS NOT NULL OR users.full_name IS NOT NULL) AND reservations.confirmed_examination_date = ?";
+        if (serviceId != -1) {
+            sql += " AND reservations.service_id = ? ";
+        }
         Connection con = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
         try {
             con = getConnection(); //get connection
             ps = con.prepareStatement(sql);
+            ps.setString(1, viewDay);
+            if (serviceId != -1) {
+                ps.setInt(2, serviceId);
+            }
             rs = ps.executeQuery();
             /**
              * set attributes for doctors from result set then add its to result
@@ -129,47 +166,6 @@ public class ReservationDAOImpl extends DBContext implements ReservationDAO {
             while (rs.next()) {
                 User doctor = new User(rs.getInt("doctor_id"), rs.getString("doctor_username"), rs.getString("doctor_full_name"));
                 result.add(doctor);
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(ReservationDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
-            throw ex;
-        } catch (Exception ex) {
-            Logger.getLogger(ReservationDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
-            /**
-             * close result set, prepared statement and connection by
-             * corresponding order
-             */
-        } finally {
-            this.closeResultSet(rs);
-            this.closePreparedStatement(ps);
-            this.closeConnection(con);
-        }
-        return result;
-    }
-
-    @Override
-    public ArrayList<Service> getServices() throws SQLException {
-        ArrayList<Service> result = new ArrayList<>();
-        String sql = "SELECT [service_id]\n"
-                + "      ,[service_name]\n"
-                + "      ,[service_brief]\n"
-                + "      ,[service_description]\n"
-                + "      ,[service_image]\n"
-                + "  FROM [CMS].[dbo].[services]";
-        Connection con = null;
-        PreparedStatement ps = null;
-        ResultSet rs = null;
-        try {
-            con = getConnection(); //get connection
-            ps = con.prepareStatement(sql);
-            rs = ps.executeQuery();
-            /**
-             * set attributes for services from result set then add its to
-             * result list
-             */
-            while (rs.next()) {
-                Service service = new Service(rs.getInt("service_id"), rs.getString("service_name"), rs.getString("service_brief"), rs.getString("service_description"), rs.getString("service_image"));
-                result.add(service);
             }
         } catch (SQLException ex) {
             Logger.getLogger(ReservationDAOImpl.class.getName()).log(Level.SEVERE, null, ex);

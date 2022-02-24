@@ -10,49 +10,71 @@
 package controller;
 
 import dao.impl.ReservationDAOImpl;
+import dao.impl.ServiceDAOImpl;
 import entity.Reservation;
 import entity.Service;
 import entity.User;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Date;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import util.Utils;
 
 /**
+ * * -This class uses function getReservations in
+ * <code>dao.impl.reservationDAOImpl</code> to get an
+ * <code>java.util.ArrayList</code> object that contains a series of
+ * <code>entity.Reservation</code>
  *
- * @author Thanh Tung
+ * @author Nguyen Thanh Tung
  */
-public class ViewAllReservations extends HttpServlet {
+public class ViewAllReservationsController extends HttpServlet {
 
     /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
+     * -Use function getReservations in <code>dao.impl.ReservationDAOImpl</code> to
+     * get an <code>java.util.ArrayList</code> object that contains a series of
+     * <code>entity.Reservation</code><br>
+     * -Use function getDoctorsHasReservation in <code>dao.impl.ReservationDAOImpl</code> to
+     * get an <code>java.util.ArrayList</code> object that contains a series of
+     * <code>entity.User</code><br> represent for a doctor
+     * -Use function getServices in <code>dao.impl.ServiceDAOImpl</code> to
+     * get an <code>java.util.ArrayList</code> object that contains a series of
+     * <code>entity.Service</code><br> 
+     * 
+     * -Set parameters: viewDay, doctors, services, reservations<br>
+     * -Finally forward user to the <code>viewAllReservation.jsp</code> page. Processes
+     * requests for both HTTP <code>GET</code> and <code>POST</code> methods.
      *
      * @param request servlet request
-     * @param response servlet response
+     * @param response servlet response is
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-            String date = formatter.format(new Date());
-            ReservationDAOImpl reservationDAO = new ReservationDAOImpl();
-            ArrayList<Reservation> reservations = reservationDAO.getReservations();
-            ArrayList<User> doctors = reservationDAO.getDoctorsHasReservation();
-            ArrayList<Service> services = reservationDAO.getServices();
-            request.setAttribute("today", date);
+            String viewDay = (request.getParameter("viewDay") != null) ? request.getParameter("viewDay"):Utils.getToday();
+            int serviceId = (request.getParameter("serviceId") != null) ? Integer.parseInt(request.getParameter("serviceId")): -1;
+            ServiceDAOImpl serviceDAO = new ServiceDAOImpl(); // get serviceDAO object
+            ReservationDAOImpl reservationDAO = new ReservationDAOImpl();// get reservationDAO object
+
+            ArrayList<Service> services = serviceDAO.getServices();
+            ArrayList<User> doctors = reservationDAO.getDoctorsHasReservation(viewDay, serviceId);
+            ArrayList<Reservation> reservations = reservationDAO.getReservationsByDay(viewDay, serviceId);
+            
+            request.setAttribute("viewDay", viewDay);
+            request.setAttribute("serviceId", serviceId);
             request.setAttribute("doctors", doctors);
             request.setAttribute("services", services);
             request.setAttribute("reservations", reservations);
             request.getRequestDispatcher("jsp/viewAllReservation.jsp").forward(request, response);
         } catch (Exception e) {
+            request.setAttribute("errorMessage", "Không thể tải dữ liệu từ cơ sở dữ liệu");
+            request.setAttribute("exceptionMessage", e.getMessage());
+            request.getRequestDispatcher("jsp/error.jsp").forward(request, response);
         }
     }
 

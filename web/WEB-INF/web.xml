@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
     <servlet>
-        <servlet-name>ViewAllReservations</servlet-name>
-        <servlet-class>controller.ViewAllReservations</servlet-class>
+        <servlet-name>ViewAllReservationsController</servlet-name>
+        <servlet-class>controller.ViewAllReservationsController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>LoginController</servlet-name>
@@ -24,6 +24,22 @@
         <servlet-name>GetAllAccountController</servlet-name>
         <servlet-class>controller.GetAllAccountController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>DeleteAccountController</servlet-name>
+        <servlet-class>controller.DeleteAccountController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CreateAccountController</servlet-name>
+        <servlet-class>controller.CreateAccountController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ServiceManagementController</servlet-name>
+        <servlet-class>controller.ServiceManagementController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ServiceManagementDetailController</servlet-name>
+        <servlet-class>controller.ServiceManagementDetailController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
         <url-pattern>/LoginController</url-pattern>
@@ -41,12 +57,28 @@
         <url-pattern>/ServiceDetailController</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>ViewAllReservationsController</servlet-name>
+        <url-pattern>/viewAllReservationController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>GetAllAccountController</servlet-name>
         <url-pattern>/GetAllAccountController</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>ViewAllReservations</servlet-name>
-        <url-pattern>/viewAllReservationController</url-pattern>
+        <servlet-name>DeleteAccountController</servlet-name>
+        <url-pattern>/DeleteAccountController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CreateAccountController</servlet-name>
+        <url-pattern>/CreateAccountController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServiceManagementController</servlet-name>
+        <url-pattern>/ServiceManagementController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServiceManagementDetailController</servlet-name>
+        <url-pattern>/ServiceManagementDetailController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

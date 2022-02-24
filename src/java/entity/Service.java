@@ -33,7 +33,8 @@ public class Service {
     public Service() {
     }
 
-    public Service(String serviceName) {
+    public Service(int serviceId, String serviceName) {
+        this.serviceId = serviceId;
         this.serviceName = serviceName;
     }
     

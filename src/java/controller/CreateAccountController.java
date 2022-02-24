@@ -4,8 +4,8 @@
  * CLINIC MANAGEMENT SYSTEM
  *
  * Record of change:
- * DATE            Version             AUTHOR           DESCRIPTION
- * 2022-02-11      1.0                 namnv           First Implement 
+ * DATE            Version          AUTHOR           DESCRIPTION
+ * 2022-02-08      1.0              HuongHTT         First Implement 
  */
 package controller;
 
@@ -15,13 +15,15 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
+ * This class uses <code>dao.impl.UserDAOImpl</code> functions:<br>
+ * createAccount to create an account.
  *
- * @author nguye
+ * Bugs: none
+ * @author Hoang Thi Thu Huong
  */
-public class LogoutController extends HttpServlet {
+public class CreateAccountController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,10 +37,18 @@ public class LogoutController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        HttpSession session = request.getSession();
-        session.invalidate();
-        request.getRequestDispatcher("./jsp/login.jsp").forward(request, response);
-
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet CreateAccountController</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet CreateAccountController at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
