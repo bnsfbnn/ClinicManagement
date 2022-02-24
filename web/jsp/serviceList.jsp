@@ -6,7 +6,7 @@
  * Record of change:
  * DATE            Version             AUTHOR           DESCRIPTION
  * 2022-02-08      1.0                 TrangCT          List service
- -->
+-->
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -44,10 +44,10 @@
             <div class="row mt-3 items">
                 <c:forEach items="${services.data}" var="service">
                     <div class="col-4">
-                        <div >
-                            <!--<img src="${service.serviceImage}" class="card-img-top w-50" alt="...">-->
-                                                        <img src="https://o.rada.vn/data/image/2020/05/08/ta-bac-si-dang-kham-benh.jpg" class="card-img-top w-75" alt="...">
-
+                        <div>
+                            <div class="card-img-top w-75 mx-auto" style="overflow:hidden;">
+                                <img height="300" width="300" src="./assets/images/${service.serviceImage}" alt="...">
+                            </div>
                             <div class="card-body">
                                 <h5 class="card-title m-0">${service.serviceName}</h5>
                             </div>
@@ -61,7 +61,7 @@
                     </div>
                 </c:if>
             </div>
-                
+
             <c:if test="${services.totalPage > 1}">
                 <div class="row">
                     <div class="col-12 text-center">
