@@ -5,10 +5,13 @@
  */
 package dao;
 
+import entity.ServicePackage;
+import java.util.List;
+
 /**
  *
  * @author Thanh Tung
  */
 public interface PackageDAO {
-    
+    List<ServicePackage> getAllPackage();
 }

@@ -10,11 +10,15 @@
 
 package controller;
 
+import dao.PackageDAO;
 import dao.ServiceDAO;
+import dao.impl.PackageDAOImpl;
 import dao.impl.ServiceDAOImpl;
 import entity.Service;
+import entity.ServicePackage;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -52,6 +56,9 @@ public class ServiceDetailController extends HttpServlet {
         Service service = serviceDAO.getById(id);
         // set attribute service with valuse service 
         request.setAttribute("service", service);
+        PackageDAO packageDAO = new PackageDAOImpl();
+        List<ServicePackage> packages = packageDAO.getAllPackage();
+        request.setAttribute("packages", packages);
         // forward request,reponse to serviceDetail.jsp
         request.getRequestDispatcher("./jsp/serviceDetail.jsp").forward(request, response);
     }
