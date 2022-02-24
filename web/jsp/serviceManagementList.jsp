@@ -34,6 +34,7 @@
                     <div class="col-md-4 mb-3">
                         <div class="card">
                             <img src="${service.serviceImage}" class="card-img-top" alt="...">
+                            
                             <div class="card-body">
                                 <h5 class="card-title m-0">${service.serviceName}</h5>
                                 <p class="card-text text-secondary">${service.serviceBrief}</p>

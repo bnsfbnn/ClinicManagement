@@ -19,6 +19,16 @@
         <link href="../assets/css/header.css" rel="stylesheet" type="text/css"/>
         <title>Account Management</title>
     </head>
+    <style>
+        input{
+            height: 45px;
+            border:none;
+            text-align: center;
+        }
+        table tr th{
+            text-align: center
+        }
+    </style>
     <body>
         <!--Import header-->
         <%@include file="components/adminHeader.jsp" %>
@@ -29,13 +39,13 @@
                 <th>Tài Khoản</th>
                 <th>Email</th>
                 <th>Họ tên</th>
-                <th>Ngày Sinh</th>
+                <th >Ngày Sinh</th>
                 <th>Giới tính</th>
                 <th>Phone</th>
                 <th>Địa chỉ</th>
                 <th>Chức vụ</th>
-                <th>Update</th>
-                <th>Delete</th>
+                <th></th>
+                <th></th>
             </tr>
             <c:forEach var="user" items="${users}">
                 <tr>

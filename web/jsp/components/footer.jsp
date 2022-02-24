@@ -12,6 +12,10 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1></h1>
+        <div class="footer">
+            <ul>
+                
+            </ul>
+        </div>
     </body>
 </html>
