@@ -10,12 +10,8 @@
 package controller;
 
 import dao.ReservationDAO;
-import dao.ServiceDAO;
 import dao.impl.ReservationDAOImpl;
-import dao.impl.ServiceDAOImpl;
 import entity.Reservation;
-import entity.Service;
-import entity.User;
 import java.io.IOException;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
@@ -25,29 +21,24 @@ import javax.servlet.http.HttpServletResponse;
 import util.Utils;
 
 /**
- * * -This class uses function getReservations in
+ * * -This class uses function getMyReservations in
  * <code>dao.impl.reservationDAOImpl</code> to get an
  * <code>java.util.ArrayList</code> object that contains a series of
  * <code>entity.Reservation</code>
  *
  * @author Nguyen Thanh Tung
  */
-public class ViewAllReservationsController extends HttpServlet {
+public class ViewMyReservationController extends HttpServlet {
 
     /**
-     * -Use function getReservations in <code>dao.impl.ReservationDAOImpl</code> to
+     * -Use function getReservationByDoctorId in <code>dao.impl.ReservationDAOImpl</code> to
      * get an <code>java.util.ArrayList</code> object that contains a series of
      * <code>entity.Reservation</code><br>
-     * -Use function getDoctorsHasReservation in <code>dao.impl.ReservationDAOImpl</code> to
-     * get an <code>java.util.ArrayList</code> object that contains a series of
-     * <code>entity.User</code><br> represent for a doctor
-     * -Use function getServices in <code>dao.impl.ServiceDAOImpl</code> to
-     * get an <code>java.util.ArrayList</code> object that contains a series of
-     * <code>entity.Service</code><br> 
-     * 
-     * -Set parameters: viewDay, doctors, services, reservations<br>
-     * -Finally forward user to the <code>viewAllReservation.jsp</code> page. Processes
-     * requests for both HTTP <code>GET</code> and <code>POST</code> methods.
+     *  
+     * -Set parameters: dayOfWeek, startWeek, endWeek, viewDay, reservations<br>
+     * -Finally forward user to the <code>viewMyReservation.jsp</code> page.
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
      *
      * @param request servlet request
      * @param response servlet response is
@@ -58,22 +49,21 @@ public class ViewAllReservationsController extends HttpServlet {
             throws ServletException, IOException {
         try {
             String viewDay = (request.getParameter("viewDay") != null) ? Utils.parseDateFormat(request.getParameter("viewDay")) : Utils.getToday();
-            int serviceId = (request.getParameter("serviceId") != null) ? Integer.parseInt(request.getParameter("serviceId")): -1;
-            ServiceDAO serviceDAO = new ServiceDAOImpl(); // get serviceDAO object
-            ReservationDAO reservationDAO = new ReservationDAOImpl();// get reservationDAO object
-            ArrayList<Service> services = serviceDAO.getServices();
-            ArrayList<User> doctors = reservationDAO.getDoctorsHasReservation(viewDay, serviceId);
-            ArrayList<Reservation> reservations = reservationDAO.getReservationsByDay(viewDay, serviceId);
-            
+            String startWeek = (request.getParameter("startWeek") != null) ? (request.getParameter("startWeek")): Utils.getMondayOfThisWeek();
+            String endWeek = (request.getParameter("endWeek") != null) ? (request.getParameter("endWeek")): Utils.getSundayOfThisWeek();
+            ReservationDAO reservationDAO = new ReservationDAOImpl();
+            ArrayList<Reservation> reservations = reservationDAO.getReservationByDoctorId(7, startWeek, endWeek);
+            ArrayList<String> dayOfWeek = Utils.getDayOfThisWeek(viewDay);
+            request.setAttribute("dayOfWeek", dayOfWeek);
+            request.setAttribute("startWeek", startWeek);
+            request.setAttribute("endWeek", endWeek);
             request.setAttribute("viewDay", Utils.revertParseDateFormat(viewDay));
-            request.setAttribute("serviceId", serviceId);
-            request.setAttribute("doctors", doctors);
-            request.setAttribute("services", services);
             request.setAttribute("reservations", reservations);
-            request.getRequestDispatcher("jsp/viewAllReservation.jsp").forward(request, response);
+            request.getRequestDispatcher("jsp/viewMyReservation.jsp").forward(request, response);
         } catch (Exception e) {
             request.setAttribute("errorMessage", "Không thể tải dữ liệu từ cơ sở dữ liệu");
             request.setAttribute("exceptionMessage", e.getMessage());
+            System.out.println(e);
             request.getRequestDispatcher("jsp/error.jsp").forward(request, response);
         }
     }

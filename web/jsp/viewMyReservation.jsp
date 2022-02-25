@@ -1,0 +1,249 @@
+<!--
+ * Copyright(C) 2022, FPT University
+ * CMS
+ * CLINIC MANAGEMENT SYSTEM
+ *
+ * Record of change:
+ * DATE            Version             AUTHOR           DESCRIPTION
+ * 2022-02-24      1.0                 tungnt           First Implement 
+/-->
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib uri="/WEB-INF/functions.tld" prefix="f" %>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8;">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Clinic Management System</title>
+        <link href="./assets/css/header.css" rel="stylesheet" type="text/css"/>
+        <link href="./assets/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href="./assets/css/jquery-ui.min.css" rel="stylesheet" type="text/css"/>
+        <link href="./assets/css/jquery-ui.structure.min.css" rel="stylesheet" type="text/css"/>
+        <link href="./assets/css/jquery-ui.theme.min.css" rel="stylesheet" type="text/css"/>
+    </head>
+    <body>
+        <!--Import header-->
+        <%@include file="components/doctorHeader.jsp" %>
+        <!--Start main content-->
+        <div class="">
+            <div class="container-fluid p-0">
+                <div class="row justify-content-center mt-3 mr-0">
+                    <h4>Lịch hẹn của tôi</h4>
+                </div>
+                <form id="myForm" action="${pageContext.request.contextPath}/viewMyReservation" method="POST">
+                    <div class="row justify-content-end mt-3 mr-0">
+                        <div class="col-lg-2 mr-5">
+                            <h6 class="float-right">Hôm nay</h6>
+                            <input type="text" class="form-control" id="datepicker" name="viewDay">
+                        </div>
+                    </div>
+                    <div class="row justify-content-end mt-3 mr-0">
+                        <div class="col-lg-2 mr-5">
+                            <h6 class="float-right">Ngày trong tuần</h6>
+                            <input type="text" hidden="enabled" id="startWeek" name="startWeek">
+                            <input type="text" hidden="enabled" id="endWeek" name="endWeek">
+                            <input type="text" class="form-control" id="weekRange" aria-label="Disabled input example" disabled readonly>
+                        </div>
+                    </div>
+                </form>
+                <div class="container-fluid mt-5 m-0 p-0">
+                    <div class="table-responsive overflow-auto">
+                        <table class="table table-bordered text-center ">
+                            <tr>
+                                <th  scope="col" class="bg-light"></th>
+                                <th scope="col" class="bg-dark text-white" id="Mon">Thứ Hai<br/><c:out value="${dayOfWeek[0]}"/></th>
+                                <th scope="col" class="bg-dark text-white" id="Tue">Thứ Ba<br/><c:out value="${dayOfWeek[1]}"/></th>
+                                <th scope="col" class="bg-dark text-white" id="Wed">Thứ Tư<br/><c:out value="${dayOfWeek[2]}"/></th>
+                                <th scope="col" class="bg-dark text-white" id="Thu">Thứ Năm<br/><c:out value="${dayOfWeek[3]}"/></th>
+                                <th scope="col" class="bg-dark text-white" id="Fri">Thứ Sáu<br/><c:out value="${dayOfWeek[4]}"/></th>
+                                <th scope="col" class="bg-dark text-white" id="Sat">Thứ Bảy<br/><c:out value="${dayOfWeek[5]}"/></th>
+                                <th scope="col" class="bg-dark text-white" id="Sun">Chủ Nhật<br/><c:out value="${dayOfWeek[6]}"/></th>
+                            </tr>
+                            <c:forEach begin="7" end="16" step="1" var="k">
+                                <c:choose>
+                                    <c:when test="${k eq 12}">
+                                        <tr>
+                                            <c:forEach begin="1" end="8" step="1">
+                                                <td class="bg-light text-dark m-0 p-0">12:00</td>
+                                            </c:forEach>
+                                        </tr>
+                                        <tr>
+                                            <td class="bg-light text-dark m-0 p-0">15</td>
+                                            <c:forEach begin="1" end="7" step="1">
+                                                <td class="bg-light text-dark m-0 p-0">12:15</td>
+                                            </c:forEach>
+                                        </tr>
+                                        <tr>
+                                            <td class="bg-light text-dark m-0 p-0">30</td>
+                                            <c:forEach begin="1" end="7" step="1">
+                                                <td class="bg-light text-dark m-0 p-0">12:30</td>
+                                            </c:forEach>
+                                        </tr>
+                                        <tr>
+                                            <td class="bg-light text-dark m-0 p-0">45</td>
+                                            <c:forEach begin="1" end="7" step="1">
+                                                <td class="bg-light text-dark m-0 p-0">12:45</td>
+                                            </c:forEach>
+                                        </tr>
+                                        <tr>
+                                            <td class="bg-light text-dark m-0 p-0">60</td>
+                                            <c:forEach begin="1" end="7" step="1">
+                                                <td class="bg-light text-dark m-0 p-0">13:00</td>
+                                            </c:forEach>
+                                        </tr>
+                                    </c:when>
+                                    <c:when test="${k ne 12 and k lt 10}">
+                                        <tr>
+                                            <td class="bg-light text-dark m-0 p-0">${k}:00</td>
+                                            <c:forEach var="i" items="${dayOfWeek}">
+                                                <td class="bg-white text-dark m-0 p-0">${k}:00</td>
+                                            </c:forEach>
+                                        </tr>
+                                        <tr>
+                                            <td class="bg-light text-dark m-0 p-0">15</td>
+                                            <c:forEach var="i" items="${dayOfWeek}">
+                                                <td class="bg-white text-dark m-0 p-0" id="${i}-0${k}:00:00">${k}:15</td>
+                                            </c:forEach>
+                                        </tr>
+                                        <tr>
+                                            <td class="bg-light text-dark m-0 p-0">30</td>
+                                            <c:forEach var="i" items="${dayOfWeek}">
+                                                <td class="bg-white text-dark m-0 p-0" id="${i}-0${k}:15:00">${k}:30</td>
+                                            </c:forEach>
+                                        </tr>
+                                        <tr>
+                                            <td class="bg-light text-dark m-0 p-0">45</td>
+                                            <c:forEach var="i" items="${dayOfWeek}">
+                                                <td class="bg-white text-dark m-0 p-0" id="${i}-0${k}:30:00">${k}:45</td>
+                                            </c:forEach>
+                                        </tr>
+                                        <tr>
+                                            <td class="bg-light text-dark m-0 p-0">60</td>
+                                            <c:forEach var="i" items="${dayOfWeek}">
+                                                <td class="bg-white text-dark m-0 p-0" id="${i}-0${k}:45:00">${k+1}:00</td>
+                                            </c:forEach>
+                                        </tr>
+                                    </c:when>
+                                    <c:when test="${k ne 12 and (k gt 10 or k eq 10)}">
+                                        <tr>
+                                            <td class="bg-light text-dark m-0 p-0">${k}:00</td>
+                                            <c:forEach var="i" items="${dayOfWeek}">
+                                                <td class="bg-white text-dark m-0 p-0">${k}:00</td>
+                                            </c:forEach>
+                                        </tr>
+                                        <tr>
+                                            <td class="bg-light text-dark m-0 p-0">15</td>
+                                            <c:forEach var="i" items="${dayOfWeek}">
+                                                <td class="bg-white text-dark m-0 p-0" id="${i}-${k}:00:00">${k}:15</td>
+                                            </c:forEach>
+                                        </tr>
+                                        <tr>
+                                            <td class="bg-light text-dark m-0 p-0">30</td>
+                                            <c:forEach var="i" items="${dayOfWeek}">
+                                                <td class="bg-white text-dark m-0 p-0" id="${i}-${k}:15:00">${k}:30</td>
+                                            </c:forEach>
+                                        </tr>
+                                        <tr>
+                                            <td class="bg-light text-dark m-0 p-0">45</td>
+                                            <c:forEach var="i" items="${dayOfWeek}">
+                                                <td class="bg-white text-dark m-0 p-0" id="${i}-${k}:30:00">${k}:45</td>
+                                            </c:forEach>
+                                        </tr>
+                                        <tr>
+                                            <td class="bg-light text-dark m-0 p-0">60</td>
+                                            <c:forEach var="i" items="${dayOfWeek}">
+                                                <td class="bg-white text-dark m-0 p-0" id="${i}-${k}:45:00">${k+1}:00</td>
+                                            </c:forEach>
+                                        </tr>
+                                    </c:when>
+                                </c:choose>
+                            </c:forEach>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Import js lib-->
+        <script src="./assets/js/jquery-3.6.0.min.js" type="text/javascript"></script>
+        <script src="./assets/js/popper.js" type="text/javascript"></script>
+        <script src="./assets/js/bootstrap.min.js" type="text/javascript"></script>
+        <script src="./assets/js/jquery-ui.min.js" type="text/javascript"></script>
+        <!--Import js code-->
+        <script>
+            $(document).ready(function () {
+                var weekday = new Array(7);
+                weekday[0] = "Monday";
+                weekday[1] = "Tuesday";
+                weekday[2] = "Wednesday";
+                weekday[3] = "Thursday";
+                weekday[4] = "Friday";
+                weekday[5] = "Saturday";
+                weekday[6] = "Sunday";
+                function convert(str) {
+                    var date = new Date(str),
+                            mnth = ("0" + (date.getMonth() + 1)).slice(-2),
+                            day = ("0" + date.getDate()).slice(-2);
+                    return [mnth, day, date.getFullYear()].join("/");
+                }
+                $("#datepicker").datepicker({
+                    firstDay: 1,
+                    changeMonth: true,
+                    maxDate: '+6D',
+                    onSelect: function () {
+                        var date = $(this).datepicker('getDate');
+                        var dayOfWeek = weekday[date.getUTCDay()];
+                        var startWeek = $(this).datepicker('getDate');
+                        var endWeek = $(this).datepicker('getDate');
+                        if (dayOfWeek === "Monday") {
+                            endWeek.setDate(endWeek.getDate() + 6);
+                        } else if (dayOfWeek === "Tuesday") {
+                            startWeek.setDate(startWeek.getDate() - 1);
+                            endWeek.setDate(endWeek.getDate() + 5);
+                        } else if (dayOfWeek === "Wednesday") {
+                            startWeek.setDate(startWeek.getDate() - 2);
+                            endWeek.setDate(endWeek.getDate() + 4);
+                        } else if (dayOfWeek === "Thursday") {
+                            startWeek.setDate(startWeek.getDate() - 3);
+                            endWeek.setDate(endWeek.getDate() + 3);
+                        } else if (dayOfWeek === "Friday") {
+                            startWeek.setDate(startWeek.getDate() - 4);
+                            endWeek.setDate(endWeek.getDate() + 2);
+                        } else if (dayOfWeek === "Saturday") {
+                            startWeek.setDate(startWeek.getDate() - 5);
+                            endWeek.setDate(endWeek.getDate() + 1);
+                        } else if (dayOfWeek === "Sunday") {
+                            startWeek.setDate(startWeek.getDate() - 6);
+                            endWeek.setDate(endWeek.getDate());
+                        }
+                        $("#startWeek").val(convert(startWeek));
+                        $("#endWeek").val(convert(endWeek));
+                        $("#weekRange").val(convert(startWeek) + " - " + convert(endWeek));
+                        document.getElementById("myForm").submit();
+                    },
+                });
+                $("#startWeek").val('${startWeek}');
+                $("#endWeek").val('${endWeek}');
+                $("#weekRange").val('${startWeek}' + " - " + '${endWeek}');
+                $("#datepicker").val('${viewDay}'); //set date want to view for datepicker
+            <c:forEach items="${reservations}" var="i" varStatus="status">
+                var raw_confirmedExaminationTime = '${i.confirmedExaminationTime}';
+                var confirmedExaminationTime = raw_confirmedExaminationTime.split(":")[0] + "\\:" + raw_confirmedExaminationTime.split(":")[1] + "\\:" + raw_confirmedExaminationTime.split(":")[2];
+                var confirmedExaminationDate = '${i.confirmedExaminationDate}';
+                var idProperties = confirmedExaminationDate + '-' + confirmedExaminationTime;
+                $("#" + idProperties).text("");
+                var reservationStatus = '${i.reservationStatus}';
+                if (reservationStatus === 'Đặt thành công') {
+                    $("#" + idProperties).append("<div class=\"rounded bg-primary text-white m-0 p-0\"><b>${i.customer.fullName}</b><br/><a class=\"text-white\" href=\"#\">Chi tiết</a></div>");
+                } else if (reservationStatus === 'Đã khám') {
+                    $("#" + idProperties).append("<div class=\"rounded bg-success text-white m-0 p-0\"><b>${i.customer.fullName}</b><br/><a class=\"text-white\" href=\"#\">Chi tiết</a></div>");
+                } else if (reservationStatus === 'Đã hủy') {
+                    $("#" + idProperties).append("<div class=\"rounded bg-danger text-white m-0 p-0\"><b>${i.customer.fullName}</b><br/><a class=\"text-white\" href=\"#\">Chi tiết</a></div>");
+                } else {
+                    $("#" + idProperties).append("<div class=\"rounded bg-secondary text-white m-0 p-0\"><b>${i.customer.fullName}</b><br/><a class=\"text-white\" href=\"#\">Chi tiết</a></div>");
+                }
+            </c:forEach>
+            });
+        </script>
+    </body>
+</html>
