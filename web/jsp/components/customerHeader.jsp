@@ -12,9 +12,9 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-    <body class="m-0 p-0">
+    <body>
         <!--Start header-->
-        <header class="navbar navbar-expand-lg navbar-light navbar-floating navbar-sticky">
+        <div class="navbar navbar-expand-lg navbar-light navbar-floating navbar-sticky m-0 p-0">
             <div class="p-2">
                 <a href="#">
                     <img src="./assets/images/logo.png" alt="" width="30" height="30">
@@ -31,7 +31,7 @@
                 </ul>
             </div>
             <div class="dropdown ml-auto">
-                <a class="avatar avatar-md p-0 show" href="" href="#" id="profileDropdown" role="button" data-bs-auto-close="outside" data-bs-display="static" data-bs-toggle="dropdown" aria-expanded="true">
+                <a class="avatar avatar-md p-0" href="" href="#" id="profileDropdown" role="button" data-bs-auto-close="outside" data-bs-display="static" data-bs-toggle="dropdown" aria-expanded="true">
                     <%
                         User user = (User) request.getSession().getAttribute("user");
                         if (user != null) {
@@ -40,9 +40,9 @@
                             String email = user.getAvatarImage();
                         }
                     %>
-                    <img height="45" class="avatar-img rounded-circle" src="./assets/images/avatar01.jpg" alt="avatar">
+                    <img height="45" class="avatar-img rounded-circle" src="./assets/images/avatar01.jpg" alt="avatar" onclick="show()">
                 </a>
-                    <ul class="dropdown-menu dropdown-animation shadow pt-3 show dropdown-menu-right" aria-labelledby="profileDropdown" data-bs-popper="none" style="">
+                <ul class="dropdown-menu dropdown-animation shadow pt-3 dropdown-menu-right" aria-labelledby="profileDropdown" data-bs-popper="none" style="">
                     <!-- Profile info -->
                     <li class="px-3">
                         <div class="d-flex align-items-center">

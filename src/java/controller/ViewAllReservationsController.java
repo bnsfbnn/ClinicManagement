@@ -9,13 +9,14 @@
  */
 package controller;
 
+import dao.ReservationDAO;
+import dao.ServiceDAO;
 import dao.impl.ReservationDAOImpl;
 import dao.impl.ServiceDAOImpl;
 import entity.Reservation;
 import entity.Service;
 import entity.User;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -31,7 +32,7 @@ import util.Utils;
  *
  * @author Nguyen Thanh Tung
  */
-public class ViewAllReservations extends HttpServlet {
+public class ViewAllReservationsController extends HttpServlet {
 
     /**
      * -Use function getReservations in <code>dao.impl.ReservationDAOImpl</code> to
@@ -56,18 +57,24 @@ public class ViewAllReservations extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            String viewDay = Utils.getToday();
-            ReservationDAOImpl reservationDAO = new ReservationDAOImpl();
-            ServiceDAOImpl serviceDAO = new ServiceDAOImpl();
-            ArrayList<Reservation> reservations = reservationDAO.getReservationsByDay(viewDay);
-            ArrayList<User> doctors = reservationDAO.getDoctorsHasReservation();
+            String viewDay = (request.getParameter("viewDay") != null) ? Utils.parseDateFormat(request.getParameter("viewDay")) : Utils.getToday();
+            int serviceId = (request.getParameter("serviceId") != null) ? Integer.parseInt(request.getParameter("serviceId")): -1;
+            ServiceDAO serviceDAO = new ServiceDAOImpl(); // get serviceDAO object
+            ReservationDAO reservationDAO = new ReservationDAOImpl();// get reservationDAO object
             ArrayList<Service> services = serviceDAO.getServices();
-            request.setAttribute("viewDay", viewDay);
+            ArrayList<User> doctors = reservationDAO.getDoctorsHasReservation(viewDay, serviceId);
+            ArrayList<Reservation> reservations = reservationDAO.getReservationsByDay(viewDay, serviceId);
+            
+            request.setAttribute("viewDay", Utils.revertParseDateFormat(viewDay));
+            request.setAttribute("serviceId", serviceId);
             request.setAttribute("doctors", doctors);
             request.setAttribute("services", services);
             request.setAttribute("reservations", reservations);
             request.getRequestDispatcher("jsp/viewAllReservation.jsp").forward(request, response);
         } catch (Exception e) {
+            request.setAttribute("errorMessage", "Không thể tải dữ liệu từ cơ sở dữ liệu");
+            request.setAttribute("exceptionMessage", e.getMessage());
+            request.getRequestDispatcher("jsp/error.jsp").forward(request, response);
         }
     }
 

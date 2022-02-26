@@ -37,12 +37,13 @@
         <jsp:include page="./components/customerHeader.jsp" />
     </header>
     <body>
-        <div class="container-fluid mt-3 p-0">
-            <div class="row">
-                <img class="w-100" src="./assets/images/banner-sm.png" alt="Banner"/>
+        <div class="container-fluid m-0 p-0">
+            <div class="row-fluid mb-3">
+                <img class="col-lg-12 p-0" src="./assets/images/banner-sm.png" alt="Banner"/>
             </div>
-           
-            <div class="row mt-3 items">
+
+            <div class="row">
+
                 <c:forEach items="${services.data}" var="service">
                     <div class="col-4">
                         <div >

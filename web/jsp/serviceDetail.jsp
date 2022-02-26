@@ -22,8 +22,14 @@
         <link rel="stylesheet" href="./assets/css/custom.css" />
         <link href="../assets/css/header.css" rel="stylesheet" type="text/css"/>
     </head>
+    <header>
+        <jsp:include page="./components/customerHeader.jsp" />
+    </header>
     <body>
-        <div class="container">
+        <div class="container-fluid m-0 p-0">
+            <div class="row-fluid mb-3">
+                <img class="col-lg-12 p-0" src="./assets/images/banner-sm.png" alt="Banner"/>
+            </div>
             <div class="row mb-3">
                 <div class="col-md-12">
                     <div id="gallerydetail" class="carousel slide" data-bs-ride="carousel">
