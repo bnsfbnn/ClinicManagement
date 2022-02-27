@@ -1,11 +1,7 @@
 /*
- * Copyright(C) 2022, FPT University
- * CMS
- * CLINIC MANAGEMENT SYSTEM
- *
- * Record of change:
- * DATE            Version             AUTHOR           DESCRIPTION
- * 2022-02-08      1.0                 MinhVT           First Implement 
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
 package controller;
 
@@ -21,15 +17,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * <h1>Service Management Controller</h1>
- * Controller to view service management. Method process data form ServiceDAO and 
- * forward data to file view
- * <p>
- * 
- * 
- * @author MinhVT
- * @version 1.0
- * @since 2022-02-08
+ *
+ * @author lenovo
  */
 public class ServiceManagementController extends HttpServlet {
 
@@ -44,33 +33,26 @@ public class ServiceManagementController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // get value of query string page
-        String page = request.getParameter("page");    
+        String page = request.getParameter("page");
         int pageIndex = 1;
-        if (page != null) {// check page if not null
+        if (page != null) {
             try {
-                //convert page(string) to pageIndex(int)
                 pageIndex = Integer.parseInt(page);
                 if (pageIndex == -1) {
                     pageIndex = 1;
                 }
             } catch (Exception e) {
-                //default pageIndex = 1
                 pageIndex = 1;
             }
-        }
-        else {
+        } else {
             pageIndex = 1;
         }
-                
-        int pageSize = 5;// default page size
+
+        int pageSize = 5;
         ServiceDAO serviceDAO = new ServiceDAOImpl();
-        //List service with pageIndex and pageSize
         Pagination<Service> services
                 = serviceDAO.getAllService(pageIndex, pageSize);
-        //set atrribute services with values serviece (Pagination<Services>)
         request.setAttribute("services", services);
-        //forwatd request and response to serviceManagementList.jsp
         request.getRequestDispatcher("./jsp/serviceManagementList.jsp").forward(request, response);
     }
 
