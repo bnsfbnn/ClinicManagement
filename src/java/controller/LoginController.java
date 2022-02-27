@@ -20,12 +20,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- * * -This class uses function getUser in
- * <code>dao.impl.UserDAOImpl</code> to get an
- * <code>java.util.String</code> object that contains a series of
- * <code>entity.User</code>
  *
- * @author Nguyen Thanh Tung
+ * @author nguye
  */
 public class LoginController extends HttpServlet {
 
@@ -45,11 +41,11 @@ public class LoginController extends HttpServlet {
         String password = request.getParameter("password");
 
         UserDAO userDAO = new UserDAOImpl();
-        User user = userDAO.login(username, password);
+        User user = userDAO.login(username.trim(), password);
         if (user != null) {
             HttpSession session = request.getSession();
             session.setAttribute("user", user);
-            request.getRequestDispatcher("./jsp/components/home.jsp").forward(request, response);
+            request.getRequestDispatcher("./jsp/home.jsp").forward(request, response);
         } else {
             request.setAttribute("message", "Tên đăng nhập hoặc mật khẩu không đúng!!!");
             request.getRequestDispatcher("./jsp/login.jsp").forward(request, response);

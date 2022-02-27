@@ -64,21 +64,21 @@ public class Utils {
     }
 
     public static ArrayList<String> getDayOfThisWeek(String viewDay) {
-        String viewDay;
-        LocalDate today = LocalDate.of(viewDay);
-        System.out.println(today);
-        // Go backward to get Monday
-        LocalDate monday = today;
-        while (monday.getDayOfWeek() != DayOfWeek.MONDAY) {
-            monday = monday.minusDays(1);
-        }
-        int count = 0;
-        ArrayList<String> dayOfWeek = new ArrayList<>();
-        while(count<7){
-            dayOfWeek.add(monday.toString());
-            monday = monday.plusDays(1);
-            count++;
-        }
-        return dayOfWeek;
+//        LocalDate today = LocalDate.of(viewDay);
+//        System.out.println(today);
+//        // Go backward to get Monday
+//        LocalDate monday = today;
+//        while (monday.getDayOfWeek() != DayOfWeek.MONDAY) {
+//            monday = monday.minusDays(1);
+//        }
+//        int count = 0;
+//        ArrayList<String> dayOfWeek = new ArrayList<>();
+//        while(count<7){
+//            dayOfWeek.add(monday.toString());
+//            monday = monday.plusDays(1);
+//            count++;
+//        }
+//        return dayOfWeek;
+        return null;
     }
 }
