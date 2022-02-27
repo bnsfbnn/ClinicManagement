@@ -66,7 +66,7 @@ public interface ReservationDAO {
      * @throws Exception when <code>java.sql.Exception</code> occurs.
      */
     public ArrayList<Reservation> getReservationByDoctorId(int doctorId, String startWeek, String endWeek) throws SQLException, Exception;
-    
+
     /**
      * - Get reservation information by reservation id
      *
@@ -78,16 +78,18 @@ public interface ReservationDAO {
      * @throws Exception when <code>java.sql.Exception</code> occurs.
      */
     public Reservation getReservationById(int reservationId) throws SQLException, Exception;
-    
+
     /**
      * - Update reservation status
      *
-     * @param reservationId is a <code>java.lang.int</code> object used to get
+     * @param reservationId is a <code>java.lang.int</code> object used to update
      * reservation by reservationId
+     * @param reservationStatus is a <code>java.lang.String</code> object used to update
+     * reservation by reservationStatus
      * @return a list of <code>Reservation</code> objects. <br>
      * -It is a <code>java.util.ArrayList</code> object
      * @throws SQLException when <code>java.sql.SQLException</code> occurs.
      * @throws Exception when <code>java.sql.Exception</code> occurs.
      */
-    public int updateReservationStatusById(int reservationId) throws SQLException, Exception;
+    public int updateReservationStatusById(int reservationId, String reservationStatus) throws SQLException, Exception;
 }

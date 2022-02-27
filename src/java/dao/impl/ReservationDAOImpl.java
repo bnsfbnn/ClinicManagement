@@ -347,17 +347,18 @@ public class ReservationDAOImpl extends DBContext implements ReservationDAO {
     /**
      * - Update reservation status
      *
-     * @param reservationId is a <code>java.lang.int</code> object used to get
+     * @param reservationId is a <code>java.lang.int</code> object used to update
      * reservation by reservationId
+     * @param reservationStatus is a <code>java.lang.String</code> object used to update
+     * reservation by reservationStatus
      * @return a list of <code>Reservation</code> objects. <br>
      * -It is a <code>java.util.ArrayList</code> object
      * @throws SQLException when <code>java.sql.SQLException</code> occurs.
      * @throws Exception when <code>java.sql.Exception</code> occurs.
      */
     @Override
-    public int updateReservationStatusById(int reservationId) throws SQLException, Exception {
+    public int updateReservationStatusById(int reservationId, String reservationStatus) throws SQLException, Exception {
         int check = 0;
-        String status = "Đã khám";
         String sql = "UPDATE reservations\n"
                 + "   SET reservation_status = ?\n"
                 + " WHERE reservations.reservation_id = ?";
@@ -366,7 +367,7 @@ public class ReservationDAOImpl extends DBContext implements ReservationDAO {
         try {
             con = getConnection(); //get connection
             ps = con.prepareStatement(sql);
-            ps.setString(1, status);
+            ps.setString(1, reservationStatus);
             ps.setInt(2, reservationId);
             check = ps.executeUpdate();
         } catch (SQLException ex) {

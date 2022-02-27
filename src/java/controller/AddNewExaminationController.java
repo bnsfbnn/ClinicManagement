@@ -23,10 +23,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * -This class uses function getExamninationByUserId in
- * <code>dao.impl.ExaminationDAOImpl</code> to get list of
- * <code>entity.Examination</code>. It's a <code>java.util.ArrayList</code>
- * object
+ * -Use function getExamninationByUserId in
+ * <code>dao.impl.ReservationDAOImpl</code> to update reservation status of
+ * <code>entity.Reservation</code>. And use function insertNewExamination in
+ * <code>dao.impl.ExaminationDAOImpl</code> to insert new examination
  *
  * @author Nguyen Thanh Tung
  */
@@ -34,12 +34,12 @@ public class AddNewExaminationController extends HttpServlet {
 
     /**
      * -Use function getExamninationByUserId in
-     * <code>dao.impl.ExaminationDAOImpl</code> to get list of
-     * <code>entity.Examination</code>. It's a <code>java.util.ArrayList</code>
-     * object
+     * <code>dao.impl.ReservationDAOImpl</code> to update reservation status of
+     * <code>entity.Reservation</code>. And use function insertNewExamination in
+     * <code>dao.impl.ExaminationDAOImpl</code> to insert new examination
      *
      * -Set parameters: examination<br>
-     * -Finally forward user to the <code>viewReservationDetailPopup.jsp</code>
+     * -Finally send direct to the <code>viewMyReservation.jsp</code>
      * page. Processes requests for both HTTP <code>GET</code> and
      * <code>POST</code> methods.
      *
@@ -54,9 +54,10 @@ public class AddNewExaminationController extends HttpServlet {
             int reservationId = (request.getParameter("reservationId") != null) ? Integer.parseInt(request.getParameter("reservationId")) : -1;
             String examinationDisgosis = (request.getParameter("examinationDisgosis") != null) ? request.getParameter("examinationDisgosis") : "";
             String examinationPrescription = (request.getParameter("examinationPrescription") != null) ? request.getParameter("examinationPrescription") : "";
+            String reservationStatus = "Đã khám";
             int check = 0;
             ReservationDAO reservationDAO = new ReservationDAOImpl();
-            check = reservationDAO.updateReservationStatusById(reservationId);
+            check = reservationDAO.updateReservationStatusById(reservationId, reservationStatus);
             Reservation reservation = reservationDAO.getReservationById(reservationId);
             ExaminationDAO examinationDAO = new ExaminationDAOImpl();
             check = examinationDAO.insertNewExamination(reservation.getReservationId(), reservation.getConfirmedDoctor().getUserId(), examinationDisgosis, examinationPrescription, reservation.getConfirmedExaminationDate());
