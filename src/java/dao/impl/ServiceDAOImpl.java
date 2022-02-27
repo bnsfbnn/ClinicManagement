@@ -39,6 +39,7 @@ public class ServiceDAOImpl extends DBContext implements ServiceDAO {
     /**
      * Logger for system
      */
+    
     private static Logger logger = Logger.getLogger(UserDAOImpl.class.getName());
 
     /**
@@ -67,9 +68,16 @@ public class ServiceDAOImpl extends DBContext implements ServiceDAO {
 
             connecion = getConnection();
             // Get data
-            preparedStatement = connecion.prepareStatement("select * from services ORDER BY service_id  OFFSET ? ROWS FETCH NEXT ? ROWS ONLY");
-            preparedStatement.setInt(1, pageIndex);
-            preparedStatement.setInt(2, pageSize);
+            preparedStatement = connecion.prepareStatement(""
+                    + "SELECT  *\n"
+                    + "FROM (SELECT ROW_NUMBER() OVER ( ORDER BY service_id )\n"
+                    + "AS RowNum, * FROM  services) \n"
+                    + "AS RowConstrainedResult\n"
+                    + "WHERE   RowNum >= ?\n"
+                    + "    AND RowNum <= ?\n"
+                    + "ORDER BY RowNum");
+            preparedStatement.setInt(1, (pageIndex - 1) * pageSize);
+            preparedStatement.setInt(2, (pageIndex - 1) * pageSize + pageSize);
             //excute query
             rs = preparedStatement.executeQuery();
             while (rs.next()) {
@@ -200,5 +208,31 @@ public class ServiceDAOImpl extends DBContext implements ServiceDAO {
             this.closeConnection(con);
         }
         return result;
+    }
+
+    @Override
+    public void addService(Service service) {
+        logger.log(Level.INFO, "Add service");
+        Connection connecion = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet rs = null;
+        try {
+            connecion = getConnection();
+            // Get data
+            preparedStatement = connecion.prepareStatement("insert into services (service_name, service_brief, service_description, service_image)\n"
+                    + "values (?,?,?,?)");
+            preparedStatement.setString(1, service.getServiceName());
+            preparedStatement.setString(2, service.getServiceBrief());
+            preparedStatement.setString(3, service.getServiceDescription());
+            preparedStatement.setString(4, service.getServiceImage());
+
+            preparedStatement.executeUpdate();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            Logger.getLogger(UserDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            closePreparedStatement(preparedStatement);
+            closeConnection(connecion);
+        }
     }
 }

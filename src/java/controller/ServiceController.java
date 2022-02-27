@@ -48,26 +48,20 @@ public class ServiceController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         // get value of query string page
         String page = request.getParameter("page");
-        int pageIndex = 0;
-        int pageSize = 6; // default page size
+        int pageIndex = 1;
         if (page != null) {// check page if not null
             try {
                 //convert page(string) to pageIndex(int)
-                pageIndex = Integer.parseInt(page);
-                if(pageIndex == 1){
+                pageIndex = Integer.parseInt(page); 
+                if (pageIndex == -1) {
                     pageIndex = 0;
-                }
-               else if (pageIndex == -1) {
-                    pageIndex = 0;
-                }
-                else {
-                    pageIndex = (pageIndex-1) * pageSize ;
                 }
             } catch (NumberFormatException e) { 
                 //default pageIndex = 1
                 pageIndex = 0;
             }
         }
+        int pageSize = 5; // default page size
         ServiceDAO serviceDAO = new ServiceDAOImpl();
         //List service with pageIndex and pageSize
         Pagination<Service> services
