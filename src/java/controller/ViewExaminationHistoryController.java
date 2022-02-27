@@ -9,45 +9,36 @@
  */
 package controller;
 
-import dao.ReservationDAO;
-import dao.ServiceDAO;
-import dao.impl.ReservationDAOImpl;
-import dao.impl.ServiceDAOImpl;
-import entity.Reservation;
-import entity.Service;
-import entity.User;
+import dao.ExaminationDAO;
+import dao.impl.ExaminationDAOImpl;
+import entity.Examination;
 import java.io.IOException;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import util.Utils;
 
 /**
- * * -This class uses function getReservations in
- * <code>dao.impl.reservationDAOImpl</code> to get an
- * <code>java.util.ArrayList</code> object that contains a series of
- * <code>entity.Reservation</code>
+ * -This class uses function getExamninationByUserId in
+ * <code>dao.impl.ExaminationDAOImpl</code> to get list of
+ * <code>entity.Examination</code>. It's a <code>java.util.ArrayList</code>
+ * object
  *
  * @author Nguyen Thanh Tung
  */
-public class ViewAllReservationsController extends HttpServlet {
+public class ViewExaminationHistoryController extends HttpServlet {
 
     /**
-     * -Use function getReservations in <code>dao.impl.ReservationDAOImpl</code> to
-     * get an <code>java.util.ArrayList</code> object that contains a series of
-     * <code>entity.Reservation</code><br>
-     * -Use function getDoctorsHasReservation in <code>dao.impl.ReservationDAOImpl</code> to
-     * get an <code>java.util.ArrayList</code> object that contains a series of
-     * <code>entity.User</code><br> represent for a doctor
-     * -Use function getServices in <code>dao.impl.ServiceDAOImpl</code> to
-     * get an <code>java.util.ArrayList</code> object that contains a series of
-     * <code>entity.Service</code><br> 
-     * 
-     * -Set parameters: viewDay, doctors, services, reservations<br>
-     * -Finally forward user to the <code>viewAllReservation.jsp</code> page. Processes
-     * requests for both HTTP <code>GET</code> and <code>POST</code> methods.
+     * -Use function getExamninationByUserId in
+     * <code>dao.impl.ExaminationDAOImpl</code> to get list of
+     * <code>entity.Examination</code>. It's a <code>java.util.ArrayList</code>
+     * object
+     *
+     * -Set parameters: examination<br>
+     * -Finally forward user to the <code>viewReservationDetailPopup.jsp</code>
+     * page. Processes requests for both HTTP <code>GET</code> and
+     * <code>POST</code> methods.
      *
      * @param request servlet request
      * @param response servlet response is
@@ -57,20 +48,11 @@ public class ViewAllReservationsController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            String viewDay = (request.getParameter("viewDay") != null) ? Utils.parseDateFormat(request.getParameter("viewDay")) : Utils.getToday();
-            int serviceId = (request.getParameter("serviceId") != null) ? Integer.parseInt(request.getParameter("serviceId")): -1;
-            ServiceDAO serviceDAO = new ServiceDAOImpl(); // get serviceDAO object
-            ReservationDAO reservationDAO = new ReservationDAOImpl();// get reservationDAO object
-            ArrayList<Service> services = serviceDAO.getServices();
-            ArrayList<User> doctors = reservationDAO.getDoctorsHasReservation(viewDay, serviceId);
-            ArrayList<Reservation> reservations = reservationDAO.getReservationsByDay(viewDay, serviceId);
-            
-            request.setAttribute("viewDay", Utils.revertParseDateFormat(viewDay));
-            request.setAttribute("serviceId", serviceId);
-            request.setAttribute("doctors", doctors);
-            request.setAttribute("services", services);
-            request.setAttribute("reservations", reservations);
-            request.getRequestDispatcher("jsp/viewAllReservation.jsp").forward(request, response);
+            int customerId = (request.getParameter("customerId") != null) ? Integer.parseInt(request.getParameter("customerId")) : -1;
+            ExaminationDAO examinationDAO = new ExaminationDAOImpl();
+            ArrayList<Examination> examination = examinationDAO.getExamninationByUserId(customerId);
+            request.setAttribute("examination", examination);
+            request.getRequestDispatcher("jsp/components/viewExaminationHistoryPopup.jsp").forward(request, response);
         } catch (Exception e) {
             request.setAttribute("errorMessage", "Không thể tải dữ liệu từ cơ sở dữ liệu");
             request.setAttribute("exceptionMessage", e.getMessage());

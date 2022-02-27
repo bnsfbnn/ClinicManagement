@@ -40,6 +40,26 @@
         <servlet-name>ServiceManagementDetailController</servlet-name>
         <servlet-class>controller.ServiceManagementDetailController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ViewMyReservationController</servlet-name>
+        <servlet-class>controller.ViewMyReservationController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewMyReservationDetail</servlet-name>
+        <servlet-class>controller.ViewMyReservationDetailController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewExaminationHistoryController</servlet-name>
+        <servlet-class>controller.ViewExaminationHistoryController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewExaminationHistoryDetailController</servlet-name>
+        <servlet-class>controller.ViewExaminationHistoryDetailController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddNewExaminationController</servlet-name>
+        <servlet-class>controller.AddNewExaminationController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
         <url-pattern>/LoginController</url-pattern>
@@ -55,10 +75,6 @@
     <servlet-mapping>
         <servlet-name>ServiceDetailController</servlet-name>
         <url-pattern>/ServiceDetailController</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>ViewAllReservationsController</servlet-name>
-        <url-pattern>/viewAllReservationController</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>GetAllAccountController</servlet-name>
@@ -79,6 +95,30 @@
     <servlet-mapping>
         <servlet-name>ServiceManagementDetailController</servlet-name>
         <url-pattern>/ServiceManagementDetailController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewMyReservationController</servlet-name>
+        <url-pattern>/viewMyReservation</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewAllReservationsController</servlet-name>
+        <url-pattern>/viewAllReservation</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewMyReservationDetail</servlet-name>
+        <url-pattern>/viewMyReservationDetail</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewExaminationHistoryController</servlet-name>
+        <url-pattern>/viewExaminationHistory</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewExaminationHistoryDetailController</servlet-name>
+        <url-pattern>/viewExaminationHistoryDetail</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddNewExaminationController</servlet-name>
+        <url-pattern>/addNewExamination</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

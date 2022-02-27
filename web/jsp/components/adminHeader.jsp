@@ -28,7 +28,7 @@
             </div>
             <div class="ml-auto">
                 <div class="avatar avatar-md p-0">
-                    <img height="45" class="avatar-img rounded-circle" src="./assets/images/avatar01.jpg" alt="avatar">
+                    <img height="45" class="avatar-img rounded-circle" src="./assets/images/avatar04.jpg" alt="avatar">
                 </div>
             </div>
             <!--End header-->

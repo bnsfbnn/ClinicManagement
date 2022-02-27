@@ -32,7 +32,7 @@
                 <div class="row justify-content-center mt-3 mr-0">
                     <h4>Danh sách tất cả lịch khám bệnh</h4>
                 </div>
-                <form id="myForm" action="${pageContext.request.contextPath}/viewAllReservationController" method="POST">
+                <form id="myForm" action="${pageContext.request.contextPath}/viewAllReservation" method="POST">
                     <div class="row justify-content-end mt-3 mr-4">
                         <div class="mx-4">
                             <select name="serviceId" id="serviceId" class="form-control">
@@ -48,7 +48,7 @@
                             <input type="text" class="form-control" id="datepicker" name="viewDay">
                         </div>
                         <div class="mr-5">
-                            <button type="button" class="btn btn-primary px-4" id="today">Today</button>
+                            <button type="button" class="btn btn-primary px-4" id="today">Hôm nay</button>
                         </div>
                     </div>
                 </form>
@@ -58,7 +58,7 @@
                             <tr>
                                 <th  scope="col" class="bg-light"></th>
                                     <c:forEach var="i" items="${doctors}">
-                                    <th scope="col" class="bg-dark text-white">${i.fullName}<br/>(07:00AM-05:00PM)</th>
+                                    <th scope="col" class="bg-dark text-white ">${i.fullName}<br/>(07:00AM-05:00PM)</th>
                                     </c:forEach>
                             </tr>
                             <c:forEach begin="7" end="16" step="1" var="k">
@@ -105,25 +105,25 @@
                                         <tr>
                                             <td class="bg-white text-dark m-0 p-0">15</td>
                                             <c:forEach var="i" items="${doctors}">
-                                                <td class="bg-white text-dark m-0 p-0" id="${i.userId}-0${k}:00:00">${k}:15</td>
+                                                <td class="bg-white text-dark m-0 p-0" id="${i.userId}-1-0${k}">${k}:15</td>
                                             </c:forEach>
                                         </tr>
                                         <tr>
                                             <td class="bg-white text-dark m-0 p-0">30</td>
                                             <c:forEach var="i" items="${doctors}">
-                                                <td class="bg-white text-dark m-0 p-0" id="${i.userId}-0${k}:15:00">${k}:30</td>
+                                                <td class="bg-white text-dark m-0 p-0" id="${i.userId}-2-0${k}">${k}:30</td>
                                             </c:forEach>
                                         </tr>
                                         <tr>
                                             <td class="bg-white text-dark m-0 p-0">45</td>
                                             <c:forEach var="i" items="${doctors}">
-                                                <td class="bg-white text-dark m-0 p-0" id="${i.userId}-0${k}:30:00">${k}:40</td>
+                                                <td class="bg-white text-dark m-0 p-0" id="${i.userId}-3-0${k}">${k}:40</td>
                                             </c:forEach>
                                         </tr>
                                         <tr>
                                             <td class="bg-white text-dark m-0 p-0">60</td>
                                             <c:forEach var="i" items="${doctors}">
-                                                <td class="bg-white text-dark m-0 p-0" id="${i.userId}-0${k}:45:00">${k+1}:00</td>
+                                                <td class="bg-white text-dark m-0 p-0" id="${i.userId}-4-0${k}">${k+1}:00</td>
                                             </c:forEach>
                                         </tr>
                                     </c:when>
@@ -137,25 +137,25 @@
                                         <tr>
                                             <td class="bg-white text-dark m-0 p-0">15</td>
                                             <c:forEach var="i" items="${doctors}">
-                                                <td class="bg-white text-dark m-0 p-0" id="${i.userId}-${k}:00:00">${k}:15</td>
+                                                <td class="bg-white text-dark m-0 p-0" id="${i.userId}-1-${k}">${k}:15</td>
                                             </c:forEach>
                                         </tr>
                                         <tr>
                                             <td class="bg-white text-dark m-0 p-0">30</td>
                                             <c:forEach var="i" items="${doctors}">
-                                                <td class="bg-white text-dark m-0 p-0" id="${i.userId}-${k}:15:00">${k}:30</td>
+                                                <td class="bg-white text-dark m-0 p-0" id="${i.userId}-2-${k}">${k}:30</td>
                                             </c:forEach>
                                         </tr>
                                         <tr>
                                             <td class="bg-white text-dark m-0 p-0">45</td>
                                             <c:forEach var="i" items="${doctors}">
-                                                <td class="bg-white text-dark m-0 p-0" id="${i.userId}-${k}:30:00">${k}:40</td>
+                                                <td class="bg-white text-dark m-0 p-0" id="${i.userId}-3-${k}">${k}:40</td>
                                             </c:forEach>
                                         </tr>
                                         <tr>
                                             <td class="bg-white text-dark m-0 p-0">60</td>
                                             <c:forEach var="i" items="${doctors}">
-                                                <td class="bg-white text-dark m-0 p-0" id="${i.userId}-${k}:45:00">${k+1}:00</td>
+                                                <td class="bg-white text-dark m-0 p-0" id="${i.userId}-4-${k}">${k+1}:00</td>
                                             </c:forEach>
                                         </tr>
                                     </c:when>
@@ -174,52 +174,45 @@
         <script src="./assets/js/jquery-ui.min.js" type="text/javascript"></script>
         <!--Import js code-->
         <script>
-            function submitForm() {
-
-            }
             $(document).ready(function () {
                 //set date picker
                 $("#datepicker").datepicker({
+                    firstDay: 1,
                     changeMonth: true,
-                    changeYear: true,
                     maxDate: '+6D',
+                    onSelect: function () {
+                        document.getElementById("myForm").submit();
+                    },
                 });
-                var viewDay = "${viewDay}";
-                var dd1 = viewDay.split("-")[2];
-                var mm1 = viewDay.split("-")[1];
-                var yyyy1 = viewDay.split("-")[0];
-                viewDay = mm1 + '/' + dd1 + '/' + yyyy1;
-                $("#datepicker").val(viewDay); //set date want to view for datepicker
+                $("#datepicker").val('${viewDay}'); //set date want to view for datepicker
             <c:forEach items="${reservations}" var="i" varStatus="status">
-                var raw_confirmedExaminationTime = '${i.confirmedExaminationTime}';
-                var confirmedExaminationTime = raw_confirmedExaminationTime.split(":")[0] + "\\:" + raw_confirmedExaminationTime.split(":")[1] + "\\:" + raw_confirmedExaminationTime.split(":")[2];
+                var servicePackageId = '${i.servicePackage.packageId}';
                 var confirmDoctorId = '${i.confirmedDoctor.userId}';
-                var idProperties = confirmDoctorId + '-' + confirmedExaminationTime;
+                var confirmedExaminationTime = '${i.confirmedExaminationTime}'.split(":")[0];
+                var idProperties = confirmDoctorId + '-' + servicePackageId + '-' + confirmedExaminationTime;
                 $("#" + idProperties).text("");
-                var reservationStatus = '${i.confirmedDoctor.userId}';
-                $("#" + idProperties).append("<div class=\"rounded bg-primary text-white m-0 p-0\"><b>${i.customer.fullName}</b><br/><b>Dịch vụ:  </b><i>${i.service.serviceName}</i></div>");
+                var reservationStatus = '${i.reservationStatus}';
+                if (reservationStatus === 'Đặt thành công') {
+                    $("#" + idProperties).append("<div class=\"rounded bg-primary text-white m-0 p-0\"><b>${i.customer.fullName}</b><br/><b>Dịch vụ:  </b><i>${i.service.serviceName}</i></div>");
+                } else if (reservationStatus === 'Đã khám') {
+                    $("#" + idProperties).append("<div class=\"rounded bg-success text-white m-0 p-0\"><b>${i.customer.fullName}</b><br/><b>Dịch vụ:  </b><i>${i.service.serviceName}</i></div>");
+                } else if (reservationStatus === 'Đã hủy') {
+                    $("#" + idProperties).append("<div class=\"rounded bg-danger text-white m-0 p-0\"><b>${i.customer.fullName}</b><br/><b>Dịch vụ:  </b><i>${i.service.serviceName}</i></div>");
+                } else {
+                    $("#" + idProperties).append("<div class=\"rounded bg-secondary text-white m-0 p-0\"><b>${i.customer.fullName}</b><br/><b>Dịch vụ:  </b><i>${i.service.serviceName}</i></div>");
+                }
             </c:forEach>
             });
             //set today for datepicker
             $("#today").click(function () {
                 var today = new Date();
+                console.log(today);
                 var dd = String(today.getDate()).padStart(2, '0');
                 var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
                 var yyyy = today.getFullYear();
-                today = yyyy + '-' + mm + '-' + dd;
+                today = mm + '/' + dd + '/' + yyyy;
                 $("#datepicker").val(today);
                 document.getElementById("myForm").submit();
-            });
-            $("#datepicker").datepicker({
-                onSelect: function () {
-                    var raw_viewDay = $('#datepicker').val();
-                    var mm = raw_viewDay.split("/")[0];
-                    var dd = raw_viewDay.split("/")[1];
-                    var yyyy = raw_viewDay.split("/")[2];
-                    var viewDay = yyyy + '-' + mm + '-' + dd;
-                    $('#datepicker').val(viewDay);
-                    document.getElementById("myForm").submit();
-                }
             });
         </script>
     </body>

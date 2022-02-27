@@ -24,19 +24,13 @@
             <div>
                 <ul class="navbar-nav">
                     <li class="nav-item active">
-                        <a class="nav-link py-3" href="#">Xem tất danh sách đặt chỗ<span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class=nav-item">
-                        <a class="nav-link py-3" href="#">Quản lý dịch vụ</a>
-                    </li>
-                    <li class=nav-item">
-                        <a class="nav-link py-3" href="#">Quản lý Phản hồi</a>
+                        <a class="nav-link py-3" href="#">Lịch hẹn của tôi<span class="sr-only">(current)</span></a>
                     </li>
                 </ul>
             </div>
             <div class="ml-auto">
                 <div class="avatar avatar-md p-0">
-                    <img height="45" class="avatar-img rounded-circle" src="./assets/images/avatar02.jpg" alt="avatar">
+                    <img height="45" class="avatar-img rounded-circle" src="./assets/images/avatar03.jpg" alt="avatar">
                 </div>
             </div>
             <!--End header-->
