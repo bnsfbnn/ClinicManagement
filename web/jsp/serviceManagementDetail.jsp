@@ -1,12 +1,4 @@
-<!--
- * Copyright(C) 20022, FPT University
- * CMS:
- * Clinic Management System
- *
- * Record of change:
- * DATE            Version             AUTHOR           DESCRIPTION
- * 2022-02-08      1.0                 MinhVT          Controller Service Management Detail
- -->
+
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -21,6 +13,11 @@
         <link rel="stylesheet" href="./assets/css/select2-bootstrap-5-theme.min.css" />
         <link rel="stylesheet" href="./assets/css/custom.css" />
         <link href="../assets/css/header.css" rel="stylesheet" type="text/css"/>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+              integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+        <!-- Bootstrap Icon -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+        <link rel="stylesheet" href="./assets/service/style.css">
     </head>
 
     <header>
@@ -28,37 +25,70 @@
     </header>
 
     <body>
-        <div class="container">
-            <div class="row mb-3">
-                <div class="col-md-12">
-                    <div id="gallerydetail" class="carousel slide" data-bs-ride="carousel">
-                        <div class="carousel-inner">
-                            <c:forEach items="${service.serviceImage}" var="image" varStatus="loop">
-                                <div class="carousel-item ${loop.first?'active':''}">
-                                    <img src="${service.serviceImage}" class="d-block w-100">
-                                </div>                                
-                            </c:forEach>
-                        </div>
-                        <div class="carousel-indicators">
-                            <c:forEach items="${service.serviceImage}" var="image" varStatus="loop">
-                                <img src="${service.serviceImage}" ${loop.first?'class="active"':''} data-bs-target="#gallerydetail" data-bs-slide-to="${loop.index}">
-                            </c:forEach>
-                        </div>
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="non-block"></div>
+                    <h5 class="modal-title" id="staticBackdropLabel">Chi tiết dịch vụ</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <form class="row g-3">
+                            <div class="pe-5 col-6">
+                                <div class="row mb-3">
+                                    <label for="serviceCode" class="col-4 col-form-label">Mã dịch vụ</label>
+                                    <div class="col-8">
+                                        <span class="form-control-plaintext">
+                                            ${service.serviceId}
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <label for="serviceName" class="col-4 col-form-label">Tên dịch vụ</label>
+                                    <div class="col-8">
+                                        <span class="desc-text form-control-plaintext">
+                                            ${service.serviceName}
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <label for="serviceDesc" class="col-4 col-form-label">Mô tả</label>
+                                    <div class="col-8">
+                                        <span class="form-control-plaintext">
+                                            ${service.serviceDescription}
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="ps-5 col-6">
+                                <div class="row">
+                                    <div class="col-7 col-form-label">
+                                        Bác sĩ
+                                    </div>
+                                </div>
+                                <c:forEach items="${services.data}" var="service"  varStatus="counter" >
+                                    <div class="row list-doctors">
+                                        <div class="list-doctors-scroll">
+                                            <div class="doctor-card px-0">
+                                                <div class="img-cover">
+                                                    <img src="https://via.placeholder.com/60" alt="">
+                                                </div>
+                                                <div class="d-flex flex-column my-2 mx-4">
+                                                    ${service.serviceName}
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </c:forEach>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
-            <div class="row mb-3">
-                <div class="col-12">
-                    <h5 class="m-0">
-                        ${service.serviceName}
-                    </h5>
-                    <p class="text-secondary small"><i class="fas fa-map-marker-alt"></i> ${service.serviceBrief}</p>
-                    <p class="mb-0">Mô tả:</p>
-                    <p>                    
-                        ${service.serviceDescription}<br/></p>
-                </div>
-            </div>
         </div>
+
         <script src="./assets/js/jquery-3.6.0.min.js" crossorigin="anonymous"></script>
         <script src="./assets/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="./assets/js/star-rating.js" type="text/javascript"></script>
