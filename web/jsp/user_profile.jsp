@@ -1,7 +1,7 @@
 <%-- 
     Document   : user_profile
     Created on : Feb 23, 2022, 10:43:51 PM
-    Author     : Dao Van Do
+    Author     : nguye
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
