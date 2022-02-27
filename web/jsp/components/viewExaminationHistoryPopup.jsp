@@ -1,0 +1,43 @@
+<%-- 
+ * Copyright(C) 2022, FPT University
+ * CMS
+ * CLINIC MANAGEMENT SYSTEM
+ *
+ * Record of change:
+ * DATE            Version             AUTHOR           DESCRIPTION
+ * 2022-02-08      1.0                 tungnt           First Implement 
+--%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib uri="/WEB-INF/functions.tld" prefix="f" %>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+    <body>
+        <div class="col-lg-12">
+            <table class="table table-striped border table-sm col-lg-12">
+                <thead>
+                    <tr>
+                        <th scope="col">Ngày khám</th>
+                        <th class="col-lg-3" scope="col">Dịch vụ</th>
+                        <th class="col-lg-2" scope="col">Gói</th>
+                        <th class="col-lg-2" scope="col">Bác sĩ</th>
+                        <th class="col-lg-2" scope="col">Trạng Thái</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <c:forEach var="i" items="${examination}">
+                        <tr>
+                            <td>${i.examinationDate}</td>
+                            <td>${i.reservation.service.serviceName}</td>
+                            <td>${i.reservation.servicePackage.packageTitle}</td>
+                            <td>${i.doctor.fullName}</td>
+                            <td class="text-success">${i.reservation.reservationStatus}</td>
+                            <td><a id="${i.examinationId}" onClick="openViewExaminationDetailPopup(this)" data-toggle="modal" href="#viewExaminationDetailPopup" data-dismiss="modal">Xem Chi Tiết</a></td>
+                        </tr>
+                    </c:forEach>
+                </tbody>
+            </table>
+        </div>                          
+    </body>
+</html>

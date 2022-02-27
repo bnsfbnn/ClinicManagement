@@ -9,9 +9,11 @@
  */
 package util;
 
+import java.text.DateFormatSymbols;
 import java.text.SimpleDateFormat;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.time.Month;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -64,9 +66,36 @@ public class Utils {
     }
 
     public static ArrayList<String> getDayOfThisWeek(String viewDay) {
-        String viewDay;
-        LocalDate today = LocalDate.of(viewDay);
-        System.out.println(today);
+        String[] viewDayAtrri = viewDay.split("-");
+        int year = Integer.parseInt(viewDayAtrri[0]);
+        int month = Integer.parseInt(viewDayAtrri[1]);
+        int day = Integer.parseInt(viewDayAtrri[2]);
+        LocalDate today = LocalDate.now();
+        if (month == 1) {
+            today = LocalDate.of(year, Month.JANUARY, day);
+        } else if (month == 2) {
+            today = LocalDate.of(year, Month.FEBRUARY, day);
+        } else if (month == 3) {
+            today = LocalDate.of(year, Month.MARCH, day);
+        } else if (month == 4) {
+            today = LocalDate.of(year, Month.APRIL, day);
+        } else if (month == 5) {
+            today = LocalDate.of(year, Month.MAY, day);
+        } else if (month == 6) {
+            today = LocalDate.of(year, Month.JUNE, day);
+        } else if (month == 7) {
+            today = LocalDate.of(year, Month.JULY, day);
+        } else if (month == 8) {
+            today = LocalDate.of(year, Month.AUGUST, day);
+        } else if (month == 9) {
+            today = LocalDate.of(year, Month.SEPTEMBER, day);
+        } else if (month == 10) {
+            today = LocalDate.of(year, Month.OCTOBER, day);
+        } else if (month == 11) {
+            today = LocalDate.of(year, Month.NOVEMBER, day);
+        } else if (month == 12) {
+            today = LocalDate.of(year, Month.DECEMBER, day);
+        }
         // Go backward to get Monday
         LocalDate monday = today;
         while (monday.getDayOfWeek() != DayOfWeek.MONDAY) {
@@ -74,7 +103,7 @@ public class Utils {
         }
         int count = 0;
         ArrayList<String> dayOfWeek = new ArrayList<>();
-        while(count<7){
+        while (count < 7) {
             dayOfWeek.add(monday.toString());
             monday = monday.plusDays(1);
             count++;

@@ -13,30 +13,27 @@ import dao.ReservationDAO;
 import dao.impl.ReservationDAOImpl;
 import entity.Reservation;
 import java.io.IOException;
-import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import util.Utils;
 
 /**
- * * -This class uses function getMyReservations in
- * <code>dao.impl.reservationDAOImpl</code> to get an
- * <code>java.util.ArrayList</code> object that contains a series of
+ * * -This class uses function getReservationByReservationId in
+ * <code>dao.impl.ReservationDAOImpl</code> to get an
  * <code>entity.Reservation</code>
  *
  * @author Nguyen Thanh Tung
  */
-public class ViewMyReservationController extends HttpServlet {
+public class ViewMyReservationDetailController extends HttpServlet {
 
     /**
-     * -Use function getReservationByDoctorId in <code>dao.impl.ReservationDAOImpl</code> to
-     * get an <code>java.util.ArrayList</code> object that contains a series of
-     * <code>entity.Reservation</code><br>
-     *  
-     * -Set parameters: dayOfWeek, startWeek, endWeek, viewDay, reservations<br>
-     * -Finally forward user to the <code>viewMyReservation.jsp</code> page.
+     * -Use function getReservationByReservationId in
+     * <code>dao.impl.ReservationDAOImpl</code> to get an
+     * <code>entity.Reservation</code> object 
+     *
+     * -Set parameters: reservation<br>
+     * -Finally forward user to the <code>viewReservationDetailPopup.jsp</code> page.
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
      *
@@ -48,18 +45,11 @@ public class ViewMyReservationController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            String viewDay = (request.getParameter("viewDay") != null) ? Utils.parseDateFormat(request.getParameter("viewDay")) : Utils.getToday();
-            String startWeek = (request.getParameter("startWeek") != null) ? (request.getParameter("startWeek")): Utils.getMondayOfThisWeek();
-            String endWeek = (request.getParameter("endWeek") != null) ? (request.getParameter("endWeek")): Utils.getSundayOfThisWeek();
+            int reservationId = (request.getParameter("reservationId") != null) ? Integer.parseInt(request.getParameter("reservationId")) : -1;
             ReservationDAO reservationDAO = new ReservationDAOImpl();
-            ArrayList<Reservation> reservations = reservationDAO.getReservationByDoctorId(7, startWeek, endWeek);
-            ArrayList<String> dayOfWeek = Utils.getDayOfThisWeek(viewDay);
-            request.setAttribute("dayOfWeek", dayOfWeek);
-            request.setAttribute("startWeek", startWeek);
-            request.setAttribute("endWeek", endWeek);
-            request.setAttribute("viewDay", Utils.revertParseDateFormat(viewDay));
-            request.setAttribute("reservations", reservations);
-            request.getRequestDispatcher("jsp/viewMyReservation.jsp").forward(request, response);
+            Reservation reservation = reservationDAO.getReservationByReservationId(reservationId);
+            request.setAttribute("reservation", reservation);
+            request.getRequestDispatcher("jsp/components/viewReservationDetailPopup.jsp").forward(request, response);
         } catch (Exception e) {
             request.setAttribute("errorMessage", "Không thể tải dữ liệu từ cơ sở dữ liệu");
             request.setAttribute("exceptionMessage", e.getMessage());

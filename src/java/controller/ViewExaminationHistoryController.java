@@ -9,36 +9,36 @@
  */
 package controller;
 
-import dao.ReservationDAO;
-import dao.impl.ReservationDAOImpl;
-import entity.Reservation;
+import dao.ExaminationDAO;
+import dao.impl.ExaminationDAOImpl;
+import entity.Examination;
 import java.io.IOException;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import util.Utils;
 
 /**
- * * -This class uses function getMyReservations in
- * <code>dao.impl.reservationDAOImpl</code> to get an
- * <code>java.util.ArrayList</code> object that contains a series of
- * <code>entity.Reservation</code>
+ * -This class uses function getExamninationByUserId in
+ * <code>dao.impl.ExaminationDAOImpl</code> to get list of
+ * <code>entity.Examination</code>. It's a <code>java.util.ArrayList</code>
+ * object
  *
  * @author Nguyen Thanh Tung
  */
-public class ViewMyReservationController extends HttpServlet {
+public class ViewExaminationHistoryController extends HttpServlet {
 
     /**
-     * -Use function getReservationByDoctorId in <code>dao.impl.ReservationDAOImpl</code> to
-     * get an <code>java.util.ArrayList</code> object that contains a series of
-     * <code>entity.Reservation</code><br>
-     *  
-     * -Set parameters: dayOfWeek, startWeek, endWeek, viewDay, reservations<br>
-     * -Finally forward user to the <code>viewMyReservation.jsp</code> page.
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
+     * -Use function getExamninationByUserId in
+     * <code>dao.impl.ExaminationDAOImpl</code> to get list of
+     * <code>entity.Examination</code>. It's a <code>java.util.ArrayList</code>
+     * object
+     *
+     * -Set parameters: examination<br>
+     * -Finally forward user to the <code>viewReservationDetailPopup.jsp</code>
+     * page. Processes requests for both HTTP <code>GET</code> and
+     * <code>POST</code> methods.
      *
      * @param request servlet request
      * @param response servlet response is
@@ -48,18 +48,19 @@ public class ViewMyReservationController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            String viewDay = (request.getParameter("viewDay") != null) ? Utils.parseDateFormat(request.getParameter("viewDay")) : Utils.getToday();
-            String startWeek = (request.getParameter("startWeek") != null) ? (request.getParameter("startWeek")): Utils.getMondayOfThisWeek();
-            String endWeek = (request.getParameter("endWeek") != null) ? (request.getParameter("endWeek")): Utils.getSundayOfThisWeek();
-            ReservationDAO reservationDAO = new ReservationDAOImpl();
-            ArrayList<Reservation> reservations = reservationDAO.getReservationByDoctorId(7, startWeek, endWeek);
-            ArrayList<String> dayOfWeek = Utils.getDayOfThisWeek(viewDay);
-            request.setAttribute("dayOfWeek", dayOfWeek);
-            request.setAttribute("startWeek", startWeek);
-            request.setAttribute("endWeek", endWeek);
-            request.setAttribute("viewDay", Utils.revertParseDateFormat(viewDay));
-            request.setAttribute("reservations", reservations);
-            request.getRequestDispatcher("jsp/viewMyReservation.jsp").forward(request, response);
+            int addNew = (request.getParameter("addNew") != null) ? Integer.parseInt(request.getParameter("addNew")) : -1;
+            int customerId = (request.getParameter("customerId") != null) ? Integer.parseInt(request.getParameter("customerId")) : -1;
+            ExaminationDAO examinationDAO = new ExaminationDAOImpl();
+            ArrayList<Examination> examination = examinationDAO.getExamninationByUserId(customerId);
+            request.setAttribute("examination", examination);
+            request.setAttribute("addNew", addNew);
+            if (addNew == -1) {
+                request.getRequestDispatcher("jsp/components/viewExaminationHistoryPopup.jsp").forward(request, response);
+            } else if (addNew == 0) {
+                request.getRequestDispatcher("jsp/components/viewExaminationDetailPopup.jsp").forward(request, response);
+            } else {
+                request.getRequestDispatcher("jsp/components/viewExaminationDetailPopup.jsp").forward(request, response);
+            }
         } catch (Exception e) {
             request.setAttribute("errorMessage", "Không thể tải dữ liệu từ cơ sở dữ liệu");
             request.setAttribute("exceptionMessage", e.getMessage());

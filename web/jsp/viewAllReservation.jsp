@@ -105,25 +105,25 @@
                                         <tr>
                                             <td class="bg-white text-dark m-0 p-0">15</td>
                                             <c:forEach var="i" items="${doctors}">
-                                                <td class="bg-white text-dark m-0 p-0" id="${i.userId}-0${k}:00:00">${k}:15</td>
+                                                <td class="bg-white text-dark m-0 p-0" id="${i.userId}-1-0${k}">${k}:15</td>
                                             </c:forEach>
                                         </tr>
                                         <tr>
                                             <td class="bg-white text-dark m-0 p-0">30</td>
                                             <c:forEach var="i" items="${doctors}">
-                                                <td class="bg-white text-dark m-0 p-0" id="${i.userId}-0${k}:15:00">${k}:30</td>
+                                                <td class="bg-white text-dark m-0 p-0" id="${i.userId}-2-0${k}">${k}:30</td>
                                             </c:forEach>
                                         </tr>
                                         <tr>
                                             <td class="bg-white text-dark m-0 p-0">45</td>
                                             <c:forEach var="i" items="${doctors}">
-                                                <td class="bg-white text-dark m-0 p-0" id="${i.userId}-0${k}:30:00">${k}:40</td>
+                                                <td class="bg-white text-dark m-0 p-0" id="${i.userId}-3-0${k}">${k}:40</td>
                                             </c:forEach>
                                         </tr>
                                         <tr>
                                             <td class="bg-white text-dark m-0 p-0">60</td>
                                             <c:forEach var="i" items="${doctors}">
-                                                <td class="bg-white text-dark m-0 p-0" id="${i.userId}-0${k}:45:00">${k+1}:00</td>
+                                                <td class="bg-white text-dark m-0 p-0" id="${i.userId}-4-0${k}">${k+1}:00</td>
                                             </c:forEach>
                                         </tr>
                                     </c:when>
@@ -137,25 +137,25 @@
                                         <tr>
                                             <td class="bg-white text-dark m-0 p-0">15</td>
                                             <c:forEach var="i" items="${doctors}">
-                                                <td class="bg-white text-dark m-0 p-0" id="${i.userId}-${k}:00:00">${k}:15</td>
+                                                <td class="bg-white text-dark m-0 p-0" id="${i.userId}-1-${k}">${k}:15</td>
                                             </c:forEach>
                                         </tr>
                                         <tr>
                                             <td class="bg-white text-dark m-0 p-0">30</td>
                                             <c:forEach var="i" items="${doctors}">
-                                                <td class="bg-white text-dark m-0 p-0" id="${i.userId}-${k}:15:00">${k}:30</td>
+                                                <td class="bg-white text-dark m-0 p-0" id="${i.userId}-2-${k}">${k}:30</td>
                                             </c:forEach>
                                         </tr>
                                         <tr>
                                             <td class="bg-white text-dark m-0 p-0">45</td>
                                             <c:forEach var="i" items="${doctors}">
-                                                <td class="bg-white text-dark m-0 p-0" id="${i.userId}-${k}:30:00">${k}:40</td>
+                                                <td class="bg-white text-dark m-0 p-0" id="${i.userId}-3-${k}">${k}:40</td>
                                             </c:forEach>
                                         </tr>
                                         <tr>
                                             <td class="bg-white text-dark m-0 p-0">60</td>
                                             <c:forEach var="i" items="${doctors}">
-                                                <td class="bg-white text-dark m-0 p-0" id="${i.userId}-${k}:45:00">${k+1}:00</td>
+                                                <td class="bg-white text-dark m-0 p-0" id="${i.userId}-4-${k}">${k+1}:00</td>
                                             </c:forEach>
                                         </tr>
                                     </c:when>
@@ -178,8 +178,7 @@
                 //set date picker
                 $("#datepicker").datepicker({
                     firstDay: 1,
-                    changeMonth: false,
-                    changeYear: false,
+                    changeMonth: true,
                     maxDate: '+6D',
                     onSelect: function () {
                         document.getElementById("myForm").submit();
@@ -187,10 +186,10 @@
                 });
                 $("#datepicker").val('${viewDay}'); //set date want to view for datepicker
             <c:forEach items="${reservations}" var="i" varStatus="status">
-                var raw_confirmedExaminationTime = '${i.confirmedExaminationTime}';
-                var confirmedExaminationTime = raw_confirmedExaminationTime.split(":")[0] + "\\:" + raw_confirmedExaminationTime.split(":")[1] + "\\:" + raw_confirmedExaminationTime.split(":")[2];
+                var servicePackageId = '${i.servicePackage.packageId}';
                 var confirmDoctorId = '${i.confirmedDoctor.userId}';
-                var idProperties = confirmDoctorId + '-' + confirmedExaminationTime;
+                var confirmedExaminationTime = '${i.confirmedExaminationTime}'.split(":")[0];
+                var idProperties = confirmDoctorId + '-' + servicePackageId + '-' + confirmedExaminationTime;
                 $("#" + idProperties).text("");
                 var reservationStatus = '${i.reservationStatus}';
                 if (reservationStatus === 'Đặt thành công') {

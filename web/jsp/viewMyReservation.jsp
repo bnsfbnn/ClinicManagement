@@ -21,12 +21,13 @@
         <link href="./assets/css/jquery-ui.min.css" rel="stylesheet" type="text/css"/>
         <link href="./assets/css/jquery-ui.structure.min.css" rel="stylesheet" type="text/css"/>
         <link href="./assets/css/jquery-ui.theme.min.css" rel="stylesheet" type="text/css"/>
+        <link href="./assets/css/viewMyReservation.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
         <!--Import header-->
         <%@include file="components/doctorHeader.jsp" %>
         <!--Start main content-->
-        <div class="">
+        <div>
             <div class="container-fluid p-0">
                 <div class="row justify-content-center mt-3 mr-0">
                     <h4>Lịch hẹn của tôi</h4>
@@ -97,31 +98,31 @@
                                         <tr>
                                             <td class="bg-light text-dark m-0 p-0">${k}:00</td>
                                             <c:forEach var="i" items="${dayOfWeek}">
-                                                <td class="bg-white text-dark m-0 p-0">${k}:00</td>
+                                                <td class="bg-light text-dark m-0 p-0">${k}:00</td>
                                             </c:forEach>
                                         </tr>
                                         <tr>
                                             <td class="bg-light text-dark m-0 p-0">15</td>
                                             <c:forEach var="i" items="${dayOfWeek}">
-                                                <td class="bg-white text-dark m-0 p-0" id="${i}-0${k}:00:00">${k}:15</td>
+                                                <td class="bg-white text-dark m-0 p-0" id="${i}-1-0${k}">${k}:15</td>
                                             </c:forEach>
                                         </tr>
                                         <tr>
                                             <td class="bg-light text-dark m-0 p-0">30</td>
                                             <c:forEach var="i" items="${dayOfWeek}">
-                                                <td class="bg-white text-dark m-0 p-0" id="${i}-0${k}:15:00">${k}:30</td>
+                                                <td class="bg-white text-dark m-0 p-0" id="${i}-2-0${k}">${k}:30</td>
                                             </c:forEach>
                                         </tr>
                                         <tr>
                                             <td class="bg-light text-dark m-0 p-0">45</td>
                                             <c:forEach var="i" items="${dayOfWeek}">
-                                                <td class="bg-white text-dark m-0 p-0" id="${i}-0${k}:30:00">${k}:45</td>
+                                                <td class="bg-white text-dark m-0 p-0" id="${i}-3-0${k}">${k}:45</td>
                                             </c:forEach>
                                         </tr>
                                         <tr>
                                             <td class="bg-light text-dark m-0 p-0">60</td>
                                             <c:forEach var="i" items="${dayOfWeek}">
-                                                <td class="bg-white text-dark m-0 p-0" id="${i}-0${k}:45:00">${k+1}:00</td>
+                                                <td class="bg-white text-dark m-0 p-0" id="${i}-4-0${k}">${k+1}:00</td>
                                             </c:forEach>
                                         </tr>
                                     </c:when>
@@ -129,37 +130,88 @@
                                         <tr>
                                             <td class="bg-light text-dark m-0 p-0">${k}:00</td>
                                             <c:forEach var="i" items="${dayOfWeek}">
-                                                <td class="bg-white text-dark m-0 p-0">${k}:00</td>
+                                                <td class="bg-light text-dark m-0 p-0">${k}:00</td>
                                             </c:forEach>
                                         </tr>
                                         <tr>
                                             <td class="bg-light text-dark m-0 p-0">15</td>
                                             <c:forEach var="i" items="${dayOfWeek}">
-                                                <td class="bg-white text-dark m-0 p-0" id="${i}-${k}:00:00">${k}:15</td>
+                                                <td class="bg-white text-dark m-0 p-0" id="${i}-1-${k}">${k}:15</td>
                                             </c:forEach>
                                         </tr>
                                         <tr>
                                             <td class="bg-light text-dark m-0 p-0">30</td>
                                             <c:forEach var="i" items="${dayOfWeek}">
-                                                <td class="bg-white text-dark m-0 p-0" id="${i}-${k}:15:00">${k}:30</td>
+                                                <td class="bg-white text-dark m-0 p-0" id="${i}-2-${k}">${k}:30</td>
                                             </c:forEach>
                                         </tr>
                                         <tr>
                                             <td class="bg-light text-dark m-0 p-0">45</td>
                                             <c:forEach var="i" items="${dayOfWeek}">
-                                                <td class="bg-white text-dark m-0 p-0" id="${i}-${k}:30:00">${k}:45</td>
+                                                <td class="bg-white text-dark m-0 p-0" id="${i}-3-${k}">${k}:45</td>
                                             </c:forEach>
                                         </tr>
                                         <tr>
                                             <td class="bg-light text-dark m-0 p-0">60</td>
                                             <c:forEach var="i" items="${dayOfWeek}">
-                                                <td class="bg-white text-dark m-0 p-0" id="${i}-${k}:45:00">${k+1}:00</td>
+                                                <td class="bg-white text-dark m-0 p-0" id="${i}-4-${k}">${k+1}:00</td>
                                             </c:forEach>
                                         </tr>
                                     </c:when>
                                 </c:choose>
                             </c:forEach>
                         </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="viewDetailReservationPopup" data-backdrop="true" data-keyboard="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Trở lại</button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="container-fluid">
+                            <div class="row mt-2 mb-5" id="viewDetailReservationPopupContent">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer" hidden="true">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="viewExaminationHistoryPopup" data-backdrop="static" data-keyboard="false">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#viewDetailReservationPopup" data-dismiss="modal">Trở lại</button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="container-fluid">
+                            <div class="row mt-2 mb-5" id="viewExaminationHistoryPopupContent">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer" hidden="true">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="viewExaminationDetailPopup" data-backdrop="static" data-keyboard="false">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#viewExaminationHistoryPopup" data-dismiss="modal">Trở lại</button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="container-fluid">
+                            <div class="row mt-2 mb-5" id="viewExaminationDetailPopupContent">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer" hidden="true">
                     </div>
                 </div>
             </div>
@@ -171,6 +223,49 @@
         <script src="./assets/js/jquery-ui.min.js" type="text/javascript"></script>
         <!--Import js code-->
         <script>
+            function openViewReservationDetailPopup(elem) {
+                var id = $(elem).attr("id");
+                $.ajax({
+                    url: "${pageContext.request.contextPath}/viewMyReservationDetail",
+                    type: "post",
+                    dataType: "text",
+                    data: {
+                        reservationId: id
+                    },
+                    success: function (result) {
+                        $("#viewDetailReservationPopupContent").html(result);
+                    }
+                });
+            }
+            function openViewExaminationHistoryPopup(elem) {
+                var id = $(elem).attr("id");
+                $.ajax({
+                    url: "${pageContext.request.contextPath}/viewExaminationHistory",
+                    type: "post",
+                    dataType: "text",
+                    data: {
+                        customerId: id
+                    },
+                    success: function (result) {
+                        $("#viewExaminationHistoryPopupContent").html(result);
+                    }
+                });
+            }
+            function openViewExaminationDetailPopup(elem) {
+                var id = $(elem).attr("id");
+                $.ajax({
+                    url: "${pageContext.request.contextPath}/viewExaminationHistory",
+                    type: "post",
+                    dataType: "text",
+                    data: {
+                        customerId: id,
+                        addNew: 0
+                    },
+                    success: function (result) {
+                        $("#viewExaminationDetailPopupContent").html(result);
+                    }
+                });
+            }
             $(document).ready(function () {
                 var weekday = new Array(7);
                 weekday[0] = "Monday";
@@ -227,18 +322,18 @@
                 $("#weekRange").val('${startWeek}' + " - " + '${endWeek}');
                 $("#datepicker").val('${viewDay}'); //set date want to view for datepicker
             <c:forEach items="${reservations}" var="i" varStatus="status">
-                var raw_confirmedExaminationTime = '${i.confirmedExaminationTime}';
-                var confirmedExaminationTime = raw_confirmedExaminationTime.split(":")[0] + "\\:" + raw_confirmedExaminationTime.split(":")[1] + "\\:" + raw_confirmedExaminationTime.split(":")[2];
+                var servicePackageId = '${i.servicePackage.packageId}';
+                var confirmedExaminationTime = '${i.confirmedExaminationTime}'.split(":")[0];
                 var confirmedExaminationDate = '${i.confirmedExaminationDate}';
-                var idProperties = confirmedExaminationDate + '-' + confirmedExaminationTime;
+                var idProperties = confirmedExaminationDate + '-' + servicePackageId + '-' + confirmedExaminationTime;
                 $("#" + idProperties).text("");
                 var reservationStatus = '${i.reservationStatus}';
                 if (reservationStatus === 'Đặt thành công') {
-                    $("#" + idProperties).append("<div class=\"rounded bg-primary text-white m-0 p-0\"><b>${i.customer.fullName}</b><br/><a class=\"text-white\" href=\"#\">Chi tiết</a></div>");
+                    $("#" + idProperties).append("<div class=\"rounded bg-primary text-white m-0 p-0\"><b>${i.customer.fullName}</b><br/><a class=\"text-white\" href=\"#viewDetailReservationPopup\" id=\"${i.reservationId}\" data-toggle=\"modal\" onClick=\"openViewReservationDetailPopup(this)\">Chi tiết</a></div>");
                 } else if (reservationStatus === 'Đã khám') {
-                    $("#" + idProperties).append("<div class=\"rounded bg-success text-white m-0 p-0\"><b>${i.customer.fullName}</b><br/><a class=\"text-white\" href=\"#\">Chi tiết</a></div>");
+                    $("#" + idProperties).append("<div class=\"rounded bg-success text-white m-0 p-0\"><b>${i.customer.fullName}</b><br/><i>${i.reservationStatus}</i></div>");
                 } else if (reservationStatus === 'Đã hủy') {
-                    $("#" + idProperties).append("<div class=\"rounded bg-danger text-white m-0 p-0\"><b>${i.customer.fullName}</b><br/><a class=\"text-white\" href=\"#\">Chi tiết</a></div>");
+                    $("#" + idProperties).append("<div class=\"rounded bg-danger text-white m-0 p-0\"><b>${i.customer.fullName}</b><br/><i>${i.reservationStatus}</i></div>");
                 } else {
                     $("#" + idProperties).append("<div class=\"rounded bg-secondary text-white m-0 p-0\"><b>${i.customer.fullName}</b><br/><a class=\"text-white\" href=\"#\">Chi tiết</a></div>");
                 }
