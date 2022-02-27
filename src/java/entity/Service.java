@@ -5,7 +5,7 @@
  *
  * Record of change:
  * DATE            Version             AUTHOR           DESCRIPTION
- * 2022-02-08     1.0                 TrangCT          Service DAO Implement
+ * 2022-02-08     1.0                 TrangCT          Service  Implement
  */
 package entity;
 

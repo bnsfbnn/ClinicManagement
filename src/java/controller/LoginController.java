@@ -20,8 +20,12 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
+ * * -This class uses function getUser in
+ * <code>dao.impl.UserDAOImpl</code> to get an
+ * <code>java.util.String</code> object that contains a series of
+ * <code>entity.User</code>
  *
- * @author nguye
+ * @author Nguyen Thanh Tung
  */
 public class LoginController extends HttpServlet {
 

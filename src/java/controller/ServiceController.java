@@ -54,11 +54,11 @@ public class ServiceController extends HttpServlet {
                 //convert page(string) to pageIndex(int)
                 pageIndex = Integer.parseInt(page); 
                 if (pageIndex == -1) {
-                    pageIndex = 1;
+                    pageIndex = 0;
                 }
             } catch (NumberFormatException e) { 
                 //default pageIndex = 1
-                pageIndex = 1;
+                pageIndex = 0;
             }
         }
         int pageSize = 5; // default page size
