@@ -40,14 +40,16 @@
         <div class="container-fluid m-0 p-0">
             <div class="row-fluid mb-3">
                 <img class="col-lg-12 p-0" src="./assets/images/banner-sm.png" alt="Banner"/>
-            </div>         
-            <div class="row mt-3 items">
+            </div>
+
+            <div class="row">
+
                 <c:forEach items="${services.data}" var="service">
                     <div class="col-4">
-                        <div>
-                            <div class="card-img-top w-75 mx-auto" style="overflow:hidden;">
-                                <img height="300" width="300" src="./assets/images/${service.serviceImage}" alt="...">
-                            </div>
+                        <div >
+                            <!--<img src="${service.serviceImage}" class="card-img-top w-50" alt="...">-->
+                                                        <img src="https://o.rada.vn/data/image/2020/05/08/ta-bac-si-dang-kham-benh.jpg" class="card-img-top w-75" alt="...">
+
                             <div class="card-body">
                                 <h5 class="card-title m-0">${service.serviceName}</h5>
                             </div>
@@ -61,7 +63,7 @@
                     </div>
                 </c:if>
             </div>
-
+                
             <c:if test="${services.totalPage > 1}">
                 <div class="row">
                     <div class="col-12 text-center">
