@@ -77,5 +77,17 @@ public interface ReservationDAO {
      * @throws SQLException when <code>java.sql.SQLException</code> occurs.
      * @throws Exception when <code>java.sql.Exception</code> occurs.
      */
-    public Reservation getReservationByReservationId(int reservationId) throws SQLException, Exception;
+    public Reservation getReservationById(int reservationId) throws SQLException, Exception;
+    
+    /**
+     * - Update reservation status
+     *
+     * @param reservationId is a <code>java.lang.int</code> object used to get
+     * reservation by reservationId
+     * @return a list of <code>Reservation</code> objects. <br>
+     * -It is a <code>java.util.ArrayList</code> object
+     * @throws SQLException when <code>java.sql.SQLException</code> occurs.
+     * @throws Exception when <code>java.sql.Exception</code> occurs.
+     */
+    public int updateReservationStatusById(int reservationId) throws SQLException, Exception;
 }

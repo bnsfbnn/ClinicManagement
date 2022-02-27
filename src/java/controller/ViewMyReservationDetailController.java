@@ -47,7 +47,7 @@ public class ViewMyReservationDetailController extends HttpServlet {
         try {
             int reservationId = (request.getParameter("reservationId") != null) ? Integer.parseInt(request.getParameter("reservationId")) : -1;
             ReservationDAO reservationDAO = new ReservationDAOImpl();
-            Reservation reservation = reservationDAO.getReservationByReservationId(reservationId);
+            Reservation reservation = reservationDAO.getReservationById(reservationId);
             request.setAttribute("reservation", reservation);
             request.getRequestDispatcher("jsp/components/viewReservationDetailPopup.jsp").forward(request, response);
         } catch (Exception e) {

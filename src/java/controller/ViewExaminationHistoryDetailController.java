@@ -13,6 +13,7 @@ import dao.ExaminationDAO;
 import dao.impl.ExaminationDAOImpl;
 import entity.Examination;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -27,7 +28,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Nguyen Thanh Tung
  */
-public class ViewExaminationHistoryController extends HttpServlet {
+public class ViewExaminationHistoryDetailController extends HttpServlet {
 
     /**
      * -Use function getExamninationByUserId in
@@ -48,11 +49,15 @@ public class ViewExaminationHistoryController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            int customerId = (request.getParameter("customerId") != null) ? Integer.parseInt(request.getParameter("customerId")) : -1;
+            int isAddNew = (request.getParameter("isAddNew") != null) ? Integer.parseInt(request.getParameter("isAddNew")) : 0;
+            int reservationId = (request.getParameter("reservationId") != null) ? Integer.parseInt(request.getParameter("reservationId")) : -1;
+            int examinationId = (request.getParameter("examinationId") != null) ? Integer.parseInt(request.getParameter("examinationId")) : -1;
             ExaminationDAO examinationDAO = new ExaminationDAOImpl();
-            ArrayList<Examination> examination = examinationDAO.getExamninationByUserId(customerId);
+            Examination examination = examinationDAO.getExamninationById(examinationId);
             request.setAttribute("examination", examination);
-            request.getRequestDispatcher("jsp/components/viewExaminationHistoryPopup.jsp").forward(request, response);
+            request.setAttribute("reservationId", reservationId);
+            request.setAttribute("isAddNew", isAddNew);
+            request.getRequestDispatcher("jsp/components/viewExaminationHistoryDetailPopup.jsp").forward(request, response);
         } catch (Exception e) {
             request.setAttribute("errorMessage", "Không thể tải dữ liệu từ cơ sở dữ liệu");
             request.setAttribute("exceptionMessage", e.getMessage());

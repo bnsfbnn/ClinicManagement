@@ -216,6 +216,23 @@
                 </div>
             </div>
         </div>
+        <div class="modal fade" id="addNewExaminationPopup" data-backdrop="static" data-keyboard="false">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#viewDetailReservationPopup" data-dismiss="modal">Trở lại</button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="container-fluid">
+                            <div class="row mt-2" id="addNewExaminationPopupContent">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer" hidden="true">
+                    </div>
+                </div>
+            </div>
+        </div>
         <!--Import js lib-->
         <script src="./assets/js/jquery-3.6.0.min.js" type="text/javascript"></script>
         <script src="./assets/js/popper.js" type="text/javascript"></script>
@@ -254,15 +271,29 @@
             function openViewExaminationDetailPopup(elem) {
                 var id = $(elem).attr("id");
                 $.ajax({
-                    url: "${pageContext.request.contextPath}/viewExaminationHistory",
+                    url: "${pageContext.request.contextPath}/viewExaminationHistoryDetail",
                     type: "post",
                     dataType: "text",
                     data: {
-                        customerId: id,
-                        addNew: 0
+                        examinationId: id,
                     },
                     success: function (result) {
                         $("#viewExaminationDetailPopupContent").html(result);
+                    }
+                });
+            }
+            function openAddNewExaminationPopup(elem) {
+                var id = $(elem).attr("id");
+                $.ajax({
+                    url: "${pageContext.request.contextPath}/viewExaminationHistoryDetail",
+                    type: "post",
+                    dataType: "text",
+                    data: {
+                        reservationId: id,
+                        isAddNew: 1
+                    },
+                    success: function (result) {
+                        $("#addNewExaminationPopupContent").html(result);
                     }
                 });
             }

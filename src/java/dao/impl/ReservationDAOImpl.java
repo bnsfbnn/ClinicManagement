@@ -142,7 +142,7 @@ public class ReservationDAOImpl extends DBContext implements ReservationDAO {
     public ArrayList<User> getDoctorsHasReservation(String viewDay, int serviceId) throws SQLException, Exception {
         ArrayList<User> result = new ArrayList<>();
         String sql = "SELECT DISTINCT users.user_id as doctor_id, users.username as doctor_username, users.full_name as doctor_full_name\n"
-                + "FROM     reservations\n"
+                + "FROM reservations\n"
                 + "LEFT JOIN users ON reservations.confirmed_doctor_id = users.user_id \n"
                 + "WHERE (users.username IS NOT NULL OR users.full_name IS NOT NULL) AND reservations.confirmed_examination_date = ?";
         if (serviceId != -1) {
@@ -271,7 +271,7 @@ public class ReservationDAOImpl extends DBContext implements ReservationDAO {
     }
 
     @Override
-    public Reservation getReservationByReservationId(int reservationId) throws SQLException, Exception {
+    public Reservation getReservationById(int reservationId) throws SQLException, Exception {
         Reservation result = new Reservation();
         String sql = "SELECT reservations.reservation_id,\n"
                 + "       reservations.customer_id,\n"
@@ -316,7 +316,7 @@ public class ReservationDAOImpl extends DBContext implements ReservationDAO {
                 User customer = new User(rs.getInt("user_id"), rs.getString("email"), rs.getString("full_name"), rs.getDate("birth_date"), rs.getBoolean("gender"), rs.getString("phone"), rs.getString("address"));
                 Service service = new Service(rs.getInt("service_id"), rs.getString("service_name"));
                 ServicePackage servicePackage = new ServicePackage(rs.getInt("package_id"), rs.getString("package_title"), rs.getString("examination_duration"));
-                User doctor = new User();
+                User doctor = new User(rs.getInt("confirmed_doctor_id"),"","");
                 result.setReservationId(rs.getInt("reservation_id"));
                 result.setCustomer(customer);
                 result.setService(service);
@@ -342,5 +342,43 @@ public class ReservationDAOImpl extends DBContext implements ReservationDAO {
             this.closeConnection(con);
         }
         return result;
+    }
+
+    /**
+     * - Update reservation status
+     *
+     * @param reservationId is a <code>java.lang.int</code> object used to get
+     * reservation by reservationId
+     * @return a list of <code>Reservation</code> objects. <br>
+     * -It is a <code>java.util.ArrayList</code> object
+     * @throws SQLException when <code>java.sql.SQLException</code> occurs.
+     * @throws Exception when <code>java.sql.Exception</code> occurs.
+     */
+    @Override
+    public int updateReservationStatusById(int reservationId) throws SQLException, Exception {
+        int check = 0;
+        String status = "Đã khám";
+        String sql = "UPDATE reservations\n"
+                + "   SET reservation_status = ?\n"
+                + " WHERE reservations.reservation_id = ?";
+        Connection con = null;
+        PreparedStatement ps = null;
+        try {
+            con = getConnection(); //get connection
+            ps = con.prepareStatement(sql);
+            ps.setString(1, status);
+            ps.setInt(2, reservationId);
+            check = ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(ReservationDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+            throw ex;
+        } catch (Exception ex) {
+            Logger.getLogger(ReservationDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+            throw ex;
+        } finally {
+            this.closePreparedStatement(ps);
+            this.closeConnection(con);
+        }
+        return check;
     }
 }

@@ -52,6 +52,14 @@
         <servlet-name>ViewExaminationHistoryController</servlet-name>
         <servlet-class>controller.ViewExaminationHistoryController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ViewExaminationHistoryDetailController</servlet-name>
+        <servlet-class>controller.ViewExaminationHistoryDetailController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddNewExaminationController</servlet-name>
+        <servlet-class>controller.AddNewExaminationController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
         <url-pattern>/LoginController</url-pattern>
@@ -103,6 +111,14 @@
     <servlet-mapping>
         <servlet-name>ViewExaminationHistoryController</servlet-name>
         <url-pattern>/viewExaminationHistory</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewExaminationHistoryDetailController</servlet-name>
+        <url-pattern>/viewExaminationHistoryDetail</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddNewExaminationController</servlet-name>
+        <url-pattern>/addNewExamination</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

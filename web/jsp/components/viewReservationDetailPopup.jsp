@@ -54,7 +54,7 @@
             </dl>
             <div class="row ml-auto mt-5">
                 <button type="button" class="btn btn-primary btn-block" id="${reservation.customer.userId}" onClick="openViewExaminationHistoryPopup(this)" data-toggle="modal" data-target="#viewExaminationHistoryPopup" data-dismiss="modal">Xem lịch sử khám bệnh</button>
-                <button type="button" class="btn btn-primary btn-block">Thêm mới lịch sử khám bệnh</button>
+                <button type="button" class="btn btn-primary btn-block" id="${reservation.reservationId}" onclick="openAddNewExaminationPopup(this)" data-toggle="modal" data-target="#addNewExaminationPopup" data-dismiss="modal">Thêm mới lịch sử khám bệnh</button>
                 <button type="button" class="btn btn-danger btn-block">Hủy lịch đặt chỗ</button>
             </div>
         </div>                          

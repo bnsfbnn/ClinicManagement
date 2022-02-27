@@ -10,10 +10,13 @@
 package controller;
 
 import dao.ExaminationDAO;
+import dao.ReservationDAO;
 import dao.impl.ExaminationDAOImpl;
+import dao.impl.ReservationDAOImpl;
 import entity.Examination;
+import entity.Reservation;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -27,7 +30,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Nguyen Thanh Tung
  */
-public class ViewExaminationHistoryController extends HttpServlet {
+public class AddNewExaminationController extends HttpServlet {
 
     /**
      * -Use function getExamninationByUserId in
@@ -48,11 +51,17 @@ public class ViewExaminationHistoryController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            int customerId = (request.getParameter("customerId") != null) ? Integer.parseInt(request.getParameter("customerId")) : -1;
+            int reservationId = (request.getParameter("reservationId") != null) ? Integer.parseInt(request.getParameter("reservationId")) : -1;
+            String examinationDisgosis = (request.getParameter("examinationDisgosis") != null) ? request.getParameter("examinationDisgosis") : "";
+            String examinationPrescription = (request.getParameter("examinationPrescription") != null) ? request.getParameter("examinationPrescription") : "";
+            int check = 0;
+            ReservationDAO reservationDAO = new ReservationDAOImpl();
+            check = reservationDAO.updateReservationStatusById(reservationId);
+            Reservation reservation = reservationDAO.getReservationById(reservationId);
             ExaminationDAO examinationDAO = new ExaminationDAOImpl();
-            ArrayList<Examination> examination = examinationDAO.getExamninationByUserId(customerId);
-            request.setAttribute("examination", examination);
-            request.getRequestDispatcher("jsp/components/viewExaminationHistoryPopup.jsp").forward(request, response);
+            check = examinationDAO.insertNewExamination(reservation.getReservationId(), reservation.getConfirmedDoctor().getUserId(), examinationDisgosis, examinationPrescription, reservation.getConfirmedExaminationDate());
+            request.setAttribute("check", check);
+            response.sendRedirect("viewMyReservation");
         } catch (Exception e) {
             request.setAttribute("errorMessage", "Không thể tải dữ liệu từ cơ sở dữ liệu");
             request.setAttribute("exceptionMessage", e.getMessage());
