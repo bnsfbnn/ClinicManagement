@@ -12,11 +12,11 @@
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Thanh%20Tung/Documents/NetBeansProjects/ClinicManagerment/src/java/controller/ServiceManagementDetailController.java</file>
-            <file>file:/C:/Users/Thanh%20Tung/Documents/NetBeansProjects/ClinicManagerment/src/java/controller/LoginController.java</file>
-            <file>file:/C:/Users/Thanh%20Tung/Documents/NetBeansProjects/ClinicManagerment/src/java/controller/ServiceManagementController.java</file>
-            <file>file:/C:/Users/Thanh%20Tung/Documents/NetBeansProjects/ClinicManagerment/src/java/controller/DeleteAccountController.java</file>
-            <file>file:/C:/Users/Thanh%20Tung/Documents/NetBeansProjects/ClinicManagerment/src/java/controller/LogoutController.java</file>
+            <file>file:/C:/Users/Thanh%20Tung/Documents/NetBeansProjects/ClinicManagerment/web/jsp/viewMyReservation.jsp</file>
+            <file>file:/C:/Users/Thanh%20Tung/Documents/NetBeansProjects/ClinicManagerment/src/java/controller/ViewMyReservationController.java</file>
+            <file>file:/C:/Users/Thanh%20Tung/Documents/NetBeansProjects/ClinicManagerment/src/java/controller/AddNewExaminationController.java</file>
+            <file>file:/C:/Users/Thanh%20Tung/Documents/NetBeansProjects/ClinicManagerment/web/jsp/viewAllReservation.jsp</file>
+            <file>file:/C:/Users/Thanh%20Tung/Documents/NetBeansProjects/ClinicManagerment/web/jsp/components/viewReservationDetailPopup.jsp</file>
         </group>
     </open-files>
 </project-private>
