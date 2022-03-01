@@ -49,6 +49,7 @@
 
                             <div class="card-body">
                                 <h5 class="card-title m-0">${service.serviceName}</h5>
+                                <p class="card-text text-secondary">Mô tả: ${service.serviceDescription}</p>
                             </div>
                         </div>
                         <a href="ServiceDetailController?Id=${service.serviceId}" class="btn btn-success mb-4">Xem thêm</a>
