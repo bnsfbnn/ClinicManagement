@@ -52,44 +52,45 @@
                         <table class="table table-bordered text-center ">
                             <tr>
                                 <th  scope="col" class="bg-light"></th>
-                                <th scope="col" class="bg-dark text-white" id="Mon">Thứ Hai<br/><c:out value="${dayOfWeek[0]}"/></th>
-                                <th scope="col" class="bg-dark text-white" id="Tue">Thứ Ba<br/><c:out value="${dayOfWeek[1]}"/></th>
-                                <th scope="col" class="bg-dark text-white" id="Wed">Thứ Tư<br/><c:out value="${dayOfWeek[2]}"/></th>
-                                <th scope="col" class="bg-dark text-white" id="Thu">Thứ Năm<br/><c:out value="${dayOfWeek[3]}"/></th>
-                                <th scope="col" class="bg-dark text-white" id="Fri">Thứ Sáu<br/><c:out value="${dayOfWeek[4]}"/></th>
-                                <th scope="col" class="bg-dark text-white" id="Sat">Thứ Bảy<br/><c:out value="${dayOfWeek[5]}"/></th>
-                                <th scope="col" class="bg-dark text-white" id="Sun">Chủ Nhật<br/><c:out value="${dayOfWeek[6]}"/></th>
+                                <th scope="col" class="${(today eq dayOfWeek[0]) ? "bg-primary text-white" : "bg-dark text-white"}" id="Mon">Thứ Hai<br/><c:out value="${dayOfWeek[0]}"/></th>
+                                <th scope="col" class="${(today eq dayOfWeek[1]) ? "bg-primary text-white" : "bg-dark text-white"}" id="Tue">Thứ Ba<br/><c:out value="${dayOfWeek[1]}"/></th>
+                                <th scope="col" class="${(today eq dayOfWeek[2]) ? "bg-primary text-white" : "bg-dark text-white"}" id="Wed">Thứ Tư<br/><c:out value="${dayOfWeek[2]}"/></th>
+                                <th scope="col" class="${(today eq dayOfWeek[3]) ? "bg-primary text-white" : "bg-dark text-white"}" id="Thu">Thứ Năm<br/><c:out value="${dayOfWeek[3]}"/></th>
+                                <th scope="col" class="${(today eq dayOfWeek[4]) ? "bg-primary text-white" : "bg-dark text-white"}" id="Fri">Thứ Sáu<br/><c:out value="${dayOfWeek[4]}"/></th>
+                                <th scope="col" class="${(today eq dayOfWeek[5]) ? "bg-primary text-white" : "bg-dark text-white"}" id="Sat">Thứ Bảy<br/><c:out value="${dayOfWeek[5]}"/></th>
+                                <th scope="col" class="${(today eq dayOfWeek[6]) ? "bg-primary text-white" : "bg-dark text-white"}" id="Sun">Chủ Nhật<br/><c:out value="${dayOfWeek[6]}"/></th>
                             </tr>
                             <c:forEach begin="7" end="16" step="1" var="k">
                                 <c:choose>
                                     <c:when test="${k eq 12}">
                                         <tr>
-                                            <c:forEach begin="1" end="8" step="1">
-                                                <td class="bg-light text-dark m-0 p-0">12:00</td>
+                                            <td class="bg-light text-dark m-0 p-0">12:00</td>
+                                            <c:forEach var="i" items="${dayOfWeek}">
+                                                <td class="${(today eq i) ? "bg-dark text-white m-0 p-0":"bg-light text-dark m-0 p-0"}">12:00</td>
                                             </c:forEach>
                                         </tr>
                                         <tr>
                                             <td class="bg-light text-dark m-0 p-0">15</td>
-                                            <c:forEach begin="1" end="7" step="1">
-                                                <td class="bg-light text-dark m-0 p-0">12:15</td>
+                                            <c:forEach var="i" items="${dayOfWeek}">
+                                                <td class="${(today eq i) ? "bg-dark text-white m-0 p-0":"bg-light text-dark m-0 p-0"}">12:15</td>
                                             </c:forEach>
                                         </tr>
                                         <tr>
                                             <td class="bg-light text-dark m-0 p-0">30</td>
-                                            <c:forEach begin="1" end="7" step="1">
-                                                <td class="bg-light text-dark m-0 p-0">12:30</td>
+                                            <c:forEach var="i" items="${dayOfWeek}">
+                                                <td class="${(today eq i) ? "bg-dark text-white m-0 p-0":"bg-light text-dark m-0 p-0"}">12:30</td>
                                             </c:forEach>
                                         </tr>
                                         <tr>
                                             <td class="bg-light text-dark m-0 p-0">45</td>
-                                            <c:forEach begin="1" end="7" step="1">
-                                                <td class="bg-light text-dark m-0 p-0">12:45</td>
+                                            <c:forEach var="i" items="${dayOfWeek}">
+                                                <td class="${(today eq i) ? "bg-dark text-white m-0 p-0":"bg-light text-dark m-0 p-0"}">12:45</td>
                                             </c:forEach>
                                         </tr>
                                         <tr>
                                             <td class="bg-light text-dark m-0 p-0">60</td>
-                                            <c:forEach begin="1" end="7" step="1">
-                                                <td class="bg-light text-dark m-0 p-0">13:00</td>
+                                            <c:forEach var="i" items="${dayOfWeek}">
+                                                <td class="${(today eq i) ? "bg-dark text-white m-0 p-0":"bg-light text-dark m-0 p-0"}">13:00</td>
                                             </c:forEach>
                                         </tr>
                                     </c:when>
@@ -97,31 +98,31 @@
                                         <tr>
                                             <td class="bg-light text-dark m-0 p-0">${k}:00</td>
                                             <c:forEach var="i" items="${dayOfWeek}">
-                                                <td class="bg-light text-dark m-0 p-0">${k}:00</td>
+                                                <td class="${(today eq i) ? "bg-info text-white m-0 p-0" : "bg-white text-dark m-0 p-0"}">${k}:00</td>
                                             </c:forEach>
                                         </tr>
                                         <tr>
                                             <td class="bg-light text-dark m-0 p-0">15</td>
                                             <c:forEach var="i" items="${dayOfWeek}">
-                                                <td class="bg-white text-dark m-0 p-0" id="${i}-1-0${k}">${k}:15</td>
+                                                <td class="${(today eq i) ? "bg-info text-white m-0 p-0" : "bg-white text-dark m-0 p-0"}" id="${i}-1-0${k}">${k}:15</td>
                                             </c:forEach>
                                         </tr>
                                         <tr>
                                             <td class="bg-light text-dark m-0 p-0">30</td>
                                             <c:forEach var="i" items="${dayOfWeek}">
-                                                <td class="bg-white text-dark m-0 p-0" id="${i}-2-0${k}">${k}:30</td>
+                                                <td class="${(today eq i) ? "bg-info text-white m-0 p-0" : "bg-white text-dark m-0 p-0"}" id="${i}-2-0${k}">${k}:30</td>
                                             </c:forEach>
                                         </tr>
                                         <tr>
                                             <td class="bg-light text-dark m-0 p-0">45</td>
                                             <c:forEach var="i" items="${dayOfWeek}">
-                                                <td class="bg-white text-dark m-0 p-0" id="${i}-3-0${k}">${k}:45</td>
+                                                <td class="${(today eq i) ? "bg-info text-white m-0 p-0" : "bg-white text-dark m-0 p-0"}" id="${i}-3-0${k}">${k}:45</td>
                                             </c:forEach>
                                         </tr>
                                         <tr>
                                             <td class="bg-light text-dark m-0 p-0">60</td>
                                             <c:forEach var="i" items="${dayOfWeek}">
-                                                <td class="bg-white text-dark m-0 p-0" id="${i}-4-0${k}">${k+1}:00</td>
+                                                <td class="${(today eq i) ? "bg-info text-white m-0 p-0" : "bg-white text-dark m-0 p-0"}" id="${i}-4-0${k}">${k+1}:00</td>
                                             </c:forEach>
                                         </tr>
                                     </c:when>
@@ -129,31 +130,31 @@
                                         <tr>
                                             <td class="bg-light text-dark m-0 p-0">${k}:00</td>
                                             <c:forEach var="i" items="${dayOfWeek}">
-                                                <td class="bg-light text-dark m-0 p-0">${k}:00</td>
+                                                <td class="${(today eq i) ? "bg-info text-white m-0 p-0" : "bg-white text-dark m-0 p-0"}">${k}:00</td>
                                             </c:forEach>
                                         </tr>
                                         <tr>
                                             <td class="bg-light text-dark m-0 p-0">15</td>
                                             <c:forEach var="i" items="${dayOfWeek}">
-                                                <td class="bg-white text-dark m-0 p-0" id="${i}-1-${k}">${k}:15</td>
+                                                <td class="${(today eq i) ? "bg-info text-white m-0 p-0" : "bg-white text-dark m-0 p-0"}" id="${i}-1-${k}">${k}:15</td>
                                             </c:forEach>
                                         </tr>
                                         <tr>
                                             <td class="bg-light text-dark m-0 p-0">30</td>
                                             <c:forEach var="i" items="${dayOfWeek}">
-                                                <td class="bg-white text-dark m-0 p-0" id="${i}-2-${k}">${k}:30</td>
+                                                <td class="${(today eq i) ? "bg-info text-white m-0 p-0" : "bg-white text-dark m-0 p-0"}" id="${i}-2-${k}">${k}:30</td>
                                             </c:forEach>
                                         </tr>
                                         <tr>
                                             <td class="bg-light text-dark m-0 p-0">45</td>
                                             <c:forEach var="i" items="${dayOfWeek}">
-                                                <td class="bg-white text-dark m-0 p-0" id="${i}-3-${k}">${k}:45</td>
+                                                <td class="${(today eq i) ? "bg-info text-white m-0 p-0" : "bg-white text-dark m-0 p-0"}" id="${i}-3-${k}">${k}:45</td>
                                             </c:forEach>
                                         </tr>
                                         <tr>
                                             <td class="bg-light text-dark m-0 p-0">60</td>
                                             <c:forEach var="i" items="${dayOfWeek}">
-                                                <td class="bg-white text-dark m-0 p-0" id="${i}-4-${k}">${k+1}:00</td>
+                                                <td class="${(today eq i) ? "bg-info text-white m-0 p-0" : "bg-white text-dark m-0 p-0"}" id="${i}-4-${k}">${k+1}:00</td>
                                             </c:forEach>
                                         </tr>
                                     </c:when>
