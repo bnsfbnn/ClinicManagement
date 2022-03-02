@@ -1,14 +1,19 @@
-<%-- 
-    Document   : user_profile
-    Created on : Feb 23, 2022, 10:43:51 PM
-    Author     : nguye
---%>
+<!--
+ * Copyright(C) 20022, FPT University
+ * CMS:
+ * Clinic Management System
+ *
+ * Record of change:
+ * DATE            Version             AUTHOR           DESCRIPTION
+ * 2022-02-23      1.0                 NamNV          First Implement 
+-->
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <title>JSP Page</title>
     </head>
     <style>
@@ -26,7 +31,8 @@ color:#69707a;
     box-shadow: 0 0.15rem 1.75rem 0 rgb(33 40 50 / 15%);
 }
 .card .card-header {
-    font-weight: 500;
+    font-weight: bold;
+    font-size: 30px;
 }
 .card-header:first-child {
     border-radius: 0.35rem 0.35rem 0 0;
@@ -36,6 +42,7 @@ color:#69707a;
     margin-bottom: 0;
     background-color: rgba(33, 40, 50, 0.03);
     border-bottom: 1px solid rgba(33, 40, 50, 0.125);
+    
 }
 .form-control, .dataTable-input {
     display: block;
@@ -71,6 +78,7 @@ color:#69707a;
     margin-left: 1rem;
     margin-right: 1rem;
 }     
+
     </style>
     <body>
  <div class="container-xl px-4 mt-4">
@@ -141,7 +149,7 @@ color:#69707a;
                             </div>
                         </div>
                         <!-- Save changes button-->
-                        <button class="btn btn-primary" type="button">Save changes</button>
+                        <button class="btn btn-primary" type="button">Update</button>
                     </form>
                 </div>
             </div>

@@ -143,7 +143,7 @@ public class UserDAOImpl extends DBContext implements UserDAO {
         try {
             connecion = getConnection();
             // Get data
-            preparedStatement = connecion.prepareStatement("  update users set is_active = 0 where user_id = ?");
+            preparedStatement = connecion.prepareStatement("update users set is_active = 0 where user_id = ?");
             preparedStatement.setInt(1, id);
             preparedStatement.executeUpdate();
         } catch (Exception ex) {
