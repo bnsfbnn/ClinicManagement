@@ -64,10 +64,6 @@
         <servlet-name>BookReservationController</servlet-name>
         <servlet-class>controller.BookReservationController</servlet-class>
     </servlet>
-    <servlet>
-        <servlet-name>ViewCustomerReservationList</servlet-name>
-        <servlet-class>controller.ViewCustomerReservationList</servlet-class>
-    </servlet>
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
         <url-pattern>/LoginController</url-pattern>
@@ -131,10 +127,6 @@
     <servlet-mapping>
         <servlet-name>BookReservationController</servlet-name>
         <url-pattern>/BookReservationController</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>ViewCustomerReservationList</servlet-name>
-        <url-pattern>/ViewCustomerReservationList</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
