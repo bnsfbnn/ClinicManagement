@@ -34,7 +34,6 @@ import javax.servlet.http.HttpSession;
  * @version 1.0
  * @since 2022-02-22
  */
-@WebServlet(name = "ViewCustomerReservationsList", urlPatterns = {"/ViewCustomerReservationsList"})
 public class ViewCustomerReservationsList extends HttpServlet {
 
     /**
