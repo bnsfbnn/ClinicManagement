@@ -475,9 +475,33 @@ public class ReservationDAOImpl extends DBContext implements ReservationDAO {
         } catch (Exception ex) {
             Logger.getLogger(ReservationDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
             /**
-             * close result set, prepared statement and connection by
-             * corresponding order
+             * set attributes for doctors from result set then add its to result
+             * list
              */
+            while (rs.next()) {
+                User customer = new User(rs.getInt("user_id"), rs.getString("email"), rs.getString("full_name"), rs.getDate("birth_date"), rs.getBoolean("gender"), rs.getString("phone"), rs.getString("address"));
+                Service service = new Service(rs.getInt("service_id"), rs.getString("service_name"));
+                ServicePackage servicePackage = new ServicePackage(rs.getInt("package_id"), rs.getString("package_title"), rs.getString("examination_duration"));
+                User doctor = new User(rs.getInt("confirmed_doctor_id"),"","");
+                result.setReservationId(rs.getInt("reservation_id"));
+                result.setCustomer(customer);
+                result.setService(service);
+                result.setServicePackage(servicePackage);
+                result.setConfirmedDoctor(doctor);
+                result.setRequestExaminationDate(rs.getDate("request_examination_date"));
+                result.setRequestExaminationTime(rs.getTime("request_examination_time"));
+                result.setConfirmedExaminationDate(rs.getDate("confirmed_examination_date"));
+                result.setConfirmedExaminationTime(rs.getTime("confirmed_examination_time"));
+                result.setReservationDate(rs.getDate("reservation_date"));
+                result.setReservationStatus(rs.getString("reservation_status"));
+                result.setMedicalRequest(rs.getString("medical_request"));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ReservationDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+            throw ex;
+        } catch (Exception ex) {
+            Logger.getLogger(ReservationDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+            throw ex;
         } finally {
             this.closeResultSet(rs);
             this.closePreparedStatement(ps);
@@ -534,5 +558,43 @@ public class ReservationDAOImpl extends DBContext implements ReservationDAO {
             this.closeConnection(con);
         }
         return null;
+    }
+
+    /**
+     * - Update reservation status
+     *
+     * @param reservationId is a <code>java.lang.int</code> object used to get
+     * reservation by reservationId
+     * @return a list of <code>Reservation</code> objects. <br>
+     * -It is a <code>java.util.ArrayList</code> object
+     * @throws SQLException when <code>java.sql.SQLException</code> occurs.
+     * @throws Exception when <code>java.sql.Exception</code> occurs.
+     */
+    @Override
+    public int updateReservationStatusById(int reservationId) throws SQLException, Exception {
+        int check = 0;
+        String status = "Đã khám";
+        String sql = "UPDATE reservations\n"
+                + "   SET reservation_status = ?\n"
+                + " WHERE reservations.reservation_id = ?";
+        Connection con = null;
+        PreparedStatement ps = null;
+        try {
+            con = getConnection(); //get connection
+            ps = con.prepareStatement(sql);
+            ps.setString(1, status);
+            ps.setInt(2, reservationId);
+            check = ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(ReservationDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+            throw ex;
+        } catch (Exception ex) {
+            Logger.getLogger(ReservationDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+            throw ex;
+        } finally {
+            this.closePreparedStatement(ps);
+            this.closeConnection(con);
+        }
+        return check;
     }
 }

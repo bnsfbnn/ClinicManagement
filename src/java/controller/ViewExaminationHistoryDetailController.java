@@ -36,8 +36,8 @@ public class ViewExaminationHistoryDetailController extends HttpServlet {
      * <code>entity.Examination</code>. It's a <code>java.util.ArrayList</code>
      * object
      *
-     * -Set parameters: examination, reservationId, isAddNew<br>
-     * -Finally forward user to the <code>viewExaminationHistoryDetailPopup.jsp</code>
+     * -Set parameters: examination<br>
+     * -Finally forward user to the <code>viewReservationDetailPopup.jsp</code>
      * page. Processes requests for both HTTP <code>GET</code> and
      * <code>POST</code> methods.
      *
