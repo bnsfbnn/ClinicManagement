@@ -1,63 +1,81 @@
 /*
- * Copyright(C) 2022, FPT University
- * CMS
- * CLINIC MANAGEMENT SYSTEM
+ * Copyright(C) 20022, FPT University
+ * CMS:
+ * Clinic Management System
  *
  * Record of change:
  * DATE            Version             AUTHOR           DESCRIPTION
- * 2022-02-08      1.0                 tungnt           First Implement 
+ * 2022-02-22     1.0                 TrangCT          Controller View Customer Reservation List
  */
 package controller;
 
 import dao.ReservationDAO;
 import dao.impl.ReservationDAOImpl;
-import entity.Reservation;
+import entity.CustomerReservation;
+import entity.ReservationDTO;
+import entity.Pagination;
+import entity.User;
 import java.io.IOException;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
- * * -This class uses function getReservationById in
- * <code>dao.impl.ReservationDAOImpl</code> to get an
- * <code>entity.Reservation</code>
+ * <h1>View Customer Reservation Detail </h1>
+ * Controller to view customer reservation list. Method process data form
+ * ReservationDAO and forward data to file view
+ * <p>
  *
- * @author Nguyen Thanh Tung
+ *
+ * @author TrangCT
+ * @version 1.0
+ * @since 2022-02-22
  */
-public class ViewMyReservationDetailController extends HttpServlet {
+public class ViewCustomerReservationsList extends HttpServlet {
 
     /**
-     * -Use function getReservationById in
-     * <code>dao.impl.ReservationDAOImpl</code> to get an
-     * <code>entity.Reservation</code> object 
-     *
-     * -Set parameters: reservation<br>
-     * -Finally forward user to the <code>viewReservationDetailPopup.jsp</code> page.
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
      *
      * @param request servlet request
-     * @param response servlet response is
+     * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            int reservationId = (request.getParameter("reservationId") != null) ? Integer.parseInt(request.getParameter("reservationId")) : -1;
-            ReservationDAO reservationDAO = new ReservationDAOImpl();
-            Reservation reservation = reservationDAO.getReservationById(reservationId);
-            request.setAttribute("reservation", reservation);
-            request.getRequestDispatcher("jsp/components/viewReservationDetailPopup.jsp").forward(request, response);
-        } catch (Exception e) {
-            request.setAttribute("errorMessage", "Không thể tải dữ liệu từ cơ sở dữ liệu");
-            request.setAttribute("exceptionMessage", e.getMessage());
-            request.getRequestDispatcher("jsp/error.jsp").forward(request, response);
+        response.setContentType("text/html;charset=UTF-8");
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
+        if (user == null) {
+            request.getRequestDispatcher("./jsp/login.jsp").forward(request, response);
+        } else {
+            String page = request.getParameter("page");
+            int pageIndex = 1;
+            if (page != null) {// check page if not null
+                try {
+                    //convert page(string) to pageIndex(int)
+                    pageIndex = Integer.parseInt(page);
+                    if (pageIndex == -1) {
+                        pageIndex = 0;
+                    }
+                } catch (NumberFormatException e) {
+                    //default pageIndex = 1
+                    pageIndex = 0;
+                }
+                int pageSize = 5; // default page size
+                ReservationDAO reservationDAO = new ReservationDAOImpl();
+                Pagination<CustomerReservation> reservations = reservationDAO.getAllCustomerReservation(pageIndex, pageSize, user.getUserId());
+                request.setAttribute("reservations", reservations);
+                request.getRequestDispatcher("./jsp/viewAllCustomerReservation.jsp").forward(request, response);
+            }
         }
     }
-
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+
     /**
      * Handles the HTTP <code>GET</code> method.
      *

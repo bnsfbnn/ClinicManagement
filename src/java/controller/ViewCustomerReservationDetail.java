@@ -1,60 +1,57 @@
 /*
- * Copyright(C) 2022, FPT University
- * CMS
- * CLINIC MANAGEMENT SYSTEM
+ * Copyright(C) 20022, FPT University
+ * CMS:
+ * Clinic Management System
  *
  * Record of change:
  * DATE            Version             AUTHOR           DESCRIPTION
- * 2022-02-08      1.0                 tungnt           First Implement 
+ * 2022-02-22     1.0                 TrangCT          Controller view customer reservation detail 
  */
 package controller;
 
 import dao.ReservationDAO;
 import dao.impl.ReservationDAOImpl;
-import entity.Reservation;
+import entity.CustomerReservation;
 import java.io.IOException;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * * -This class uses function getReservationById in
- * <code>dao.impl.ReservationDAOImpl</code> to get an
- * <code>entity.Reservation</code>
- *
- * @author Nguyen Thanh Tung
+ * <h1>View Customer Reservation  Detail </h1>
+ * Controller to view customer reservation detail . Method process data form ReservationDAO and 
+ * forward data to file view
+ * <p>
+ * 
+ * 
+ * @author TrangCT
+ * @version 1.0
+ * @since 2022-02-22
  */
-public class ViewMyReservationDetailController extends HttpServlet {
+public class ViewCustomerReservationDetail extends HttpServlet {
 
     /**
-     * -Use function getReservationById in
-     * <code>dao.impl.ReservationDAOImpl</code> to get an
-     * <code>entity.Reservation</code> object 
-     *
-     * -Set parameters: reservation<br>
-     * -Finally forward user to the <code>viewReservationDetailPopup.jsp</code> page.
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
      *
      * @param request servlet request
-     * @param response servlet response is
+     * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            int reservationId = (request.getParameter("reservationId") != null) ? Integer.parseInt(request.getParameter("reservationId")) : -1;
-            ReservationDAO reservationDAO = new ReservationDAOImpl();
-            Reservation reservation = reservationDAO.getReservationById(reservationId);
-            request.setAttribute("reservation", reservation);
-            request.getRequestDispatcher("jsp/components/viewReservationDetailPopup.jsp").forward(request, response);
-        } catch (Exception e) {
-            request.setAttribute("errorMessage", "Không thể tải dữ liệu từ cơ sở dữ liệu");
-            request.setAttribute("exceptionMessage", e.getMessage());
-            request.getRequestDispatcher("jsp/error.jsp").forward(request, response);
+        response.setContentType("text/html;charset=UTF-8");
+        int id = 1;
+        if (request.getParameter("id") != null) {
+            id = Integer.parseInt(request.getParameter("id"));
         }
+        ReservationDAO reservationDAO = new ReservationDAOImpl();
+        CustomerReservation reservation = reservationDAO.getCustomerReservationById(id);
+        request.setAttribute("reservation", reservation);
+        request.getRequestDispatcher("./jsp/viewCustomerReservationDetail.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

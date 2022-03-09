@@ -22,7 +22,7 @@
     <body style="background-color: #A9DFFD;">
         <section class="ftco-section">
             <div class="container">
-                
+
                 <div class="row justify-content-center">
                     <div class="col-md-7 col-lg-5">
                         <div class="wrap">
@@ -46,7 +46,7 @@
                                     <div class="form-group">
                                         <button type="submit" class="form-control btn btn-primary rounded submit px-3">Đăng nhập</button>
                                     </div>
-                                    
+
                                 </form>
                                 <p class="text-center">không phải thành viên? <a data-toggle="tab" href="#signup">Đăng kí</a></p>
                                 <p style="color: red"> ${message}</p>
