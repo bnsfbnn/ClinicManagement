@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!--
  * Copyright(C) 20022, FPT University
  * CMS:
@@ -22,47 +23,51 @@
         <link rel="stylesheet" href="./assets/css/custom.css" />
         <link href="../assets/css/header.css" rel="stylesheet" type="text/css"/>
     </head>
+    <header>
+        <jsp:include page="./components/customerHeader.jsp" />
+    </header>
     <body>
-        <div class="container">
-            <div class="row mb-3">
-                <div class="col-md-12">
-                    <div id="gallerydetail" class="carousel slide" data-bs-ride="carousel">
-                        <div class="carousel-inner">
-                            <c:forEach items="${service.serviceImage}" var="image" varStatus="loop">
-                                <div class="carousel-item ${loop.first?'active':''}">
-                                    <!--<img src="${service.serviceImage}" class="d-block w-100">-->
-                                    <img src="https://o.rada.vn/data/image/2020/05/08/ta-bac-si-dang-kham-benh.jpg" class="d-block w-100">
-
-                                </div>                                
-                            </c:forEach>
+        <div class="container-fuild">
+            <div class="row-fluid mb-5">
+                <img class="col-lg-12 p-0" src="./assets/images/banner.jpg" alt="Banner"/>
+            </div>
+            <div class="row my-5">
+                <div class="col-md-8 mx-auto bg-primary p-5 rounded">
+                    <h2 class="text-white">Giới thiệu về ${service.serviceName}</h2>
+                    <div class="row">
+                        <div class="col-md-6 mt-5">
+                            <img src="./assets/images/${service.serviceImage}" class="d-block w-100">
                         </div>
-                        <div class="carousel-indicators">
-                            <c:forEach items="${service.serviceImage}" var="image" varStatus="loop">
-                                <img src="${service.serviceImage}" ${loop.first?'class="active"':''} data-bs-target="#gallerydetail" data-bs-slide-to="${loop.index}">
-                            </c:forEach>
+                        <div class="col-md-6 mt-5 p-5">
+                            <h4 class="text-white">${service.serviceDescription}</h3>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="row mb-3">
-                <div class="col-12">
-                    <h5 class="m-0 mb-2">
-                        ${service.serviceName}
-                    </h5>
-                        <p class="text-secondary small"><i class="fas fa-map-marker-alt"></i> ${service.serviceBrief}</p>
-                   
-
-                    <div class="d-flex">
-                        <div>  <img src="https://o.rada.vn/data/image/2020/05/08/ta-bac-si-dang-kham-benh.jpg" class="d-block"></div>
-                        <div class="ml-3"> <p class="mb-0">Mô tả:</p>
-                            <p>                    
-                                ${service.serviceDescription}<br/></p>
+            <div class="row my-5">
+                <c:set var = "count" scope = "page" value = "0"/>
+                <c:forEach var="i" items="${packages}">
+                    <c:set var = "count" scope = "page" value = "${count+1}"/>
+                    <div class="col-md-2 mx-auto border rounded">
+                        <div class="row">
+                            <img src="./assets/images/gói ${count}.png" class="d-block w-100"/>
                         </div>
-
+                        <div class="row pl-1 my-1">
+                            <b>${i.packageTitle}</b>
+                        </div>
+                        <div class="row pl-1 my-1">
+                            <span><b>Thời gian khám: </b><span class="font-italic">${i.examinationDuration}</span></span>
+                        </div>
+                        <div class="row pl-1 my-1">
+                            <span class="justify-content-center"><b>Giá: </b><h3 class="font-weight-bold text-primary">${i.price} VND</h3></span>
+                        </div>
+                        <div class="row-fluid px-auto ml-5 my-1">
+                            <a href="./jsp/bookAReservation.jsp?serviceId=${service.serviceId}&packageId=${i.packageId}" class="button">
+                                <button type="button" class="btn btn-primary w-75">Đăng ký</button>
+                            </a>
+                        </div>
                     </div>
-
-
-                </div>
+                </c:forEach>
             </div>
         </div>
         <script src="./assets/js/jquery-3.6.0.min.js" crossorigin="anonymous"></script>
@@ -72,5 +77,4 @@
         <script src="./assets/js/select2.full.min.js"></script>
         <script src="./assets/js/custom.js"></script>
     </body>
-
 </html>

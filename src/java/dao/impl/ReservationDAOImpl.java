@@ -11,6 +11,8 @@ package dao.impl;
 
 import context.DBContext;
 import dao.ReservationDAO;
+import entity.CustomerReservation;
+import entity.Pagination;
 import entity.Reservation;
 import entity.Service;
 import entity.User;
@@ -20,7 +22,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -316,7 +318,7 @@ public class ReservationDAOImpl extends DBContext implements ReservationDAO {
                 User customer = new User(rs.getInt("user_id"), rs.getString("email"), rs.getString("full_name"), rs.getDate("birth_date"), rs.getBoolean("gender"), rs.getString("phone"), rs.getString("address"));
                 Service service = new Service(rs.getInt("service_id"), rs.getString("service_name"));
                 ServicePackage servicePackage = new ServicePackage(rs.getInt("package_id"), rs.getString("package_title"), rs.getString("examination_duration"));
-                User doctor = new User(rs.getInt("confirmed_doctor_id"),"","");
+                User doctor = new User(rs.getInt("confirmed_doctor_id"), "", "");
                 result.setReservationId(rs.getInt("reservation_id"));
                 result.setCustomer(customer);
                 result.setService(service);
@@ -381,5 +383,156 @@ public class ReservationDAOImpl extends DBContext implements ReservationDAO {
             this.closeConnection(con);
         }
         return check;
+    }
+
+    public int count(int id) {
+        Connection connecion = null;
+        PreparedStatement countPreparedStatement = null;
+        ResultSet countResultSet = null;
+        try {
+            connecion = getConnection();
+                        String sql = "";
+            if (id > 0) {
+                sql = "SELECT COUNT(*) FROM (\n"
+                        + " select DISTINCT r.reservation_id, p.examination_duration, p.package_title, p.price, s.service_name, r.reservation_status, r.medical_request, r.request_examination_date, r.confirmed_examination_date from reservations r join services s\n"
+                        + "  on r.service_id = s.service_id\n"
+                        + "  join packages p\n"
+                        + "  on r.package_id = p.package_id and r.customer_id = ?\n"
+                        + ") AS derived;";
+            } else {
+                sql = "SELECT COUNT(*) FROM (\n"
+                        + " select DISTINCT r.reservation_id, p.examination_duration, p.package_title, p.price, s.service_name, r.reservation_status, r.medical_request, r.request_examination_date, r.confirmed_examination_date from reservations r join services s\n"
+                        + "  on r.service_id = s.service_id\n"
+                        + "  join packages p\n"
+                        + "  on r.package_id = p.package_id\n"
+                        + ") AS derived;";
+            }
+            countPreparedStatement = connecion.prepareStatement(sql);
+            if (id > 0) {
+                countPreparedStatement.setInt(1, id);
+            }
+            countResultSet = countPreparedStatement.executeQuery();
+            if (countResultSet.next()) {
+                // get and return count total services
+                return countResultSet.getInt(1);
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            closeResultSet(countResultSet);
+            closePreparedStatement(countPreparedStatement);
+            closeConnection(connecion);
+        }
+        return 0;
+    }
+
+    @Override
+    public Pagination<CustomerReservation> getAllCustomerReservation(int pageIndex, int pageSize, int id) {
+        Pagination<CustomerReservation> pagination = new Pagination<>();
+        List<CustomerReservation> customerReservations = new ArrayList<>();
+        String sql = "  SELECT * FROM (SELECT DISTINCT ROW_NUMBER() OVER ( ORDER BY r.confirmed_examination_date )\n"
+                + "                    AS RowNum, r.reservation_id,  p.examination_duration, p.package_title, p.price, s.service_name, r.reservation_status, r.medical_request, r.request_examination_date, r.confirmed_examination_date from reservations r join services s\n"
+                + "  on r.service_id = s.service_id\n"
+                + "  join packages p\n"
+                + "  on r.package_id = p.package_id and r.customer_id = ?) \n"
+                + "                    AS RowConstrainedResult\n"
+                + "                    WHERE   RowNum >= ?\n"
+                + "                  AND RowNum <= ?\n"             
+                + "                    ORDER BY RowNum";
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            con = getConnection(); //get connection
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+            ps.setInt(2, (pageIndex - 1) * pageSize);
+            ps.setInt(3, (pageIndex - 1) * pageSize + pageSize);
+            rs = ps.executeQuery();
+            /**
+             * set attributes for doctors from result set then add its to result
+             * list
+             */
+            int totalItem = count(id); // count total service
+            pagination.setCurrentPage(pageIndex);
+            pagination.setItemPerPage(pageSize);
+            pagination.setTotalItem(totalItem);
+            while (rs.next()) {
+                CustomerReservation reservation = new CustomerReservation();
+                reservation.setId(rs.getInt("reservation_id"));
+                reservation.setExaminationDuration(rs.getString("examination_duration"));
+                reservation.setPackageTitle(rs.getString("package_title"));
+                reservation.setPrice(rs.getFloat("price"));
+                reservation.setServiceName(rs.getString("service_name"));
+                reservation.setReservationStatus(rs.getString("reservation_status"));
+                reservation.setMedicalRequest(rs.getString("medical_request"));
+                reservation.setRequestExaminationDate(rs.getDate("request_examination_date"));
+                reservation.setConfirmedExaminationDate(rs.getDate("confirmed_examination_date"));
+                customerReservations.add(reservation);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ReservationDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(ReservationDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+            /**
+             * close result set, prepared statement and connection by
+             * corresponding order
+             */
+        } finally {
+            this.closeResultSet(rs);
+            this.closePreparedStatement(ps);
+            this.closeConnection(con);
+        }
+        pagination.setData(customerReservations);
+        return pagination;
+    }
+
+    @Override
+    public CustomerReservation getCustomerReservationById(int id) {
+        Pagination<CustomerReservation> pagination = new Pagination<>();
+        String sql = "  select DISTINCT r.reservation_id, p.examination_duration, p.package_title, p.price, s.service_name, r.reservation_status, r.medical_request, r.request_examination_date, r.confirmed_examination_date from reservations r join services s\n"
+                + "  on r.service_id = s.service_id\n"
+                + "  join packages p\n"
+                + "  on r.package_id = p.package_id and r.reservation_id = ? ";
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            con = getConnection(); //get connection
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+            rs = ps.executeQuery();
+            /**
+             * set attributes for doctors from result set then add its to result
+             * list
+             */
+            int totalItem = count(0); // count total service
+            while (rs.next()) {
+                CustomerReservation reservation = new CustomerReservation();
+                reservation.setId(rs.getInt("reservation_id"));
+                reservation.setExaminationDuration(rs.getString("examination_duration"));
+                reservation.setPackageTitle(rs.getString("package_title"));
+                reservation.setPrice(rs.getFloat("price"));
+                reservation.setServiceName(rs.getString("service_name"));
+                reservation.setReservationStatus(rs.getString("reservation_status"));
+                reservation.setMedicalRequest(rs.getString("medical_request"));
+                reservation.setRequestExaminationDate(rs.getDate("request_examination_date"));
+                reservation.setConfirmedExaminationDate(rs.getDate("confirmed_examination_date"));
+                return reservation;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ReservationDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(ReservationDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+            /**
+             * close result set, prepared statement and connection by
+             * corresponding order
+             */
+        } finally {
+            this.closeResultSet(rs);
+            this.closePreparedStatement(ps);
+            this.closeConnection(con);
+        }
+        return null;
     }
 }

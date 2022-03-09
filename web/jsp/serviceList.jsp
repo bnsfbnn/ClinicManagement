@@ -39,19 +39,17 @@
     <body>
         <div class="container-fluid m-0 p-0">
             <div class="row-fluid mb-3">
-                <img class="col-lg-12 p-0" src="./assets/images/banner-sm.png" alt="Banner"/>
+                <img class="col-lg-12 p-0" src="./assets/images/banner.jpg" alt="Banner"/>
             </div>
-
             <div class="row">
-
                 <c:forEach items="${services.data}" var="service">
-                    <div class="col-4">
+                    <div class="col-4 m-0 px-auto">
                         <div >
-                            <!--<img src="${service.serviceImage}" class="card-img-top w-50" alt="...">-->
-                                                        <img src="https://o.rada.vn/data/image/2020/05/08/ta-bac-si-dang-kham-benh.jpg" class="card-img-top w-75" alt="...">
+                            <img src="./assets/images/${service.serviceImage}" class="card-img-top w-50" alt="...">
 
                             <div class="card-body">
                                 <h5 class="card-title m-0">${service.serviceName}</h5>
+                                <p class="card-text text-secondary">Mô tả: ${service.serviceDescription}</p>
                             </div>
                         </div>
                         <a href="ServiceDetailController?Id=${service.serviceId}" class="btn btn-success mb-4">Xem thêm</a>
@@ -63,10 +61,9 @@
                     </div>
                 </c:if>
             </div>
-                
             <c:if test="${services.totalPage > 1}">
                 <div class="row">
-                    <div class="col-12 text-center">
+                    <div class="col-12 text-center m-0 p-0">
                         <ul>
                             <c:if test="${services.currentPage > 1}">
                                 <a class="btn btn-light" href="${requestScope['javax.servlet.forward.request_uri']}?page=${restaurants.currentPage}">Trang trước</a>
@@ -87,7 +84,6 @@
                 </div>
             </c:if>
         </div>
-
         <script src="./assets/js/jquery-3.6.0.min.js" crossorigin="anonymous"></script>
         <script src="./assets/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="./assets/js/star-rating.js" type="text/javascript"></script>

@@ -64,6 +64,18 @@
         <servlet-name>CancelReservationController</servlet-name>
         <servlet-class>controller.CancelReservationController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ViewCustomerReservationsList</servlet-name>
+        <servlet-class>controller.ViewCustomerReservationsList</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewCustomerReservationDetail</servlet-name>
+        <servlet-class>controller.ViewCustomerReservationDetail</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GetAllPackageController</servlet-name>
+        <servlet-class>controller.GetAllPackageController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
         <url-pattern>/LoginController</url-pattern>
@@ -127,6 +139,18 @@
     <servlet-mapping>
         <servlet-name>CancelReservationController</servlet-name>
         <url-pattern>/cancelReservation</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewCustomerReservationsList</servlet-name>
+        <url-pattern>/ViewCustomerReservationsList</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewCustomerReservationDetail</servlet-name>
+        <url-pattern>/ViewCustomerReservationDetail</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetAllPackageController</servlet-name>
+        <url-pattern>/GetAllPackageController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
