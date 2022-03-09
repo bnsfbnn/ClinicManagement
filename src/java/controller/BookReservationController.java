@@ -58,7 +58,7 @@ public class BookReservationController extends HttpServlet {
 
         ReservationDAO reservationDAO = new ReservationDAOImpl();
         reservationDAO.bookReservation(reservation);
-        ViewCustomerReservationList controller = new ViewCustomerReservationList();
+        ViewCustomerReservationsList controller = new ViewCustomerReservationsList();
         controller.processRequest(request, response);
     }
 
