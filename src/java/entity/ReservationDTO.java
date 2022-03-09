@@ -10,6 +10,7 @@
 package entity;
 
 import java.sql.Date;
+
 /**
  * <h1>ReservationDTO </h1>
  * storage data of a Reservation
@@ -24,20 +25,26 @@ import java.sql.Date;
 public class ReservationDTO {
 
     private int id;
-    
+
     private Date requestDate;
 
     private String customerRequest;
 
+    private int serviceId;
+
+    private int packageId;
+   
+
     /**
      * Get requestDate
      *
-     * @return  requestDate date 
+     * @return requestDate date
      */
     public Date getRequestDate() {
         return requestDate;
     }
-     /**
+
+    /**
      * Set requestDate
      *
      * @param requestDate
@@ -46,14 +53,16 @@ public class ReservationDTO {
     public void setRequestDate(Date requestDate) {
         this.requestDate = requestDate;
     }
-     /**
+
+    /**
      * Get CustomerRequest
      *
-     * @return  customerRequest String
+     * @return customerRequest String
      */
     public String getCustomerRequest() {
         return customerRequest;
     }
+
     /**
      * Set customerRequest
      *
@@ -63,10 +72,11 @@ public class ReservationDTO {
     public void setCustomerRequest(String customerRequest) {
         this.customerRequest = customerRequest;
     }
-     /**
+
+    /**
      * Get id
      *
-     * @return  id  int
+     * @return id int
      */
 
     public int getId() {
@@ -78,9 +88,24 @@ public class ReservationDTO {
      *
      * @param id
      */
-
     public void setId(int id) {
         this.id = id;
     }
+    
+    public int getServiceId() {
+        return serviceId;
+    }
 
+    public void setServiceId(int serviceId) {
+        this.serviceId = serviceId;
+    }
+
+    public int getPackageId() {
+        return packageId;
+    }
+
+    public void setPackageId(int packageId) {
+        this.packageId = packageId;
+    }
+   
 }

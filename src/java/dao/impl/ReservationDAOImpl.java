@@ -384,18 +384,32 @@ public class ReservationDAOImpl extends DBContext implements ReservationDAO {
         return check;
     }
 
-    public int count() {
+    public int count(int id) {
         Connection connecion = null;
         PreparedStatement countPreparedStatement = null;
         ResultSet countResultSet = null;
         try {
             connecion = getConnection();
-            countPreparedStatement = connecion.prepareStatement("  SELECT COUNT(*) FROM (\n"
-                    + " select DISTINCT r.reservation_id, p.examination_duration, p.package_title, p.price, s.service_name, r.reservation_status, r.medical_request, r.request_examination_date, r.confirmed_examination_date from reservations r join services s\n"
-                    + "  on r.service_id = s.service_id\n"
-                    + "  join packages p\n"
-                    + "  on r.package_id = p.package_id\n"
-                    + ") AS derived;");
+                        String sql = "";
+            if (id > 0) {
+                sql = "SELECT COUNT(*) FROM (\n"
+                        + " select DISTINCT r.reservation_id, p.examination_duration, p.package_title, p.price, s.service_name, r.reservation_status, r.medical_request, r.request_examination_date, r.confirmed_examination_date from reservations r join services s\n"
+                        + "  on r.service_id = s.service_id\n"
+                        + "  join packages p\n"
+                        + "  on r.package_id = p.package_id and r.customer_id = ?\n"
+                        + ") AS derived;";
+            } else {
+                sql = "SELECT COUNT(*) FROM (\n"
+                        + " select DISTINCT r.reservation_id, p.examination_duration, p.package_title, p.price, s.service_name, r.reservation_status, r.medical_request, r.request_examination_date, r.confirmed_examination_date from reservations r join services s\n"
+                        + "  on r.service_id = s.service_id\n"
+                        + "  join packages p\n"
+                        + "  on r.package_id = p.package_id\n"
+                        + ") AS derived;";
+            }
+            countPreparedStatement = connecion.prepareStatement(sql);
+            if (id > 0) {
+                countPreparedStatement.setInt(1, id);
+            }
             countResultSet = countPreparedStatement.executeQuery();
             if (countResultSet.next()) {
                 // get and return count total services
@@ -412,17 +426,17 @@ public class ReservationDAOImpl extends DBContext implements ReservationDAO {
     }
 
     @Override
-    public Pagination<CustomerReservation> getAllCustomerReservation(int pageIndex, int pageSize) {
+    public Pagination<CustomerReservation> getAllCustomerReservation(int pageIndex, int pageSize, int id) {
         Pagination<CustomerReservation> pagination = new Pagination<>();
         List<CustomerReservation> customerReservations = new ArrayList<>();
         String sql = "  SELECT * FROM (SELECT DISTINCT ROW_NUMBER() OVER ( ORDER BY r.confirmed_examination_date )\n"
                 + "                    AS RowNum, r.reservation_id,  p.examination_duration, p.package_title, p.price, s.service_name, r.reservation_status, r.medical_request, r.request_examination_date, r.confirmed_examination_date from reservations r join services s\n"
                 + "  on r.service_id = s.service_id\n"
                 + "  join packages p\n"
-                + "  on r.package_id = p.package_id) \n"
+                + "  on r.package_id = p.package_id and r.customer_id = ?) \n"
                 + "                    AS RowConstrainedResult\n"
                 + "                    WHERE   RowNum >= ?\n"
-                + "                  AND RowNum <= ?\n"
+                + "                  AND RowNum <= ?\n"             
                 + "                    ORDER BY RowNum";
         Connection con = null;
         PreparedStatement ps = null;
@@ -430,14 +444,15 @@ public class ReservationDAOImpl extends DBContext implements ReservationDAO {
         try {
             con = getConnection(); //get connection
             ps = con.prepareStatement(sql);
-            ps.setInt(1, (pageIndex - 1) * pageSize);
-            ps.setInt(2, (pageIndex - 1) * pageSize + pageSize);
+            ps.setInt(1, id);
+            ps.setInt(2, (pageIndex - 1) * pageSize);
+            ps.setInt(3, (pageIndex - 1) * pageSize + pageSize);
             rs = ps.executeQuery();
             /**
              * set attributes for doctors from result set then add its to result
              * list
              */
-            int totalItem = count(); // count total service
+            int totalItem = count(id); // count total service
             pagination.setCurrentPage(pageIndex);
             pagination.setItemPerPage(pageSize);
             pagination.setTotalItem(totalItem);
@@ -477,7 +492,7 @@ public class ReservationDAOImpl extends DBContext implements ReservationDAO {
         String sql = "  select DISTINCT r.reservation_id, p.examination_duration, p.package_title, p.price, s.service_name, r.reservation_status, r.medical_request, r.request_examination_date, r.confirmed_examination_date from reservations r join services s\n"
                 + "  on r.service_id = s.service_id\n"
                 + "  join packages p\n"
-                + "  on r.package_id = p.package_id and r.reservation_id = ?";
+                + "  on r.package_id = p.package_id and r.reservation_id = ? ";
         Connection con = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -490,7 +505,7 @@ public class ReservationDAOImpl extends DBContext implements ReservationDAO {
              * set attributes for doctors from result set then add its to result
              * list
              */
-            int totalItem = count(); // count total service
+            int totalItem = count(0); // count total service
             while (rs.next()) {
                 CustomerReservation reservation = new CustomerReservation();
                 reservation.setId(rs.getInt("reservation_id"));
