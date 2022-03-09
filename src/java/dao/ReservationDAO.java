@@ -9,7 +9,10 @@
  */
 package dao;
 
+import entity.CustomerReservation;
+import entity.Pagination;
 import entity.Reservation;
+import entity.ReservationDTO;
 import entity.User;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -90,4 +93,10 @@ public interface ReservationDAO {
      * @throws Exception when <code>java.sql.Exception</code> occurs.
      */
     public int updateReservationStatusById(int reservationId) throws SQLException, Exception;
+    
+    void bookReservation(ReservationDTO reservation);
+    
+    Pagination<CustomerReservation> getAllCustomerReservation(int pageIndex, int pageSize);
+    
+    CustomerReservation getReservationByIdForCustomer(int id);
 }

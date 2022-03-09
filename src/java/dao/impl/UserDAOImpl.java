@@ -11,7 +11,7 @@ package dao.impl;
 
 import context.DBContext;
 import dao.UserDAO;
-import dto.Account;
+import entity.Account;
 import entity.Pagination;
 import entity.User;
 import java.sql.Connection;
@@ -138,6 +138,28 @@ public class UserDAOImpl extends DBContext implements UserDAO {
         pagination.setData(users);
         return pagination;
     }
+    
+    public int count() {
+        Connection connecion = null;
+        PreparedStatement countPreparedStatement = null;
+        ResultSet countResultSet = null;
+        try {
+            connecion = getConnection();
+            countPreparedStatement = connecion.prepareStatement("SELECT COUNT(user_id) AS id FROM users where is_active = 1");
+            countResultSet = countPreparedStatement.executeQuery();
+            if (countResultSet.next()) {
+                // get and return count total services
+                return countResultSet.getInt(1);
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            closeResultSet(countResultSet);
+            closePreparedStatement(countPreparedStatement);
+            closeConnection(connecion);
+        }
+        return 0;
+    }
 
     @Override
     public void deleteAccount(int id) {
@@ -148,7 +170,7 @@ public class UserDAOImpl extends DBContext implements UserDAO {
         try {
             connecion = getConnection();
             // Get data
-            preparedStatement = connecion.prepareStatement("  update users set is_active = 0 where user_id = ?");
+            preparedStatement = connecion.prepareStatement("update users set is_active = 0 where user_id = ?;");
             preparedStatement.setInt(1, id);
             preparedStatement.executeUpdate();
         } catch (Exception ex) {
@@ -162,22 +184,23 @@ public class UserDAOImpl extends DBContext implements UserDAO {
 
     @Override
     public void updateAccount(User user) {
-        Connection connecion = null;
-        PreparedStatement preparedStatement = null;
-        ResultSet rs = null;
-        try {
-            connecion = getConnection();
-            // Get data
-            preparedStatement = connecion.prepareStatement("delete from users where user_id = ?;");
-//            preparedStatement.setInt(1, id);
-            preparedStatement.executeUpdate();
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            Logger.getLogger(UserDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            closePreparedStatement(preparedStatement);
-            closeConnection(connecion);
-        }
+        logger.log(Level.INFO, "Delete account with id");
+//        Connection connecion = null;
+//        PreparedStatement preparedStatement = null;
+//        ResultSet rs = null;
+//        try {
+//            connecion = getConnection();
+//            // Get data
+//            preparedStatement = connecion.prepareStatement("delete from users where user_id = ?;");
+////            preparedStatement.setInt(1, id);
+//            preparedStatement.executeUpdate();
+//        } catch (Exception ex) {
+//            ex.printStackTrace();
+//            Logger.getLogger(UserDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+//        } finally {
+//            closePreparedStatement(preparedStatement);
+//            closeConnection(connecion);
+//        }
     }
 
     @Override
@@ -211,28 +234,6 @@ public class UserDAOImpl extends DBContext implements UserDAO {
             closePreparedStatement(preparedStatement);
             closeConnection(connecion);
         }
-    }
-
-    public int count() {
-        Connection connecion = null;
-        PreparedStatement countPreparedStatement = null;
-        ResultSet countResultSet = null;
-        try {
-            connecion = getConnection();
-            countPreparedStatement = connecion.prepareStatement("SELECT COUNT(user_id) AS id FROM users where is_active = 1");
-            countResultSet = countPreparedStatement.executeQuery();
-            if (countResultSet.next()) {
-                // get and return count total services
-                return countResultSet.getInt(1);
-            }
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        } finally {
-            closeResultSet(countResultSet);
-            closePreparedStatement(countPreparedStatement);
-            closeConnection(connecion);
-        }
-        return 0;
     }
 
     @Override

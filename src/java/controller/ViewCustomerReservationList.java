@@ -1,39 +1,32 @@
 /*
- * Copyright(C) 2022, FPT University
- * CMS
- * CLINIC MANAGEMENT SYSTEM
- *
- * Record of change:
- * DATE            Version          AUTHOR           DESCRIPTION
- * 2022-02-08      1.0              HuongHTT         First Implement 
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
 package controller;
 
-import dao.UserDAO;
-import dao.impl.UserDAOImpl;
+import dao.ReservationDAO;
+import dao.impl.ReservationDAOImpl;
+import entity.CustomerReservation;
+import entity.Pagination;
 import java.io.IOException;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * This class uses <code>dao.impl.UserDAOImpl</code> functions:<br>
- * deleteAccount to delete an account.
  *
- * Bugs: none
- * @author Hoang Thi Thu Huong
+ * @author dell
  */
-public class DeleteAccountController extends HttpServlet {
+public class ViewCustomerReservationList extends HttpServlet {
 
     /**
-     * Use function deleteAccount in <code>dao.impl.UserDAOImpl</code> to
-     * delete an account.<br>
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
      *
      * @param request servlet request
-     * -id is id of account.
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
@@ -41,14 +34,26 @@ public class DeleteAccountController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        int id = Integer.parseInt(request.getParameter("id"));
-        UserDAO userDAO = new UserDAOImpl();
-        userDAO.deleteAccount(id);
+        String page = request.getParameter("page");
+        int pageIndex = 1;
+        if (page != null) {// check page if not null
+            try {
+                //convert page(string) to pageIndex(int)
+                pageIndex = Integer.parseInt(page);
+                if (pageIndex == -1) {
+                    pageIndex = 0;
+                }
+            } catch (NumberFormatException e) {
+                //default pageIndex = 1
+                pageIndex = 0;
+            }
+        }
+        int pageSize = 5; // default page size
+        ReservationDAO reservationDAO = new ReservationDAOImpl();
+        Pagination<CustomerReservation> reservations = reservationDAO.getAllCustomerReservation(pageIndex, pageSize);
+        request.setAttribute("reservations", reservations);
+        request.getRequestDispatcher("./jsp/viewAllCustomerReservation.jsp").forward(request, response);
 
-        GetAllAccountController accountController = new GetAllAccountController();
-        accountController.processRequest(request, response);
-        
-        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
