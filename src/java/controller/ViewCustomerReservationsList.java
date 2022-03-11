@@ -26,7 +26,7 @@ import javax.servlet.http.HttpSession;
 /**
  * <h1>View Customer Reservation Detail </h1>
  * Controller to view customer reservation list. Method process data form
- * ReservationDAO and forward data to file view
+ * FeedbackDAO and forward data to file view
  * <p>
  *
  *
@@ -54,7 +54,7 @@ public class ViewCustomerReservationsList extends HttpServlet {
         if (user == null) {
             request.getRequestDispatcher("./jsp/login.jsp").forward(request, response);
         } else {
-            String page = request.getParameter("page");
+            String page = (request.getParameter("page") == null)? request.getParameter("page"): "1";
             int pageIndex = 1;
             if (page != null) {// check page if not null
                 try {

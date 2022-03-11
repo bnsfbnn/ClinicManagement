@@ -1,8 +1,12 @@
 
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Copyright(C) 20022, FPT University
+ * CMS:
+ * Clinic Management System
+ *
+ * Record of change:
+ * DATE            Version             AUTHOR           DESCRIPTION
+ * 2022-03-08     1.0                 TrangCT          Controller View Feedback Management List
  */
 package controller;
 
@@ -18,8 +22,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
+ * <h1>View Feedback Management List Controller </h1>
+ * Controller to view feedback management  list. Method process data form
+ * FeedbackDAO and forward data to file view
+ * <p>
  *
- * @author Dao Van Do
+ *
+ * @author TrangCT
+ * @version 1.0
+ * @since 2022-03-08
  */
 public class ViewFeedbackManagedListController extends HttpServlet {
 
