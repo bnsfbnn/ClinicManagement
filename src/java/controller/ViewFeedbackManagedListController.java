@@ -1,3 +1,4 @@
+
 /*
  * Copyright(C) 20022, FPT University
  * CMS:
@@ -5,36 +6,33 @@
  *
  * Record of change:
  * DATE            Version             AUTHOR           DESCRIPTION
- * 2022-02-22     1.0                 TrangCT          Controller View Customer Reservation List
+ * 2022-03-08     1.0                 TrangCT          Controller View Feedback Management List
  */
 package controller;
 
-import dao.ReservationDAO;
-import dao.impl.ReservationDAOImpl;
-import entity.CustomerReservation;
-import entity.ReservationDTO;
+import dao.FeedbackDAO;
+import dao.impl.FeedbackDAOImpl;
+import entity.FeedbackDTO;
 import entity.Pagination;
-import entity.User;
 import java.io.IOException;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
- * <h1>View Customer Reservation Detail </h1>
- * Controller to view customer reservation list. Method process data form
+ * <h1>View Feedback Management List Controller </h1>
+ * Controller to view feedback management  list. Method process data form
  * FeedbackDAO and forward data to file view
  * <p>
  *
  *
  * @author TrangCT
  * @version 1.0
- * @since 2022-02-22
+ * @since 2022-03-08
  */
-public class ViewCustomerReservationsList extends HttpServlet {
+public class ViewFeedbackManagedListController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -48,34 +46,32 @@ public class ViewCustomerReservationsList extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        HttpSession session = request.getSession();
-        User user = (User) session.getAttribute("user");
-        if (user == null) {
-            request.getRequestDispatcher("./jsp/login.jsp").forward(request, response);
-        } else {
-            String page = (request.getParameter("page") == null)? request.getParameter("page"): "1";
-            int pageIndex = 1;
-            if (page != null) {// check page if not null
-                try {
-                    //convert page(string) to pageIndex(int)
-                    pageIndex = Integer.parseInt(page);
-                    if (pageIndex == -1) {
-                        pageIndex = 0;
-                    }
-                } catch (NumberFormatException e) {
-                    //default pageIndex = 1
-                    pageIndex = 0;
+           String page = request.getParameter("page");
+        int pageIndex = 1;
+        if (page != null) {
+            try {
+                pageIndex = Integer.parseInt(page);
+                if (pageIndex == -1) {
+                    pageIndex = 1;
                 }
-                int pageSize = 5; // default page size
-                ReservationDAO reservationDAO = new ReservationDAOImpl();
-                Pagination<CustomerReservation> reservations = reservationDAO.getAllCustomerReservation(pageIndex, pageSize, user.getUserId());
-                request.setAttribute("reservations", reservations);
-                request.getRequestDispatcher("./jsp/viewAllCustomerReservation.jsp").forward(request, response);
+            } catch (Exception e) {
+                pageIndex = 1;
             }
+        } else {
+            pageIndex = 1;
         }
-    }
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
 
+        int pageSize = 5;
+
+        FeedbackDAO feedbackDAO = new FeedbackDAOImpl();
+        
+        Pagination<FeedbackDTO> feedbacks = feedbackDAO.getAllFeedback(pageIndex, pageSize);
+        
+        request.setAttribute("feedbacks", feedbacks);
+        request.getRequestDispatcher("").forward(request, response);
+    }
+
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *

@@ -23,7 +23,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -439,7 +438,7 @@ public class ReservationDAOImpl extends DBContext implements ReservationDAO {
                 + "  on r.package_id = p.package_id and r.customer_id = ?) \n"
                 + "                    AS RowConstrainedResult\n"
                 + "                    WHERE   RowNum >= ?\n"
-                + "                  AND RowNum <= ?\n"
+                + "                  AND RowNum <= ?\n"             
                 + "                    ORDER BY RowNum";
         Connection con = null;
         PreparedStatement ps = null;
