@@ -53,7 +53,7 @@ public class ViewCustomerReservationsList extends HttpServlet {
         if (user == null) {
             request.getRequestDispatcher("./jsp/login.jsp").forward(request, response);
         } else {
-            String page = (request.getParameter("page") == null)? request.getParameter("page"): "1";
+            String page = (request.getParameter("page") == null)?"1":request.getParameter("page");
             int pageIndex = 1;
             if (page != null) {// check page if not null
                 try {

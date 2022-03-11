@@ -108,6 +108,10 @@
                                 <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                                 View Customer Reservation List
                             </a>
+                            <a class="nav-link" href="./ViewFeedBackListController">
+                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                                View Feedback List
+                            </a>
                         </div>
                     </div>
                     <div class="sb-sidenav-footer">
