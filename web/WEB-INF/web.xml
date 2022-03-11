@@ -44,6 +44,14 @@
         <servlet-name>ViewMyReservationController</servlet-name>
         <servlet-class>controller.ViewMyReservationController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>UpdateCustomerProfileController</servlet-name>
+        <servlet-class>controller.UpdateCustomerProfileController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RegisterForCustomerController</servlet-name>
+        <servlet-class>controller.RegisterForCustomerController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
         <url-pattern>/LoginController</url-pattern>
@@ -87,6 +95,14 @@
     <servlet-mapping>
         <servlet-name>ViewAllReservationsController</servlet-name>
         <url-pattern>/viewAllReservation</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateCustomerProfileController</servlet-name>
+        <url-pattern>/UpdateCustomerProfileController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RegisterForCustomerController</servlet-name>
+        <url-pattern>/RegisterForCustomerController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

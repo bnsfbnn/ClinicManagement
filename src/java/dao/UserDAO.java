@@ -10,6 +10,7 @@
 package dao;
 
 import dto.Account;
+import dto.Doctor;
 import entity.Pagination;
 import entity.User;
 import java.util.List;
@@ -23,14 +24,22 @@ import java.util.List;
 public interface UserDAO {
 
     User login(String username, String password);
-    
+
     Pagination<Account> getAllAccount(int pageIndex, int pageSize);
-    
+
     void deleteAccount(int id);
-    
+
     void updateAccount(User user);
-    
-    void createAccount (User user);
-    
+
+    void createAccount(User user);
+
     void addDoctorForService(int doctor, int service);
+
+    List<Doctor> getAllDoctor();
+
+    List<Doctor> getDoctorByServiceId(int id);
+    
+     void updateAccountByAdmin(User user);
+     
+     User getUserById(int id);
 }
