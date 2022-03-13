@@ -5,7 +5,7 @@
  *
  * Record of change:
  * DATE            Version             AUTHOR           DESCRIPTION
- * 2022-02-26      1.0                 MinhVT          Controller Add Feed Back
+ * 2022-03-08     1.0                 TrangCT          Controller Add Feedback 
  */
 package controller;
 
@@ -26,7 +26,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
+/**
+ * <h1>Add Feedback Controller </h1>
+ * Controller to add feedback. Method process data form
+ * FeedbackDAO and forward data to file view
+ * <p>
+ *
+ *
+ * @author TrangCT
+ * @version 1.0
+ * @since 2022-03-08
+ */
 public class AddFeedbackController extends HttpServlet {
 
     /**

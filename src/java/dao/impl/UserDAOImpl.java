@@ -11,7 +11,7 @@ package dao.impl;
 
 import context.DBContext;
 import dao.UserDAO;
-import dto.Account;
+import entity.Account;
 import entity.Pagination;
 import entity.User;
 import java.sql.Connection;
@@ -33,7 +33,12 @@ public class UserDAOImpl extends DBContext implements UserDAO {
      * Logger for system
      */
     private static Logger logger = Logger.getLogger(UserDAOImpl.class.getName());
-
+/*
+    * Get all user from database. 
+    * 
+    * @return a list of <code>User</code> objects. It is
+    * a <code>java.util.List</code> object 
+    */
     @Override
     public User login(String username, String password) {
         logger.log(Level.INFO, "Login Controller");
@@ -134,6 +139,28 @@ public class UserDAOImpl extends DBContext implements UserDAO {
         pagination.setData(users);
         return pagination;
     }
+    
+    public int count() {
+        Connection connecion = null;
+        PreparedStatement countPreparedStatement = null;
+        ResultSet countResultSet = null;
+        try {
+            connecion = getConnection();
+            countPreparedStatement = connecion.prepareStatement("SELECT COUNT(user_id) AS id FROM users where is_active = 1");
+            countResultSet = countPreparedStatement.executeQuery();
+            if (countResultSet.next()) {
+                // get and return count total services
+                return countResultSet.getInt(1);
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            closeResultSet(countResultSet);
+            closePreparedStatement(countPreparedStatement);
+            closeConnection(connecion);
+        }
+        return 0;
+    }
 
     @Override
     public void deleteAccount(int id) {
@@ -144,7 +171,7 @@ public class UserDAOImpl extends DBContext implements UserDAO {
         try {
             connecion = getConnection();
             // Get data
-            preparedStatement = connecion.prepareStatement("  update users set is_active = 0 where user_id = ?");
+            preparedStatement = connecion.prepareStatement("update users set is_active = 0 where user_id = ?;");
             preparedStatement.setInt(1, id);
             preparedStatement.executeUpdate();
         } catch (Exception ex) {

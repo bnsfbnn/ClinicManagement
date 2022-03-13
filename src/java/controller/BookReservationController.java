@@ -7,7 +7,7 @@ package controller;
 
 import dao.ReservationDAO;
 import dao.impl.ReservationDAOImpl;
-import dto.ReservationDTO;
+import entity.ReservationDTO;
 import entity.User;
 import java.io.IOException;
 import java.text.DateFormat;
@@ -25,7 +25,7 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author Dao Van Do
+ * @author dell
  */
 public class BookReservationController extends HttpServlet {
 

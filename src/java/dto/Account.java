@@ -33,7 +33,6 @@ public class Account {
     private String phone;
     private String address;
     private String avatarImage;
-    
 
     /**
      * Return the value of userId attribute of the

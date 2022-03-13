@@ -26,7 +26,6 @@ public class PackageDAOImpl extends DBContext implements PackageDAO {
 
     @Override
     public List<ServicePackage> getAllPackage() {
-
         Connection connecion = null; 
         PreparedStatement preparedStatement = null;
         ResultSet rs = null;

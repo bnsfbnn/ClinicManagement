@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * * -This class uses function getReservationByReservationId in
+ * * -This class uses function getReservationById in
  * <code>dao.impl.ReservationDAOImpl</code> to get an
  * <code>entity.Reservation</code>
  *
@@ -28,7 +28,7 @@ import javax.servlet.http.HttpServletResponse;
 public class ViewMyReservationDetailController extends HttpServlet {
 
     /**
-     * -Use function getReservationByReservationId in
+     * -Use function getReservationById in
      * <code>dao.impl.ReservationDAOImpl</code> to get an
      * <code>entity.Reservation</code> object 
      *

@@ -76,9 +76,7 @@ public class CreateAccountController extends HttpServlet {
         }
         u.setPhone(phone);
         u.setAddress(address);
-        
         UserDAO userDAO = new UserDAOImpl();
-        
         userDAO.createAccount(u);
 
         GetAllAccountController accountController = new GetAllAccountController();

@@ -132,7 +132,6 @@
         <script src="./assets/themes/krajee-fas/theme.js" type="text/javascript"></script>
         <script src="./assets/js/select2.full.min.js"></script>
         <script src="./assets/js/custom.js"></script>
-
     </body>
     <footer>
         <jsp:include page="./components/footer.jsp" />

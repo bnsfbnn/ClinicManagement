@@ -1,14 +1,18 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Copyright(C) 20022, FPT University
+ * CMS:
+ * Clinic Management System
+ *
+ * Record of change:
+ * DATE            Version             AUTHOR           DESCRIPTION
+ * 2022-02-22     1.0                 TrangCT          Controller View Customer Reservation List
  */
 package controller;
 
 import dao.ReservationDAO;
 import dao.impl.ReservationDAOImpl;
-import dto.CustomerReservation;
-import dto.ReservationDTO;
+import entity.CustomerReservation;
+import entity.ReservationDTO;
 import entity.Pagination;
 import entity.User;
 import java.io.IOException;
@@ -22,7 +26,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-@WebServlet(name = "ViewCustomerReservationsList", urlPatterns = {"/ViewCustomerReservationsList"})
+/**
+ * <h1>View Customer Reservation Detail </h1>
+ * Controller to view customer reservation list. Method process data form
+ * FeedbackDAO and forward data to file view
+ * <p>
+ *
+ *
+ * @author TrangCT
+ * @version 1.0
+ * @since 2022-02-22
+ */
 public class ViewCustomerReservationsList extends HttpServlet {
 
     /**
@@ -37,13 +51,12 @@ public class ViewCustomerReservationsList extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
         if (user == null) {
             request.getRequestDispatcher("./jsp/login.jsp").forward(request, response);
         } else {
-            String page = request.getParameter("page");
+            String page = (request.getParameter("page") == null)? request.getParameter("page"): "1";
             int pageIndex = 1;
             if (page != null) {// check page if not null
                 try {
@@ -56,17 +69,16 @@ public class ViewCustomerReservationsList extends HttpServlet {
                     //default pageIndex = 1
                     pageIndex = 0;
                 }
+                int pageSize = 5; // default page size
+                ReservationDAO reservationDAO = new ReservationDAOImpl();
+                Pagination<CustomerReservation> reservations = reservationDAO.getAllCustomerReservation(pageIndex, pageSize, user.getUserId());
+                request.setAttribute("reservations", reservations);
+                request.getRequestDispatcher("./jsp/viewAllCustomerReservation.jsp").forward(request, response);
             }
-            int pageSize = 5; // default page size
-            ReservationDAO reservationDAO = new ReservationDAOImpl();
-            Pagination<CustomerReservation> reservations = reservationDAO.getAllCustomerReservation(pageIndex, pageSize, user.getUserId());
-            request.setAttribute("reservations", reservations);
-            request.getRequestDispatcher("./jsp/viewAllCustomerReservation.jsp").forward(request, response);
         }
-
     }
-
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+
     /**
      * Handles the HTTP <code>GET</code> method.
      *

@@ -54,9 +54,10 @@ public class AddNewExaminationController extends HttpServlet {
             int reservationId = (request.getParameter("reservationId") != null) ? Integer.parseInt(request.getParameter("reservationId")) : -1;
             String examinationDisgosis = (request.getParameter("examinationDisgosis") != null) ? request.getParameter("examinationDisgosis") : "";
             String examinationPrescription = (request.getParameter("examinationPrescription") != null) ? request.getParameter("examinationPrescription") : "";
+            String reservationStatus = "Đã khám";
             int check = 0;
             ReservationDAO reservationDAO = new ReservationDAOImpl();
-            check = reservationDAO.updateReservationStatusById(reservationId);
+            check = reservationDAO.updateReservationStatusById(reservationId,reservationStatus);
             Reservation reservation = reservationDAO.getReservationById(reservationId);
             ExaminationDAO examinationDAO = new ExaminationDAOImpl();
             check = examinationDAO.insertNewExamination(reservation.getReservationId(), reservation.getConfirmedDoctor().getUserId(), examinationDisgosis, examinationPrescription, reservation.getConfirmedExaminationDate());

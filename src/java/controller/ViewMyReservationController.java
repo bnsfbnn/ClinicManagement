@@ -31,10 +31,11 @@ import util.Utils;
 public class ViewMyReservationController extends HttpServlet {
 
     /**
-     * -Use function getReservationByDoctorId in <code>dao.impl.ReservationDAOImpl</code> to
-     * get an <code>java.util.ArrayList</code> object that contains a series of
+     * -Use function getReservationByDoctorId in
+     * <code>dao.impl.ReservationDAOImpl</code> to get an
+     * <code>java.util.ArrayList</code> object that contains a series of
      * <code>entity.Reservation</code><br>
-     *  
+     *
      * -Set parameters: dayOfWeek, startWeek, endWeek, viewDay, reservations<br>
      * -Finally forward user to the <code>viewMyReservation.jsp</code> page.
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -49,8 +50,9 @@ public class ViewMyReservationController extends HttpServlet {
             throws ServletException, IOException {
         try {
             String viewDay = (request.getParameter("viewDay") != null) ? Utils.parseDateFormat(request.getParameter("viewDay")) : Utils.getToday();
-            String startWeek = (request.getParameter("startWeek") != null) ? (request.getParameter("startWeek")): Utils.getMondayOfThisWeek();
-            String endWeek = (request.getParameter("endWeek") != null) ? (request.getParameter("endWeek")): Utils.getSundayOfThisWeek();
+            String today = Utils.getToday();
+            String startWeek = (request.getParameter("startWeek") != null) ? (request.getParameter("startWeek")) : Utils.getMondayOfThisWeek();
+            String endWeek = (request.getParameter("endWeek") != null) ? (request.getParameter("endWeek")) : Utils.getSundayOfThisWeek();
             ReservationDAO reservationDAO = new ReservationDAOImpl();
             ArrayList<Reservation> reservations = reservationDAO.getReservationByDoctorId(7, startWeek, endWeek);
             ArrayList<String> dayOfWeek = Utils.getDayOfThisWeek(viewDay);
@@ -58,6 +60,7 @@ public class ViewMyReservationController extends HttpServlet {
             request.setAttribute("startWeek", startWeek);
             request.setAttribute("endWeek", endWeek);
             request.setAttribute("viewDay", Utils.revertParseDateFormat(viewDay));
+            request.setAttribute("today", today);
             request.setAttribute("reservations", reservations);
             request.getRequestDispatcher("jsp/viewMyReservation.jsp").forward(request, response);
         } catch (Exception e) {

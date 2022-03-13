@@ -108,6 +108,42 @@
         <servlet-name>DeleteServiceController</servlet-name>
         <servlet-class>controller.DeleteServiceController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>BookReservationController</servlet-name>
+        <servlet-class>controller.BookReservationController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CancelReservationController</servlet-name>
+        <servlet-class>controller.CancelReservationController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewCustomerReservationsList</servlet-name>
+        <servlet-class>controller.ViewCustomerReservationsList</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewCustomerReservationDetail</servlet-name>
+        <servlet-class>controller.ViewCustomerReservationDetail</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GetAllPackageController</servlet-name>
+        <servlet-class>controller.GetAllPackageController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewFeedbackManagedListController</servlet-name>
+        <servlet-class>controller.ViewFeedbackManagedListController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewFeedBackListController</servlet-name>
+        <servlet-class>controller.ViewFeedBackListController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ReplyFeedbackController</servlet-name>
+        <servlet-class>controller.ReplyFeedbackController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddFeedbackController</servlet-name>
+        <servlet-class>controller.AddFeedbackController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
         <url-pattern>/LoginController</url-pattern>
@@ -215,6 +251,42 @@
     <servlet-mapping>
         <servlet-name>DeleteServiceController</servlet-name>
         <url-pattern>/DeleteServiceController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BookReservationController</servlet-name>
+        <url-pattern>/BookReservationController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CancelReservationController</servlet-name>
+        <url-pattern>/cancelReservation</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewCustomerReservationsList</servlet-name>
+        <url-pattern>/ViewCustomerReservationsList</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewCustomerReservationDetail</servlet-name>
+        <url-pattern>/ViewCustomerReservationDetail</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetAllPackageController</servlet-name>
+        <url-pattern>/GetAllPackageController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewFeedbackManagedListController</servlet-name>
+        <url-pattern>/ViewFeedbackManagedListController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewFeedBackListController</servlet-name>
+        <url-pattern>/ViewFeedBackListController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ReplyFeedbackController</servlet-name>
+        <url-pattern>/ReplyFeedbackController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddFeedbackController</servlet-name>
+        <url-pattern>/AddFeedbackController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

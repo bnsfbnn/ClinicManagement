@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author Dao Van Do
+ * @author TrangCT
  */
 public class GetAllPackageController extends HttpServlet {
 

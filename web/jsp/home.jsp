@@ -33,7 +33,7 @@
                         <li><a class="dropdown-item" href="#!">Activity Log</a></li>
                         <li><a class="dropdown-item" href="./jsp/user_profile.jsp">Profile</a></li>
                         <li><hr class="dropdown-divider" /></li>
-                        <li><a class="dropdown-item" href="#!">Logout</a></li>
+                        <li><a class="dropdown-item" href="../ClinicManagement/LogoutController">Logout</a></li>
                     </ul>
                 </li>
             </ul>
@@ -103,6 +103,10 @@
                             <a class="nav-link" href="./ServiceController">
                                 <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                                 View Services
+                            </a>
+                            <a class="nav-link" href="./ViewCustomerReservationsList">
+                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                                View Customer Reservation List
                             </a>
                         </div>
                     </div>

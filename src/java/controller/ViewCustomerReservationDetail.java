@@ -1,13 +1,17 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Copyright(C) 20022, FPT University
+ * CMS:
+ * Clinic Management System
+ *
+ * Record of change:
+ * DATE            Version             AUTHOR           DESCRIPTION
+ * 2022-02-22     1.0                 TrangCT          Controller view customer reservation detail 
  */
 package controller;
 
 import dao.ReservationDAO;
 import dao.impl.ReservationDAOImpl;
-import dto.CustomerReservation;
+import entity.CustomerReservation;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -16,8 +20,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- *
- * @author Dao Van Do
+ * <h1>View Customer Reservation  Detail </h1>
+ * Controller to view customer reservation detail . Method process data form ReservationDAO and 
+ * forward data to file view
+ * <p>
+ * 
+ * 
+ * @author TrangCT
+ * @version 1.0
+ * @since 2022-02-22
  */
 public class ViewCustomerReservationDetail extends HttpServlet {
 
@@ -38,7 +49,7 @@ public class ViewCustomerReservationDetail extends HttpServlet {
             id = Integer.parseInt(request.getParameter("id"));
         }
         ReservationDAO reservationDAO = new ReservationDAOImpl();
-        CustomerReservation reservation = reservationDAO.getReservationById(id);
+        CustomerReservation reservation = reservationDAO.getCustomerReservationById(id);
         request.setAttribute("reservation", reservation);
         request.getRequestDispatcher("./jsp/viewCustomerReservationDetail.jsp").forward(request, response);
     }

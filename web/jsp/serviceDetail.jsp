@@ -49,28 +49,23 @@
                 <c:forEach var="i" items="${packages}">
                     <c:set var = "count" scope = "page" value = "${count+1}"/>
                     <div class="col-md-2 mx-auto border rounded">
-                            <div class="row">
-                                <img src="./assets/images/gói ${count}.png" class="d-block w-100"/>
-                            </div>
-                            <div class="row pl-1 my-1">
-                                <b>${i.packageTitle}</b>
-                            </div>
-                            <div class="row pl-1 my-1">
-                                <span><b>Thời gian khám: </b><span class="font-italic">${i.examinationDuration}</span></span>
-                            </div>
-                            <div class="row pl-1 my-1">
-                                <span class="justify-content-center">
-                                    <b>Giá: </b>
-                                    <h3 class="font-weight-bold text-primary">
-                                        ${i.price} VND
-                                    </h3>
-                                </span>
-                            </div>
-                            <div class="row-fluid px-auto ml-5 my-1">
-                                <a href="./jsp/bookAReservation.jsp?serviceId=${service.serviceId}&packageId=${i.packageId}" class="button">
-                                    <button type="button" class="btn btn-primary w-75">Đăng ký</button>
-                                </a>
-                            </div>
+                        <div class="row">
+                            <img src="./assets/images/gói ${count}.png" class="d-block w-100"/>
+                        </div>
+                        <div class="row pl-1 my-1">
+                            <b>${i.packageTitle}</b>
+                        </div>
+                        <div class="row pl-1 my-1">
+                            <span><b>Thời gian khám: </b><span class="font-italic">${i.examinationDuration}</span></span>
+                        </div>
+                        <div class="row pl-1 my-1">
+                            <span class="justify-content-center"><b>Giá: </b><h3 class="font-weight-bold text-primary">${i.price} VND</h3></span>
+                        </div>
+                        <div class="row-fluid px-auto ml-5 my-1">
+                            <a href="./jsp/bookAReservation.jsp?serviceId=${service.serviceId}&packageId=${i.packageId}" class="button">
+                                <button type="button" class="btn btn-primary w-75">Đăng ký</button>
+                            </a>
+                        </div>
                     </div>
                 </c:forEach>
             </div>

@@ -55,11 +55,9 @@ public class ServiceDetailController extends HttpServlet {
         Service service = serviceDAO.getById(id);
         // set attribute service with valuse service 
         request.setAttribute("service", service);
-
         PackageDAO packageDAO = new PackageDAOImpl();
         List<ServicePackage> packages = packageDAO.getAllPackage();
         request.setAttribute("packages", packages);
-        
         // forward request,reponse to serviceDetail.jsp
         request.getRequestDispatcher("./jsp/serviceDetail.jsp").forward(request, response);
     }

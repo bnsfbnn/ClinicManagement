@@ -9,8 +9,7 @@
  */
 package dao;
 
-import dto.Account;
-import dto.Doctor;
+import entity.Account;
 import entity.Pagination;
 import entity.User;
 import java.util.List;

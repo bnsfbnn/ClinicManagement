@@ -11,9 +11,8 @@ package controller;
 
 import dao.UserDAO;
 import dao.impl.UserDAOImpl;
-import dto.Account;
+import entity.Account;
 import entity.Pagination;
-import entity.Service;
 import entity.User;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -50,7 +49,6 @@ public class GetAllAccountController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-
         String page = request.getParameter("page");
         int pageIndex = 1;
         if (page != null) {
@@ -65,9 +63,7 @@ public class GetAllAccountController extends HttpServlet {
         } else {
             pageIndex = 1;
         }
-
         int pageSize = 5;
-
         UserDAO userDAO = new UserDAOImpl();
         Pagination<Account> users = userDAO.getAllAccount(pageIndex, pageSize);
         request.setAttribute("users", users);
