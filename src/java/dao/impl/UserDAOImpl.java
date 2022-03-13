@@ -183,27 +183,6 @@ public class UserDAOImpl extends DBContext implements UserDAO {
     }
 
     @Override
-    public void updateAccount(User user) {
-        logger.log(Level.INFO, "Delete account with id");
-//        Connection connecion = null;
-//        PreparedStatement preparedStatement = null;
-//        ResultSet rs = null;
-//        try {
-//            connecion = getConnection();
-//            // Get data
-//            preparedStatement = connecion.prepareStatement("delete from users where user_id = ?;");
-////            preparedStatement.setInt(1, id);
-//            preparedStatement.executeUpdate();
-//        } catch (Exception ex) {
-//            ex.printStackTrace();
-//            Logger.getLogger(UserDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
-//        } finally {
-//            closePreparedStatement(preparedStatement);
-//            closeConnection(connecion);
-//        }
-    }
-
-    @Override
     public void createAccount(User user) {
         logger.log(Level.INFO, "Create account");
         Connection connecion = null;
@@ -255,5 +234,88 @@ public class UserDAOImpl extends DBContext implements UserDAO {
             closePreparedStatement(preparedStatement);
             closeConnection(connecion);
         }
+    }
+    
+    @Override
+    public void updateAccountByAdmin(User user) {
+        Connection connecion = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet rs = null;
+        try {
+            connecion = getConnection();
+            // Get data
+            preparedStatement = connecion.prepareStatement("update users set email = ?, full_name = ?, birth_date = ?,"
+                    + " phone = ? , address = ? , role_id = ?,  username = ? , gender = ? where user_id = ?");
+
+            preparedStatement.setString(1, user.getEmail());
+            preparedStatement.setString(2, user.getFullName());
+            preparedStatement.setDate(3, user.getBirthDate());
+            preparedStatement.setString(4, user.getPhone());
+            preparedStatement.setString(5, user.getAddress());
+
+            preparedStatement.setInt(6, user.getRoleId());
+            preparedStatement.setString(7, user.getUsername());
+
+            if (user.isGender()) {
+                preparedStatement.setInt(8, 1);
+            } else {
+                preparedStatement.setInt(8, 0);
+            }
+
+            preparedStatement.setInt(9, user.getUserId());
+
+            preparedStatement.executeUpdate();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            Logger.getLogger(UserDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            closePreparedStatement(preparedStatement);
+            closeConnection(connecion);
+        }
+    }
+
+    @Override
+    public User getUserById(int id) {
+        logger.log(Level.INFO, "Login Controller");
+        Connection connecion = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet rs = null;
+
+        try {
+            connecion = getConnection();
+            // Get data
+            preparedStatement = connecion.prepareStatement("select * from users c join roles r on c.role_id = r.role_id where user_id =?");
+            preparedStatement.setInt(1, id);
+            rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                User user = new User();
+                user.setUserId(rs.getInt("user_id"));
+                user.setRoleId(rs.getInt("role_id"));
+                user.setServiceId(rs.getInt("service_id"));
+                user.setUsername(rs.getString("username"));
+                user.setEmail(rs.getString("email"));
+                user.setPassword(rs.getString("password"));
+                user.setFullName(rs.getString("full_name"));
+                user.setBirthDate(rs.getDate("birth_date"));
+                user.setGender(rs.getBoolean("gender"));
+                user.setPhone(rs.getString("phone"));
+                user.setAddress(rs.getString("address"));
+                user.setAvatarImage(rs.getString("avatar_image"));
+                return user;
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            Logger.getLogger(UserDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            closeResultSet(rs);
+            closePreparedStatement(preparedStatement);
+            closeConnection(connecion);
+        }
+        return null;
+    }
+
+    @Override
+    public void updateAccount(User user) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
