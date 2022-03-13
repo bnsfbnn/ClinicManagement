@@ -1,9 +1,12 @@
-<%-- 
-    Document   : addAccount
-    Created on : Feb 14, 2022, 11:24:54 PM
-    Author     : Dao Van Do
---%>
-
+<!--
+ * Copyright(C) 20022, FPT University
+ * CMS:
+ * Clinic Management System
+ *
+ * Record of change:
+ * DATE            Version             AUTHOR           DESCRIPTION
+ * 2022-02-26      1.0                 MinhVT         Delete Doctor From Service
+ -->
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>

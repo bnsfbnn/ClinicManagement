@@ -10,6 +10,7 @@
 package dao;
 
 import entity.Account;
+import entity.Doctor;
 import entity.Pagination;
 import entity.User;
 import java.util.List;

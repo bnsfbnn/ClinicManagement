@@ -10,6 +10,7 @@ package entity;
  * @author Thanh Tung
  */
 public class ServicePackage {
+
     private int packageId;
     private String packageTitle;
     private String examinationDuration;
@@ -18,11 +19,16 @@ public class ServicePackage {
     public ServicePackage() {
     }
 
-    public ServicePackage(String packageTitle, String examinationDuration) {
+    public ServicePackage(String packageTitle) {
+        this.packageTitle = packageTitle;
+    }
+
+    public ServicePackage(int packageId, String packageTitle, String examinationDuration) {
+        this.packageId = packageId;
         this.packageTitle = packageTitle;
         this.examinationDuration = examinationDuration;
     }
-    
+
     public ServicePackage(int packageId, String packageTitle, String examinationDuration, float price) {
         this.packageId = packageId;
         this.packageTitle = packageTitle;
@@ -61,6 +67,5 @@ public class ServicePackage {
     public void setPrice(float price) {
         this.price = price;
     }
-    
-    
+
 }

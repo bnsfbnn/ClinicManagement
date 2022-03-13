@@ -5,7 +5,7 @@
  *
  * Record of change:
  * DATE            Version             AUTHOR           DESCRIPTION
- * 2022-02-26      1.0                 MinhVT          Controller Delete doctor
+ * 2022-02-26      1.0                 MinhVT          Controller Delete Service
  */
 package controller;
 

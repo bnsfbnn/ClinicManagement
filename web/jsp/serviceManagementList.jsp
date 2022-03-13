@@ -1,3 +1,13 @@
+<!--
+ * Copyright(C) 20022, FPT University
+ * CMS:
+ * Clinic Management System
+ *
+ * Record of change:
+ * DATE            Version             AUTHOR           DESCRIPTION
+ * 2022-02-08      1.0                 MinhVT         Controller Service Management List
+ -->
+
 <!doctype html>
 <html lang="en">
     <%@page contentType="text/html" pageEncoding="UTF-8"%>

@@ -12,7 +12,7 @@ package controller;
 
 import dao.ServiceDAO;
 import dao.impl.ServiceDAOImpl;
-import dto.ServiceDTO;
+import entity.ServiceDTO;
 import entity.Pagination;
 import entity.Service;
 import java.io.IOException;

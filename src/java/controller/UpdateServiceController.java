@@ -13,7 +13,7 @@ import dao.ServiceDAO;
 import dao.UserDAO;
 import dao.impl.ServiceDAOImpl;
 import dao.impl.UserDAOImpl;
-import dto.Doctor;
+import entity.Doctor;
 import entity.Service;
 import java.io.IOException;
 import java.io.PrintWriter;

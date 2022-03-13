@@ -1,7 +1,11 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Copyright(C) 20022, FPT University
+ * CMS:
+ * Clinic Management System
+ *
+ * Record of change:
+ * DATE            Version             AUTHOR           DESCRIPTION
+ * 2022-02-08      1.0                 MinhVT          Controller Service Management Detail
  */
 package controller;
 
@@ -10,7 +14,7 @@ import dao.UserDAO;
 import dao.impl.ServiceDAOImpl;
 import dao.impl.UserDAOImpl;
 import dto.Account;
-import dto.Doctor;
+import entity.Doctor;
 import entity.Service;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -21,8 +25,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- *
- * @author lenovo
+ * <h1>Service List Controller</h1>
+ * Controller to view service management detail. Method process data form ServiceDAO and 
+ * forward data to file view
+ * <p>
+ * 
+ * 
+ * @author MinhVT
+ * @version 1.0
+ * @since 2022-02-08
  */
 public class ServiceManagementDetailController extends HttpServlet {
 

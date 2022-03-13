@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import dto.Doctor;
+import entity.Doctor;
 
 /**
  *
@@ -241,28 +241,6 @@ public class UserDAOImpl extends DBContext implements UserDAO {
             closePreparedStatement(preparedStatement);
             closeConnection(connecion);
         }
-    }
-
-    public int count() {
-        Connection connecion = null;
-        PreparedStatement countPreparedStatement = null;
-        ResultSet countResultSet = null;
-        try {
-            connecion = getConnection();
-            countPreparedStatement = connecion.prepareStatement("SELECT COUNT(user_id) AS id FROM users where is_active = 1");
-            countResultSet = countPreparedStatement.executeQuery();
-            if (countResultSet.next()) {
-                // get and return count total services
-                return countResultSet.getInt(1);
-            }
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        } finally {
-            closeResultSet(countResultSet);
-            closePreparedStatement(countPreparedStatement);
-            closeConnection(connecion);
-        }
-        return 0;
     }
 
     @Override

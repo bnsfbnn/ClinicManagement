@@ -79,6 +79,36 @@ public class User {
      *
      * @param userId the value of userId attribute. It's a
      * <code>java.lang.int</code> object
+     * @param email the value of email attribute. It's a
+     * <code>java.lang.String</code> object
+     * @param fullName the value of fullName attribute. It's a
+     * <code>java.lang.String</code> object
+     * @param birthDate the value of birthDate attribute. It's a
+     * <code>java.sql.Date</code> object
+     * @param gender the value of gender attribute. It's a
+     * <code>java.sql.boolean</code> object
+     * @param phone the value of phone attribute. It's a
+     * <code>java.sql.String</code> object
+     * @param address the value of address attribute. It's a
+     * <code>java.sql.String</code> object
+     *
+     */
+    public User(int userId, String email, String fullName, Date birthDate, boolean gender, String phone, String address) {
+        this.userId = userId;
+        this.email = email;
+        this.fullName = fullName;
+        this.birthDate = birthDate;
+        this.gender = gender;
+        this.phone = phone;
+        this.address = address;
+    }
+
+    /**
+     * Create an instance of <code>User</code> object with value of attributes
+     * of <code>User</code>
+     *
+     * @param userId the value of userId attribute. It's a
+     * <code>java.lang.int</code> object
      * @param role the value of role attribute. It's a
      * <code>java.lang.String</code> object
      * @param serviceId the value of serviceId attribute. It's a
@@ -117,21 +147,17 @@ public class User {
         this.avatarImage = avatarImage;
     }
 
-    public User(int roleId, int serviceId, String username, String email, String password, String fullName, Date birthDate, boolean gender, String phone, String address, String avatarImage) {
-        this.roleId = roleId;
-        this.serviceId = serviceId;
-        this.username = username;
-        this.email = email;
-        this.password = password;
+    /**
+     * Create an instance of <code>User</code> object with value of attributes
+     * of <code>User</code>
+     *
+     * @param fullName the value of fullName attribute. It's a
+     * <code>java.lang.User</code> object
+     *
+     */
+    public User(String fullName) {
         this.fullName = fullName;
-        this.birthDate = birthDate;
-        this.gender = gender;
-        this.phone = phone;
-        this.address = address;
-        this.avatarImage = avatarImage;
     }
-    
-    
 
     /**
      * Return the value of userId attribute of the <code>User</code> object.
@@ -164,7 +190,7 @@ public class User {
      * of the User.
      */
     public void setRoleId(int role) {
-        this.roleId = role;
+        this.roleId = roleId;
     }
 
     /**

@@ -11,7 +11,7 @@ package dao.impl;
 
 import context.DBContext;
 import dao.ServiceDAO;
-import dto.ServiceDTO;
+import entity.ServiceDTO;
 import entity.Pagination;
 import entity.Service;
 import java.sql.Connection;
