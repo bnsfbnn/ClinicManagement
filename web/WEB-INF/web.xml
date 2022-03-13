@@ -96,6 +96,14 @@
         <servlet-name>AddFeedbackController</servlet-name>
         <servlet-class>controller.AddFeedbackController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ViewAccountDetails</servlet-name>
+        <servlet-class>controller.ViewAccountDetails</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateAccountController</servlet-name>
+        <servlet-class>controller.UpdateAccountController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
         <url-pattern>/LoginController</url-pattern>
@@ -192,6 +200,14 @@
         <servlet-name>AddFeedbackController</servlet-name>
         <url-pattern>/AddFeedbackController</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewAccountDetails</servlet-name>
+        <url-pattern>/ViewAccountDetails</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateAccountController</servlet-name>
+        <url-pattern>/UpdateAccountController</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
@@ -200,7 +216,7 @@
     <env-entry>
         <env-entry-name>host</env-entry-name>
         <env-entry-type>java.lang.String</env-entry-type>
-        <env-entry-value>DESKTOP-51P50IV\SQLEXPRESS</env-entry-value>
+        <env-entry-value>localhost</env-entry-value>
     </env-entry>
     <env-entry>
         <env-entry-name>port</env-entry-name>
