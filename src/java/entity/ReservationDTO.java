@@ -10,7 +10,6 @@
 package entity;
 
 import java.sql.Date;
-import java.sql.Time;
 
 /**
  * <h1>ReservationDTO </h1>
@@ -25,113 +24,88 @@ import java.sql.Time;
 
 public class ReservationDTO {
 
-    private int reservationId;
-    private int customer;
-    private int service;
-    private int servicePackage;
-    private int confirmedDoctor;
-    private Date requestExaminationDate;
-    private Time requestExaminationTime;
-    private Date confirmedExaminationDate;
-    private Time confirmedExaminationTime;
-    private Date reservationDate;
-    private String reservationStatus;
-    private String medicalRequest;
+    private int id;
 
-    public int getReservationId() {
-        return reservationId;
+    private Date requestDate;
+
+    private String customerRequest;
+
+    private int serviceId;
+
+    private int packageId;
+   
+
+    /**
+     * Get requestDate
+     *
+     * @return requestDate date
+     */
+    public Date getRequestDate() {
+        return requestDate;
     }
 
-    public void setReservationId(int reservationId) {
-        this.reservationId = reservationId;
+    /**
+     * Set requestDate
+     *
+     * @param requestDate
+     */
+
+    public void setRequestDate(Date requestDate) {
+        this.requestDate = requestDate;
     }
 
-    public int getCustomer() {
-        return customer;
+    /**
+     * Get CustomerRequest
+     *
+     * @return customerRequest String
+     */
+    public String getCustomerRequest() {
+        return customerRequest;
     }
 
-    public void setCustomer(int customer) {
-        this.customer = customer;
+    /**
+     * Set customerRequest
+     *
+     * @param customerRequest
+     */
+
+    public void setCustomerRequest(String customerRequest) {
+        this.customerRequest = customerRequest;
     }
 
-    public int getService() {
-        return service;
+    /**
+     * Get id
+     *
+     * @return id int
+     */
+
+    public int getId() {
+        return id;
     }
 
-    public void setService(int service) {
-        this.service = service;
+    /**
+     * Set id
+     *
+     * @param id
+     */
+    public void setId(int id) {
+        this.id = id;
+    }
+    
+    public int getServiceId() {
+        return serviceId;
     }
 
-    public int getServicePackage() {
-        return servicePackage;
+    public void setServiceId(int serviceId) {
+        this.serviceId = serviceId;
     }
 
-    public void setServicePackage(int servicePackage) {
-        this.servicePackage = servicePackage;
+    public int getPackageId() {
+        return packageId;
     }
 
-    public int getConfirmedDoctor() {
-        return confirmedDoctor;
-    }
-
-    public void setConfirmedDoctor(int confirmedDoctor) {
-        this.confirmedDoctor = confirmedDoctor;
-    }
-
-    public Date getRequestExaminationDate() {
-        return requestExaminationDate;
-    }
-
-    public void setRequestExaminationDate(Date requestExaminationDate) {
-        this.requestExaminationDate = requestExaminationDate;
-    }
-
-    public Time getRequestExaminationTime() {
-        return requestExaminationTime;
-    }
-
-    public void setRequestExaminationTime(Time requestExaminationTime) {
-        this.requestExaminationTime = requestExaminationTime;
-    }
-
-    public Date getConfirmedExaminationDate() {
-        return confirmedExaminationDate;
-    }
-
-    public void setConfirmedExaminationDate(Date confirmedExaminationDate) {
-        this.confirmedExaminationDate = confirmedExaminationDate;
-    }
-
-    public Time getConfirmedExaminationTime() {
-        return confirmedExaminationTime;
-    }
-
-    public void setConfirmedExaminationTime(Time confirmedExaminationTime) {
-        this.confirmedExaminationTime = confirmedExaminationTime;
-    }
-
-    public Date getReservationDate() {
-        return reservationDate;
-    }
-
-    public void setReservationDate(Date reservationDate) {
-        this.reservationDate = reservationDate;
-    }
-
-    public String getReservationStatus() {
-        return reservationStatus;
-    }
-
-    public void setReservationStatus(String reservationStatus) {
-        this.reservationStatus = reservationStatus;
-    }
-
-    public String getMedicalRequest() {
-        return medicalRequest;
-    }
-
-    public void setMedicalRequest(String medicalRequest) {
-        this.medicalRequest = medicalRequest;
+    public void setPackageId(int packageId) {
+        this.packageId = packageId;
     }
    
 }

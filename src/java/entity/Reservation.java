@@ -13,10 +13,10 @@ import java.sql.Date;
 import java.sql.Time;
 
 /**
- * The class contains attributes and getter,setter for information of [User]
- * object <br>
- * The getter will throw an attribute of [User] object<br>
- * The setter will set an attribute of [User] object<br>
+ * The class contains attributes and getter,setter for information of
+ * [Reservation] object <br>
+ * The getter will throw an attribute of [Reservation] object<br>
+ * The setter will set an attribute of [Reservation] object<br>
  *
  * @author Nguyen Thanh Tung
  */
@@ -39,6 +39,23 @@ public class Reservation {
      * Create an instance of <code>Reservation</code> object
      */
     public Reservation() {
+    }
+
+    /**
+     * Create an instance of <code>Reservation</code> object with value of
+     * attributes of <code>Reservation</code>
+     *
+     * @param service the value of service attribute. It's a
+     * <code>java.lang.Service</code> object
+     * @param servicePackage the value of servicePackage attribute. It's a
+     * <code>java.lang.servicePackage</code> object
+     * @param reservationStatus the value of reservationStatus attribute. It's a
+     * <code>java.lang.String</code> object
+     */
+    public Reservation(Service service, ServicePackage servicePackage, String reservationStatus) {
+        this.service = service;
+        this.servicePackage = servicePackage;
+        this.reservationStatus = reservationStatus;
     }
 
     /**
@@ -224,7 +241,8 @@ public class Reservation {
      * object.
      *
      * @param confirmedExaminationDate is a <code>java.lang.Date</code> this
-     * value is the confirmedExaminationDate of the <code>Reservation</code> object.
+     * value is the confirmedExaminationDate of the <code>Reservation</code>
+     * object.
      */
     public void setConfirmedExaminationDate(Date confirmedExaminationDate) {
         this.confirmedExaminationDate = confirmedExaminationDate;
@@ -243,7 +261,8 @@ public class Reservation {
      * object.
      *
      * @param confirmedExaminationTime is a <code>java.lang.Time</code> this
-     * value is the confirmedExaminationTime of the <code>Reservation</code> object.
+     * value is the confirmedExaminationTime of the <code>Reservation</code>
+     * object.
      */
     public void setConfirmedExaminationTime(Time confirmedExaminationTime) {
         this.confirmedExaminationTime = confirmedExaminationTime;
