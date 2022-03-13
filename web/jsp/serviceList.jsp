@@ -28,11 +28,11 @@
         <jsp:include page="./components/customerHeader.jsp" />
     </header>
     <body>
-        <div class="container-fluid m-0 p-0">
-            <div class="row-fluid mb-3">
-                <img class="col-lg-12 p-0" src="./assets/images/banner-sm.png" alt="Banner"/>
-            </div>
+        <div class="container-fluid mt-3 p-0">
             <div class="row">
+                <img class="w-100" src="./assets/images/banner-sm.png" alt="Banner"/>
+            </div>
+            <div class="row mt-3">
                 <c:forEach items="${services.data}" var="service">
                     <div class="col-md-4 mb-3">
                         <div class="card">
@@ -57,7 +57,7 @@
                     <div class="col-12 text-center">
                         <ul>
                             <c:if test="${services.currentPage > 1}">
-                                <a class="btn btn-light" href="${requestScope['javax.servlet.forward.request_uri']}?page=${restaurants.currentPage-1}">Trang trước</a>
+                                <a class="btn btn-light" href="${requestScope['javax.servlet.forward.request_uri']}?page=${services.currentPage-1}">Trang trước</a>
                             </c:if>
                             <c:forEach var="pageNumber" begin="1" end="${services.totalPage}" step="1">
                                 <c:if test="${services.currentPage == pageNumber}">

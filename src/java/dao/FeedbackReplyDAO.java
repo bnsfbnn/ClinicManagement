@@ -5,10 +5,12 @@
  */
 package dao;
 
+import entity.FeedbackReply;
+
 /**
  *
  * @author Thanh Tung
  */
 public interface FeedbackReplyDAO {
-    
+    void addFeedbackReply(FeedbackReply feedbackReply);
 }

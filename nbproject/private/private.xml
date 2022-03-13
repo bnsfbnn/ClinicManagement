@@ -3,21 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/lenovo/OneDrive/Documents/GitHub/ClinicManagement/src/java/dao/impl/ServiceDAOImpl.java</file>
-            <file>file:/C:/Users/lenovo/OneDrive/Documents/GitHub/ClinicManagement/src/java/entity/Service.java</file>
-            <file>file:/C:/Users/lenovo/OneDrive/Documents/GitHub/ClinicManagement/src/java/entity/Pagination.java</file>
+            <file>file:/C:/Users/lenovo/OneDrive/Documents/GitHub/ClinicManagement/web/META-INF/context.xml</file>
             <file>file:/C:/Users/lenovo/OneDrive/Documents/GitHub/ClinicManagement/src/java/controller/ServiceManagementController.java</file>
-            <file>file:/C:/Users/lenovo/OneDrive/Documents/GitHub/ClinicManagement/src/java/controller/ServiceDetailController.java</file>
-            <file>file:/C:/Users/lenovo/OneDrive/Documents/GitHub/ClinicManagement/web/jsp/serviceManagementList.jsp</file>
-            <file>file:/C:/Users/lenovo/OneDrive/Documents/GitHub/ClinicManagement/src/java/dao/ServiceDAO.java</file>
-            <file>file:/C:/Users/lenovo/OneDrive/Documents/GitHub/ClinicManagement/src/java/controller/ServiceManagementDetailController.java</file>
-            <file>file:/C:/Users/lenovo/OneDrive/Documents/GitHub/ClinicManagement/web/jsp/serviceManagementDetail.jsp</file>
-            <file>file:/C:/Users/lenovo/OneDrive/Documents/GitHub/ClinicManagement/src/java/controller/LogoutController.java</file>
-            <file>file:/C:/Users/lenovo/OneDrive/Documents/GitHub/ClinicManagement/src/java/controller/ServiceController.java</file>
-            <file>file:/C:/Users/lenovo/OneDrive/Documents/GitHub/ClinicManagement/src/java/dao/impl/RoleDAOImpl.java</file>
             <file>file:/C:/Users/lenovo/OneDrive/Documents/GitHub/ClinicManagement/src/java/context/DBContext.java</file>
-            <file>file:/C:/Users/lenovo/OneDrive/Documents/GitHub/ClinicManagement/src/java/entity/ServicePackage.java</file>
-            <file>file:/C:/Users/lenovo/OneDrive/Documents/GitHub/ClinicManagement/src/java/controller/GetAllAccountController.java</file>
+            <file>file:/C:/Users/lenovo/OneDrive/Documents/GitHub/ClinicManagement/web/jsp/editService.jsp</file>
         </group>
     </open-files>
 </project-private>

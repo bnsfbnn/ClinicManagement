@@ -9,8 +9,18 @@
  */
 package controller;
 
+import dao.UserDAO;
+import dao.impl.UserDAOImpl;
+import entity.User;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.sql.Date;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Locale;
+import java.util.TimeZone;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -21,6 +31,7 @@ import javax.servlet.http.HttpServletResponse;
  * createAccount to create an account.
  *
  * Bugs: none
+ *
  * @author Hoang Thi Thu Huong
  */
 public class CreateAccountController extends HttpServlet {
@@ -35,23 +46,46 @@ public class CreateAccountController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, ParseException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet CreateAccountController</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet CreateAccountController at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+        int roleId = Integer.parseInt(request.getParameter("roleId"));
+        String username = request.getParameter("username");
+        String email = request.getParameter("email");
+        String fullName = request.getParameter("fullName");
+
+        String birthDate = request.getParameter("date");
+        DateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
+        format.setTimeZone(TimeZone.getTimeZone("Etc/UTC"));
+        java.util.Date date = format.parse(birthDate);
+        java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+
+        int gender = Integer.parseInt(request.getParameter("gender"));
+        String phone = request.getParameter("phone");
+        String address = request.getParameter("address");
+
+        User u = new User();
+        u.setRoleId(roleId);
+        u.setUsername(username);
+        u.setEmail(email);
+        u.setFullName(fullName);
+        u.setBirthDate(sqlDate);
+        if (gender == 1) {
+            u.setGender(true);
+        } else {
+            u.setGender(false);
         }
+        u.setPhone(phone);
+        u.setAddress(address);
+        
+        UserDAO userDAO = new UserDAOImpl();
+        
+        userDAO.createAccount(u);
+
+        GetAllAccountController accountController = new GetAllAccountController();
+        accountController.processRequest(request, response);
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
@@ -63,7 +97,11 @@ public class CreateAccountController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (ParseException ex) {
+            Logger.getLogger(CreateAccountController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -77,7 +115,11 @@ public class CreateAccountController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (ParseException ex) {
+            Logger.getLogger(CreateAccountController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

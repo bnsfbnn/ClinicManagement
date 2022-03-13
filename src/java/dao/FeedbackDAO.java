@@ -5,10 +5,18 @@
  */
 package dao;
 
+import dto.FeedbackDTO;
+import entity.Feedback;
+import entity.Pagination;
+
 /**
  *
  * @author Thanh Tung
  */
 public interface FeedbackDAO {
+
+    Pagination<FeedbackDTO> getAllFeedback(int pageIndex, int pageSize);
+    
+    void addFeedback(Feedback feedback);
     
 }

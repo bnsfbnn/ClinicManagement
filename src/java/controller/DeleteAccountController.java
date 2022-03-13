@@ -1,11 +1,7 @@
 /*
- * Copyright(C) 2022, FPT University
- * CMS
- * CLINIC MANAGEMENT SYSTEM
- *
- * Record of change:
- * DATE            Version          AUTHOR           DESCRIPTION
- * 2022-02-08      1.0              HuongHTT         First Implement 
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
 package controller;
 
@@ -18,23 +14,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- * This class uses <code>dao.impl.UserDAOImpl</code> functions:<br>
- * deleteAccount to delete an account.
- *
- * Bugs: none
- * @author Hoang Thi Thu Huong
- */
+
 public class DeleteAccountController extends HttpServlet {
 
     /**
-     * Use function deleteAccount in <code>dao.impl.UserDAOImpl</code> to
-     * delete an account.<br>
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
      *
      * @param request servlet request
-     * -id is id of account.
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs

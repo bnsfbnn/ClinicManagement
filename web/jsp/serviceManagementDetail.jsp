@@ -1,6 +1,7 @@
 
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -67,21 +68,22 @@
                                         Bác sĩ
                                     </div>
                                 </div>
-                                <c:forEach items="${services.data}" var="service"  varStatus="counter" >
-                                    <div class="row list-doctors">
-                                        <div class="list-doctors-scroll">
+
+                                <div class="row list-doctors">
+                                    <div class="list-doctors-scroll">
+
+                                        <c:forEach var="doctor" items="${doctors}">
                                             <div class="doctor-card px-0">
                                                 <div class="img-cover">
-                                                    <img src="https://via.placeholder.com/60" alt="">
+                                                    <img src="${doctor.image}" alt="">
                                                 </div>
                                                 <div class="d-flex flex-column my-2 mx-4">
-                                                    ${service.serviceName}
+                                                    ${doctor.name}
                                                 </div>
                                             </div>
-
-                                        </div>
+                                        </c:forEach>
                                     </div>
-                                </c:forEach>
+                                </div>
                             </div>
                         </form>
                     </div>

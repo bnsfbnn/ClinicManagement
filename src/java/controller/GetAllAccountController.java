@@ -11,7 +11,9 @@ package controller;
 
 import dao.UserDAO;
 import dao.impl.UserDAOImpl;
-import entity.Account;
+import dto.Account;
+import entity.Pagination;
+import entity.Service;
 import entity.User;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -26,30 +28,48 @@ import javax.servlet.http.HttpServletResponse;
  * getAllAccount to get all account from database.
  *
  * Bugs: none
+ *
  * @author Hoang Thi Thu Huong
  */
 public class GetAllAccountController extends HttpServlet {
-    
-     /**
-     * Use function getAllAccount in <code>dao.impl.UserDAOImpl</code> to
-     * get a <code>java.util.List</code> object that contains a list of
-     * <code>entity.Account</code><br>
-     * Forward user to the <code>viewAllAccount.jsp</code> page.<br>
-     * 
+
+    /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
      *
      * @param request servlet request
-     * - users is a list that contains a series of account
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    /**
+     * Use function getAllAccount in <code>dao.impl.UserDAOImpl</code> to get a
+     * <code>java.util.List</code> object that contains a series of
+     * <code>entity.Account</code><br>
+     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+
+        String page = request.getParameter("page");
+        int pageIndex = 1;
+        if (page != null) {
+            try {
+                pageIndex = Integer.parseInt(page);
+                if (pageIndex == -1) {
+                    pageIndex = 1;
+                }
+            } catch (Exception e) {
+                pageIndex = 1;
+            }
+        } else {
+            pageIndex = 1;
+        }
+
+        int pageSize = 5;
+
         UserDAO userDAO = new UserDAOImpl();
-        List<Account> users = userDAO.getAllAccount();
+        Pagination<Account> users = userDAO.getAllAccount(pageIndex, pageSize);
         request.setAttribute("users", users);
         request.getRequestDispatcher("./jsp/viewAllAccount.jsp").forward(request, response);
     }

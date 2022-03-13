@@ -6,10 +6,15 @@
 package controller;
 
 import dao.ServiceDAO;
+import dao.UserDAO;
 import dao.impl.ServiceDAOImpl;
+import dao.impl.UserDAOImpl;
+import dto.Account;
+import dto.Doctor;
 import entity.Service;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -36,8 +41,14 @@ public class ServiceManagementDetailController extends HttpServlet {
         int id = Integer.parseInt(request.getParameter("Id"));
         ServiceDAO serviceDAO = new ServiceDAOImpl();
         Service service = serviceDAO.getById(id);
+
+        UserDAO userDAO = new UserDAOImpl();
+        List<Doctor> doctors = userDAO.getDoctorByServiceId(service.getServiceId());
         request.setAttribute("service", service);
-        request.getRequestDispatcher("./jsp/serviceManagementDetail.jsp").forward(request, response);
+        request.setAttribute("doctors", doctors);
+        List<Doctor> allDoctors = userDAO.getAllDoctor();
+        request.setAttribute("allDoctors", allDoctors);
+        request.getRequestDispatcher("./jsp/editService.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

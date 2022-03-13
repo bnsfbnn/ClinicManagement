@@ -33,23 +33,18 @@ public class Service {
     public Service() {
     }
 
-    public Service(int serviceId, String serviceName) {
-        this.serviceId = serviceId;
-        this.serviceName = serviceName;
-    }
-
     public Service(String serviceName) {
         this.serviceName = serviceName;
     }
-
-    /**
+    
+     /**
      * Creates a service with specified parameters.
-     *
+     * 
      * @param serviceId
      * @param serviceName
      * @param serviceBrief
      * @param serviceDescription
-     * @param serviceImage
+     * @param serviceImage 
      */
 
     public Service(int serviceId, String serviceName, String serviceBrief, String serviceDescription, String serviceImage) {
@@ -60,9 +55,8 @@ public class Service {
         this.serviceImage = serviceImage;
     }
 
-    /**
+       /**
      * Get service id
-     *
      * @return serviceId integer
      */
     public int getServiceId() {
@@ -71,7 +65,6 @@ public class Service {
 
     /**
      * Set service id
-     *
      * @param serviceId
      */
     public void setServiceId(int serviceId) {
@@ -80,7 +73,6 @@ public class Service {
 
     /**
      * Get service name
-     *
      * @return serviceName string
      */
     public String getServiceName() {
@@ -89,7 +81,6 @@ public class Service {
 
     /**
      * Set service name
-     *
      * @param serviceName
      */
     public void setServiceName(String serviceName) {
@@ -98,7 +89,6 @@ public class Service {
 
     /**
      * Get service brief
-     *
      * @return serviceBrief string
      */
     public String getServiceBrief() {
@@ -107,7 +97,6 @@ public class Service {
 
     /**
      * Set service brief
-     *
      * @param serviceBrief
      */
     public void setServiceBrief(String serviceBrief) {
@@ -116,7 +105,6 @@ public class Service {
 
     /**
      * Get service description
-     *
      * @return serviceDescription string
      */
     public String getServiceDescription() {
@@ -125,7 +113,6 @@ public class Service {
 
     /**
      * Set service description
-     *
      * @param serviceDescription
      */
     public void setServiceDescription(String serviceDescription) {
@@ -134,7 +121,6 @@ public class Service {
 
     /**
      * Get service image
-     *
      * @return serviceImage string
      */
     public String getServiceImage() {
@@ -143,7 +129,6 @@ public class Service {
 
     /**
      * Set service image
-     *
      * @param serviceImage
      */
     public void setServiceImage(String serviceImage) {

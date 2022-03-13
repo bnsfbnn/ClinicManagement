@@ -5,18 +5,20 @@
  *
  * Record of change:
  * DATE            Version             AUTHOR           DESCRIPTION
- * 2022-02-08      1.0                 MnhVT          Service DAO Implement
+ * 2022-02-08      1.0                 TrangCT          Service DAO Implement
  */
 package dao.impl;
 
 import context.DBContext;
 import dao.ServiceDAO;
+import dto.ServiceDTO;
 import entity.Pagination;
 import entity.Service;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -30,7 +32,7 @@ import java.util.logging.Logger;
  * <p>
  *
  *
- * @author MinhVT
+ * @author TrangCT
  * @version 1.0
  * @since 2022-02-08
  */
@@ -39,7 +41,6 @@ public class ServiceDAOImpl extends DBContext implements ServiceDAO {
     /**
      * Logger for system
      */
-    
     private static Logger logger = Logger.getLogger(UserDAOImpl.class.getName());
 
     /**
@@ -51,15 +52,15 @@ public class ServiceDAOImpl extends DBContext implements ServiceDAO {
      * @param pageSize integer
      * @return pagination Pagination Service
      */
-    public Pagination<Service> getAllService(int pageIndex, int pageSize) {
+    public Pagination<ServiceDTO> getAllService(int pageIndex, int pageSize) {
 
-        Pagination<Service> pagination = new Pagination<>(); // pagination services
+        Pagination<ServiceDTO> pagination = new Pagination<>(); // pagination services
 
         logger.log(Level.INFO, "getAllService");
         Connection connecion = null; // connection database
         PreparedStatement preparedStatement = null;
         ResultSet rs = null;
-        List<Service> services = new ArrayList<>();// list all services
+        List<ServiceDTO> services = new ArrayList<>();// list all services
         try {
             int totalItem = count(); // count total service
             pagination.setCurrentPage(pageIndex);
@@ -81,7 +82,7 @@ public class ServiceDAOImpl extends DBContext implements ServiceDAO {
             //excute query
             rs = preparedStatement.executeQuery();
             while (rs.next()) {
-                Service service = new Service();
+                ServiceDTO service = new ServiceDTO();
                 service.setServiceId(rs.getInt("service_id"));
                 service.setServiceName(rs.getString("service_name"));
                 service.setServiceBrief(rs.getString("service_brief"));
@@ -211,7 +212,7 @@ public class ServiceDAOImpl extends DBContext implements ServiceDAO {
     }
 
     @Override
-    public void addService(Service service) {
+    public int addService(Service service) {
         logger.log(Level.INFO, "Add service");
         Connection connecion = null;
         PreparedStatement preparedStatement = null;
@@ -220,12 +221,103 @@ public class ServiceDAOImpl extends DBContext implements ServiceDAO {
             connecion = getConnection();
             // Get data
             preparedStatement = connecion.prepareStatement("insert into services (service_name, service_brief, service_description, service_image)\n"
-                    + "values (?,?,?,?)");
+                    + "values (?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
             preparedStatement.setString(1, service.getServiceName());
-            preparedStatement.setString(2, service.getServiceBrief());
+            preparedStatement.setString(2, "");
             preparedStatement.setString(3, service.getServiceDescription());
             preparedStatement.setString(4, service.getServiceImage());
 
+            int row = preparedStatement.executeUpdate();
+            return row;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            Logger.getLogger(UserDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            closePreparedStatement(preparedStatement);
+            closeConnection(connecion);
+        }
+        return 0;
+    }
+
+    @Override
+    public int getIdInserted() {
+
+        String sql = "SELECT MAX(service_id) as id FROM services";
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            con = getConnection(); //get connection
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                return rs.getInt("id");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ReservationDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(ReservationDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+
+        } finally {
+            this.closeResultSet(rs);
+            this.closePreparedStatement(ps);
+            this.closeConnection(con);
+        }
+        return 0;
+    }
+
+    @Override
+    public void updateService(Service service) {
+        Connection connecion = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet rs = null;
+        try {
+            connecion = getConnection();
+            // Get data
+            preparedStatement = connecion.prepareStatement("update services set service_name = ? , service_description = ? where service_id = ?");
+            preparedStatement.setString(1, service.getServiceName());
+            preparedStatement.setString(2, service.getServiceDescription());
+            preparedStatement.setInt(3, service.getServiceId());
+            preparedStatement.executeUpdate();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            Logger.getLogger(UserDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            closePreparedStatement(preparedStatement);
+            closeConnection(connecion);
+        }
+    }
+
+    @Override
+    public void removeAllDoctor(int id) {
+        Connection connecion = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet rs = null;
+        try {
+            connecion = getConnection();
+            // Get data
+            preparedStatement = connecion.prepareStatement("update users set service_id = null where service_id = ? and role_id = 3");
+            preparedStatement.setInt(1, id);
+            preparedStatement.executeUpdate();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            Logger.getLogger(UserDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            closePreparedStatement(preparedStatement);
+            closeConnection(connecion);
+        }
+    }
+
+    @Override
+    public void deleteService(int id) {
+        Connection connecion = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet rs = null;
+        try {
+            connecion = getConnection();
+            // Get data
+            preparedStatement = connecion.prepareStatement("  delete from services where service_id = ?");
+            preparedStatement.setInt(1, id);
             preparedStatement.executeUpdate();
         } catch (Exception ex) {
             ex.printStackTrace();

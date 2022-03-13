@@ -6,11 +6,14 @@
 package controller;
 
 import dao.ServiceDAO;
+import dao.UserDAO;
 import dao.impl.ServiceDAOImpl;
+import dao.impl.UserDAOImpl;
+import dto.Doctor;
+import dto.ServiceDTO;
 import entity.Pagination;
-import entity.Service;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -22,15 +25,6 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class ServiceManagementController extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String page = request.getParameter("page");
@@ -50,9 +44,23 @@ public class ServiceManagementController extends HttpServlet {
 
         int pageSize = 5;
         ServiceDAO serviceDAO = new ServiceDAOImpl();
-        Pagination<Service> services
+        Pagination<ServiceDTO> services
                 = serviceDAO.getAllService(pageIndex, pageSize);
+        UserDAO userDAO = new UserDAOImpl();
+
+        List<Doctor> doctors = userDAO.getAllDoctor();
+
+        for (ServiceDTO s : services.getData()) {
+            for (Doctor d : doctors) {
+                if (d.getServiceId() == s.getServiceId()) {
+                    s.getDoctors().add(d);
+                }
+            }
+        }
+
+        request.setAttribute("doctors", doctors);
         request.setAttribute("services", services);
+
         request.getRequestDispatcher("./jsp/serviceManagementList.jsp").forward(request, response);
     }
 

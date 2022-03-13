@@ -19,9 +19,7 @@ import java.util.logging.Logger;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 /**
- *  This class is database context using to create connection to DB,
- *  close connection, result set, prepared statement after use
- * 
+ *
  * @author Thanh Tung
  */
 public class DBContext {
@@ -65,6 +63,7 @@ public class DBContext {
             connection = DriverManager.getConnection(url, USERNAME, PASSWORD);
             return connection;
         } catch (ClassNotFoundException | SQLException ex) {
+
             Logger.getLogger(DBContext.class.getName()).log(Level.SEVERE, null, ex);
         }
         return connection;
