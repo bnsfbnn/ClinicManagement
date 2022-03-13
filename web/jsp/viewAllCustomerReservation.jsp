@@ -115,12 +115,11 @@
                                     <h4>Chi tiết lịch đặt</h4>
 
 
-
-                                    ${reservation.requestExaminationDate}
-
-                                    ${reservation.confirmedExaminationDate}
-
-                                    ${reservation.medicalRequest}
+                                    Ngày yêu cầu khám bệnh :${(reservation.requestExaminationDate != null)?reservation.requestExaminationDate:'Không có'}
+                                    <br/>
+                                    Ngày khám bệnh xác nhận :${(reservation.confirmedExaminationDate != null)?reservation.confirmedExaminationDate:'Chưa có'}
+                                    <br/>
+                                    Yêu cầu y tế :${(reservation.medicalRequest != "")?reservation.medicalRequest:'Không có yêu cầu y tế'}
 
 
                                 </div>
