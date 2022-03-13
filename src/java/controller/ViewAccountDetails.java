@@ -9,29 +9,23 @@
  */
 package controller;
 
-import dao.ReservationDAO;
-import dao.impl.ReservationDAOImpl;
-import entity.ReservationDTO;
+import dao.UserDAO;
+import dao.impl.UserDAOImpl;
 import entity.User;
 import java.io.IOException;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Locale;
-import java.util.TimeZone;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
+ * This class uses <code>dao.impl.UserDAOImpl</code> functions:<br>
+ * createAccount to create an account.
  *
- * @author dell
+ * Bugs: none
+ * @author Hoang Thi Thu Huong
  */
-public class BookReservationController extends HttpServlet {
+public class ViewAccountDetails extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -43,27 +37,12 @@ public class BookReservationController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, ParseException {
+            throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        DateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
-        HttpSession session = request.getSession();
-        User user = (User) session.getAttribute("user");
-        String date1 = request.getParameter("date");
-        format.setTimeZone(TimeZone.getTimeZone("Etc/UTC"));
-        java.util.Date jdate1 = format.parse(date1);
-        java.sql.Date sdate1 = new java.sql.Date(jdate1.getTime());
-
-        String reqeust = request.getParameter("request");
-
-        ReservationDTO reservation = new ReservationDTO();
-        reservation.setCustomerRequest(reqeust);
-        reservation.setRequestDate(sdate1);
-        reservation.setId(user.getUserId());
-
-        ReservationDAO reservationDAO = new ReservationDAOImpl();
-        reservationDAO.bookReservation(reservation);
-        ViewCustomerReservationsList controller = new ViewCustomerReservationsList();
-        controller.processRequest(request, response);
+        int id = Integer.parseInt(request.getParameter("id"));
+        UserDAO userDAO = new UserDAOImpl();
+        User user = userDAO.getUserById(id);
+        request.setAttribute("user", user);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -78,11 +57,7 @@ public class BookReservationController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (ParseException ex) {
-            Logger.getLogger(BookReservationController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        processRequest(request, response);
     }
 
     /**
@@ -96,11 +71,7 @@ public class BookReservationController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (ParseException ex) {
-            Logger.getLogger(BookReservationController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        processRequest(request, response);
     }
 
     /**
