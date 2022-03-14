@@ -12,10 +12,11 @@
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/lenovo/OneDrive/Documents/GitHub/ClinicManagement/web/META-INF/context.xml</file>
-            <file>file:/C:/Users/lenovo/OneDrive/Documents/GitHub/ClinicManagement/src/java/controller/ServiceManagementController.java</file>
-            <file>file:/C:/Users/lenovo/OneDrive/Documents/GitHub/ClinicManagement/src/java/context/DBContext.java</file>
-            <file>file:/C:/Users/lenovo/OneDrive/Documents/GitHub/ClinicManagement/web/jsp/editService.jsp</file>
+            <file>file:/C:/Users/Thanh%20Tung/Documents/NetBeansProjects/ClinicManagement/web/jsp/viewMyReservation.jsp</file>
+            <file>file:/C:/Users/Thanh%20Tung/Documents/NetBeansProjects/ClinicManagement/web/jsp/viewAllCustomerReservation.jsp</file>
+            <file>file:/C:/Users/Thanh%20Tung/Documents/NetBeansProjects/ClinicManagement/src/java/controller/ViewMyReservationController.java</file>
+            <file>file:/C:/Users/Thanh%20Tung/Documents/NetBeansProjects/ClinicManagement/src/java/controller/AddFeedbackController.java</file>
+            <file>file:/C:/Users/Thanh%20Tung/Documents/NetBeansProjects/ClinicManagement/web/jsp/components/viewReservationDetailPopup.jsp</file>
         </group>
     </open-files>
 </project-private>

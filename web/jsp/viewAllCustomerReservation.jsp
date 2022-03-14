@@ -117,16 +117,16 @@
                             <div class="infor col-4">
                                 <p>Dịch vụ: <b>${reservation.serviceName}</b></p>
                                 <p>Gói: <b>${reservation.packageTitle}</b></p>
-
-                                <button class="btn btn-success">
-                                    <a id="myBtn" style="color:white">Xem chi tiết</a>
-                                </button>
-                                <c:if test="${reservation.reservationStatus eq 'Đã khám'}">
-                                    <button class="btn btn-primary">
-                                        <a id="myBtn2" style="color:white">Phản hồi</a>
+                                <div class="row">
+                                    <button class="btn btn-success mx-1">
+                                        <a id="myBtn" style="color:white">Xem chi tiết</a>
                                     </button>
-                                </c:if>
-
+                                    <c:if test="${reservation.reservationStatus eq 'Đã khám'}">
+                                        <button class="btn btn-primary mx-1">
+                                            <a id="myBtn2" style="color:white">Phản hồi</a>
+                                        </button>
+                                    </c:if>
+                                </div>
                                 <!-- The Modal -->
                                 <div id="myModal" class="modal">
                                     <!-- Modal content -->
@@ -151,11 +151,9 @@
                                     <div class="modal-content">
                                         <span class="close">&times;</span>
                                         <div class="row-fluid">
-                                            <b>Nội dung phản hồi</b>
-                                            <div class="item__content">
-                                                Dịch vụ tốt, bác sỹ tận tình. Tôi thực hiện gói xét nghiệm tổng quát, xét nghiệm
-                                                nhanh
-                                                chóng, nhận ngay kết quả, không phải chờ đợi
+                                            <div class="form-group">
+                                                <label for="feedbackContent"><b>Nội dung phản hồi</b></label>
+                                                <textarea class="form-control" id="feedbackContent" rows="3"></textarea>
                                             </div>
                                             <button class="btn btn-primary float-right mt-3">Phản hồi</button>
                                         </div>
