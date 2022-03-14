@@ -233,36 +233,36 @@
         <url-pattern>/DeleteServiceController</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>ViewCustomerReservationsList</servlet-name>
+        <url-pattern>/ViewCustomerReservationsList</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>ViewAllReservationsController</servlet-name>
-        <url-pattern>/ViewAllReservationsController</url-pattern>
+        <url-pattern>/viewAllReservation</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ViewMyReservationController</servlet-name>
-        <url-pattern>/ViewMyReservationController</url-pattern>
+        <url-pattern>/viewMyReservation</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ViewMyReservationDetailController</servlet-name>
-        <url-pattern>/ViewMyReservationDetailController</url-pattern>
+        <url-pattern>/viewMyReservationDetail</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ViewExaminationHistoryController</servlet-name>
-        <url-pattern>/ViewExaminationHistoryController</url-pattern>
+        <url-pattern>/viewExaminationHistory</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ViewExaminationHistoryDetailController</servlet-name>
-        <url-pattern>/ViewExaminationHistoryDetailController</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>AddNewExaminationController</servlet-name>
-        <url-pattern>/AddNewExaminationController</url-pattern>
+        <url-pattern>/viewExaminationHistoryDetail</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>CancelReservationController</servlet-name>
-        <url-pattern>/CancelReservationController</url-pattern>
+        <url-pattern>/cancelReservation</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>ViewCustomerReservationsList</servlet-name>
-        <url-pattern>/ViewCustomerReservationsList</url-pattern>
+        <servlet-name>AddNewExaminationController</servlet-name>
+        <url-pattern>/addNewExamination</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
