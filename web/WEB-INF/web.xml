@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
     <servlet>
-        <servlet-name>ViewAllReservations</servlet-name>
-        <servlet-class>controller.ViewAllReservations</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>LoginController</servlet-name>
         <servlet-class>controller.LoginController</servlet-class>
     </servlet>
@@ -93,10 +89,6 @@
         <servlet-class>controller.ReplyFeedbackController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>ViewHistoryOfCustomerExaminationController</servlet-name>
-        <servlet-class>controller.ViewHistoryOfCustomerExaminationController</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>UpdateAccountController</servlet-name>
         <servlet-class>controller.UpdateAccountController</servlet-class>
     </servlet>
@@ -109,40 +101,32 @@
         <servlet-class>controller.DeleteServiceController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>BookReservationController</servlet-name>
-        <servlet-class>controller.BookReservationController</servlet-class>
+        <servlet-name>ViewAllReservationsController</servlet-name>
+        <servlet-class>controller.ViewAllReservationsController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewMyReservationController</servlet-name>
+        <servlet-class>controller.ViewMyReservationController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewMyReservationDetailController</servlet-name>
+        <servlet-class>controller.ViewMyReservationDetailController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewExaminationHistoryController</servlet-name>
+        <servlet-class>controller.ViewExaminationHistoryController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewExaminationHistoryDetailController</servlet-name>
+        <servlet-class>controller.ViewExaminationHistoryDetailController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddNewExaminationController</servlet-name>
+        <servlet-class>controller.AddNewExaminationController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>CancelReservationController</servlet-name>
         <servlet-class>controller.CancelReservationController</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>ViewCustomerReservationsList</servlet-name>
-        <servlet-class>controller.ViewCustomerReservationsList</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>ViewCustomerReservationDetail</servlet-name>
-        <servlet-class>controller.ViewCustomerReservationDetail</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>GetAllPackageController</servlet-name>
-        <servlet-class>controller.GetAllPackageController</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>ViewFeedbackManagedListController</servlet-name>
-        <servlet-class>controller.ViewFeedbackManagedListController</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>ViewFeedBackListController</servlet-name>
-        <servlet-class>controller.ViewFeedBackListController</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>ReplyFeedbackController</servlet-name>
-        <servlet-class>controller.ReplyFeedbackController</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>AddFeedbackController</servlet-name>
-        <servlet-class>controller.AddFeedbackController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
@@ -159,10 +143,6 @@
     <servlet-mapping>
         <servlet-name>ServiceDetailController</servlet-name>
         <url-pattern>/ServiceDetailController</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>ViewAllReservations</servlet-name>
-        <url-pattern>/viewAllReservationController</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>GetAllAccountController</servlet-name>
@@ -237,10 +217,6 @@
         <url-pattern>/ReplyFeedbackController</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>ViewHistoryOfCustomerExaminationController</servlet-name>
-        <url-pattern>/ViewHistoryOfCustomerExaminationController</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>UpdateAccountController</servlet-name>
         <url-pattern>/UpdateAccountController</url-pattern>
     </servlet-mapping>
@@ -253,40 +229,32 @@
         <url-pattern>/DeleteServiceController</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>BookReservationController</servlet-name>
-        <url-pattern>/BookReservationController</url-pattern>
+        <servlet-name>ViewAllReservationsController</servlet-name>
+        <url-pattern>/ViewAllReservationsController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewMyReservationController</servlet-name>
+        <url-pattern>/ViewMyReservationController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewMyReservationDetailController</servlet-name>
+        <url-pattern>/ViewMyReservationDetailController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewExaminationHistoryController</servlet-name>
+        <url-pattern>/ViewExaminationHistoryController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewExaminationHistoryDetailController</servlet-name>
+        <url-pattern>/ViewExaminationHistoryDetailController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddNewExaminationController</servlet-name>
+        <url-pattern>/AddNewExaminationController</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>CancelReservationController</servlet-name>
-        <url-pattern>/cancelReservation</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>ViewCustomerReservationsList</servlet-name>
-        <url-pattern>/ViewCustomerReservationsList</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>ViewCustomerReservationDetail</servlet-name>
-        <url-pattern>/ViewCustomerReservationDetail</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>GetAllPackageController</servlet-name>
-        <url-pattern>/GetAllPackageController</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>ViewFeedbackManagedListController</servlet-name>
-        <url-pattern>/ViewFeedbackManagedListController</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>ViewFeedBackListController</servlet-name>
-        <url-pattern>/ViewFeedBackListController</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>ReplyFeedbackController</servlet-name>
-        <url-pattern>/ReplyFeedbackController</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>AddFeedbackController</servlet-name>
-        <url-pattern>/AddFeedbackController</url-pattern>
+        <url-pattern>/CancelReservationController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
@@ -296,7 +264,7 @@
     <env-entry>
         <env-entry-name>host</env-entry-name>
         <env-entry-type>java.lang.String</env-entry-type>
-        <env-entry-value>DESKTOP-51P50IV\SQLEXPRESS</env-entry-value>
+        <env-entry-value>localhost</env-entry-value>
     </env-entry>
     <env-entry>
         <env-entry-name>port</env-entry-name>
@@ -316,7 +284,7 @@
     <env-entry>
         <env-entry-name>password</env-entry-name>
         <env-entry-type>java.lang.String</env-entry-type>
-        <env-entry-value>123456</env-entry-value>
+        <env-entry-value>123</env-entry-value>
     </env-entry>
     <welcome-file-list>
         <welcome-file>./jsp/login.jsp</welcome-file>
