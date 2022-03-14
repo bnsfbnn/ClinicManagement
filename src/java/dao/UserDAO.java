@@ -13,6 +13,7 @@ import entity.Account;
 import entity.Doctor;
 import entity.Pagination;
 import entity.User;
+import java.util.List;
 
 /**
  * This is an interface contains methods of <code>User</code> object<br>
