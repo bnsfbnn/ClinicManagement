@@ -41,9 +41,6 @@
             <div class="row-fluid mb-3">
                 <img class="col-lg-12 p-0" src="./assets/images/banner.jpg" alt="Banner"/>
             </div>
-            <div class="row">
-                <img class="w-100" src="./assets/images/banner-sm.png" alt="Banner"/>
-            </div>
             <div class="row mt-3">
                 <c:forEach items="${services.data}" var="service">
                     <div class="col-4 m-0 px-auto">
