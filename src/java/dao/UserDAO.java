@@ -13,7 +13,6 @@ import entity.Account;
 import entity.Doctor;
 import entity.Pagination;
 import entity.User;
-import java.util.List;
 
 /**
  * This is an interface contains methods of <code>User</code> object<br>
@@ -26,10 +25,19 @@ public interface UserDAO {
 
     User login(String username, String password);
 
+    /**
+     * - Get all account with infomation
+     *
+     * @param pageIndex
+     * @param pageSize
+     * @return a list of <code>Account</code> objects. <br>
+     * -It is a <code>java.util.List</code> object
+     * @throws SQLException when <code>java.sql.SQLException</code> occurs.
+     */
     Pagination<Account> getAllAccount(int pageIndex, int pageSize);
 
     void deleteAccount(int id);
-
+    
     void updateAccount(User user);
 
     void createAccount(User user);

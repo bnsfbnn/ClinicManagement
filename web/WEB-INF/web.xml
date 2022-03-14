@@ -128,6 +128,14 @@
         <servlet-name>CancelReservationController</servlet-name>
         <servlet-class>controller.CancelReservationController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ViewAccountDetails</servlet-name>
+        <servlet-class>controller.ViewAccountDetails</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateAccountController</servlet-name>
+        <servlet-class>controller.UpdateAccountController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
         <url-pattern>/LoginController</url-pattern>
@@ -255,6 +263,14 @@
     <servlet-mapping>
         <servlet-name>CancelReservationController</servlet-name>
         <url-pattern>/CancelReservationController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewAccountDetails</servlet-name>
+        <url-pattern>/ViewAccountDetails</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateAccountController</servlet-name>
+        <url-pattern>/UpdateAccountController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

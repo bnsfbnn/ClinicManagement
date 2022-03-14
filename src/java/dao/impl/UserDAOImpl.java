@@ -184,33 +184,6 @@ public class UserDAOImpl extends DBContext implements UserDAO {
     }
 
     @Override
-    public void updateAccount(User user) {
-        Connection connecion = null;
-        PreparedStatement preparedStatement = null;
-        ResultSet rs = null;
-        try {
-            connecion = getConnection();
-            // Get data
-            preparedStatement = connecion.prepareStatement("update users set email = ?, full_name = ?, birth_date = ?, phone = ? , address = ? where user_id = ?");
-
-            preparedStatement.setString(1, user.getEmail());
-            preparedStatement.setString(2, user.getFullName());
-            preparedStatement.setDate(3, user.getBirthDate());
-            preparedStatement.setString(4, user.getPhone());
-            preparedStatement.setString(5, user.getAddress());
-            preparedStatement.setInt(6, user.getUserId());
-
-            preparedStatement.executeUpdate();
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            Logger.getLogger(UserDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            closePreparedStatement(preparedStatement);
-            closeConnection(connecion);
-        }
-    }
-
-    @Override
     public void createAccount(User user) {
         logger.log(Level.INFO, "Create account");
         Connection connecion = null;
@@ -409,5 +382,10 @@ public class UserDAOImpl extends DBContext implements UserDAO {
             closeConnection(connecion);
         }
         return null;
+    }
+
+    @Override
+    public void updateAccount(User user) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

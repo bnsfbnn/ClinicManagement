@@ -146,7 +146,6 @@ public class User {
         this.address = address;
         this.avatarImage = avatarImage;
     }
-    
     public User(int roleId, int serviceId, String username, String email, String password, String fullName, Date birthDate, boolean gender, String phone, String address, String avatarImage) {
         this.roleId = roleId;
         this.serviceId = serviceId;
