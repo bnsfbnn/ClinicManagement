@@ -46,7 +46,7 @@ public class ViewFeedbackManagedListController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-           String page = request.getParameter("page");
+        String page = request.getParameter("page");
         int pageIndex = 1;
         if (page != null) {
             try {
@@ -61,6 +61,7 @@ public class ViewFeedbackManagedListController extends HttpServlet {
             pageIndex = 1;
         }
 
+
         int pageSize = 5;
 
         FeedbackDAO feedbackDAO = new FeedbackDAOImpl();
@@ -68,7 +69,7 @@ public class ViewFeedbackManagedListController extends HttpServlet {
         Pagination<FeedbackDTO> feedbacks = feedbackDAO.getAllFeedback(pageIndex, pageSize);
         
         request.setAttribute("feedbacks", feedbacks);
-        request.getRequestDispatcher("").forward(request, response);
+       request.getRequestDispatcher("./jsp/feedbackManagement.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

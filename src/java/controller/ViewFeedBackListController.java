@@ -68,7 +68,7 @@ public class ViewFeedBackListController extends HttpServlet {
         Pagination<FeedbackDTO> feedbacks = feedbackDAO.getAllFeedback(pageIndex, pageSize);
         
         request.setAttribute("feedbacks", feedbacks);
-        request.getRequestDispatcher("").forward(request, response);
+        request.getRequestDispatcher("./jsp/feedback.jsp").forward(request, response);
 
     }
 

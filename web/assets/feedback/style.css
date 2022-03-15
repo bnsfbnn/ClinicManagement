@@ -1,0 +1,105 @@
+#service-container {
+    margin: 0 0;
+    max-width: 100%;
+    padding: 0;
+}
+
+#add-btn {
+    background-color: #fff;
+    border: none;
+    box-shadow: none !important;
+}
+
+.btn-only-ic {
+    background-color: #fff !important;
+    border-color: transparent;
+    padding: 0 0;
+    max-height: 20px;
+}
+
+/* Header */
+.navbar {
+    border: 1px solid #adb5bd;
+    background-color: #fff !important;
+}
+
+.nav-link {
+    border-radius: 5px;
+    border: 1px solid #ebebeb;
+    margin-right: 10px;
+    transition: all 0.3s ease-in-out;
+    font-weight: bold;
+    padding: .75rem 1rem;
+    max-width: 150px;
+    text-align: center;
+}
+
+.nav-link:hover,
+.nav-link.active {
+    background-color: #8AB9FF;
+}
+
+.avatar {
+    width: 45px;
+    height: 45px;
+    line-height: 45px;
+    border-radius: 50%;
+}
+
+.avatar > img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Title */
+#title {
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 90px;
+}
+
+/* Wrapper */
+.wrapper {
+    width: 100vh;
+    margin: auto;
+}
+
+#table-services > * > * > th{
+    text-align: center;
+}
+
+tr > td.service-desc {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 508px;
+}
+
+td > .action {
+    text-align: center;
+}
+
+td > .action > i {
+    cursor: pointer;
+}
+
+/* Pagination */
+.pagi-wrapper {
+    margin-top: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.non-block {
+    width: 20px;
+    height: 20px;
+}
+
+/* Modal */
+.modal-service {
+    max-width: 850px;
+}

@@ -36,7 +36,7 @@ public class FeedbackDAOImpl extends DBContext implements FeedbackDAO {
             pagination.setItemPerPage(pageSize);
             pagination.setTotalItem(totalItem);
             // Get data
-            preparedStatement = connecion.prepareStatement(" SELECT * FROM  ( SELECT  ROW_NUMBER() OVER ( ORDER BY  f.feedback_id ) AS RowNum,  f.feedback_id, f.feedback_content, f.feedback_time, u.full_name, s.service_name, e.examination_prescription from feedbacks f join users u\n"
+         preparedStatement = connecion.prepareStatement(" SELECT * FROM  ( SELECT  ROW_NUMBER() OVER ( ORDER BY  f.feedback_id ) AS RowNum,  f.feedback_id, f.feedback_content, f.feedback_time,  u.username, u.full_name, s.service_name, e.examination_prescription from feedbacks f join users u\n"
                     + "  on f.customer_id = u.user_id\n"
                     + "  join services s\n"
                     + "  on f.service_id = s.service_id\n"
