@@ -9,6 +9,7 @@
  */
 package dao;
 
+import entity.ServiceDTO;
 import entity.Pagination;
 import entity.Service;
 import java.sql.SQLException;
@@ -34,7 +35,7 @@ public interface ServiceDAO {
      * @param pageSize
      * @return list services
      */
-    Pagination<Service> getAllService(int pageIndex, int pageSize);
+    Pagination<ServiceDTO> getAllService(int pageIndex, int pageSize);
 
     /**
      * Count total service
@@ -59,6 +60,14 @@ public interface ServiceDAO {
      * @throws SQLException when <code>java.sql.SQLException</code> occurs.
      */
     public ArrayList<Service> getServices() throws SQLException;
-    
-    public void addService(Service service);
+
+    public int addService(Service service);
+
+    public int getIdInserted();
+
+    public void updateService(Service service);
+
+    public void removeAllDoctor(int id);
+
+    public void deleteService(int id);
 }

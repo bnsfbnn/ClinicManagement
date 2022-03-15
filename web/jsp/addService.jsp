@@ -1,19 +1,19 @@
 <!--
- * Copyright(C) 2022, FPT University
- * CMS
- * CLINIC MANAGEMENT SYSTEM
+ * Copyright(C) 20022, FPT University
+ * CMS:
+ * Clinic Management System
  *
  * Record of change:
- * DATE            Version          AUTHOR           DESCRIPTION
- * 2022-02-08      1.0              HuongHTT         First Implement 
-/-->
+ * DATE            Version             AUTHOR           DESCRIPTION
+ * 2022-02-26      1.0                 MinhVT           Add Service 
+ -->
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Add account</title>
+        <title>Add Service</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="./assets/css/style.css">
@@ -23,34 +23,27 @@
         <link href="../assets/styles/jquery-ui.theme.min.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
-        <h1 style="text-align: center">Book A Reservation</h1>
         <table style="margin-left: auto; margin-right: auto; border: 1px solid">
             <tr>
-                <th>Action</th>
-                <th>Ngày khám bệnh</th>
-                <th>Yêu cầu của bệnh nhân</th>
+                <th>Tên dịch vụ</th>
+                <th>Tóm tắt</th>
+                <th>Mô tả</th>
+                <th>Hình ảnh</th>
                 <th>Add</th>
             </tr>
-
-            <form action="../BookReservationController" method="POST">
+            <form action="../AddServiceController" method="POST">
                 <tr>
-                    <td style="text-align: center; border: 1px solid" hidden>
-                        <input value="<%= request.getParameter("serviceId")%>" name="serviceId">
-                    </td>
-                    <td style="text-align: center; border: 1px solid" hidden>
-                        <input value="<%= request.getParameter("packageId")%>" name="packageId">
+                    <td style="text-align: center; border: 1px solid" >
+                        <input name="serviceName">
                     </td>
                     <td style="text-align: center; border: 1px solid">
-                          <input type="radio" name="type" value="">
-                          <label for="html">Chọn 1 ngày ưa thích</label><br>
-                          <input type="radio"  name="type" value="">
-                          <label for="css">Ngày sớm nhất có sẵn</label><br>
+                        <input name="serviceBrief">
                     </td>
                     <td style="text-align: center; border: 1px solid">
-                        <input name="date" type="date" required="Hãy nhập ngày khám bệnh">
+                        <input name="serviceDescription">
                     </td>
                     <td style="text-align: center; border: 1px solid">
-                        <input name="request" type="text">
+                        <input name="serviceImage">
                     </td>
                     <td style="text-align: center; border: 1px solid" class="btn-success">
                         <a href="">

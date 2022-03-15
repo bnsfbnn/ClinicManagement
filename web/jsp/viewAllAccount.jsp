@@ -1,13 +1,3 @@
-<!--
- * Copyright(C) 2022, FPT University
- * CMS
- * CLINIC MANAGEMENT SYSTEM
- *
- * Record of change:
- * DATE            Version          AUTHOR           DESCRIPTION
- * 2022-02-08      1.0              HuongHTT         First Implement 
-/-->
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
@@ -143,4 +133,7 @@
         <script src="./assets/js/select2.full.min.js"></script>
         <script src="./assets/js/custom.js"></script>
     </body>
+    <footer>
+        <jsp:include page="./components/footer.jsp" />
+    </footer>
 </html>

@@ -1,27 +1,34 @@
+<!--
+ * Copyright(C) 20022, FPT University
+ * CMS:
+ * Clinic Management System
+ *
+ * Record of change:
+ * DATE            Version             AUTHOR           DESCRIPTION
+ * 2022-02-08      1.0                 MinhVT         Controller Service Management List
+ -->
 
+<!doctype html>
+<html lang="en">
+    <%@page contentType="text/html" pageEncoding="UTF-8"%>
+    <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
-<html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Service</title>
-        <link href="./assets/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css" />
-        <link href="./assets/themes/krajee-fas/theme.css" media="all" rel="stylesheet" type="text/css"/>
-        <link rel="stylesheet" href="./assets/css/select2.min.css" />
-        <link rel="stylesheet" href="./assets/css/select2-bootstrap-5-theme.min.css" />
-        <link rel="stylesheet" href="./assets/css/custom.css" />
-        <link href="./assets/css/header.css" rel="stylesheet" type="text/css"/>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
 
+        <!-- Bootstrap CSS -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
               integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
         <!-- Bootstrap Icon -->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+
         <link rel="stylesheet" href="./assets/service/style.css">
+        <title>Clinic Management</title>
     </head>
+
     <body>
         <div class="container" id="service-container">
             <!-- Header -->
@@ -41,7 +48,7 @@
                                 <a class="nav-link active" href="#">Quản lý dịch vụ</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Quản lý phản hồi</a>
+                                <a class="nav-link" href="../FeedbackManagement/index.html">Quản lý phản hồi</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link p-0" href="#">Xem tất cả lịch khám bệnh</a>
@@ -59,8 +66,7 @@
             </h1>
 
             <div class="wrapper">
-                <button id="add-btn" type="button" class="btn btn-light mb-3" data-bs-toggle="modal"
-                        data-bs-target="#addServiceModal">
+                <button id="add-btn" type="button" class="btn btn-light mb-3" onclick="showAddServiceModal()">
                     <i class="bi bi-plus-circle-fill"></i>
                     Thêm dịch vụ
                 </button>
@@ -85,21 +91,35 @@
                                 <td class="service-desc">${service.serviceBrief}</td>
                                 <td>
                                     <div class="action">
-                                        <button class="btn-only-ic" data-bs-target="#detailServiceModal">
-                                            <a href="ServiceManagementDetailController?Id=${service.serviceId}" class="bi bi-eye-fill"></a>
-                                        </button>
-                                        <button class="btn-only-ic" data-bs-toggle="modal" data-bs-target="#editServiceModal">
-                                            <i class="bi bi-pencil-fill"></i>
+                                        <button class="btn-only-ic" onclick="showDetailServiceModal(
+                                            {id: '${service.serviceId}',
+                                                    name: '${service.serviceName}',
+                                                    description: '${service.serviceDescription}',
+                                                    doctors: [{
+                                                    name: 'Nguyễn Văn A',
+                                                            username: 'userA',
+                                                            image: 'https://via.placeholder.com/60',
+                                                    },
+                                                    {
+                                                    name: 'Nguyễn Văn B',
+                                                            username: 'userB',
+                                                            image: 'https://via.placeholder.com/60',
+                                                    }]
+                                            })">
+                                            <button class="btn-only-ic" data-bs-target="#detailServiceModal">
+                                                <a href="ServiceManagementDetailController?Id=${service.serviceId}" class="bi bi-eye-fill"></a>
+                                            </button>
 
-                                        </button>
-                                        <button class="btn-only-ic" data-bs-toggle="modal" data-bs-target="#deleteServiceModal">
-                                            <i class="bi bi-trash-fill"></i>
-                                        </button>
+                                            <button class="btn-only-ic" data-bs-target="#editServiceModal">
+                                                <a href="ServiceManagementDetailController?Id=${service.serviceId}" class="bi bi-pencil-fill"></a>
+                                            </button>
+                                            <button class="btn-only-ic" onclick="showDeleteServiceModal('${service.serviceId}'), '${service.serviceName}'">
+                                                <i class="bi bi-trash-fill"></i>
+                                            </button>
                                     </div>
                                 </td>
                             </tr>
                         </c:forEach>
-
                     </tbody>
                 </table>
 
@@ -110,18 +130,18 @@
                             <div class="col-12 text-center">
                                 <ul>
                                     <c:if test="${services.currentPage > 1}">
-                                        <a class="btn btn-light" href="${requestScope['javax.servlet.forward.request_uri']}?page=${restaurants.currentPage-1}">Trang trước</a>
+                                        <a class="btn btn-light" href="ServiceManagementController?page=${restaurants.currentPage-1}">Trang trước</a>
                                     </c:if>
                                     <c:forEach var="pageNumber" begin="1" end="${services.totalPage}" step="1">
                                         <c:if test="${services.currentPage == pageNumber}">
                                             <a class="btn btn-success" href="#">${pageNumber}</a>
                                         </c:if>
                                         <c:if test="${services.currentPage != pageNumber}">
-                                            <a class="btn btn-light" href="${requestScope['javax.servlet.forward.request_uri']}?page=${pageNumber}">${pageNumber}</a>
+                                            <a class="btn btn-light" href="ServiceManagementController?page=${pageNumber}">${pageNumber}</a>
                                         </c:if>
                                     </c:forEach>
                                     <c:if test="${services.currentPage < services.totalPage}">
-                                        <a class="btn btn-light" href="${requestScope['javax.servlet.forward.request_uri']}?page=${services.currentPage+1}">Trang sau</a>
+                                        <a class="btn btn-light" href="ServiceManagementController?page=${services.currentPage+1}">Trang sau</a>
                                     </c:if>
                                 </ul>
                             </div>
@@ -145,26 +165,19 @@
                                             <div class="row mb-3">
                                                 <label for="serviceCode" class="col-4 col-form-label">Mã dịch vụ</label>
                                                 <div class="col-8">
-                                                    <span class="form-control-plaintext">
-                                                        SVCS001
-                                                    </span>
+                                                    <span class="form-control-plaintext service_id"></span>
                                                 </div>
                                             </div>
                                             <div class="row mb-3">
                                                 <label for="serviceName" class="col-4 col-form-label">Tên dịch vụ</label>
                                                 <div class="col-8">
-                                                    <span class="desc-text form-control-plaintext">
-                                                        Chuyên khoa mắt
-                                                    </span>
+                                                    <span class="desc-text form-control-plaintext service_name"></span>
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 <label for="serviceDesc" class="col-4 col-form-label">Mô tả</label>
                                                 <div class="col-8">
-                                                    <span class="form-control-plaintext">
-                                                        Cung cấp dịch vụ khám và điều trị toàn diện các bệnh lý về mắt
-                                                        asdasd
-                                                    </span>
+                                                    <span class="form-control-plaintext service_desc"></span>
                                                 </div>
                                             </div>
                                         </div>
@@ -176,16 +189,6 @@
                                             </div>
                                             <div class="row list-doctors">
                                                 <div class="list-doctors-scroll">
-
-                                                    <div class="doctor-card px-0">
-                                                        <div class="img-cover">
-                                                            <img src="https://via.placeholder.com/60" alt="">
-                                                        </div>
-                                                        <div class="d-flex flex-column my-2 mx-4">
-                                                            Nguyễn Bác Sĩ
-                                                            username: bacsing
-                                                        </div>
-                                                    </div>
 
                                                 </div>
                                             </div>
@@ -209,27 +212,20 @@
                             </div>
                             <div class="modal-body">
                                 <div class="container-fluid">
-                                    <form class="row g-3">
+                                    <form class="row g-3" onsubmit="addServiceSubmit()">
                                         <div class="pe-5 col-6">
-                                            <div class="row mb-3">
-                                                <label for="serviceCode" class="col-4 col-form-label">Mã dịch vụ</label>
-                                                <div class="col-8">
-                                                    <input type="text" class="form-control" name="service_code"
-                                                           id="serviceCode" placeholder="SVCS999">
-                                                </div>
-                                            </div>
                                             <div class="row mb-3">
                                                 <label for="serviceName" class="col-4 col-form-label">Tên dịch vụ</label>
                                                 <div class="col-8">
                                                     <input type="text" class="form-control" name="service_name"
-                                                           id="serviceName" placeholder="Chuyên khoa mắt">
+                                                           id="serviceName" required maxlength="50">
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 <label for="serviceDesc" class="col-4 col-form-label">Mô tả</label>
                                                 <div class="col-8">
                                                     <textarea class="form-control" name="service_desc" id="serviceDesc"
-                                                              rows="3"></textarea>
+                                                              rows="3"  required maxlength="50"></textarea>
                                                 </div>
                                             </div>
                                         </div>
@@ -239,71 +235,21 @@
                                                     Bác sĩ
                                                 </div>
                                                 <button id="add-btn" type="button" class="btn btn-light col-5"
-                                                        data-bs-toggle="modal" data-bs-target="#selectDoctorModal"
-                                                        data-bs-select="add">
+                                                        onclick="showSelectDoctorModal('#addServiceModal')">
                                                     Thêm bác sĩ
                                                     <i class="bi bi-plus-circle-fill ms-1"></i>
                                                 </button>
                                             </div>
                                             <div class="row list-doctors">
                                                 <div class="list-doctors-scroll">
-                                                    <div class="doctor-card px-0">
-                                                        <div class="img-cover">
-                                                            <img src="https://via.placeholder.com/60" alt="">
-                                                        </div>
-                                                        <div class="d-flex flex-column my-2 mx-3">
-                                                            <span>Nguyễn Bác Sĩ</span>
-                                                            <span>username: bacsing</span>
-                                                        </div>
-                                                        <button class="btn-only-ic" data-bs-toggle="modal"
-                                                                data-bs-target="#deleteDoctorModal" data-bs-delete="add">
-                                                            <i class="bi bi-dash-circle-fill"></i>
-                                                        </button>
-                                                    </div>
-                                                    <div class="doctor-card px-0">
-                                                        <div class="img-cover">
-                                                            <img src="https://via.placeholder.com/60" alt="">
-                                                        </div>
-                                                        <div class="d-flex flex-column my-2 mx-3">
-                                                            <span>Nguyễn Bác Sĩ</span>
-                                                            <span>username: bacsing</span>
-                                                        </div>
-                                                        <button class="btn-only-ic" data-bs-toggle="modal"
-                                                                data-bs-target="#deleteDoctorModal" data-bs-delete="add">
-                                                            <i class="bi bi-dash-circle-fill"></i>
-                                                        </button>
-                                                    </div>
-                                                    <div class="doctor-card px-0">
-                                                        <div class="img-cover">
-                                                            <img src="https://via.placeholder.com/60" alt="">
-                                                        </div>
-                                                        <div class="d-flex flex-column my-2 mx-3">
-                                                            <span>Nguyễn Bác Sĩ</span>
-                                                            <span>username: bacsing</span>
-                                                        </div>
-                                                        <button class="btn-only-ic" data-bs-toggle="modal"
-                                                                data-bs-target="#deleteDoctorModal" data-bs-delete="add">
-                                                            <i class="bi bi-dash-circle-fill"></i>
-                                                        </button>
-                                                    </div>
-                                                    <div class="doctor-card px-0">
-                                                        <div class="img-cover">
-                                                            <img src="https://via.placeholder.com/60" alt="">
-                                                        </div>
-                                                        <div class="d-flex flex-column my-2 mx-3">
-                                                            <span>Nguyễn Bác Sĩ</span>
-                                                            <span>username: bacsing</span>
-                                                        </div>
-                                                        <button class="btn-only-ic" data-bs-toggle="modal"
-                                                                data-bs-target="#deleteDoctorModal" data-bs-delete="add">
-                                                            <i class="bi bi-dash-circle-fill"></i>
-                                                        </button>
-                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col-auto mx-auto text-center">
-                                            <button type="submit" class="btn btn-primary">Thêm dịch vụ</button>
+                                            <button 
+                                                type="submit"
+                                                class="btn btn-primary"
+                                                >Thêm dịch vụ</button>
                                         </div>
                                     </form>
                                 </div>
@@ -312,121 +258,32 @@
                     </div>
                 </div>
 
-                <!-- Edit Service Modal -->
-                <div class="modal fade" id="editServiceModal">
-                    <div class="modal-dialog modal-lg">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <div class="non-block"></div>
-                                <h5 class="modal-title" id="staticBackdropLabel">Chỉnh sửa dịch vụ</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+
+            </div>
+            
+             <!-- Select Doctor Modal -->
+        <div class="modal fade" id="selectDoctorModal" data-bs-keyboard="false" tabindex="-1"
+             aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-doctor">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div class="non-block"></div>
+                        <h5 class="modal-title" id="staticBackdropLabel">Chọn bác sĩ</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="list-doctors">
+                            <div class="list-doctors-scroll">
                             </div>
-                            <div class="modal-body">
-                                <div class="container-fluid">
-                                    <form class="row g-3">
-                                        <div class="pe-5 col-6">
-                                            <div class="row mb-3">
-                                                <label for="serviceCode" class="col-4 col-form-label">Mã dịch vụ</label>
-                                                <div class="col-8">
-                                                    <input type="text" class="form-control" name="service_code"
-                                                           id="serviceCode" placeholder="SVCS999" value="SVCS001">
-                                                </div>
-                                            </div>
-                                            <div class="row mb-3">
-                                                <label for="serviceName" class="col-4 col-form-label">Tên dịch vụ</label>
-                                                <div class="col-8">
-                                                    <input type="text" class="form-control" name="service_name"
-                                                           id="serviceName" placeholder="Chuyên khoa mắt"
-                                                           value="Chuyên khoa mắt">
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <label for="serviceDesc" class="col-4 col-form-label">Mô tả</label>
-                                                <div class="col-8">
-                                                    <textarea class="form-control" name="service_desc" id="serviceDesc"
-                                                              rows="3"></textarea>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="ps-5 col-6">
-                                            <div class="row">
-                                                <div class="col-7 col-form-label">
-                                                    Bác sĩ
-                                                </div>
-                                                <button id="add-btn" type="button" class="btn btn-light col-5"
-                                                        data-bs-toggle="modal" data-bs-target="#selectDoctorModal"
-                                                        data-bs-select="edit">
-                                                    Thêm bác sĩ
-                                                    <i class="bi bi-plus-circle-fill ms-1"></i>
-                                                </button>
-                                            </div>
-                                            <div class="row list-doctors">
-                                                <div class="list-doctors-scroll">
-                                                    <div class="doctor-card px-0">
-                                                        <div class="img-cover">
-                                                            <img src="https://via.placeholder.com/60" alt="">
-                                                        </div>
-                                                        <div class="d-flex flex-column my-2 mx-3">
-                                                            <span>Nguyễn Bác Sĩ</span>
-                                                            <span>username: bacsing</span>
-                                                        </div>
-                                                        <button class="btn-only-ic" data-bs-toggle="modal"
-                                                                data-bs-target="#deleteDoctorModal" data-bs-delete="edit">
-                                                            <i class="bi bi-dash-circle-fill"></i>
-                                                        </button>
-                                                    </div>
-                                                    <div class="doctor-card px-0">
-                                                        <div class="img-cover">
-                                                            <img src="https://via.placeholder.com/60" alt="">
-                                                        </div>
-                                                        <div class="d-flex flex-column my-2 mx-3">
-                                                            <span>Nguyễn Bác Sĩ</span>
-                                                            <span>username: bacsing</span>
-                                                        </div>
-                                                        <button class="btn-only-ic" data-bs-toggle="modal"
-                                                                data-bs-target="#deleteDoctorModal" data-bs-delete="edit">
-                                                            <i class="bi bi-dash-circle-fill"></i>
-                                                        </button>
-                                                    </div>
-                                                    <div class="doctor-card px-0">
-                                                        <div class="img-cover">
-                                                            <img src="https://via.placeholder.com/60" alt="">
-                                                        </div>
-                                                        <div class="d-flex flex-column my-2 mx-3">
-                                                            <span>Nguyễn Bác Sĩ</span>
-                                                            <span>username: bacsing</span>
-                                                        </div>
-                                                        <button class="btn-only-ic" data-bs-toggle="modal"
-                                                                data-bs-target="#deleteDoctorModal" data-bs-delete="edit">
-                                                            <i class="bi bi-dash-circle-fill"></i>
-                                                        </button>
-                                                    </div>
-                                                    <div class="doctor-card px-0">
-                                                        <div class="img-cover">
-                                                            <img src="https://via.placeholder.com/60" alt="">
-                                                        </div>
-                                                        <div class="d-flex flex-column my-2 mx-3">
-                                                            <span>Nguyễn Bác Sĩ</span>
-                                                            <span>username: bacsing</span>
-                                                        </div>
-                                                        <button class="btn-only-ic" data-bs-toggle="modal"
-                                                                data-bs-target="#deleteDoctorModal" data-bs-delete="edit">
-                                                            <i class="bi bi-dash-circle-fill"></i>
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-auto mx-auto text-center">
-                                            <button type="submit" class="btn btn-primary">Lưu thay đổi</button>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
+                        </div>
+                        <div class="col-auto mx-auto text-center">
+                            <button id="addDoc" type="button" class="btn btn-primary">Thêm</button>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
 
             <!-- Delete Service Modal -->
             <div class="modal fade" id="deleteServiceModal" data-bs-keyboard="false" tabindex="-1"
@@ -437,111 +294,20 @@
                             <h5 class="modal-title" id="staticBackdropLabel">Thông báo</h5>
                         </div>
                         <div class="modal-body text-center">
-                            Bạn có muốn xóa dịch vụ chuyên khoa mắt không?
+                            Bạn có muốn xóa dịch vụ <span id="service_name"></span> không?
                         </div>
                         <div class="modal-footer">
-                            <button class="btn btn-light" data-bs-target="#deleteServiceModal" data-bs-toggle="modal">
+                            <button class="btn btn-light" data-bs-dismiss="modal">
                                 Không</button>
-                            <button class="btn btn-primary" data-bs-target="#deleteServiceModal" data-bs-toggle="modal">
-                                Có</button>
+                            <button id='delete-btn' class="btn btn-primary" data-bs-dismiss="modal">
+                                Có
+                            </button>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Select Doctor Modal -->
-            <div class="modal fade" id="selectDoctorModal" data-bs-keyboard="false" tabindex="-1"
-                 aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                <div class="modal-dialog modal-doctor">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <div class="non-block"></div>
-                            <h5 class="modal-title" id="staticBackdropLabel">Chọn bác sĩ</h5>
-                            <button type="button" class="btn-close select-dismiss" data-bs-toggle="modal"
-                                    aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <div class="list-doctors">
-                                <div class="list-doctors-scroll">
-                                    <div class="doctor-card px-0 active">
-                                        <div class="img-cover">
-                                            <img src="https://via.placeholder.com/60" alt="">
-                                        </div>
-                                        <div class="d-flex flex-column my-2 mx-3">
-                                            <span>Nguyễn Bác Sĩ</span>
-                                            <span>username: bacsing</span>
-                                        </div>
-                                        <button class="btn-checked">
-                                            <i class="bi bi-check-circle-fill"></i>
-                                        </button>
-                                    </div>
-                                    <div class="doctor-card px-0 active">
-                                        <div class="img-cover">
-                                            <img src="https://via.placeholder.com/60" alt="">
-                                        </div>
-                                        <div class="d-flex flex-column my-2 mx-3">
-                                            <span>Nguyễn Bác Sĩ</span>
-                                            <span>username: bacsing</span>
-                                        </div>
-                                        <button class="btn-checked">
-                                            <i class="bi bi-check-circle-fill"></i>
-                                        </button>
-                                    </div>
-                                    <div class="doctor-card px-0">
-                                        <div class="img-cover">
-                                            <img src="https://via.placeholder.com/60" alt="">
-                                        </div>
-                                        <div class="d-flex flex-column my-2 mx-3">
-                                            <span>Nguyễn Bác Sĩ</span>
-                                            <span>username: bacsing</span>
-                                        </div>
-                                        <button class="btn-checked">
-                                            <i class="bi bi-check-circle-fill"></i>
-                                        </button>
-                                    </div>
-                                    <div class="doctor-card px-0">
-                                        <div class="img-cover">
-                                            <img src="https://via.placeholder.com/60" alt="">
-                                        </div>
-                                        <div class="d-flex flex-column my-2 mx-3">
-                                            <span>Nguyễn Bác Sĩ</span>
-                                            <span>username: bacsing</span>
-                                        </div>
-                                        <button class="btn-checked">
-                                            <i class="bi bi-check-circle-fill"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-auto mx-auto text-center">
-                                <button type="submit" class="btn btn-primary select-dismiss"
-                                        data-bs-toggle="modal">Thêm</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
-            <!-- Delete Doctor Modal -->
-            <div class="modal fade" id="deleteDoctorModal" data-bs-keyboard="false" tabindex="-1"
-                 aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered modal-delete">
-                    <div class="modal-content">
-                        <div class="modal-header justify-content-center">
-                            <h5 class="modal-title" id="staticBackdropLabel">Thông báo</h5>
-                        </div>
-                        <div class="modal-body text-center">
-                            Bạn có muốn xóa "Nguyễn Bác Sĩ" khỏi dịch vụ "Chuyên khoa mắt" không?
-                        </div>
-                        <div class="modal-footer">
-                            <button class="btn btn-light delete-dismiss" data-bs-toggle="modal">
-                                Không</button>
-                            <button class="btn btn-primary delete-dismiss" data-bs-toggle="modal">
-                                Có</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
 
 
@@ -552,17 +318,282 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
                 integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js" integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
 
-        <script src="./assets/service/index.js"></script>
+        <script src="./index.js"></script>
+        <script>
+                                                            function showDetailServiceModal(data = {}) {
+                                                            $('#detailServiceModal .list-doctors-scroll').html('')
+                                                                    if (!data) return;
+                                                            $("#detailServiceModal .service_id").html(data?.id)
+                                                                    $("#detailServiceModal .service_name").html(data?.name)
+                                                                    $("#detailServiceModal .service_desc").html(data?.description)
+                                                                    data?.doctors?.length > 0 && data?.doctors.forEach(doctor => {
+                                                                    let html =
+                                                                            '<div class="doctor-card px-0">' +
+                                                                            '<div class="img-cover">' +
+                                                                            '<img src=' + doctor?.image + ' alt="">' +
+                                                                            '</div>' +
+                                                                            '<div class="d-flex flex-column my-2 mx-4">' +
+                                                                            doctor?.name +
+                                                                            `Id ${doctor.username}` +
+                                                                            '</div>' +
+                                                                            '</div>'
 
-        <script src="./assets/js/jquery-3.6.0.min.js" crossorigin="anonymous"></script>
-        <script src="./assets/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-        <script src="./assets/js/star-rating.js" type="text/javascript"></script>
-        <script src="./assets/themes/krajee-fas/theme.js" type="text/javascript"></script>
-        <script src="./assets/js/select2.full.min.js"></script>
-        <script src="./assets/js/custom.js"></script>
+                                                                            $('#detailServiceModal .list-doctors-scroll').append(html)
+                                                                    })
+                                                                    const detailModal = new bootstrap.Modal(document.getElementById('detailServiceModal'), {})
+                                                                    detailModal.show()
+                                                            }
+
+                                                            function showAddServiceModal() {
+                                                            const addModal = new bootstrap.Modal(document.getElementById('addServiceModal'), {})
+                                                                    addModal.show()
+                                                            }
+
+                                                            function showEditServiceModal(data = {}) {
+                                                            $('#editServiceModal .list-doctors-scroll').html('')
+                                                                    if (!data) return;
+                                                            $('#editServiceModal #serviceCode').val(data?.id)
+                                                                    $('#editServiceModal #serviceName').val(data?.name)
+                                                                    $('#editServiceModal #serviceDesc').val(data?.description)
+                                                                    // hiển thị danh sách bác sĩ
+                                                                    renderDoctorListView(data?.doctors, '#editServiceModal')
+
+                                                                    const editModal = new bootstrap.Modal(document.getElementById('editServiceModal'), {})
+                                                                    editModal.show()
+                                                            }
+
+                                                            function renderDoctorListView (doctors, from) {
+                                                            $(from + ' .list-doctors-scroll').html('')
+                                                                    doctors?.length > 0 && doctors.forEach(doctor => {
+                                                                    let doctorCard = document.createElement('div')
+                                                                            doctorCard.setAttribute('class', 'doctor-card px0')
+                                                                            doctorCard.setAttribute('id', doctor?.username)
+
+                                                                            let imgCover = document.createElement('div')
+                                                                            imgCover.setAttribute('class', 'img-cover')
+                                                                            let img = document.createElement('img')
+                                                                            img.src = doctor?.image
+                                                                            img.alt = ''
+                                                                            imgCover.appendChild(img)
+
+                                                                            let divName = document.createElement('div')
+                                                                            divName.setAttribute('class', 'd-flex flex-column my-2 mx-3')
+                                                                            divName.innerHTML = doctor.name + '<br/>' + ' Id ' + doctor.username
+                                                                            let button = document.createElement('button')
+                                                                            button.setAttribute('type', 'button')
+                                                                            button.setAttribute('class', 'btn-only-ic')
+                                                                            button.onclick = function() {
+                                                                            showDeleteDoctorModal({doctor, from})
+                                                                            }
+                                                                    let icon = document.createElement('i')
+                                                                            icon.setAttribute('class', 'bi bi-dash-circle-fill')
+                                                                            button.appendChild(icon)
+
+                                                                            doctorCard.appendChild(imgCover)
+                                                                            doctorCard.appendChild(divName)
+                                                                            doctorCard.appendChild(button)
+
+                                                                            $(from + ' .list-doctors-scroll').append(doctorCard)
+                                                                    })
+                                                            }
+
+                                                            function showSelectDoctorModal(from) {
+                                                            const selectDoc = new bootstrap.Modal(document.getElementById('selectDoctorModal'), {})
+                                                             console.log('123')
+
+                                                                    let doctors = [];
+            <c:forEach items="${doctors}" var="doctor"  varStatus="counter" >
+                                                            doctors.push({
+                                                            name: '${doctor.name}',
+                                                                    username: '${doctor.id}',
+                                                                    image: '${doctor.image}'
+                                                            });
+            </c:forEach>
+
+
+                                                            let doctorCards = $(from + ' .list-doctors-scroll > .doctor-card')
+                                                                    let listId = []
+                                                                    if (doctorCards?.length > 0) {
+                                                            for (let i = 0; i < doctorCards?.length; i++) {
+                                                            listId.push(doctorCards[i].id)
+                                                            }
+                                                            }
+                                                            renderDoctorListSelect(doctors, from, listId)
+                                                                    const buttonAddDoc = $('#selectDoctorModal #addDoc')
+                                                                    buttonAddDoc[0].onclick = function() {
+                                                            console.log(doctors);
+                                                            addDoctorBackToList(doctors, from)
+                                                                    selectDoc.hide()
+                                                            }
+                                                            selectDoc.show()
+                                                            }
+
+                                                            function renderDoctorListSelect (doctors, from, listActive) {
+                                                            console.log(listActive)
+                                                                    $('#selectDoctorModal .list-doctors-scroll').html('')
+                                                                    setTimeout(() => {
+                                                                    doctors?.length > 0 && doctors.forEach(doctor => {
+                                                                    let doctorCard = document.createElement('div')
+                                                                            doctorCard.setAttribute('class', 'doctor-card px0')
+                                                                            if (listActive.includes(doctor.username)) doctorCard.classList.add('active')
+                                                                            doctorCard.setAttribute('id', doctor?.username)
+                                                                            doctorCard.onclick = function () {
+                                                                            selectDoctor(doctor?.username)
+                                                                            }
+
+                                                                    let imgCover = document.createElement('div')
+                                                                            imgCover.setAttribute('class', 'img-cover')
+                                                                            let img = document.createElement('img')
+                                                                            img.src = doctor?.image
+                                                                            img.alt = ''
+                                                                            imgCover.appendChild(img)
+
+                                                                            let divName = document.createElement('div')
+                                                                            let doctornameSpan = document.createElement('span')
+                                                                            let usernameSpan = document.createElement('span')
+                                                                            divName.setAttribute('class', 'd-flex flex-column my-2 mx-3')
+                                                                            doctornameSpan.innerHTML = doctor?.name
+                                                                            usernameSpan.innerHTML = 'Id ' + doctor.username
+                                                                            divName.appendChild(doctornameSpan)
+                                                                            divName.appendChild(usernameSpan)
+
+                                                                            let button = document.createElement('button')
+                                                                            button.setAttribute('type', 'button')
+                                                                            button.setAttribute('class', 'btn-checked')
+
+                                                                            let icon = document.createElement('i')
+                                                                            icon.setAttribute('class', 'bi bi-check-circle-fill')
+                                                                            button.appendChild(icon)
+
+                                                                            doctorCard.appendChild(imgCover)
+                                                                            doctorCard.appendChild(divName)
+                                                                            doctorCard.appendChild(button)
+
+                                                                            $('#selectDoctorModal .list-doctors-scroll').append(doctorCard)
+                                                                    })
+                                                                    }, 100)
+                                                            }
+
+                                                            function showDeleteServiceModal(id, serviceName) {
+                                                            $('#deleteServiceModal #service_name').html(serviceName)
+                                                                    const deleteModal = new bootstrap.Modal(document.getElementById('deleteServiceModal'), {})
+                                                                    deleteModal.show()
+                                                                    const button = $('#deleteServiceModal #delete-btn')[0].onclick = function () {
+                                                            deleteServiceSubmit(id)
+                                                            }
+                                                            }
+
+                                                            function showDeleteDoctorModal({doctor, from}) {
+                                                            $('#deleteDoctorModal .doctor-name').html(doctor?.name)
+                                                                    $('#deleteDoctorModal .btn-confirm')[0].onclick = function() {
+                                                            deleteDoctor(doctor?.username, from)
+                                                            }
+                                                            const deleteDocModal = new bootstrap.Modal(document.getElementById('deleteDoctorModal'), {})
+                                                                    deleteDocModal.show()
+                                                            }
+
+                                                            function addServiceSubmit () {
+                                                            const idModal = '#addServiceModal'
+                                                                    const service_id = $(idModal + ' #serviceCode').val()
+                                                                    const service_name = $(idModal + ' #serviceName').val()
+                                                                    const service_desc = $(idModal + ' #serviceDesc').val()
+
+                                                                    let doctorCards = $(idModal + ' .list-doctors-scroll > .doctor-card')
+                                                                    let listId = []
+                                                                    if (doctorCards?.length > 0) {
+                                                            for (let i = 0; i < doctorCards?.length; i++) {
+                                                            listId.push(doctorCards[i].id)
+                                                            }
+                                                            }
+                                                            const body = {
+                                                            service_id,
+                                                                    service_name,
+                                                                    service_desc,
+                                                                    doctors: listId
+                                                            }
+                                                            const stringListId = listId.join('-')
+                                                                    window.location.href = 'AddServiceController?service_name=' + service_name +
+                                                                    '&service_desc=' + service_desc +
+                                                                    '&list_doctors=' + stringListId
+                                                            }
+
+
+
+
+                                                            function editServiceSubmit () {
+                                                            const idModal = '#editServiceModal'
+                                                                    const service_id = $(idModal + ' #serviceCode').val()
+                                                                    const service_name = $(idModal + ' #serviceName').val()
+                                                                    const service_desc = $(idModal + ' #serviceDesc').val()
+
+                                                                    let doctorCards = $(idModal + ' .list-doctors-scroll > .doctor-card')
+                                                                    let listId = []
+                                                                    if (doctorCards?.length > 0) {
+                                                            for (let i = 0; i < doctorCards?.length; i++) {
+                                                            listId.push(doctorCards[i].id)
+                                                            }
+                                                            }
+                                                            const body = {
+                                                            service_id,
+                                                                    service_name,
+                                                                    service_desc,
+                                                                    doctors: listId
+                                                            }
+                                                            const stringListId = listId.join('-')
+                                                                    window.location.href = 'UpdateServiceController?service_name=' + service_name +
+                                                                    '&service_id=' + service_id +
+                                                                    '&service_desc=' + service_desc +
+                                                                    '&list_doctors=' + stringListId
+                                                                    const modal = new bootstrap.Modal(document.getElementById('editServiceModal'), {})
+                                                                    modal.hide()
+                                                            }
+
+                                                            function deleteServiceSubmit(id) {
+                                                            window.location.href = 'DeleteServiceController?service_id=' + id
+                                                            }
+
+                                                            function selectDoctor(username) {
+                                                            const selectingDoctor = $('#selectDoctorModal .list-doctors-scroll > .doctor-card#' + username)
+                                                                    if (selectingDoctor.length <= 0) return;
+                                                                 console.log('abcxz')   
+                                                            if (selectingDoctor[0].classList.contains('active')) {
+                                                            selectingDoctor[0].classList.remove('active')
+                                                            } else {
+                                                            selectingDoctor[0].classList.add('active')
+                                                            }
+
+                                                            const activeDoctors = $('#selectDoctorModal .active')
+                                                                    const buttonAddDoc = $('#selectDoctorModal #addDoc')
+                                                                    if (activeDoctors.length === 0) {
+                                                            buttonAddDoc[0].setAttribute('disabled', true)
+                                                            } else {
+                                                            buttonAddDoc[0].removeAttribute('disabled')
+                                                            }
+                                                            }
+
+                                                            function deleteDoctor(username, from) {
+                                                            $(from + ' .list-doctors-scroll > .doctor-card#' + username).remove()
+                                                            }
+
+                                                            function addDoctorBackToList(doctors, from) {
+                                                            const activeDoctors = $('#selectDoctorModal .active')
+                                                                    let listId = []
+                                                                    if (activeDoctors?.length > 0) {
+                                                            for (let i = 0; i < activeDoctors?.length; i++) {
+                                                            listId.push(activeDoctors[i].id)
+                                                            }
+                                                            }
+                                                            let tempList = doctors.filter(item => {
+                                                            return listId.includes(item.username)
+                                                            })
+                                                                    console.log()
+                                                                    renderDoctorListView(tempList, from)
+                                                            }
+
+        </script>
+
     </body>
-    <footer>
-        <jsp:include page="./components/footer.jsp" />
-    </footer>
+
 </html>

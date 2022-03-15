@@ -21,8 +21,8 @@ import java.util.logging.Logger;
  * @author TrangCT
  */
 public class FeedbackDAOImpl extends DBContext implements FeedbackDAO {
-    
 
+    @Override
     public Pagination<FeedbackDTO> getAllFeedback(int pageIndex, int pageSize) {
         Pagination<FeedbackDTO> pagination = new Pagination<>();
         List<FeedbackDTO> feedbacks = new ArrayList<>();
@@ -94,6 +94,7 @@ public class FeedbackDAOImpl extends DBContext implements FeedbackDAO {
         return 0;
     }
 
+    @Override
     public void addFeedback(Feedback feedback) {
         Connection connecion = null;
         PreparedStatement preparedStatement = null;

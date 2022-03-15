@@ -1,35 +1,49 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Copyright(C) 20022, FPT University
+ * CMS:
+ * Clinic Management System
+ *
+ * Record of change:
+ * DATE            Version             AUTHOR           DESCRIPTION
+ * 2022-02-08      1.0                 MinhVT          Controller Service Management List
  */
 package controller;
 
 import dao.ServiceDAO;
+import dao.UserDAO;
 import dao.impl.ServiceDAOImpl;
+import dao.impl.UserDAOImpl;
+import entity.Doctor;
+import entity.ServiceDTO;
 import entity.Pagination;
-import entity.Service;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- *
- * @author lenovo
+ * <h1>Service List Controller</h1>
+ * Controller to view service management list. Method process data form ServiceDAO and 
+ * forward data to file view
+ * <p>
+ * 
+ * 
+ * @author MinhVT
+ * @version 1.0
+ * @since 2022-02-08
  */
 public class ServiceManagementController extends HttpServlet {
-
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
-     *
+     * Get list services and pagging
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
+     * @throws NumberFormatException if page is not integer
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -50,9 +64,23 @@ public class ServiceManagementController extends HttpServlet {
 
         int pageSize = 5;
         ServiceDAO serviceDAO = new ServiceDAOImpl();
-        Pagination<Service> services
+        Pagination<ServiceDTO> services
                 = serviceDAO.getAllService(pageIndex, pageSize);
+        UserDAO userDAO = new UserDAOImpl();
+
+        List<Doctor> doctors = userDAO.getAllDoctor();
+
+        for (ServiceDTO s : services.getData()) {
+            for (Doctor d : doctors) {
+                if (d.getServiceId() == s.getServiceId()) {
+                    s.getDoctors().add(d);
+                }
+            }
+        }
+
+        request.setAttribute("doctors", doctors);
         request.setAttribute("services", services);
+
         request.getRequestDispatcher("./jsp/serviceManagementList.jsp").forward(request, response);
     }
 

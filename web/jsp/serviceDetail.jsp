@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page language="java" contentType="text/html;charset=UTF-8" %>
 <!--
  * Copyright(C) 20022, FPT University
  * CMS:
@@ -9,7 +10,6 @@
  * 2022-02-08      1.0                 TrangCT          Controller Service Detail
 -->
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -21,11 +21,11 @@
         <link rel="stylesheet" href="./assets/css/select2.min.css" />
         <link rel="stylesheet" href="./assets/css/select2-bootstrap-5-theme.min.css" />
         <link rel="stylesheet" href="./assets/css/custom.css" />
-        <link href="../assets/css/header.css" rel="stylesheet" type="text/css"/>
+        <link href="./assets/css/header.css" rel="stylesheet" type="text/css"/>
     </head>
-    <header>
-        <jsp:include page="./components/customerHeader.jsp" />
-    </header>
+    <!--    <header>
+    <%--<jsp:include page="../components/customerHeader.jsp" />--%>
+</header>-->
     <body>
         <div class="container-fuild">
             <div class="row-fluid mb-5">

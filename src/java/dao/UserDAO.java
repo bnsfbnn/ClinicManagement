@@ -10,6 +10,7 @@
 package dao;
 
 import entity.Account;
+import entity.Doctor;
 import entity.Pagination;
 import entity.User;
 import java.util.List;
@@ -28,22 +29,28 @@ public interface UserDAO {
     /**
      * - Get all account with infomation
      *
+     * @param pageIndex
+     * @param pageSize
      * @return a list of <code>Account</code> objects. <br>
      * -It is a <code>java.util.List</code> object
      * @throws SQLException when <code>java.sql.SQLException</code> occurs.
      */
     Pagination<Account> getAllAccount(int pageIndex, int pageSize);
 
-    /**
-     * Delete a <code>entity.Account</code> entity by id.
-     *
-     * @param id is id of an account that will be deleted.
-     */
     void deleteAccount(int id);
-
+    
     void updateAccount(User user);
-    
-    void createAccount (User user);
-    
+
+    void createAccount(User user);
+
     void addDoctorForService(int doctor, int service);
+
+    List<Doctor> getAllDoctor();
+
+    List<Doctor> getDoctorByServiceId(int id);
+    
+     void updateAccountByAdmin(User user);
+     
+     User getUserById(int id);
+
 }

@@ -7,7 +7,6 @@
  * DATE            Version             AUTHOR           DESCRIPTION
  * 2022-02-08      1.0                 TrangCT          Controller Service Detail
  */
-
 package controller;
 
 import dao.PackageDAO;
@@ -26,11 +25,11 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  * <h1>Service Detail Controller</h1>
- * Controller to view service detail. Method process data form ServiceDAO and 
+ * Controller to view service detail. Method process data form ServiceDAO and
  * forward data to file view
  * <p>
- * 
- * 
+ *
+ *
  * @author TrangCT
  * @version 1.0
  * @since 2022-02-08
@@ -39,8 +38,8 @@ public class ServiceDetailController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     * Get Service by id from client or url and forward to view 
+     * methods. Get Service by id from client or url and forward to view
+     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs

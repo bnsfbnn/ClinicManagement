@@ -13,6 +13,7 @@ import dao.UserDAO;
 import dao.impl.UserDAOImpl;
 import entity.User;
 import java.io.IOException;
+import java.sql.Date;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -30,6 +31,7 @@ import javax.servlet.http.HttpServletResponse;
  * createAccount to create an account.
  *
  * Bugs: none
+ *
  * @author Hoang Thi Thu Huong
  */
 public class CreateAccountController extends HttpServlet {
@@ -79,10 +81,9 @@ public class CreateAccountController extends HttpServlet {
 
         GetAllAccountController accountController = new GetAllAccountController();
         accountController.processRequest(request, response);
-
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *

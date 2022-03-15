@@ -1,41 +1,31 @@
 /*
- * Copyright(C) 20022, FPT University
- * CMS:
- * Clinic Management System
+ * Copyright(C) 2022, FPT University
+ * CMS
+ * CLINIC MANAGEMENT SYSTEM
  *
  * Record of change:
- * DATE            Version             AUTHOR           DESCRIPTION
- * 2022-02-08      1.0                 MinhVT          Controller Service Management Detail
+ * DATE            Version          AUTHOR           DESCRIPTION
+ * 2022-02-08      1.0              HuongHTT         First Implement 
  */
 package controller;
 
-import dao.ServiceDAO;
 import dao.UserDAO;
-import dao.impl.ServiceDAOImpl;
 import dao.impl.UserDAOImpl;
-import entity.Account;
-import entity.Doctor;
-import entity.Service;
+import entity.User;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * <h1>Service List Controller</h1>
- * Controller to view service management detail. Method process data form ServiceDAO and 
- * forward data to file view
- * <p>
- * 
- * 
- * @author MinhVT
- * @version 1.0
- * @since 2022-02-08
+ * This class uses <code>dao.impl.UserDAOImpl</code> functions:<br>
+ * createAccount to create an account.
+ *
+ * Bugs: none
+ * @author Hoang Thi Thu Huong
  */
-public class ServiceManagementDetailController extends HttpServlet {
+public class ViewAccountDetails extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -49,17 +39,10 @@ public class ServiceManagementDetailController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        int id = Integer.parseInt(request.getParameter("Id"));
-        ServiceDAO serviceDAO = new ServiceDAOImpl();
-        Service service = serviceDAO.getById(id);
-
+        int id = Integer.parseInt(request.getParameter("id"));
         UserDAO userDAO = new UserDAOImpl();
-        List<Doctor> doctors = userDAO.getDoctorByServiceId(service.getServiceId());
-        request.setAttribute("service", service);
-        request.setAttribute("doctors", doctors);
-        List<Doctor> allDoctors = userDAO.getAllDoctor();
-        request.setAttribute("allDoctors", allDoctors);
-        request.getRequestDispatcher("./jsp/editService.jsp").forward(request, response);
+        User user = userDAO.getUserById(id);
+        request.setAttribute("user", user);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -12,6 +12,7 @@ package controller;
 
 import dao.ServiceDAO;
 import dao.impl.ServiceDAOImpl;
+import entity.ServiceDTO;
 import entity.Pagination;
 import entity.Service;
 import java.io.IOException;
@@ -64,7 +65,7 @@ public class ServiceController extends HttpServlet {
         int pageSize = 5; // default page size
         ServiceDAO serviceDAO = new ServiceDAOImpl();
         //List service with pageIndex and pageSize
-        Pagination<Service> services
+        Pagination<ServiceDTO> services
                 = serviceDAO.getAllService(pageIndex, pageSize);
         //set atrribute services with values serviece (Pagination<Services>)
         request.setAttribute("services", services);

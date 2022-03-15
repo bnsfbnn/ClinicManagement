@@ -5,7 +5,7 @@
  *
  * Record of change:
  * DATE            Version             AUTHOR           DESCRIPTION
- * 2022-02-08      1.0                 MinhVT          Controller Service Management Detail
+ * 2022-02-26      1.0                 MinhVT          Controller Update Service 
  */
 package controller;
 
@@ -13,53 +13,60 @@ import dao.ServiceDAO;
 import dao.UserDAO;
 import dao.impl.ServiceDAOImpl;
 import dao.impl.UserDAOImpl;
-import entity.Account;
 import entity.Doctor;
 import entity.Service;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- * <h1>Service List Controller</h1>
- * Controller to view service management detail. Method process data form ServiceDAO and 
- * forward data to file view
- * <p>
- * 
- * 
- * @author MinhVT
- * @version 1.0
- * @since 2022-02-08
- */
-public class ServiceManagementDetailController extends HttpServlet {
+public class UpdateServiceController extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        int id = Integer.parseInt(request.getParameter("Id"));
+
+        String serviceName = request.getParameter("service_name");
+        String serviceBrief = request.getParameter("service_desc");
+        int serviceId = Integer.parseInt(request.getParameter("service_id"));
+
+        String[] ids = request.getParameter("list_doctors").split("-");
+        List<Integer> idList = new ArrayList<>();
+
+        if (!request.getParameter("list_doctors").equals("")) {
+            for (String i : ids) {
+                idList.add(Integer.parseInt(i));
+            }
+        }
+        Service service = new Service();
+        service.setServiceId(serviceId);
+        service.setServiceName(serviceName);
+        service.setServiceDescription(serviceBrief);
         ServiceDAO serviceDAO = new ServiceDAOImpl();
-        Service service = serviceDAO.getById(id);
+        serviceDAO.removeAllDoctor(serviceId);
+        serviceDAO.updateService(service);
 
         UserDAO userDAO = new UserDAOImpl();
+        if (idList.isEmpty()) {
+            userDAO.addDoctorForService(0, serviceId);
+        }
+        for (int k : idList) {
+            userDAO.addDoctorForService(k, serviceId);
+        }
+
+        service = serviceDAO.getById(serviceId);
+
         List<Doctor> doctors = userDAO.getDoctorByServiceId(service.getServiceId());
         request.setAttribute("service", service);
         request.setAttribute("doctors", doctors);
         List<Doctor> allDoctors = userDAO.getAllDoctor();
         request.setAttribute("allDoctors", allDoctors);
         request.getRequestDispatcher("./jsp/editService.jsp").forward(request, response);
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

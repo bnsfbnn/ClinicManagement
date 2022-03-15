@@ -41,7 +41,7 @@
             <div class="row-fluid mb-3">
                 <img class="col-lg-12 p-0" src="./assets/images/banner.jpg" alt="Banner"/>
             </div>
-            <div class="row">
+            <div class="row mt-3">
                 <c:forEach items="${services.data}" var="service">
                     <div class="col-4 m-0 px-auto">
                         <div >
@@ -63,10 +63,10 @@
             </div>
             <c:if test="${services.totalPage > 1}">
                 <div class="row">
-                    <div class="col-12 text-center m-0 p-0">
+                    <div class="col-12 text-center">
                         <ul>
                             <c:if test="${services.currentPage > 1}">
-                                <a class="btn btn-light" href="${requestScope['javax.servlet.forward.request_uri']}?page=${restaurants.currentPage}">Trang trước</a>
+                                <a class="btn btn-light" href="${requestScope['javax.servlet.forward.request_uri']}?page=${services.currentPage-1}">Trang trước</a>
                             </c:if>
                             <c:forEach var="pageNumber" begin="1" end="${services.totalPage}" step="1">
                                 <c:if test="${services.currentPage == pageNumber}">
@@ -77,7 +77,7 @@
                                 </c:if>
                             </c:forEach>
                             <c:if test="${services.currentPage < services.totalPage}">
-                                <a class="btn btn-light" href="${requestScope['javax.servlet.forward.request_uri']}?page=${services.currentPage +2}">Trang sau</a>
+                                <a class="btn btn-light" href="${requestScope['javax.servlet.forward.request_uri']}?page=${services.currentPage+1}">Trang sau</a>
                             </c:if>
                         </ul>
                     </div>
