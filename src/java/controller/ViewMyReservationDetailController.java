@@ -45,7 +45,7 @@ public class ViewMyReservationDetailController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            int reservationId = (request.getParameter("reservationId") != null) ? Integer.parseInt(request.getParameter("reservationId")) : -1;
+            int reservationId = (request.getParameter("reservationId") != null) ? Integer.parseInt(request.getParameter("reservationId").trim()) : -1;
             ReservationDAO reservationDAO = new ReservationDAOImpl();
             Reservation reservation = reservationDAO.getReservationById(reservationId);
             request.setAttribute("reservation", reservation);

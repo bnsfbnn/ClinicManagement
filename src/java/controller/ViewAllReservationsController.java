@@ -57,8 +57,8 @@ public class ViewAllReservationsController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            String viewDay = (request.getParameter("viewDay") != null) ? Utils.parseDateFormat(request.getParameter("viewDay")) : Utils.getToday();
-            int serviceId = (request.getParameter("serviceId") != null) ? Integer.parseInt(request.getParameter("serviceId")): -1;
+            String viewDay = (request.getParameter("viewDay") != null) ? Utils.parseDateFormat(request.getParameter("viewDay").trim()) : Utils.getToday();
+            int serviceId = (request.getParameter("serviceId") != null) ? Integer.parseInt(request.getParameter("serviceId").trim()): -1;
             ServiceDAO serviceDAO = new ServiceDAOImpl(); // get serviceDAO object
             ReservationDAO reservationDAO = new ReservationDAOImpl();// get reservationDAO object
             ArrayList<Service> services = serviceDAO.getServices();

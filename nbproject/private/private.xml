@@ -12,20 +12,10 @@
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/trang/Desktop/project/ClinicManagement/web/jsp/viewAllReservation.jsp</file>
-            <file>file:/C:/Users/trang/Desktop/project/ClinicManagement/web/jsp/home.jsp</file>
-            <file>file:/C:/Users/trang/Desktop/project/ClinicManagement/web/jsp/serviceDetail.jsp</file>
-            <file>file:/C:/Users/trang/Desktop/project/ClinicManagement/web/jsp/serviceManagementList.jsp</file>
-            <file>file:/C:/Users/trang/Desktop/project/ClinicManagement/web/jsp/viewAllCustomerReservation.jsp</file>
-            <file>file:/C:/Users/trang/Desktop/project/ClinicManagement/web/jsp/login.jsp</file>
-            <file>file:/C:/Users/trang/Desktop/project/ClinicManagement/src/java/controller/ViewCustomerReservationsList.java</file>
-            <file>file:/C:/Users/trang/Desktop/project/ClinicManagement/web/jsp/serviceList.jsp</file>
-            <file>file:/C:/Users/trang/Desktop/project/ClinicManagement/web/jsp/viewAllAccount.jsp</file>
-            <file>file:/C:/Users/trang/Desktop/project/ClinicManagement/web/jsp/serviceManagementDetail.jsp</file>
-            <file>file:/C:/Users/trang/Desktop/project/ClinicManagement/src/java/controller/ViewFeedBackListController.java</file>
-            <file>file:/C:/Users/trang/Desktop/project/ClinicManagement/web/jsp/viewCustomerReservationDetail.jsp</file>
-            <file>file:/C:/Users/trang/Desktop/project/ClinicManagement/web/jsp/viewMyReservation.jsp</file>
-            <file>file:/C:/Users/trang/Desktop/project/ClinicManagement/web/jsp/user_profile.jsp</file>
+            <file>file:/C:/Users/Thanh%20Tung/Documents/NetBeansProjects/ClinicManagement/web/jsp/viewMyReservation.jsp</file>
+            <file>file:/C:/Users/Thanh%20Tung/Documents/NetBeansProjects/ClinicManagement/src/java/controller/CancelReservationController.java</file>
+            <file>file:/C:/Users/Thanh%20Tung/Documents/NetBeansProjects/ClinicManagement/src/java/controller/ViewMyReservationController.java</file>
+            <file>file:/C:/Users/Thanh%20Tung/Documents/NetBeansProjects/ClinicManagement/src/java/controller/AddNewExaminationController.java</file>
         </group>
     </open-files>
 </project-private>
