@@ -51,9 +51,9 @@ public class AddNewExaminationController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            int reservationId = (request.getParameter("reservationId") != null) ? Integer.parseInt(request.getParameter("reservationId")) : -1;
-            String examinationDisgosis = (request.getParameter("examinationDisgosis") != null) ? request.getParameter("examinationDisgosis") : "";
-            String examinationPrescription = (request.getParameter("examinationPrescription") != null) ? request.getParameter("examinationPrescription") : "";
+            int reservationId = (request.getParameter("reservationId") != null) ? Integer.parseInt(request.getParameter("reservationId").trim()) : -1;
+            String examinationDisgosis = (request.getParameter("examinationDisgosis") != null) ? request.getParameter("examinationDisgosis").trim() : "";
+            String examinationPrescription = (request.getParameter("examinationPrescription") != null) ? request.getParameter("examinationPrescription").trim() : "";
             String reservationStatus = "Đã khám";
             int check = 0;
             ReservationDAO reservationDAO = new ReservationDAOImpl();
@@ -62,7 +62,7 @@ public class AddNewExaminationController extends HttpServlet {
             ExaminationDAO examinationDAO = new ExaminationDAOImpl();
             check = examinationDAO.insertNewExamination(reservation.getReservationId(), reservation.getConfirmedDoctor().getUserId(), examinationDisgosis, examinationPrescription, reservation.getConfirmedExaminationDate());
             request.setAttribute("check", check);
-            response.sendRedirect("viewMyReservation");
+            request.getRequestDispatcher("viewMyReservation").forward(request, response);
         } catch (Exception e) {
             request.setAttribute("errorMessage", "Không thể tải dữ liệu từ cơ sở dữ liệu");
             request.setAttribute("exceptionMessage", e.getMessage());

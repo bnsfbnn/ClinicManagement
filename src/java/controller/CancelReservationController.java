@@ -45,7 +45,7 @@ public class CancelReservationController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            int reservationId = (request.getParameter("reservationId") != null) ? Integer.parseInt(request.getParameter("reservationId")) : -1;
+            int reservationId = (request.getParameter("reservationId") != null) ? Integer.parseInt(request.getParameter("reservationId").trim()) : -1;
             request.setAttribute("reservationId", reservationId);
             request.getRequestDispatcher("jsp/components/confirmDialog.jsp").forward(request, response);
         } catch (Exception e) {
@@ -72,7 +72,7 @@ public class CancelReservationController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            int reservationId = (request.getParameter("reservationId") != null) ? Integer.parseInt(request.getParameter("reservationId")) : -1;
+            int reservationId = (request.getParameter("reservationId") != null) ? Integer.parseInt(request.getParameter("reservationId").trim()) : -1;
             String reservationStatus = "Đã hủy";
             ReservationDAO reservationDAO = new ReservationDAOImpl();
             reservationDAO.updateReservationStatusById(reservationId, reservationStatus);

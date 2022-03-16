@@ -49,10 +49,10 @@ public class ViewMyReservationController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            String viewDay = (request.getParameter("viewDay") != null) ? Utils.parseDateFormat(request.getParameter("viewDay")) : Utils.getToday();
+            String viewDay = (request.getParameter("viewDay") != null) ? Utils.parseDateFormat(request.getParameter("viewDay").trim()) : Utils.getToday();
             String today = Utils.getToday();
-            String startWeek = (request.getParameter("startWeek") != null) ? (request.getParameter("startWeek")) : Utils.getMondayOfThisWeek();
-            String endWeek = (request.getParameter("endWeek") != null) ? (request.getParameter("endWeek")) : Utils.getSundayOfThisWeek();
+            String startWeek = (request.getParameter("startWeek") != null) ? (request.getParameter("startWeek").trim()) : Utils.getMondayOfThisWeek();
+            String endWeek = (request.getParameter("endWeek") != null) ? (request.getParameter("endWeek").trim()) : Utils.getSundayOfThisWeek();
             ReservationDAO reservationDAO = new ReservationDAOImpl();
             ArrayList<Reservation> reservations = reservationDAO.getReservationByDoctorId(7, startWeek, endWeek);
             ArrayList<String> dayOfWeek = Utils.getDayOfThisWeek(viewDay);
