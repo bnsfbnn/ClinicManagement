@@ -31,10 +31,17 @@ public class RegisterForCustomerController extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ParseException {
-        response.setContentType("text/html;charset=UTF-8");
+     response.setContentType("text/html;charset=UTF-8");
+request.setCharacterEncoding("utf-8");
         String username = request.getParameter("username").trim();
         String email = request.getParameter("email").trim();
         String password = request.getParameter("password").trim();
+        String rePassword = request.getParameter("re-password").trim();
+        if (!password.equals(rePassword)) {
+            request.setAttribute("message", "Password not match");
+            request.getRequestDispatcher("./jsp/Register.jsp").forward(request, response);
+            return;
+        }
         String fullName = request.getParameter("fullName").trim();
 
         DateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
@@ -52,9 +59,8 @@ public class RegisterForCustomerController extends HttpServlet {
         }
         String phone = request.getParameter("phone").trim();
         String address = request.getParameter("address").trim();
-        String avatarImage = request.getParameter("avatarImage").trim();
 
-        User user = new User(4, 0, username, email, password, fullName, sdate, gender, phone, address, avatarImage);
+        User user = new User(4, 0, username, email, password, fullName, sdate, gender, phone, address, "", 0);
         UserDAO userDAO = new UserDAOImpl();
         if (userDAO.login(username, password) != null) {
             request.setAttribute("message", "Username existed");

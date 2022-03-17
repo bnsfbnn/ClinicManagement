@@ -48,7 +48,7 @@
                                     </div>
                                     
                                 </form>
-                                <p class="text-center">không phải thành viên? <a data-toggle="tab" href="#signup">Đăng kí</a></p>
+                                <p class="text-center">không phải thành viên? <a  href="./jsp/Register.jsp">Đăng kí</a></p>
                                 <p style="color: red"> ${message}</p>
                             </div>
                         </div>
