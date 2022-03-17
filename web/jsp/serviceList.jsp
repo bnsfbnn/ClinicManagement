@@ -15,14 +15,14 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Clinic Management</title>
         <link href="./assets/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css" />
         <link href="./assets/themes/krajee-fas/theme.css" media="all" rel="stylesheet" type="text/css"/>
         <link rel="stylesheet" href="./assets/css/select2.min.css" />
         <link rel="stylesheet" href="./assets/css/select2-bootstrap-5-theme.min.css" />
         <link rel="stylesheet" href="./assets/css/custom.css" />
-        <link href="../assets/css/header.css" rel="stylesheet" type="text/css"/>
+        <link href="./assets/css/header.css" rel="stylesheet" type="text/css"/>
     </head>
     <style>
         .card{

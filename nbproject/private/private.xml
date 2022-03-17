@@ -14,8 +14,12 @@
         <group>
             <file>file:/C:/Users/Thanh%20Tung/Documents/NetBeansProjects/ClinicManagement/web/jsp/viewMyReservation.jsp</file>
             <file>file:/C:/Users/Thanh%20Tung/Documents/NetBeansProjects/ClinicManagement/src/java/controller/CancelReservationController.java</file>
-            <file>file:/C:/Users/Thanh%20Tung/Documents/NetBeansProjects/ClinicManagement/src/java/controller/ViewMyReservationController.java</file>
-            <file>file:/C:/Users/Thanh%20Tung/Documents/NetBeansProjects/ClinicManagement/src/java/controller/AddNewExaminationController.java</file>
+            <file>file:/C:/Users/Thanh%20Tung/Documents/NetBeansProjects/ClinicManagement/web/jsp/viewAllReservation.jsp</file>
+            <file>file:/C:/Users/Thanh%20Tung/Documents/NetBeansProjects/ClinicManagement/web/jsp/bookAReservation.jsp</file>
+            <file>file:/C:/Users/Thanh%20Tung/Documents/NetBeansProjects/ClinicManagement/web/jsp/components/viewReservationDetailPopup.jsp</file>
+            <file>file:/C:/Users/Thanh%20Tung/Documents/NetBeansProjects/ClinicManagement/web/jsp/viewAllAccount.jsp</file>
+            <file>file:/C:/Users/Thanh%20Tung/Documents/NetBeansProjects/ClinicManagement/web/jsp/components/confirmDialog.jsp</file>
+            <file>file:/C:/Users/Thanh%20Tung/Documents/NetBeansProjects/ClinicManagement/web/jsp/confirmReservation.jsp</file>
         </group>
     </open-files>
 </project-private>

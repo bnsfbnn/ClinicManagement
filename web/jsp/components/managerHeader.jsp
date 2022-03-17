@@ -32,6 +32,9 @@
                     <li class=nav-item">
                         <a class="nav-link py-3" href="#">Quản lý Phản hồi</a>
                     </li>
+                    <li class=nav-item">
+                        <a class="nav-link py-3" href="#">Duyệt lịch đặt chỗ</a>
+                    </li>
                 </ul>
             </div>
             <div class="dropdown ml-auto">
