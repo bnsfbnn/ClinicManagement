@@ -23,9 +23,9 @@
         <link rel="stylesheet" href="./assets/css/custom.css" />
         <link href="./assets/css/header.css" rel="stylesheet" type="text/css"/>
     </head>
-    <!--    <header>
-    <%--<jsp:include page="../components/customerHeader.jsp" />--%>
-</header>-->
+    <header>
+        <jsp:include page="./components/customerHeader.jsp" />
+    </header>
     <body>
         <div class="container-fuild">
             <div class="row-fluid mb-5">
@@ -77,4 +77,7 @@
         <script src="./assets/js/select2.full.min.js"></script>
         <script src="./assets/js/custom.js"></script>
     </body>
+    <footer>
+        <jsp:include page="./components/footer.jsp" />
+    </footer>
 </html>

@@ -151,74 +151,22 @@
                         </div>
                     </div>
                     <div class="row-fluid my-5">
+                        <div class="col-lg-12"></div>
                         <h1>Tin T?c</h1>
-                        <div class="row border-bottom my-1"></div>
-                        <div class="row col-lg-6 mx-auto my-1">
-                            <input type="text" class="form-control col-md-8" id="searchKeyword">
-                            <button type="button" class="btn btn-primary col-md-4">Tìm ki?m</button>
+                       
+                        <div class="row d-flex justify-content-center my-1">
+                            <h2>BV H?NG NG?C KÝ K?T BIÊN B?N H?P TÁC V?I ?SQ HÀN QU?C, HI?P H?I NG??I HÀN T?I HÀ N?I V? VI?C H? TR? Y T? CHO B?NH NHÂN HÀN QU?C M?C COVID-19</h2>
                         </div>
-                        <div class="row d-flex justify-content-center">
-                            <div class="col-md-4 my-1">
-                                <div class="card" style="width: 18rem;">
-                                    <img class="card-img-top" src="./assets/images/hien-mau-xuan-2022-4-e1644738059686.jpg" alt="Card image cap">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Card title</h5>
-                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                        <a href="#" class="btn btn-primary">View Post Detail</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4 my-1">
-                                <div class="card" style="width: 18rem;">
-                                    <img class="card-img-top" src="..." alt="Card image cap">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Card title</h5>
-                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                        <a href="#" class="btn btn-primary">Go somewhere</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4 my-1">
-                                <div class="card" style="width: 18rem;">
-                                    <img class="card-img-top" src="..." alt="Card image cap">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Card title</h5>
-                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                        <a href="#" class="btn btn-primary">Go somewhere</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4 my-1">
-                                <div class="card" style="width: 18rem;">
-                                    <img class="card-img-top" src="..." alt="Card image cap">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Card title</h5>
-                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                        <a href="#" class="btn btn-primary">Go somewhere</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4 my-1">
-                                <div class="card" style="width: 18rem;">
-                                    <img class="card-img-top" src="..." alt="Card image cap">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Card title</h5>
-                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                        <a href="#" class="btn btn-primary">Go somewhere</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4 my-1">
-                                <div class="card" style="width: 18rem;">
-                                    <img class="card-img-top" src="..." alt="Card image cap">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Card title</h5>
-                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                        <a href="#" class="btn btn-primary">Go somewhere</a>
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="row border-dark my-1">
+                            
                         </div>
+                        <div class="row d-flex justify-content-start">
+                            <b><i>Nguy?n V?n B - 2022-19-10 07:00:00</i></b>
+                        </div>
+                        <div class="row d-flex justify-content-end">
+                            <p>BV H?NG NG?C KÝ K?T BIÊN B?N H?P TÁC V?I ?SQ HÀN QU?C, HI?P H?I NG??I HÀN T?I HÀ N?I V? VI?C H? TR? Y T? CHO B?NH NHÂN HÀN QU?C M?C COVID-19</p>
+                        </div>
+                       
                     </div>
                 </div>
             </div>
