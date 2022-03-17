@@ -220,7 +220,7 @@ public class UserDAOImpl extends DBContext implements UserDAO {
             connecion = getConnection();
             // Get data
             preparedStatement = connecion.prepareStatement("insert into users (role_id, username, full_name, email, birth_date, gender, phone, address, is_active, password)\n"
-                    + "values (?,?,?,?,?,?,?,?, 1,'123456')");
+                    + "values (?,?,?,?,?,?,?,?, 1,?)");
             preparedStatement.setInt(1, user.getRoleId());
             preparedStatement.setString(2, user.getUsername());
             preparedStatement.setString(3, user.getFullName());
@@ -233,6 +233,7 @@ public class UserDAOImpl extends DBContext implements UserDAO {
             }
             preparedStatement.setString(7, user.getPhone());
             preparedStatement.setString(8, user.getAddress());
+              preparedStatement.setString(9, user.getPassword());
             preparedStatement.executeUpdate();
         } catch (Exception ex) {
             ex.printStackTrace();

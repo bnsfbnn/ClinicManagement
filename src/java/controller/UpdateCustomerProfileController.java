@@ -36,11 +36,8 @@ public class UpdateCustomerProfileController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ParseException {
         response.setContentType("text/html;charset=UTF-8");
-        int roleId = Integer.parseInt(request.getParameter("roleId").trim());
-        int serviceId = Integer.parseInt(request.getParameter("serviceId").trim());
-        String username = request.getParameter("username").trim();
+request.setCharacterEncoding("utf-8");
         String email = request.getParameter("email").trim();
-        String password = request.getParameter("password").trim();
         String fullName = request.getParameter("fullName").trim();
 
         DateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
@@ -49,23 +46,17 @@ public class UpdateCustomerProfileController extends HttpServlet {
         java.util.Date jdate = format.parse(date);
         java.sql.Date sdate = new java.sql.Date(jdate.getTime());
 
-        int check = Integer.parseInt(request.getParameter("gender").trim());
-        boolean gender;
-        if (check == 1) {
-            gender = true;
-        } else {
-            gender = false;
-        }
         String phone = request.getParameter("phone").trim();
         String address = request.getParameter("address").trim();
-        String avatarImage = request.getParameter("avatarImage").trim();
+        int id = Integer.parseInt(request.getParameter("id"));
 
-        User user = new User(roleId, serviceId, username, email, password, fullName, sdate, gender, phone, address, avatarImage);
+        User user = new User(0, 0, "", email, "", fullName, sdate, true, phone, address, "", id);
         UserDAO userDAO = new UserDAOImpl();
         userDAO.updateAccount(user);
         HttpSession session = request.getSession();
         session.setAttribute("user", user);
-        request.getRequestDispatcher("./jsp/user_profile.jsp").forward(request, response);
+         session.setAttribute("message", "Update Success");
+        response.sendRedirect("./jsp/user_profile.jsp");
 
     }
 
