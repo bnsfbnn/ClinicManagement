@@ -1,7 +1,11 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Copyright(C) 20022, FPT University
+ * CMS:
+ * Clinic Management System
+ *
+ * Record of change:
+ * DATE            Version             AUTHOR           DESCRIPTION
+ * 2022-03-06      1.0                 MinhVT          Controller Replyfeedback
  */
 package controller;
 
