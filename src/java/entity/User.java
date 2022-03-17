@@ -202,7 +202,7 @@ public class User {
      * of the User.
      */
     public void setRoleId(int role) {
-        this.roleId = roleId;
+        this.roleId = role;
     }
 
     /**

@@ -14,6 +14,7 @@ import dao.UserDAO;
 import entity.Account;
 import entity.Pagination;
 import entity.User;
+import entity.Doctor;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -21,11 +22,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import entity.Doctor;
 
 /**
  *
- * @author Thanh Tung
+ * @author Nguyen Van Nam
  */
 public class UserDAOImpl extends DBContext implements UserDAO {
 
@@ -162,7 +162,7 @@ public class UserDAOImpl extends DBContext implements UserDAO {
         return 0;
     }
 
-    @Override
+   @Override
     public void deleteAccount(int id) {
         logger.log(Level.INFO, "Delete account with id");
         Connection connecion = null;
@@ -171,8 +171,35 @@ public class UserDAOImpl extends DBContext implements UserDAO {
         try {
             connecion = getConnection();
             // Get data
-            preparedStatement = connecion.prepareStatement("update users set is_active = 0 where user_id = ?;");
+            preparedStatement = connecion.prepareStatement("  update users set is_active = 0 where user_id = ?");
             preparedStatement.setInt(1, id);
+            preparedStatement.executeUpdate();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            Logger.getLogger(UserDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            closePreparedStatement(preparedStatement);
+            closeConnection(connecion);
+        }
+    }
+
+    @Override
+    public void updateAccount(User user) {
+        Connection connecion = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet rs = null;
+        try {
+            connecion = getConnection();
+            // Get data
+            preparedStatement = connecion.prepareStatement("update users set email = ?, full_name = ?, birth_date = ?, phone = ? , address = ? where user_id = ?");
+
+            preparedStatement.setString(1, user.getEmail());
+            preparedStatement.setString(2, user.getFullName());
+            preparedStatement.setDate(3, user.getBirthDate());
+            preparedStatement.setString(4, user.getPhone());
+            preparedStatement.setString(5, user.getAddress());
+            preparedStatement.setInt(6, user.getUserId());
+
             preparedStatement.executeUpdate();
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -382,10 +409,5 @@ public class UserDAOImpl extends DBContext implements UserDAO {
             closeConnection(connecion);
         }
         return null;
-    }
-
-    @Override
-    public void updateAccount(User user) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
