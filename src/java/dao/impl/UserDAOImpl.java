@@ -14,6 +14,7 @@ import dao.UserDAO;
 import entity.Account;
 import entity.Pagination;
 import entity.User;
+import entity.Doctor;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -21,7 +22,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import dto.Doctor;
 
 /**
  *
@@ -162,9 +162,29 @@ public class UserDAOImpl extends DBContext implements UserDAO {
         return 0;
     }
 
-    @Override
+   @Override
     public void deleteAccount(int id) {
         logger.log(Level.INFO, "Delete account with id");
+        Connection connecion = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet rs = null;
+        try {
+            connecion = getConnection();
+            // Get data
+            preparedStatement = connecion.prepareStatement("  update users set is_active = 0 where user_id = ?");
+            preparedStatement.setInt(1, id);
+            preparedStatement.executeUpdate();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            Logger.getLogger(UserDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            closePreparedStatement(preparedStatement);
+            closeConnection(connecion);
+        }
+    }
+
+    @Override
+    public void updateAccount(User user) {
         Connection connecion = null;
         PreparedStatement preparedStatement = null;
         ResultSet rs = null;
@@ -234,113 +254,6 @@ public class UserDAOImpl extends DBContext implements UserDAO {
             preparedStatement = connecion.prepareStatement(" update users set service_id = ? where user_id = ? and role_id = 3");
             preparedStatement.setInt(1, service);
             preparedStatement.setInt(2, doctor);
-            preparedStatement.executeUpdate();
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            Logger.getLogger(UserDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            closePreparedStatement(preparedStatement);
-            closeConnection(connecion);
-        }
-    }
-
-    @Override
-    public List<Doctor> getAllDoctor() {
-        logger.log(Level.INFO, "Login Controller");
-        Connection connecion = null;
-        PreparedStatement preparedStatement = null;
-        ResultSet rs = null;
-        List<Doctor> doctor = new ArrayList<>();
-        try {
-            connecion = getConnection();
-            // Get data
-            preparedStatement = connecion.prepareStatement("select * from users where role_id = 3 and is_active = 1;");
-            rs = preparedStatement.executeQuery();
-            while (rs.next()) {
-                Doctor user = new Doctor();
-                user.setId(rs.getInt("user_id"));
-                user.setName(rs.getString("full_name"));
-                user.setImage(rs.getString("avatar_image"));
-                user.setServiceId(rs.getInt("service_id"));
-                doctor.add(user);
-            }
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            Logger.getLogger(UserDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            closeResultSet(rs);
-            closePreparedStatement(preparedStatement);
-            closeConnection(connecion);
-        }
-        return doctor;
-    }
-
-    @Override
-    public List<Doctor> getDoctorByServiceId(int id) {
-        logger.log(Level.INFO, "Login Controller");
-        Connection connecion = null;
-        PreparedStatement preparedStatement = null;
-        ResultSet rs = null;
-        List<Doctor> doctor = new ArrayList<>();
-        try {
-            connecion = getConnection();
-            // Get data
-            preparedStatement = connecion.prepareStatement(" select distinct u.user_id, u.avatar_image, u.full_name, u.service_id, s.service_description \n"
-                    + "	 from users u \n"
-                    + "	 join services s\n"
-                    + "    on u.role_id  = 3 and u.service_id = ? and u.is_active = 1 and s.service_id = ?");
-            preparedStatement.setInt(1, id);
-            preparedStatement.setInt(2, id);
-            rs = preparedStatement.executeQuery();
-            while (rs.next()) {
-                Doctor user = new Doctor();
-                user.setId(rs.getInt("user_id"));
-                user.setName(rs.getString("full_name"));
-                user.setImage(rs.getString("avatar_image"));
-                user.setServiceDescription(rs.getString("service_description"));
-
-                doctor.add(user);
-            }
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            Logger.getLogger(UserDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            closeResultSet(rs);
-            closePreparedStatement(preparedStatement);
-            closeConnection(connecion);
-        }
-        return doctor;
-
-    }
-
-    @Override
-    public void updateAccountByAdmin(User user) {
-        Connection connecion = null;
-        PreparedStatement preparedStatement = null;
-        ResultSet rs = null;
-        try {
-            connecion = getConnection();
-            // Get data
-            preparedStatement = connecion.prepareStatement("update users set email = ?, full_name = ?, birth_date = ?,"
-                    + " phone = ? , address = ? , role_id = ?,  username = ? , gender = ? where user_id = ?");
-
-            preparedStatement.setString(1, user.getEmail());
-            preparedStatement.setString(2, user.getFullName());
-            preparedStatement.setDate(3, user.getBirthDate());
-            preparedStatement.setString(4, user.getPhone());
-            preparedStatement.setString(5, user.getAddress());
-
-            preparedStatement.setInt(6, user.getRoleId());
-            preparedStatement.setString(7, user.getUsername());
-
-            if (user.isGender()) {
-                preparedStatement.setInt(8, 1);
-            } else {
-                preparedStatement.setInt(8, 0);
-            }
-
-            preparedStatement.setInt(9, user.getUserId());
-
             preparedStatement.executeUpdate();
         } catch (Exception ex) {
             ex.printStackTrace();

@@ -171,22 +171,6 @@ public class User {
         this.fullName = fullName;
     }
 
-    public User(int roleId, int serviceId, String username, String email, String password, String fullName, Date birthDate, boolean gender, String phone, String address, String avatarImage) {
-        this.roleId = roleId;
-        this.serviceId = serviceId;
-        this.username = username;
-        this.email = email;
-        this.password = password;
-        this.fullName = fullName;
-        this.birthDate = birthDate;
-        this.gender = gender;
-        this.phone = phone;
-        this.address = address;
-        this.avatarImage = avatarImage;
-    }
-    
-    
-
     /**
      * Return the value of userId attribute of the <code>User</code> object.
      */
