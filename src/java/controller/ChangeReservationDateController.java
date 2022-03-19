@@ -9,34 +9,33 @@
  */
 package controller;
 
+import dao.ExaminationDAO;
 import dao.ReservationDAO;
+import dao.UserDAO;
 import dao.impl.ReservationDAOImpl;
+import dao.impl.UserDAOImpl;
+import entity.Reservation;
+import entity.User;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import util.Utils;
 
 /**
- * -Use function updateReservationStatusById in
- * <code>dao.impl.ReservationDAOImpl</code> to update reservation status of
- * <code>entity.Reservation</code>.
  *
  * @author Nguyen Thanh Tung
  */
-public class CancelReservationController extends HttpServlet {
+public class ChangeReservationDateController extends HttpServlet {
 
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
-     * -Handles the HTTP <code>POST</code> method to get popUp confirm
-     *
-     * -Set parameters: check<br>
-     * -Finally forward user to the <code>viewReservationDetailPopup.jsp</code>
-     * page. Processes requests for both HTTP <code>GET</code> and
-     * <code>POST</code> methods.
+     * Handles the HTTP <code>GET</code> method.
      *
      * @param request servlet request
-     * @param response servlet response is
+     * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
@@ -45,10 +44,14 @@ public class CancelReservationController extends HttpServlet {
             throws ServletException, IOException {
         try {
             int reservationId = (request.getParameter("reservationId") != null) ? Integer.parseInt(request.getParameter("reservationId").trim()) : -1;
-            int cancelReservation = (request.getParameter("cancelReservation") != null) ? Integer.parseInt(request.getParameter("cancelReservation").trim()) : 0;
-            request.setAttribute("cancelReservation", cancelReservation);
-            request.setAttribute("reservationId", reservationId);
-            request.getRequestDispatcher("jsp/components/confirmDialog.jsp").forward(request, response);
+            ReservationDAO reservationDAO = new ReservationDAOImpl();
+            UserDAO userDAO = new UserDAOImpl();
+            Reservation reservation = reservationDAO.getReservationById(reservationId);
+            User doctor = userDAO.getUserById(reservation.getConfirmedDoctor().getUserId());
+            request.setAttribute("today", Utils.revertParseDateFormat(Utils.getToday()));
+            request.setAttribute("doctor", doctor);
+            request.setAttribute("reservation", reservation);
+            request.getRequestDispatcher("jsp/components/changeReservationDate.jsp").forward(request, response);
         } catch (Exception e) {
             request.setAttribute("errorMessage", "Không thể tải dữ liệu từ cơ sở dữ liệu");
             request.setAttribute("exceptionMessage", e.getMessage());
@@ -57,12 +60,7 @@ public class CancelReservationController extends HttpServlet {
     }
 
     /**
-     * Handles the HTTP <code>POST</code> method to cancel reservation
-     *
-     * -Set parameters: check<br>
-     * -Finally forward user to the <code>viewReservationDetailPopup.jsp</code>
-     * page. Processes requests for both HTTP <code>GET</code> and
-     * <code>POST</code> methods
+     * Handles the HTTP <code>POST</code> method.
      *
      * @param request servlet request
      * @param response servlet response
@@ -73,11 +71,12 @@ public class CancelReservationController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            int reservationId = (request.getParameter("reservationId") != null) ? Integer.parseInt(request.getParameter("reservationId").trim()) : -1;
-            String reservationStatus = "Đã hủy";
+            int doctorId = (request.getParameter("doctorId") != null) ? Integer.parseInt(request.getParameter("doctorId").trim()) : -1;
+            String date = (request.getParameter("date") != null) ? Utils.parseDateFormat(request.getParameter("date").trim()) : "";
             ReservationDAO reservationDAO = new ReservationDAOImpl();
-            reservationDAO.updateReservationStatusById(reservationId, reservationStatus);
-            response.sendRedirect("viewMyReservation");
+            ArrayList<String> timeSchedule = reservationDAO.getTimeScheduleByDoctorId(doctorId, date);
+            request.setAttribute("timeSchedule", timeSchedule);
+            request.getRequestDispatcher("jsp/components/getEmptyReservationOfDoctor.jsp").forward(request, response);
         } catch (Exception e) {
             request.setAttribute("errorMessage", "Không thể tải dữ liệu từ cơ sở dữ liệu");
             request.setAttribute("exceptionMessage", e.getMessage());

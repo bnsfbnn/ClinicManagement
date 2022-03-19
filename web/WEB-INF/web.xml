@@ -132,6 +132,14 @@
         <servlet-name>ViewCustomerReservationsList</servlet-name>
         <servlet-class>controller.ViewCustomerReservationsList</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CancelReceiveReservationController</servlet-name>
+        <servlet-class>controller.CancelReceiveReservationController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ChangeReservationDate</servlet-name>
+        <servlet-class>controller.ChangeReservationDateController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
         <url-pattern>/LoginController</url-pattern>
@@ -255,6 +263,14 @@
     <servlet-mapping>
         <servlet-name>AddNewExaminationController</servlet-name>
         <url-pattern>/addNewExamination</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CancelReceiveReservationController</servlet-name>
+        <url-pattern>/cancelReceiveReservation</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ChangeReservationDate</servlet-name>
+        <url-pattern>/changeReservationDate</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

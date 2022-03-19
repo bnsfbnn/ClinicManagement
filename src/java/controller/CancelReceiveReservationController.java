@@ -17,6 +17,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import util.Utils;
 
 /**
  * -Use function updateReservationStatusById in
@@ -25,18 +26,14 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Nguyen Thanh Tung
  */
-public class CancelReservationController extends HttpServlet {
+public class CancelReceiveReservationController extends HttpServlet {
 
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
-     * -Handles the HTTP <code>POST</code> method to get popUp confirm
-     *
-     * -Set parameters: check<br>
-     * -Finally forward user to the <code>viewReservationDetailPopup.jsp</code>
-     * page. Processes requests for both HTTP <code>GET</code> and
-     * <code>POST</code> methods.
+     * Handles the HTTP <code>GET</code> method.
      *
      * @param request servlet request
-     * @param response servlet response is
+     * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
@@ -45,8 +42,8 @@ public class CancelReservationController extends HttpServlet {
             throws ServletException, IOException {
         try {
             int reservationId = (request.getParameter("reservationId") != null) ? Integer.parseInt(request.getParameter("reservationId").trim()) : -1;
-            int cancelReservation = (request.getParameter("cancelReservation") != null) ? Integer.parseInt(request.getParameter("cancelReservation").trim()) : 0;
-            request.setAttribute("cancelReservation", cancelReservation);
+            int cancelReceiveReservation = (request.getParameter("cancelReceiveReservation") != null) ? Integer.parseInt(request.getParameter("cancelReceiveReservation").trim()) : 0;
+            request.setAttribute("cancelReceiveReservation", cancelReceiveReservation);
             request.setAttribute("reservationId", reservationId);
             request.getRequestDispatcher("jsp/components/confirmDialog.jsp").forward(request, response);
         } catch (Exception e) {
@@ -57,12 +54,7 @@ public class CancelReservationController extends HttpServlet {
     }
 
     /**
-     * Handles the HTTP <code>POST</code> method to cancel reservation
-     *
-     * -Set parameters: check<br>
-     * -Finally forward user to the <code>viewReservationDetailPopup.jsp</code>
-     * page. Processes requests for both HTTP <code>GET</code> and
-     * <code>POST</code> methods
+     * Handles the HTTP <code>POST</code> method.
      *
      * @param request servlet request
      * @param response servlet response
@@ -74,9 +66,9 @@ public class CancelReservationController extends HttpServlet {
             throws ServletException, IOException {
         try {
             int reservationId = (request.getParameter("reservationId") != null) ? Integer.parseInt(request.getParameter("reservationId").trim()) : -1;
-            String reservationStatus = "Đã hủy";
+            String reservationStatus = "Chờ duyệt";
             ReservationDAO reservationDAO = new ReservationDAOImpl();
-            reservationDAO.updateReservationStatusById(reservationId, reservationStatus);
+            reservationDAO.cancelReceiveReservationById(reservationId, reservationStatus, Utils.getToday());
             response.sendRedirect("viewMyReservation");
         } catch (Exception e) {
             request.setAttribute("errorMessage", "Không thể tải dữ liệu từ cơ sở dữ liệu");

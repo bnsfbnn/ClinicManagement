@@ -23,10 +23,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * -This class uses function getExamninationByUserId in
- * <code>dao.impl.ExaminationDAOImpl</code> to get list of
- * <code>entity.Examination</code>. It's a <code>java.util.ArrayList</code>
- * object
+ * -Use function updateReservationStatusById in
+ * <code>dao.impl.ReservationDAOImpl</code> to update reservation status of
+ * <code>entity.Reservation</code>. And use function insertNewExamination in
+ * <code>dao.impl.ExaminationDAOImpl</code> to insert new examination
  *
  * @author Nguyen Thanh Tung
  */
