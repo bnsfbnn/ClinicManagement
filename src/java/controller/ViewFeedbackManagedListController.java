@@ -6,7 +6,7 @@
  *
  * Record of change:
  * DATE            Version             AUTHOR           DESCRIPTION
- * 2022-03-08     1.0                 TrangCT          Controller View Feedback Management List
+ * 2022-03-08     1.0                 MinhVT          Controller View Feedback Management List
  */
 package controller;
 
@@ -28,7 +28,7 @@ import javax.servlet.http.HttpServletResponse;
  * <p>
  *
  *
- * @author TrangCT
+ * @author MinhVT
  * @version 1.0
  * @since 2022-03-08
  */
@@ -66,7 +66,7 @@ public class ViewFeedbackManagedListController extends HttpServlet {
 
         FeedbackDAO feedbackDAO = new FeedbackDAOImpl();
         
-        Pagination<FeedbackDTO> feedbacks = feedbackDAO.getAllFeedback(pageIndex, pageSize);
+        Pagination<FeedbackDTO> feedbacks = feedbackDAO.getAllFeedback(pageIndex, pageSize, "");
         
         request.setAttribute("feedbacks", feedbacks);
        request.getRequestDispatcher("./jsp/feedbackManagement.jsp").forward(request, response);

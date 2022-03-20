@@ -96,9 +96,10 @@ public interface ReservationDAO {
      */
     public int updateReservationStatusById(int reservationId,  String reservationStatus) throws SQLException, Exception;
 
-    Pagination<CustomerReservation> getAllCustomerReservation(int pageIndex, int pageSize, int id);
+    Pagination<CustomerReservation> getAllCustomerReservation(int pageIndex, int pageSize, int id, String status);
 
     CustomerReservation getCustomerReservationById(int id);
 
     void bookReservation(ReservationDTO reservation);
+    
 }

@@ -1,3 +1,12 @@
+<!--
+ * Copyright(C) 20022, FPT University
+ * CMS:
+ * Clinic Management System
+ *
+ * Record of change:
+ * DATE            Version             AUTHOR           DESCRIPTION
+ * 2022-03-06      1.0                 MinhVT         Feed Back Management
+-->
 <html lang="en">
     <%@page contentType="text/html" pageEncoding="UTF-8"%>
     <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -13,11 +22,118 @@
         <!-- Bootstrap Icon -->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
 
-        <link rel="stylesheet" href="../assets/feedback/style.css">
         <title>Clinic Management</title>
     </head>
 
     <body>
+        <style>
+            #service-container {
+                margin: 0 0;
+                max-width: 100%;
+                padding: 0;
+            }
+
+            #add-btn {
+                background-color: #fff;
+                border: none;
+                box-shadow: none !important;
+            }
+
+            .btn-only-ic {
+                background-color: #fff !important;
+                border-color: transparent;
+                padding: 0 0;
+                max-height: 20px;
+            }
+
+            /* Header */
+            .navbar {
+                border: 1px solid #adb5bd;
+                background-color: #fff !important;
+            }
+
+            .nav-link {
+                border-radius: 5px;
+                border: 1px solid #ebebeb;
+                margin-right: 10px;
+                transition: all 0.3s ease-in-out;
+                font-weight: bold;
+                padding: .75rem 1rem;
+                max-width: 150px;
+                text-align: center;
+            }
+
+            .nav-link:hover,
+            .nav-link.active {
+                background-color: #8AB9FF;
+            }
+
+            .avatar {
+                width: 45px;
+                height: 45px;
+                line-height: 45px;
+                border-radius: 50%;
+            }
+
+            .avatar > img {
+                display: block;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+
+            /* Title */
+            #title {
+                text-align: center;
+                margin-top: 20px;
+                margin-bottom: 90px;
+            }
+
+            /* Wrapper */
+            .wrapper {
+                width: 100vh;
+                margin: auto;
+            }
+
+            #table-services > * > * > th{
+                text-align: center;
+            }
+
+            tr > td.service-desc {
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                max-width: 508px;
+            }
+
+            td > .action {
+                text-align: center;
+            }
+
+            td > .action > i {
+                cursor: pointer;
+            }
+
+            /* Pagination */
+            .pagi-wrapper {
+                margin-top: 30px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 0 20px;
+            }
+
+            .non-block {
+                width: 20px;
+                height: 20px;
+            }
+
+            /* Modal */
+            .modal-service {
+                max-width: 850px;
+            }
+
+        </style>
         <div class="container" id="service-container">
             <!-- Header -->
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -33,7 +149,7 @@
                                 <a class="nav-link" aria-current="page" href="#">Trang chủ</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="../ServiceManagement/index.html">Quản lý dịch vụ</a>
+                                <a class="nav-link" href="../ClinicManagement/ServiceManagementController">Quản lý dịch vụ</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link active" href="#">Quản lý phản hồi</a>
@@ -113,18 +229,18 @@
                             <div class="col-12 text-center">
                                 <ul>
                                     <c:if test="${feedbacks.currentPage > 1}">
-                                        <a class="btn btn-light" href="ViewFeedBackListController?page=${feedbacks.currentPage-1}">Trang trước</a>
+                                        <a class="btn btn-light" href="ViewFeedbackManagedListController?page=${feedbacks.currentPage-1}">Trang trước</a>
                                     </c:if>
                                     <c:forEach var="pageNumber" begin="1" end="${feedbacks.totalPage}" step="1">
                                         <c:if test="${feedbacks.currentPage == pageNumber}">
                                             <a class="btn btn-success" href="#">${pageNumber}</a>
                                         </c:if>
                                         <c:if test="${feedbacks.currentPage != pageNumber}">
-                                            <a class="btn btn-light" href="ViewFeedBackListController?page=${pageNumber}">${pageNumber}</a>
+                                            <a class="btn btn-light" href="ViewFeedbackManagedListController?page=${pageNumber}">${pageNumber}</a>
                                         </c:if>
                                     </c:forEach>
                                     <c:if test="${feedbacks.currentPage < feedbacks.totalPage}">
-                                        <a class="btn btn-light" href="ViewFeedBackListController?page=${services.currentPage+1}">Trang sau</a>
+                                        <a class="btn btn-light" href="ViewFeedbackManagedListController?page=${services.currentPage+1}">Trang sau</a>
                                     </c:if>
                                 </ul>
                             </div>
@@ -176,7 +292,7 @@
                                     </div>
                                     <form class="row">
                                         <div class="form-group col-12 mb-3">
-                                            <textarea id="reply" class="form-control" rows="5"></textarea>
+                                            <textarea id="reply" class="form-control" rows="5" required></textarea>
                                         </div>
                                         <div class="form-group col-12 text-end">
                                             <button 

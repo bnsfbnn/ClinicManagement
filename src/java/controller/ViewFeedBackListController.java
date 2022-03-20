@@ -10,20 +10,28 @@
 package controller;
 
 import dao.FeedbackDAO;
+import dao.ServiceDAO;
 import dao.impl.FeedbackDAOImpl;
+import dao.impl.ServiceDAOImpl;
 import entity.FeedbackDTO;
 import entity.Feedback;
 import entity.Pagination;
+import entity.ServiceDTO;
+import entity.User;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Date;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 /**
  * <h1>View Feedback List Controller </h1>
- * Controller to view feedback list. Method process data form
- * ReservationDAO and forward data to file view
+ * Controller to view feedback list. Method process data form ReservationDAO and
+ * forward data to file view
  * <p>
  *
  *
@@ -31,7 +39,6 @@ import javax.servlet.http.HttpServletResponse;
  * @version 1.0
  * @since 2022-03-08
  */
-
 public class ViewFeedBackListController extends HttpServlet {
 
     /**
@@ -46,7 +53,23 @@ public class ViewFeedBackListController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
+        if (user == null) {
+            request.getRequestDispatcher("./jsp/login.jsp").forward(request, response);
+            return;
+        }
         String page = request.getParameter("page");
+        int service = 0;
+        if (request.getParameter("serviceId") != null) {
+            service = Integer.parseInt(request.getParameter("serviceId"));
+        }
+
+        String time = request.getParameter("time");
+        if (time == null) {
+            time = "";
+        }
+
         int pageIndex = 1;
         if (page != null) {
             try {
@@ -64,9 +87,20 @@ public class ViewFeedBackListController extends HttpServlet {
         int pageSize = 5;
 
         FeedbackDAO feedbackDAO = new FeedbackDAOImpl();
-        
-        Pagination<FeedbackDTO> feedbacks = feedbackDAO.getAllFeedback(pageIndex, pageSize);
-        
+        ServiceDAO serviceDAO = new ServiceDAOImpl();
+        Pagination<FeedbackDTO> feedbacks;
+        if (service != 0) {
+            feedbacks = feedbackDAO.getAllFeedback(pageIndex, pageSize, service, time);
+        } else {
+            feedbacks = feedbackDAO.getAllFeedback(pageIndex, pageSize, time);
+        }
+
+        List<Date> times = feedbackDAO.getAllDate();
+
+        Pagination<ServiceDTO> services
+                = serviceDAO.getAllService(1, 50);
+        request.setAttribute("times", times);
+        request.setAttribute("services", services);
         request.setAttribute("feedbacks", feedbacks);
         request.getRequestDispatcher("./jsp/feedback.jsp").forward(request, response);
 

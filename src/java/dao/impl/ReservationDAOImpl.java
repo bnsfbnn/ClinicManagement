@@ -427,18 +427,18 @@ public class ReservationDAOImpl extends DBContext implements ReservationDAO {
         return 0;
     }
 
-    @Override
-    public Pagination<CustomerReservation> getAllCustomerReservation(int pageIndex, int pageSize, int id) {
+     @Override
+    public Pagination<CustomerReservation> getAllCustomerReservation(int pageIndex, int pageSize, int id, String status) {
         Pagination<CustomerReservation> pagination = new Pagination<>();
         List<CustomerReservation> customerReservations = new ArrayList<>();
-        String sql = "  SELECT * FROM (SELECT DISTINCT ROW_NUMBER() OVER ( ORDER BY r.confirmed_examination_date )\n"
+        String sql = "SELECT * FROM (SELECT DISTINCT ROW_NUMBER() OVER ( ORDER BY r.confirmed_examination_date )\n"
                 + "                    AS RowNum, r.reservation_id,  p.examination_duration, p.package_title, p.price, s.service_name, r.reservation_status, r.medical_request, r.request_examination_date, r.confirmed_examination_date from reservations r join services s\n"
-                + "  on r.service_id = s.service_id\n"
+                + "  on r.service_id = s.service_id and r.reservation_status like N" + "'%" + status + "%'" + "\n"
                 + "  join packages p\n"
                 + "  on r.package_id = p.package_id and r.customer_id = ?) \n"
                 + "                    AS RowConstrainedResult\n"
                 + "                    WHERE   RowNum >= ?\n"
-                + "                  AND RowNum <= ?\n"             
+                + "                  AND RowNum <= ?\n"
                 + "                    ORDER BY RowNum";
         Connection con = null;
         PreparedStatement ps = null;

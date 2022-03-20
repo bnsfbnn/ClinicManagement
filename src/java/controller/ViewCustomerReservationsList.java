@@ -12,15 +12,10 @@ package controller;
 import dao.ReservationDAO;
 import dao.impl.ReservationDAOImpl;
 import entity.CustomerReservation;
-import entity.ReservationDTO;
 import entity.Pagination;
 import entity.User;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.List;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -56,7 +51,7 @@ public class ViewCustomerReservationsList extends HttpServlet {
         if (user == null) {
             request.getRequestDispatcher("./jsp/login.jsp").forward(request, response);
         } else {
-            String page = (request.getParameter("page") == null)?"1":request.getParameter("page");
+            String page = (request.getParameter("page") == null) ? "1" : request.getParameter("page");
             int pageIndex = 1;
             if (page != null) {// check page if not null
                 try {
@@ -69,9 +64,15 @@ public class ViewCustomerReservationsList extends HttpServlet {
                     //default pageIndex = 1
                     pageIndex = 0;
                 }
+
+                String status = request.getParameter("status");
+                if (status == null) {
+                    status = "";
+                }
+
                 int pageSize = 5; // default page size
                 ReservationDAO reservationDAO = new ReservationDAOImpl();
-                Pagination<CustomerReservation> reservations = reservationDAO.getAllCustomerReservation(pageIndex, pageSize, user.getUserId());
+                Pagination<CustomerReservation> reservations = reservationDAO.getAllCustomerReservation(pageIndex, pageSize, user.getUserId(), status);
                 request.setAttribute("reservations", reservations);
                 request.getRequestDispatcher("./jsp/viewAllCustomerReservation.jsp").forward(request, response);
             }
