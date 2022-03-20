@@ -127,6 +127,22 @@ public interface ReservationDAO {
      */
     public ArrayList<String> getTimeScheduleByDoctorId(int doctorId, String date) throws SQLException, Exception;
 
+    /**
+     * - Update reservation date, reservation time
+     *
+     * @param reservationId is a <code>java.lang.int</code> object used to
+     * update reservation by new reservation date, time
+     * @param confirmReservationDate is a <code>java.lang.String</code> object
+     * used to update reservation reservation by new reservation date, time
+     * @param confirmReservationTime is a <code>java.lang.String</code> object
+     * used to update reservation by reservation by new reservation date, time
+     * @return a list of <code>Reservation</code> objects. <br>
+     * -It is a <code>java.util.ArrayList</code> object
+     * @throws SQLException when <code>java.sql.SQLException</code> occurs.
+     * @throws Exception when <code>java.sql.Exception</code> occurs.
+     */
+    public int updateReservationDateTimeById(int reservationId, String confirmReservationDate, String confirmReservationTime) throws SQLException, Exception;
+
     Pagination<CustomerReservation> getAllCustomerReservation(int pageIndex, int pageSize, int id);
 
     CustomerReservation getCustomerReservationById(int id);

@@ -11,12 +11,12 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-    <select name="time" id="time" class="form-control">
+    <select name="confirmedExaminationTime" id="confirmedExaminationTime" class="form-control">
         <option value="-1">Giờ</option>
         <c:forEach begin="7" end="16" step="1" var="k">
             <c:choose>
                 <c:when test="${k eq 12}">
-                    <option style="background-color: gainsboro" disabled="disabled">12:00:00</option>
+                    <option style="background-color: gainsboro" disabled="disabled" value="12:00:00">12:00:00</option>
                 </c:when>
                 <c:when test="${k ne 12 and k lt 10}">
                     <c:set var = "var" scope = "page" value = "0${k}:00:00"/>
@@ -28,10 +28,10 @@
                     </c:forEach>
                     <c:choose>
                         <c:when test="${done eq true}">
-                            <option style="background-color: gainsboro" disabled="disabled">${var}</option>
+                            <option style="background-color: gainsboro" disabled="disabled" value="${var}">${var}</option>
                         </c:when>
                         <c:when test="${done ne true}">
-                            <option>${var}</option>
+                            <option value="${var}">${var}</option>
                         </c:when>
                     </c:choose>
                 </c:when>
@@ -45,10 +45,10 @@
                     </c:forEach>
                     <c:choose>
                         <c:when test="${done eq true}">
-                            <option style="background-color: gainsboro" disabled="disabled">${var}</option>
+                            <option style="background-color: gainsboro" disabled="disabled" value="${var}">${var}</option>
                         </c:when>
                         <c:when test="${done ne true}">
-                            <option>${var}</option>
+                            <option value="${var}">${var}</option>
                         </c:when>
                     </c:choose>
                 </c:when>

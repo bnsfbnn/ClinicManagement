@@ -56,7 +56,7 @@
                 <button type="button" class="btn btn-info btn-block" id="${reservation.customer.userId}" onClick="openViewExaminationHistoryPopup(this)" data-toggle="modal" data-target="#viewExaminationHistoryPopup" data-dismiss="modal">Xem lịch sử khám bệnh</button>
                 <button type="button" class="btn btn-success btn-block" id="${reservation.reservationId}" onclick="openAddNewExaminationPopup(this)" data-toggle="modal" data-target="#addNewExaminationPopup" data-dismiss="modal">Thêm mới lịch sử khám bệnh</button>
                 <button type="button" class="btn btn-warning btn-block" id="${reservation.reservationId}" onclick="openChangeReservationDate(this)" data-toggle="modal" data-target="#changeReservationDatePopup" data-dismiss="modal">Đổi lịch đặt chỗ</button>
-                <button type="button" class="btn btn-warning btn-block" id="${reservation.reservationId}" onclick="openCancelReceiveReservationConfirmDialog(this)" data-toggle="modal" data-target="#cancelReceiveReservationPopup" data-dismiss="modal">Hủy nhận lịch đặt chỗ này</button>
+                <button type="button" class="btn btn-danger btn-block" id="${reservation.reservationId}" onclick="openCancelReceiveReservationConfirmDialog(this)" data-toggle="modal" data-target="#cancelReceiveReservationPopup" data-dismiss="modal">Hủy nhận lịch đặt chỗ này</button>
                 <button type="button" class="btn btn-danger btn-block" id="${reservation.reservationId}" onclick="openCancelReservationConfirmDialog(this)" data-toggle="modal" data-target="#cancelReservationPopup" data-dismiss="modal">Hủy lịch đặt chỗ</button>
             </div>
         </div>                          

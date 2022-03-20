@@ -281,6 +281,23 @@
                 </div>
             </div>
         </div>
+        <div class="modal fade" id="changeReservationDatePopupConfirm" data-backdrop="true" data-keyboard="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Trở lại</button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="container-fluid">
+                            <div class="row mt-2 mb-5" id="changeReservationDatePopupConfirmContent">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer" hidden="true">
+                    </div>
+                </div>
+            </div>
+        </div>
         <!--Import js lib-->
         <script src="./assets/js/jquery-3.6.0.min.js" type="text/javascript"></script>
         <script src="./assets/js/popper.js" type="text/javascript"></script>
@@ -389,6 +406,22 @@
                     },
                     success: function (result) {
                         $("#changeReservationDatePopupContent").html(result);
+                    }
+                });
+            }
+            function openChangeReservationDatePopupConfirm(elem1, elem2, elem3, elem4) {
+                $.ajax({
+                    url: "${pageContext.request.contextPath}/changeReservationDate",
+                    type: "post",
+                    dataType: "text",
+                    data: {
+                        getConfirmDialog: elem1,
+                        reservationId: elem2,
+                        confirmedExaminationDate: elem3,
+                        confirmedExaminationTime: elem4
+                    },
+                    success: function (result) {
+                        $("#changeReservationDatePopupConfirmContent").html(result);
                     }
                 });
             }

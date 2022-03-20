@@ -16,31 +16,47 @@
         <title>JSP Page</title>
     </head>
     <body>
-    <c:if test="${cancelReservation eq 1}">
-        <div class="row">
-            <h5 class="col-lg-12">Bạn có chắc chắn hủy lịch đặt chỗ của bệnh nhân này với lý  do bệnh nhân không đến ?</h5>
-        </div>
-                <div class="w-100 border-bottom my-5"></div>
-        <div class="row mx-auto">
-            <form id="frm" action="${pageContext.request.contextPath}/cancelReservation" method="POST">
-                <input type="number" name="reservationId" value="${reservationId}" hidden="false"/>
-            </form>
-            <button type="button" class="btn btn-success mx-1" onclick="$('#frm').submit();">Có</button>
-            <button type="button" class="btn btn-danger mx-1" data-toggle="modal" data-target="#viewDetailReservationPopup" data-dismiss="modal">Không</button>
-        </div>
-    </c:if>
-    <c:if test="${cancelReceiveReservation eq 1}">
-        <div class="row">
-            <h5 class="col-lg-12">Bạn có chắc chắn muốn hủy nhận lịch đặt chỗ này với lý do bận và yêu cầu chuyển cho bác sĩ khác?</h5>
-        </div>
-        <div class="w-100 border-bottom my-5"></div>
-        <div class="row mx-auto">
-            <form id="frm" action="${pageContext.request.contextPath}/cancelReceiveReservation" method="POST">
-                <input type="number" name="reservationId" value="${reservationId}" hidden="false"/>
-            </form>
-            <button type="button" class="btn btn-success mx-1" onclick="$('#frm').submit();">Có</button>
-            <button type="button" class="btn btn-danger mx-1" data-toggle="modal" data-target="#viewDetailReservationPopup" data-dismiss="modal">Không</button>
-        </div>
-    </c:if>
-</body>
+        <c:if test="${cancelReservation eq 1}">
+            <div class="row">
+                <h5 class="col-lg-12">Bạn có chắc chắn hủy lịch đặt chỗ của bệnh nhân này với lý  do bệnh nhân không đến ?</h5>
+            </div>
+            <div class="w-100 border-bottom my-5"></div>
+            <div class="row mx-auto">
+                <form id="frm" action="${pageContext.request.contextPath}/cancelReservation" method="POST">
+                    <input type="number" name="reservationId" value="${reservationId}" hidden="false"/>
+                </form>
+                <button type="button" class="btn btn-success mx-1" onclick="$('#frm').submit();">Có</button>
+                <button type="button" class="btn btn-danger mx-1" data-toggle="modal" data-target="#viewDetailReservationPopup" data-dismiss="modal">Không</button>
+            </div>
+        </c:if>
+        <c:if test="${cancelReceiveReservation eq 1}">
+            <div class="row">
+                <h5 class="col-lg-12">Bạn có chắc chắn muốn hủy nhận lịch đặt chỗ này với lý do bận và yêu cầu chuyển cho bác sĩ khác?</h5>
+            </div>
+            <div class="w-100 border-bottom my-5"></div>
+            <div class="row mx-auto">
+                <form id="frm" action="${pageContext.request.contextPath}/cancelReceiveReservation" method="POST">
+                    <input type="number" name="reservationId" value="${reservationId}" hidden="false"/>
+                </form>
+                <button type="button" class="btn btn-success mx-1" onclick="$('#frm').submit();">Có</button>
+                <button type="button" class="btn btn-danger mx-1" data-toggle="modal" data-target="#viewDetailReservationPopup" data-dismiss="modal">Không</button>
+            </div>
+        </c:if>
+        <c:if test="${getConfirmDialog eq 1}">
+            <div class="row">
+                <h5 class="col-lg-12">Bạn có chắc chắn đổi lịch đặt chỗ của bệnh nhân này ?</h5>
+            </div>
+            <div class="w-100 border-bottom my-5"></div>
+            <div class="row mx-auto">
+                <form id="frm" action="${pageContext.request.contextPath}/changeReservationDate" method="POST">
+                    <input type="number" name="reservationId" value="${reservationId}" hidden="false"/>
+                    <input type="text" name="confirmedExaminationDate" value="${confirmedExaminationDate}" hidden="false"/>
+                    <input type="text" name="confirmedExaminationTime" value="${confirmedExaminationTime}" hidden="false"/>
+                    <input type="text" name="changeReservationDate" value="true" hidden="false"/>
+                </form>
+                <button type="button" class="btn btn-success mx-1" onclick="$('#frm').submit();">Có</button>
+                <button type="button" class="btn btn-danger mx-1" data-toggle="modal" data-target="#viewDetailReservationPopup" data-dismiss="modal">Không</button>
+            </div>
+        </c:if>
+    </body>
 </html>

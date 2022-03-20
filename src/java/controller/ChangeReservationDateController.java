@@ -71,27 +71,35 @@ public class ChangeReservationDateController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            int doctorId = (request.getParameter("doctorId") != null) ? Integer.parseInt(request.getParameter("doctorId").trim()) : -1;
-            String date = (request.getParameter("date") != null) ? Utils.parseDateFormat(request.getParameter("date").trim()) : "";
-            ReservationDAO reservationDAO = new ReservationDAOImpl();
-            ArrayList<String> timeSchedule = reservationDAO.getTimeScheduleByDoctorId(doctorId, date);
-            request.setAttribute("timeSchedule", timeSchedule);
-            request.getRequestDispatcher("jsp/components/getEmptyReservationOfDoctor.jsp").forward(request, response);
+            if (Boolean.parseBoolean(request.getParameter("getEmptyReservationOfDoctor")) == true) {
+                int doctorId = (request.getParameter("doctorId") != null) ? Integer.parseInt(request.getParameter("doctorId").trim()) : -1;
+                String date = (request.getParameter("date") != null) ? Utils.parseDateFormat(request.getParameter("date").trim()) : "";
+                ReservationDAO reservationDAO = new ReservationDAOImpl();
+                ArrayList<String> timeSchedule = reservationDAO.getTimeScheduleByDoctorId(doctorId, date);
+                request.setAttribute("timeSchedule", timeSchedule);
+                request.getRequestDispatcher("jsp/components/getEmptyReservationOfDoctor.jsp").forward(request, response);
+            } else if (Boolean.parseBoolean(request.getParameter("getConfirmDialog")) == true) {
+                int reservationId = (request.getParameter("reservationId") != null) ? Integer.parseInt(request.getParameter("reservationId").trim()) : -1;
+                String confirmedExaminationDate = (request.getParameter("confirmedExaminationDate") != null) ? Utils.parseDateFormat(request.getParameter("confirmedExaminationDate").trim()) : "";
+                String confirmedExaminationTime = (request.getParameter("confirmedExaminationTime") != null) ? request.getParameter("confirmedExaminationTime") : "";
+                int getConfirmDialog = (Boolean.parseBoolean(request.getParameter("getConfirmDialog")) == true) ? 1 : 0;
+                request.setAttribute("getConfirmDialog", getConfirmDialog);
+                request.setAttribute("reservationId", reservationId);
+                request.setAttribute("confirmedExaminationDate", confirmedExaminationDate);
+                request.setAttribute("confirmedExaminationTime", confirmedExaminationTime);
+                request.getRequestDispatcher("jsp/components/confirmDialog.jsp").forward(request, response);
+            } else if (Boolean.parseBoolean(request.getParameter("changeReservationDate")) == true) {
+                int reservationId = (request.getParameter("reservationId") != null) ? Integer.parseInt(request.getParameter("reservationId").trim()) : -1;
+                String confirmedExaminationDate = (request.getParameter("confirmedExaminationDate") != null) ? request.getParameter("confirmedExaminationDate").trim() : "";
+                String confirmedExaminationTime = (request.getParameter("confirmedExaminationTime") != null) ? request.getParameter("confirmedExaminationTime") : "";
+                ReservationDAO reservationDAO = new ReservationDAOImpl();
+                reservationDAO.updateReservationDateTimeById(reservationId, confirmedExaminationDate, confirmedExaminationTime);
+                response.sendRedirect("viewMyReservation");
+            }
         } catch (Exception e) {
             request.setAttribute("errorMessage", "Không thể tải dữ liệu từ cơ sở dữ liệu");
             request.setAttribute("exceptionMessage", e.getMessage());
             request.getRequestDispatcher("jsp/error.jsp").forward(request, response);
         }
     }
-
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
-
 }

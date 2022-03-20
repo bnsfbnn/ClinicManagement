@@ -26,11 +26,15 @@
             <dd class="col-sm-5">${(reservation.medicalRequest ne null) ? reservation.medicalRequest : "Không có"}</dd>
             <div class="w-50 my-2 mx-auto row border-bottom"></div>
             <dt class="col-sm-7">Chọn ngày hẹn mới</dt>
-            <dd><input type="text" class="form-control" id="datepickerPopup" name="reservation.confirmedExaminationDate"></dd>
+            <dd><input type="text" class="form-control" id="datepickerPopup" name="confirmedExaminationDate"></dd>
             <dt class="col-sm-7">Chọn thời gian khám bệnh</dt>
             <dd id="newTime"></dd>
         </dl>
-        <button></button>
+        <input type="text" id="reservationId" value="${reservation.reservationId}" hidden="false"/>
+        <input type="text" id="getConfirmDialog" value="true" hidden="false"/>
+        <button type="button" class="btn btn-primary w-10 mx-auto" 
+                onclick="openChangeReservationDatePopupConfirm($('#getConfirmDialog').attr('value'), $('#reservationId').attr('value'), $('#datepickerPopup').val(), $('#confirmedExaminationTime').val())"
+                data-toggle="modal" data-target="#changeReservationDatePopupConfirm" data-dismiss="modal">Đổi lịch đặt chỗ</button>
         <script>
             $("#datepickerPopup").datepicker({
                 firstDay: 1,
@@ -45,6 +49,7 @@
                         type: "post",
                         dataType: "text",
                         data: {
+                            getEmptyReservationOfDoctor: true,
                             doctorId: id,
                             date: date
                         },
