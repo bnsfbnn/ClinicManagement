@@ -22,6 +22,13 @@
         <link href="./assets/css/jquery-ui.structure.min.css" rel="stylesheet" type="text/css"/>
         <link href="./assets/css/jquery-ui.theme.min.css" rel="stylesheet" type="text/css"/>
     </head>
+    <style>
+        @media screen and (min-width: 676px) {
+            .modal-ex-lg {
+                max-width: 1000px; /* New width for default modal */
+            }
+        }
+    </style>
     <body>
         <!--Import header-->
         <%@include file="components/doctorHeader.jsp" %>
@@ -183,7 +190,7 @@
             </div>
         </div>
         <div class="modal fade" id="viewExaminationHistoryPopup" data-backdrop="static" data-keyboard="false">
-            <div class="modal-dialog modal-lg">
+            <div class="modal-dialog modal-ex-lg">
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#viewDetailReservationPopup" data-dismiss="modal">Trở lại</button>
@@ -234,7 +241,7 @@
             </div>
         </div>
         <div class="modal fade" id="cancelReservationPopup" data-backdrop="static" data-keyboard="false">
-            <div class="modal-dialog modal-sm">
+            <div class="modal-dialog modal-md">
                 <div class="modal-content">
                     <div class="modal-body">
                         <div class="container-fluid">
