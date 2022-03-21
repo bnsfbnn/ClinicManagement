@@ -111,14 +111,18 @@
                 <form action="../ClinicManagement/ViewCustomerReservationsList" method="GET">
                     <label for="status">Choose a status</label>
                     <select name="status" id="status">
+                        <option selected value="${status}">
+                            ${status}
+                        </option>
                         <option value="Đã khám">Đã khám</option>
                         <option value="Chờ duyệt">Chờ duyệt</option>
                         <option value="Đặt thành công">Đặt thành công</option>
                         <option value="Đã hủy">Đã hủy</option>
                     </select>
-                    <button class="btn-primary btn" type="submit">Lọc</button>
+                    <button class="btn-primary" type="submit">Lọc</button>
                 </form>
             </div>
+
             <div class="container-fluid">
                 <c:forEach var="reservation" items="${reservations.data}">
                     <div class="row list">
@@ -160,16 +164,26 @@
 
                                 <div id="myModal2" class="modal">
                                     <!-- Modal content -->
-                                    <div class="modal-content">
-                                        <span class="close">&times;</span>
-                                        <div class="row-fluid">
-                                            <div class="form-group">
-                                                <label for="feedbackContent"><b>Nội dung phản hồi</b></label>
-                                                <textarea class="form-control" id="feedbackContent" rows="3"></textarea>
+                                    <form action="AddFeedbackController" method="POST">
+
+                                        <div class="modal-content">
+                                            <span class="close">&times;</span>
+                                            <div class="row-fluid">
+                                                <div class="form-group">
+                                                    <label for="feedbackContent"><b>Nội dung phản hồi</b></label>
+                                                    <textarea class="form-control" name="content" id="feedbackContent" rows="3"></textarea>
+                                                </div>
+                                                <div hidden>
+                                                    <input name="examinationId"value="${reservation.id}">
+                                                </div>
+                                                <div hidden>
+                                                    <input name="serviceId"value="${reservation.serviceId}">
+                                                </div>
+                                                <button class="btn btn-primary float-right mt-3" type="submit">Phản hồi</button>
                                             </div>
-                                            <button class="btn btn-primary float-right mt-3">Phản hồi</button>
                                         </div>
-                                    </div>
+                                    </form>
+
                                 </div>
 
                             </div>

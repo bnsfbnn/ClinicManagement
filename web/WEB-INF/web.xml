@@ -132,6 +132,14 @@
         <servlet-name>ViewCustomerReservationsList</servlet-name>
         <servlet-class>controller.ViewCustomerReservationsList</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SearchPostController</servlet-name>
+        <servlet-class>controller.SearchPostController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>PostDetailController</servlet-name>
+        <servlet-class>controller.PostDetailController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
         <url-pattern>/LoginController</url-pattern>
@@ -263,6 +271,14 @@
     <servlet-mapping>
         <servlet-name>AddNewExaminationController</servlet-name>
         <url-pattern>/addNewExamination</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchPostController</servlet-name>
+        <url-pattern>/SearchPostController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PostDetailController</servlet-name>
+        <url-pattern>/PostDetailController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

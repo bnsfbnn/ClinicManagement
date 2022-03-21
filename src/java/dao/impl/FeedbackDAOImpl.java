@@ -105,7 +105,12 @@ public class FeedbackDAOImpl extends DBContext implements FeedbackDAO {
         ResultSet countResultSet = null;
         try {
             connecion = getConnection();
-            countPreparedStatement = connecion.prepareStatement("SELECT COUNT(feedback_id) AS id FROM feedbacks");
+            countPreparedStatement = connecion.prepareStatement("SELECT COUNT(*)   from feedbacks f join users u\n"
+                    + "  on f.customer_id = u.user_id\n"
+                    + "  join services s\n"
+                    + "  on f.service_id = s.service_id \n"
+                    + "  join examinations e\n"
+                    + "  on f.examination_id = e.examination_id");
             countResultSet = countPreparedStatement.executeQuery();
             if (countResultSet.next()) {
                 // get and return count total services

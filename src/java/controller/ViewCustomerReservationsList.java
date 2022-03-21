@@ -66,7 +66,7 @@ public class ViewCustomerReservationsList extends HttpServlet {
                 }
 
                 String status = request.getParameter("status");
-                if (status == null) {
+                if (status == null || status.equals("Tất cả")) {
                     status = "";
                 }
 
@@ -74,6 +74,10 @@ public class ViewCustomerReservationsList extends HttpServlet {
                 ReservationDAO reservationDAO = new ReservationDAOImpl();
                 Pagination<CustomerReservation> reservations = reservationDAO.getAllCustomerReservation(pageIndex, pageSize, user.getUserId(), status);
                 request.setAttribute("reservations", reservations);
+                if(status == ""){
+                    status = "Tất cả";
+                }
+                request.setAttribute("status", status);
                 request.getRequestDispatcher("./jsp/viewAllCustomerReservation.jsp").forward(request, response);
             }
         }

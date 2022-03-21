@@ -5,13 +5,13 @@
  *
  * Record of change:
  * DATE            Version             AUTHOR           DESCRIPTION
- * 2022-02-28      1.0                 TrangCT          Homepage
+ * 2022-02-28      1.0                 TrangCT          Post Detail
 -->
 <!DOCTYPE html>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html lang="en">
-    <%@page contentType="text/html" pageEncoding="UTF-8"%>
-    <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -68,7 +68,7 @@
         }
     </style>
     <header>
-        <jsp:include page="./components/customerHeader.jsp" />
+        <%--<jsp:include page="./components/customerHeader.jsp" />--%>
     </header>
     <body>
         <div class="container-fluid m-0 p-0">
@@ -78,20 +78,20 @@
                 </div>
                 <div class="container-fluid mt-3">
                     <div>
-                        <h5 >Dịch vụ của chúng tôi</h5>
+                        <h5 >D?ch v? c?a chï¿½ng tï¿½i</h5>
                     </div>
                     <div class="d-flex justify-content-around mt-3">
                         <div class="card" style="width: 18rem;">
                             <img id="images" class="card-img-top" src="https://isofhcare-backup.s3-ap-southeast-1.amazonaws.com/images/bac-si_02156a3d_6d43_476f_8d12_7d10e6d3795e.png" alt="Card image cap">
                             <div class="card-body">
-                                <h5 class="card-title">Bác sĩ</h5>
-                                <p class="card-text">.</p>
+                                <h5 class="card-title">Bï¿½c s?</h5>
+                                <p class="card-text">??t khï¿½m tr?c ti?p t?i ??i ng? bï¿½c s? c?a ISOFHCARE cï¿½ trï¿½nh ?? chuyï¿½n mï¿½n cao, nhi?u n?m kinh nghi?m, giï¿½u y ??c, giï¿½p b?n hoï¿½n toï¿½n ch? ??ng l?a ch?n th?i gian khï¿½m.</p>
                             </div>
                         </div>
                         <div class="card" style="width: 18rem;">
                             <img id="images" class="card-img-top" src="https://isofhcare-backup.s3-ap-southeast-1.amazonaws.com/images/benh-vien_3af5757b_be9b_4a39_9948_6d2062b72316.png" alt="Card image cap">
                             <div class="card-body">
-                                <h5 class="card-title">Beenh vi?n</h5>
+                                <h5 class="card-title">B?nh vi?n</h5>
                                 <p class="card-text">??t khï¿½m theo gï¿½i d?ch v? ch?t l??ng, d?ch v? xï¿½t nghi?m vï¿½ ch?n ?oï¿½n hï¿½nh ?nh hi?n ??i t?i t? cï¿½c ??i tï¿½c b?nh vi?n hï¿½ng ??u, tuy?n Trung ??ng c?a ISOFHCARE.</p>
                             </div>
                         </div>
@@ -126,15 +126,15 @@
                         <div class="col-4">
                             <p class="font-weight-bold">Bï¿½c s? n?i b?t</p>
                             <br>
-                            <p>??t khï¿½m tr?c ti?p t?i ??i ng? bï¿½c s? c?a ISOFHCARE cï¿½ trï¿½nh ?? chuyï¿½n mï¿½n cao, nhi?u n?m kinh nghi?m, giï¿½u y ??c, giï¿½p b?n hoï¿½n toï¿½n ch? ??ng l?a ch?n th?i gian khï¿½m</p>
+                            <p>xxxxx</p>
                             <img src="https://isofhcare-backup.s3-ap-southeast-1.amazonaws.com/images/bac-si-noi-bat_3aafb5a5_e84b_4be0_bf87_4689b981e5d7.png">
                         </div>
                         <div class="col-8 d-flex justify-content-around">
                             <div class="card" style="width: 18rem;">
                                 <img id="images" class="card-img-top" src="https://isofhcare-backup.s3-ap-southeast-1.amazonaws.com/images/bac-si_02156a3d_6d43_476f_8d12_7d10e6d3795e.png" alt="Card image cap">
                                 <div class="card-body">
-                                    <h5 class="card-title">Bï¿½c s?</h5>
-                                    <p class="card-text">??t khï¿½m tr?c ti?p t?i ??i ng? bï¿½c s? c?a ISOFHCARE cï¿½ trï¿½nh ?? chuyï¿½n mï¿½n cao, nhi?u n?m kinh nghi?m, giï¿½u y ??c, giï¿½p b?n hoï¿½n toï¿½n ch? ??ng l?a ch?n th?i gian khï¿½m.</p>
+                                    <h5 class="card-title">xxxx
+                                    <p class="card-text">x.</p>
                                 </div>
                             </div>
                             <div class="card" style="width: 18rem;">
@@ -148,33 +148,25 @@
                                 <img id="images" class="card-img-top" src="https://isofhcare-backup.s3-ap-southeast-1.amazonaws.com/images/bac-si_02156a3d_6d43_476f_8d12_7d10e6d3795e.png" alt="Card image cap">
                                 <div class="card-body">
                                     <h5 class="card-title">Bï¿½c s?</h5>
-                                    <p class="card-text">??t khï¿½m tr?c ti?p t?i ??i ng? bï¿½c s? c?a ISOFHCARE cï¿½ trï¿½nh ?? chuyï¿½n mï¿½n cao, nhi?u n?m kinh nghi?m, giï¿½u y ??c, giï¿½p b?n hoï¿½n toï¿½n ch? ??ng l?a ch?n th?i gian khï¿½m.</p>
+                                    <p class="card-text">gian khï¿½m.</p>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="row-fluid my-5">
+                        <div class="col-lg-12"></div>
                         <h1>Tin Tức</h1>
-                        <div class="row border-bottom my-1"></div>
-                        <form action="SearchPostController" method="get">
-                            <div class="row col-lg-6 mx-auto my-1">
-                                <input type="text" name="search" class="form-control col-md-8" id="searchKeyword">
-                                <button type="submit"  value="${search} "class="btn btn-primary col-md-4">Tìm kiếm</button>
-                            </div> 
-                        </form>
-                        <div class="row d-flex justify-content-center">
-                            <c:forEach items="${posts}" var="p">
-                                <div class="col-md-4 my-1">
-                                    <div class="card" style="width: 18rem;">
-                                        <img class="card-img-top" src="${p.postImage}" alt="Card image cap">
-                                        <div class="card-body">
-                                            <h5 class="card-title">${p.title}</h5>
-                                            <p class="card-text">${p.content}</p>
-                                            <a href="PostDetailController?id=${p.id}" class="btn btn-primary">View Post Detail</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </c:forEach>
+                        <div class="row d-flex justify-content-center my-1">
+                            <h2>${post.title}</h2>
+                        </div>
+                        <div class="row border-dark my-1">
+                            ${post.summary}
+                        </div>
+                        <div class="row d-flex justify-content-start">
+                            <b><i>${user} : ${post.createDate} : ${post.createTime}</i></b>
+                        </div>
+                        <div class="row d-flex justify-content-end">
+                            <p>${post.content}</p>
                         </div>
                     </div>
                 </div>
