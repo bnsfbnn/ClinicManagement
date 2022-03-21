@@ -57,7 +57,15 @@ public class HomeController extends HttpServlet {
                 PostDAO postDAO = new PostDAOImpl();
                 List<PostEntity> posts = postDAO.getAllPost();
                 request.setAttribute("posts", posts);
-                request.getRequestDispatcher("./jsp/home.jsp").forward(request, response);
+                if (user.getRoleId() == 1) {
+                    request.getRequestDispatcher("GetAllAccountController").forward(request, response);
+                } else if (user.getRoleId() == 2) {
+                    request.getRequestDispatcher("").forward(request, response);
+                } else if (user.getRoleId() == 3) {
+                    request.getRequestDispatcher("viewMyReservation").forward(request, response);
+                } else {
+                    request.getRequestDispatcher("./jsp/home.jsp").forward(request, response);
+                }
             } else {
                 request.setAttribute("message", "Tên đăng nhập hoặc mật khẩu không đúng!!!");
                 request.getRequestDispatcher("./jsp/login.jsp").forward(request, response);

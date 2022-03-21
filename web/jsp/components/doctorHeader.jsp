@@ -28,10 +28,33 @@
                     </li>
                 </ul>
             </div>
-            <div class="ml-auto">
-                <div class="avatar avatar-md p-0">
-                    <img height="45" class="avatar-img rounded-circle" src="./assets/images/avatar03.jpg" alt="avatar">
-                </div>
+            <div class="dropdown ml-auto">
+                <a class="avatar avatar-md p-0" href="#" id="profileDropdown" role="button" data-bs-auto-close="outside" data-bs-display="static" data-bs-toggle="dropdown" aria-expanded="true">
+                    <%
+                        User user = (User) request.getSession().getAttribute("user");
+                    %>
+                    <img height="45" class="avatar-img rounded-circle" src="./assets/images/${user.avatarImage}" alt="avatar">
+                </a>
+                <ul class="dropdown-menu dropdown-animation shadow pt-3 dropdown-menu-right" aria-labelledby="profileDropdown" data-bs-popper="none" style="">
+                    <!-- Profile info -->
+                    <li class="px-3">
+                        <div class="d-flex align-items-center">
+                            <!-- Avatar -->
+                            <div class="avatar me-3">
+                                <img height="40" class="avatar-img rounded-circle shadow" href="" src="./assets/images/${user.avatarImage}" alt="avatar">
+                            </div>
+                            <div>
+                                <a class="h6">${user.fullName}</a>
+                                <p class="small m-0">${user.email}</p>
+                            </div>
+                        </div>
+                        <hr>
+                    </li>
+                    <!-- Links -->
+                    <li><a class="dropdown-item bg-danger-soft-hover" href="./LogoutController"><i class="bi bi-power fa-fw me-2"></i>Đăng xuất</a></li>
+                    <li> <hr class="dropdown-divider"></li>
+                    <!-- Dark mode switch END -->
+                </ul>
             </div>
             <!--End header-->
         </header>

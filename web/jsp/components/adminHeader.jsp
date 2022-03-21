@@ -8,10 +8,19 @@
  * 2022-02-08      1.0                 tungnt           First Implement 
 --%>
 
+<%@page import="entity.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <body>
+        <%
+            User user = (User) request.getSession().getAttribute("user");
+            if (user != null) {
+                String username = user.getUsername();
+                String ava = user.getAvatarImage();
+                String email = user.getAvatarImage();
+            }
+        %>
         <!--Start header-->
         <header class="navbar navbar-expand-lg navbar-light navbar-floating navbar-sticky">
             <div class="p-2">
@@ -28,7 +37,7 @@
             </div>
             <div class="dropdown ml-auto">
                 <a class="avatar avatar-md p-0 show" href="">
-                    <img height="45" class="avatar-img rounded-circle" src="./assets/images/avatar01.jpg" alt="avatar">
+                    <img height="45" class="avatar-img rounded-circle" src="./assets/images/${user.avatarImage}" alt="avatar">
                 </a>
             </div>
             <!--End header-->

@@ -86,7 +86,6 @@
 
     </style>
     <body>
-        <%@include file="components/customerHeader.jsp" %>
         <div class="container-xl px-4 mt-4">
             <!-- Account page navigation-->
             <nav class="nav nav-borders">
