@@ -67,9 +67,7 @@
             height: 400px;
         }
     </style>
-    <header>
-        <jsp:include page="./components/customerHeader.jsp" />
-    </header>
+
     <body>
         <div class="container-fluid m-0 p-0">
             <div id="layoutSidenav_content">
