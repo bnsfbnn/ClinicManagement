@@ -33,7 +33,7 @@
                                         <h3 class="mb-4">Đăng nhập</h3>
                                     </div>
                                 </div>
-                                <form action="LoginController" method="POST" class="signin-form">
+                                <form action="HomeController" method="POST" class="signin-form">
                                     <div class="form-group mt-3">
                                         <input type="text" class="form-control" required name="username">
                                         <label class="form-control-placeholder" for="username">Tên đăng nhập...</label>

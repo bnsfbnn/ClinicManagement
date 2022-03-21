@@ -7,24 +7,21 @@
  * DATE            Version             AUTHOR           DESCRIPTION
  * 2022-02-23      1.0                 NamNV          First Implement 
 -->
-<%@page contentType="text/html" pageEncoding="UTF-8" %>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
-<html lang="en">
+<html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link rel="stylesheet"
-              href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-        <link rel="stylesheet" href="./assets/css/style.css">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-              integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-              crossorigin="anonymous">
-        <link href="../assets/styles/jquery-ui.min.css" rel="stylesheet" type="text/css" />
-        <link href="../assets/styles/jquery-ui.structure.min.css" rel="stylesheet" type="text/css" />
-        <link href="../assets/styles/jquery-ui.theme.min.css" rel="stylesheet" type="text/css" />
         <title>Clinic Management</title>
-        <link href="./assets/css/header.css" rel="stylesheet" type="text/css" />
+        <link href="./assets/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css" />
+        <link href="./assets/themes/krajee-fas/theme.css" media="all" rel="stylesheet" type="text/css"/>
+        <link rel="stylesheet" href="./assets/css/select2.min.css" />
+        <link rel="stylesheet" href="./assets/css/select2-bootstrap-5-theme.min.css" />
+        <link rel="stylesheet" href="./assets/css/custom.css" />
+        <link href="./assets/css/header.css" rel="stylesheet" type="text/css"/>
     </head>
     <style>
         .content {
@@ -78,11 +75,8 @@
             height: 400px;
         }
     </style>
-    <header>
-        <jsp:include page="./components/customerHeader.jsp" />
-    </header>
-
     <body>
+        <%@include file="components/customerHeader.jsp" %>
         <div class="container-fluid m-0 p-0">
             <div id="layoutSidenav_content">
                 <div class="row-fluid mb-3">
@@ -167,7 +161,7 @@
                     <div class="row container-fluid">
                         <div class="col-4">
                             <h3>Bác sĩ nổi bật</h3>
-                            <br>
+                            <br/>
                             <p>Đặt khám trực tiếp tới đội ngũ bác sĩ của ISOFHCARE có trình độ chuyên môn cao, nhiều
                                 năm kinh nghiệm, giàu y đức, giúp bạn hoàn toàn chủ động lựa chọn thời gian khám</p>
                             <img
@@ -224,10 +218,10 @@
                             <c:forEach items="${posts}" var="p">
                                 <div class="col-md-4 my-1">
                                     <div class="card" style="width: 18rem;">
-                                        <img class="card-img-top" src="${p.postImage}" alt="Card image cap">
+                                        <img class="card-img-top" src="./assets/images/${p.postImage}" alt="Card image cap">
                                         <div class="card-body">
                                             <h5 class="card-title">${p.title}</h5>
-                                            <p class="card-text">${p.content}</p>
+                                            <p class="card-text">${p.summary}</p>
                                             <a href="PostDetailController?id=${p.id}"
                                                class="btn btn-primary">View Post Detail</a>
                                         </div>
@@ -239,18 +233,12 @@
                 </div>
             </div>
         </div>
-    </body>
-    <footer>
         <jsp:include page="./components/footer.jsp" />
-    </footer>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-    crossorigin="anonymous"></script>
-    <script src="./assets/js/scripts.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"
-    crossorigin="anonymous"></script>
-    <script src="./assets/demo/chart-area-demo.js"></script>
-    <script src="./assets/demo/chart-bar-demo.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
-    <script src="./assets/js/datatables-simple-demo.js"></script>
-
+        <script src="./assets/js/jquery-3.6.0.min.js" crossorigin="anonymous"></script>
+        <script src="./assets/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+        <script src="./assets/js/star-rating.js" type="text/javascript"></script>
+        <script src="./assets/themes/krajee-fas/theme.js" type="text/javascript"></script>
+        <script src="./assets/js/select2.full.min.js"></script>
+        <script src="./assets/js/custom.js"></script>
+    </body>
 </html>
