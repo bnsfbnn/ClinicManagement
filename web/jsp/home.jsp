@@ -5,7 +5,7 @@
  *
  * Record of change:
  * DATE            Version             AUTHOR           DESCRIPTION
- * 2022-02-23      1.0                 NamNV          First Implement 
+ * 2022-02-28      1.0                 TrangCT          Home page
 -->
 <!DOCTYPE html>
 <html lang="en">
@@ -158,8 +158,8 @@
                         <div class="row border-bottom my-1"></div>
                         <form action="SearchPostController" method="get">
                             <div class="row col-lg-6 mx-auto my-1">
-                                <input type="text" name="search" class="form-control col-md-8" id="searchKeyword" maxlength="20">
-                                <button type="submit"  value="${search} "class="btn btn-primary col-md-4" >Tìm kiếm</button>
+                                <input type="text" name="search" value="${search}" class="form-control col-md-8" id="searchKeyword" maxlength="20">
+                                <button type="submit" class="btn btn-primary col-md-4" >Tìm kiếm</button>
                             </div> 
                         </form>
                         <div class="row d-flex justify-content-center">

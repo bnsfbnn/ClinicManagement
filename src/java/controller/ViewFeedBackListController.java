@@ -89,10 +89,11 @@ public class ViewFeedBackListController extends HttpServlet {
         FeedbackDAO feedbackDAO = new FeedbackDAOImpl();
         ServiceDAO serviceDAO = new ServiceDAOImpl();
         Pagination<FeedbackDTO> feedbacks;
+        int userId = user.getUserId();
         if (service != 0) {
-            feedbacks = feedbackDAO.getAllFeedback(pageIndex, pageSize, service, time);
+            feedbacks = feedbackDAO.getAllCustomerFeedback(pageIndex, pageSize, service, time, userId);
         } else {
-            feedbacks = feedbackDAO.getAllFeedback(pageIndex, pageSize, time);
+            feedbacks = feedbackDAO.getAllCustomerFeedback(pageIndex, pageSize, time, userId);
         }
 
         List<Date> times = feedbackDAO.getAllDate();

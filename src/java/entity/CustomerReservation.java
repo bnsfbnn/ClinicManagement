@@ -9,7 +9,7 @@ import java.sql.Date;
 
 /**
  *
- * @author dell
+ * @author TrangCT
  */
 public class CustomerReservation {
     private int id;

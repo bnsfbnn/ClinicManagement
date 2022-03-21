@@ -20,4 +20,8 @@ public interface FeedbackDAO {
 
     List<Date> getAllDate();
 
+    Pagination<FeedbackDTO> getAllCustomerFeedback(int pageIndex, int pageSize, String time, int id);
+
+    Pagination<FeedbackDTO> getAllCustomerFeedback(int pageIndex, int pageSize, int service, String time, int id);
+
 }
