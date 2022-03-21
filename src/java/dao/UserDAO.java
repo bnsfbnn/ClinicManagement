@@ -38,7 +38,7 @@ public interface UserDAO {
     Pagination<Account> getAllAccount(int pageIndex, int pageSize);
 
     void deleteAccount(int id);
-    
+
     void updateAccount(User user);
 
     void createAccount(User user);
@@ -52,5 +52,4 @@ public interface UserDAO {
      void updateAccountByAdmin(User user);
      
      User getUserById(int id);
-
 }

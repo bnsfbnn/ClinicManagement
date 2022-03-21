@@ -6,7 +6,7 @@
  * Record of change:
  * DATE            Version             AUTHOR           DESCRIPTION
  * 2022-03-06      1.0                 MinhVT         Feed Back Management
--->
+ -->
 <html lang="en">
     <%@page contentType="text/html" pageEncoding="UTF-8"%>
     <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>

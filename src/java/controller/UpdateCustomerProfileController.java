@@ -9,7 +9,6 @@ import dao.UserDAO;
 import dao.impl.UserDAOImpl;
 import entity.User;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -21,7 +20,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
+import javax.servlet.http.HttpSession;
 
 public class UpdateCustomerProfileController extends HttpServlet {
 
@@ -37,34 +36,28 @@ public class UpdateCustomerProfileController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ParseException {
         response.setContentType("text/html;charset=UTF-8");
-        int roleId = Integer.parseInt(request.getParameter("roleId"));
-        int serviceId = Integer.parseInt(request.getParameter("serviceId"));
-        String username = request.getParameter("username");
-        String email = request.getParameter("email");
-        String password = request.getParameter("password");
-        String fullName = request.getParameter("fullName");
-        
+request.setCharacterEncoding("utf-8");
+        String email = request.getParameter("email").trim();
+        String fullName = request.getParameter("fullName").trim();
+
         DateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
-        String date = request.getParameter("date");
+        String date = request.getParameter("date").trim();
         format.setTimeZone(TimeZone.getTimeZone("Etc/UTC"));
         java.util.Date jdate = format.parse(date);
         java.sql.Date sdate = new java.sql.Date(jdate.getTime());
-        
-        int check = Integer.parseInt(request.getParameter("gender"));
-        boolean gender;
-        if (check == 1) {
-            gender = true;
-        } else {
-            gender = false;
-        }
-        String phone = request.getParameter("phone");
-        String address = request.getParameter("address");
-        String avatarImage = request.getParameter("avatarImage");
-        
-        User user = new User(roleId, serviceId, username, email, password, fullName, sdate, gender, phone, address, avatarImage);
+
+        String phone = request.getParameter("phone").trim();
+        String address = request.getParameter("address").trim();
+        int id = Integer.parseInt(request.getParameter("id"));
+
+        User user = new User(0, 0, "", email, "", fullName, sdate, true, phone, address, "", id);
         UserDAO userDAO = new UserDAOImpl();
         userDAO.updateAccount(user);
-        
+        HttpSession session = request.getSession();
+        session.setAttribute("user", user);
+         session.setAttribute("message", "Update Success");
+        response.sendRedirect("./jsp/user_profile.jsp");
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

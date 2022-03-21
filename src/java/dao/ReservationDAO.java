@@ -101,6 +101,52 @@ public interface ReservationDAO {
      */
     public int updateReservationStatusById(int reservationId, String reservationStatus) throws SQLException, Exception;
 
+    /**
+     * - Update reservation status to unconfirmed
+     *
+     * @param reservationId is a <code>java.lang.int</code> object used to
+     * update reservation by reservationId
+     * @param reservationStatus is a <code>java.lang.String</code> object used
+     * to update reservation by reservationStatus
+     * @param today is a <code>java.lang.String</code> object used to update
+     * reservation by reservationStatus
+     * @return a list of <code>Reservation</code> objects. <br>
+     * -It is a <code>java.util.ArrayList</code> object
+     * @throws SQLException when <code>java.sql.SQLException</code> occurs.
+     * @throws Exception when <code>java.sql.Exception</code> occurs.
+     */
+    public int cancelReceiveReservationById(int reservationId, String reservationStatus, String today) throws SQLException, Exception;
+
+    /**
+     * - Get Time Schedule By Doctor Id
+     *
+     * @param doctorId is a <code>java.lang.int</code> object used to Get Time
+     * Schedule By Doctor Id by reservationId
+     * @param date is a <code>java.lang.String</code> object used to Get Time
+     * Schedule By Doctor Id by reservationStatus
+     * @return a list of <code>String</code> objects. <br>
+     * -It is a <code>java.util.ArrayList</code> object
+     * @throws SQLException when <code>java.sql.SQLException</code> occurs.
+     * @throws Exception when <code>java.sql.Exception</code> occurs.
+     */
+    public ArrayList<String> getTimeScheduleByDoctorId(int doctorId, String date) throws SQLException, Exception;
+
+    /**
+     * - Update reservation date, reservation time
+     *
+     * @param reservationId is a <code>java.lang.int</code> object used to
+     * update reservation by new reservation date, time
+     * @param confirmReservationDate is a <code>java.lang.String</code> object
+     * used to update reservation reservation by new reservation date, time
+     * @param confirmReservationTime is a <code>java.lang.String</code> object
+     * used to update reservation by reservation by new reservation date, time
+     * @return a list of <code>Reservation</code> objects. <br>
+     * -It is a <code>java.util.ArrayList</code> object
+     * @throws SQLException when <code>java.sql.SQLException</code> occurs.
+     * @throws Exception when <code>java.sql.Exception</code> occurs.
+     */
+    public int updateReservationDateTimeById(int reservationId, String confirmReservationDate, String confirmReservationTime) throws SQLException, Exception;
+
     Pagination<CustomerReservation> getAllCustomerReservation(int pageIndex, int pageSize, int id, String status);
 
     CustomerReservation getCustomerReservationById(int id);
