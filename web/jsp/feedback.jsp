@@ -165,8 +165,6 @@
                                     <div hidden>
                                         <input type="text"value="${feedback.examinationId}" name="examinationId">
                                     </div>
-                                    <input type="text" placeholder="add your feedback" name="content" required="" maxlength="50">
-                                    <button class="btn-primary">add</button>
                                 </form>
                             </li>
 

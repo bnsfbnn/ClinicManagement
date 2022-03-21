@@ -5,7 +5,7 @@
  *
  * Record of change:
  * DATE            Version             AUTHOR           DESCRIPTION
- * 2022-02-28      1.0                 TrangCT          Homepage
+ * 2022-02-23      1.0                 NamNV          First Implement 
 -->
 <!DOCTYPE html>
 <html lang="en">
@@ -84,14 +84,14 @@
                         <div class="card" style="width: 18rem;">
                             <img id="images" class="card-img-top" src="https://isofhcare-backup.s3-ap-southeast-1.amazonaws.com/images/bac-si_02156a3d_6d43_476f_8d12_7d10e6d3795e.png" alt="Card image cap">
                             <div class="card-body">
-                                <h5 class="card-title">Bác sĩ</h5>
-                                <p class="card-text">.</p>
+                                <h5 class="card-title">Bï¿½c s?</h5>
+                                <p class="card-text">??t khï¿½m tr?c ti?p t?i ??i ng? bï¿½c s? c?a ISOFHCARE cï¿½ trï¿½nh ?? chuyï¿½n mï¿½n cao, nhi?u n?m kinh nghi?m, giï¿½u y ??c, giï¿½p b?n hoï¿½n toï¿½n ch? ??ng l?a ch?n th?i gian khï¿½m.</p>
                             </div>
                         </div>
                         <div class="card" style="width: 18rem;">
                             <img id="images" class="card-img-top" src="https://isofhcare-backup.s3-ap-southeast-1.amazonaws.com/images/benh-vien_3af5757b_be9b_4a39_9948_6d2062b72316.png" alt="Card image cap">
                             <div class="card-body">
-                                <h5 class="card-title">Beenh vi?n</h5>
+                                <h5 class="card-title">B?nh vi?n</h5>
                                 <p class="card-text">??t khï¿½m theo gï¿½i d?ch v? ch?t l??ng, d?ch v? xï¿½t nghi?m vï¿½ ch?n ?oï¿½n hï¿½nh ?nh hi?n ??i t?i t? cï¿½c ??i tï¿½c b?nh vi?n hï¿½ng ??u, tuy?n Trung ??ng c?a ISOFHCARE.</p>
                             </div>
                         </div>
@@ -158,8 +158,8 @@
                         <div class="row border-bottom my-1"></div>
                         <form action="SearchPostController" method="get">
                             <div class="row col-lg-6 mx-auto my-1">
-                                <input type="text" name="search" class="form-control col-md-8" id="searchKeyword">
-                                <button type="submit"  value="${search} "class="btn btn-primary col-md-4">Tìm kiếm</button>
+                                <input type="text" name="search" class="form-control col-md-8" id="searchKeyword" maxlength="20">
+                                <button type="submit"  value="${search} "class="btn btn-primary col-md-4" >Tìm kiếm</button>
                             </div> 
                         </form>
                         <div class="row d-flex justify-content-center">

@@ -9,13 +9,18 @@
  */
 package dao;
 
+import entity.BookScheduleDTO;
 import entity.CustomerReservation;
 import entity.Pagination;
 import entity.Reservation;
 import entity.ReservationDTO;
 import entity.User;
+import java.sql.Date;
 import java.sql.SQLException;
+import java.sql.Time;
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * This class is an interface contains methods of Reservation
@@ -85,21 +90,24 @@ public interface ReservationDAO {
     /**
      * - Update reservation status
      *
-     * @param reservationId is a <code>java.lang.int</code> object used to update
-     * reservation by reservationId
-     * @param reservationStatus is a <code>java.lang.String</code> object used to update
-     * reservation by reservationStatus
+     * @param reservationId is a <code>java.lang.int</code> object used to
+     * update reservation by reservationId
+     * @param reservationStatus is a <code>java.lang.String</code> object used
+     * to update reservation by reservationStatus
      * @return a list of <code>Reservation</code> objects. <br>
      * -It is a <code>java.util.ArrayList</code> object
      * @throws SQLException when <code>java.sql.SQLException</code> occurs.
      * @throws Exception when <code>java.sql.Exception</code> occurs.
      */
-    public int updateReservationStatusById(int reservationId,  String reservationStatus) throws SQLException, Exception;
+    public int updateReservationStatusById(int reservationId, String reservationStatus) throws SQLException, Exception;
 
     Pagination<CustomerReservation> getAllCustomerReservation(int pageIndex, int pageSize, int id, String status);
 
     CustomerReservation getCustomerReservationById(int id);
 
     void bookReservation(ReservationDTO reservation);
-    
+
+    Pagination<BookScheduleDTO> getAllReservation(int pageIndex, int pageSize);
+
+    void confirmReservation(int doctorId, String time, Date date, int id);
 }

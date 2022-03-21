@@ -67,7 +67,7 @@ public class AddFeedbackController extends HttpServlet {
         Feedback feedback = new Feedback();
         feedback.setCustomerId(user.getUserId());
         feedback.setExaminationId(examinationId);
-        feedback.setFeedbackContent(content);
+        feedback.setFeedbackContent(content.trim());
         feedback.setServiceId(serviceId);
         feedback.setFeedbackTime(date);
 

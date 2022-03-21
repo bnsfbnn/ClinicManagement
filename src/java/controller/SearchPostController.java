@@ -36,7 +36,7 @@ public class SearchPostController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String search = request.getParameter("search");
         PostDAO postDAO = new PostDAOImpl();
-        List<PostEntity> posts = postDAO.searchPost(search);
+        List<PostEntity> posts = postDAO.searchPost(search.trim());
         request.setAttribute("posts", posts);
         request.setAttribute("search", search);
         request.getRequestDispatcher("./jsp/home.jsp").forward(request, response);

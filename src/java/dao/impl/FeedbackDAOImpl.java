@@ -138,7 +138,7 @@ public class FeedbackDAOImpl extends DBContext implements FeedbackDAO {
                     + "  values (?,?,?,?, ?)");
             preparedStatement.setInt(1, feedback.getCustomerId());
             preparedStatement.setInt(2, feedback.getServiceId());
-            preparedStatement.setInt(3, feedback.getExaminationId());
+            preparedStatement.setInt(3, 1);
             preparedStatement.setString(4, feedback.getFeedbackContent());
             preparedStatement.setDate(5, feedback.getFeedbackTime());
             preparedStatement.executeUpdate();
