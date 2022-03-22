@@ -9,10 +9,14 @@
  */
 package controller;
 
+import dao.PostDAO;
 import dao.UserDAO;
+import dao.impl.PostDAOImpl;
 import dao.impl.UserDAOImpl;
+import entity.PostEntity;
 import entity.User;
 import java.io.IOException;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -20,9 +24,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- * * -This class uses function getUser in
- * <code>dao.impl.UserDAOImpl</code> to get an
- * <code>java.util.String</code> object that contains a series of
+ * * -This class uses function getUser in <code>dao.impl.UserDAOImpl</code> to
+ * get an <code>java.util.String</code> object that contains a series of
  * <code>entity.User</code>
  *
  * @author Nguyen Thanh Tung
@@ -45,13 +48,17 @@ public class LoginController extends HttpServlet {
         String password = request.getParameter("password");
 
         UserDAO userDAO = new UserDAOImpl();
-        User user = userDAO.login(username.trim(), password);
+        User user = userDAO.login(username.trim(), password.trim());
         if (user != null) {
             HttpSession session = request.getSession();
             session.setAttribute("user", user);
+            session.setAttribute("role", user.getRoleId());
+            PostDAO postDAO = new PostDAOImpl();
+            List<PostEntity> posts = postDAO.getAllPost();
+            request.setAttribute("posts", posts);
             request.getRequestDispatcher("./jsp/home.jsp").forward(request, response);
         } else {
-            request.setAttribute("message", "Tên đăng nhập hoặc mật khẩu không đúng!!!");
+            request.setAttribute("messageLogin", "Tên đăng nhập hoặc mật khẩu không đúng!!!");
             request.getRequestDispatcher("./jsp/login.jsp").forward(request, response);
         }
 

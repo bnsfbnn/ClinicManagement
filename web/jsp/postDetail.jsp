@@ -7,8 +7,10 @@
  * DATE            Version             AUTHOR           DESCRIPTION
  * 2022-02-23      1.0                 NamNV          First Implement 
 -->
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html lang="en">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -53,7 +55,7 @@
         h5{
             margin-left: 45px;
         }
-        #content-page {
+        .content-page img{
             width: 100%;
             margin-top: 20px;
         }
@@ -66,7 +68,7 @@
         }
     </style>
     <header>
-        <jsp:include page="./components/customerHeader.jsp" />
+        <%--<jsp:include page="./components/customerHeader.jsp" />--%>
     </header>
     <body>
         <div class="container-fluid m-0 p-0">
@@ -76,130 +78,95 @@
                 </div>
                 <div class="container-fluid mt-3">
                     <div>
-                        <h5>Dịch vụ của chúng tôi</h5>
+                        <h5 >D?ch v? c?a chï¿½ng tï¿½i</h5>
                     </div>
                     <div class="d-flex justify-content-around mt-3">
                         <div class="card" style="width: 18rem;">
-                            <img class="card-img-top"
-                                 src="https://isofhcare-backup.s3-ap-southeast-1.amazonaws.com/images/bac-si_02156a3d_6d43_476f_8d12_7d10e6d3795e.png"
-                                 alt="Card image cap">
+                            <img id="images" class="card-img-top" src="https://isofhcare-backup.s3-ap-southeast-1.amazonaws.com/images/bac-si_02156a3d_6d43_476f_8d12_7d10e6d3795e.png" alt="Card image cap">
                             <div class="card-body">
-                                <h5 class="card-title">Bác sĩ</h5>
-                                <p class="card-text">Đặt khám trực tiếp tới đội ngũ bác sĩ của ISOFTCARE có trình độ
-                                    chuyên môn cao, nhiều năm kinh nghiệm, giàu y đức, giúp bạn hoàn toàn chủ động lựa
-                                    chọn thời gian khám.</p>
+                                <h5 class="card-title">Bï¿½c s?</h5>
+                                <p class="card-text">??t khï¿½m tr?c ti?p t?i ??i ng? bï¿½c s? c?a ISOFHCARE cï¿½ trï¿½nh ?? chuyï¿½n mï¿½n cao, nhi?u n?m kinh nghi?m, giï¿½u y ??c, giï¿½p b?n hoï¿½n toï¿½n ch? ??ng l?a ch?n th?i gian khï¿½m.</p>
                             </div>
                         </div>
                         <div class="card" style="width: 18rem;">
-                            <img class="card-img-top"
-                                 src="https://isofhcare-backup.s3-ap-southeast-1.amazonaws.com/images/benh-vien_3af5757b_be9b_4a39_9948_6d2062b72316.png"
-                                 alt="Card image cap">
+                            <img id="images" class="card-img-top" src="https://isofhcare-backup.s3-ap-southeast-1.amazonaws.com/images/benh-vien_3af5757b_be9b_4a39_9948_6d2062b72316.png" alt="Card image cap">
                             <div class="card-body">
-                                <h5 class="card-title">Bệnh viện</h5>
-                                <p class="card-text">Đặt khám theo gói dịch vụ chất lượng, dịch vụ xét nghiệm và chuẩn
-                                    đoán hình ảnh hiện đại tới từ các đối tác bệnh viện hàng đầu ,tuyến Trung Ương của
-                                    ISOFTCARE.</p>
+                                <h5 class="card-title">B?nh vi?n</h5>
+                                <p class="card-text">??t khï¿½m theo gï¿½i d?ch v? ch?t l??ng, d?ch v? xï¿½t nghi?m vï¿½ ch?n ?oï¿½n hï¿½nh ?nh hi?n ??i t?i t? cï¿½c ??i tï¿½c b?nh vi?n hï¿½ng ??u, tuy?n Trung ??ng c?a ISOFHCARE.</p>
                             </div>
                         </div>
                         <div class="card" style="width: 18rem;">
-                            <img class="card-img-top"
-                                 src="https://isofhcare-backup.s3-ap-southeast-1.amazonaws.com/images/cam-nang_9ec6df99_ba08_4015_b679_2459308c5e26.png"
-                                 alt="Card image cap">
+                            <img id="images" class="card-img-top" src="https://isofhcare-backup.s3-ap-southeast-1.amazonaws.com/images/cam-nang_9ec6df99_ba08_4015_b679_2459308c5e26.png" alt="Card image cap">
                             <div class="card-body">
-                                <h5 class="card-title">Cẩm nang</h5>
-                                <p class="card-text">Với lượng bài đăng phong phú, chuyên mục Cẩm nang y tế cung cấp cho
-                                    bạn nhiều kiến thức bổ ích về sức khỏe, mang tính thực tiễn áp dụng vào.</p>
+                                <h5 class="card-title">C?m nang</h5>
+                                <p class="card-text">V?i l??ng bï¿½i ??ng phong phï¿½, chuyï¿½n m?c C?m nang y t? cung c?p cho b?n nhi?u ki?n th?c b? ï¿½ch v? s?c kh?e, mang tï¿½nh th?c ti?n ï¿½p d?ng vï¿½o.</p>
                             </div>
                         </div>
                         <div class="card" style="width: 18rem;">
-                            <img class="card-img-top"
-                                 src="https://isofhcare-backup.s3-ap-southeast-1.amazonaws.com/images/cong-dong_15c2ee3e_0448_4635_ac97_645a84969848.png"
-                                 alt="Card image cap">
+                            <img id="images" class="card-img-top" src="https://isofhcare-backup.s3-ap-southeast-1.amazonaws.com/images/cong-dong_15c2ee3e_0448_4635_ac97_645a84969848.png" alt="Card image cap">
                             <div class="card-body">
-                                <h5 class="card-title">Cộng đồng</h5>
-                                <p class="card-text">Cộng đồng y tế đông đảo với sự tham gia của các bác sĩ đầu ngành
-                                    tới từ nhiều lĩnh vực, hỗ trợ giải đáp các thắc mắc của bạn trong mọi khía cạnh sức
-                                    khỏe.</p>
+                                <h5 class="card-title">C?ng ??ng</h5>
+                                <p class="card-text">C?ng ??ng y t? ?ï¿½ng ??o v?i s? tham gia c?a cï¿½c bï¿½c s? ??u ngï¿½nh t?i t? nhi?u l?nh v?c, h? tr? gi?i ?ï¿½p cï¿½c th?c m?c c?a b?n trong m?i khï¿½a c?nh s?c kh?e.</p>
                             </div>
                         </div>
                         <div class="card" style="width: 18rem;">
-                            <img class="card-img-top"
-                                 src="https://isofhcare-backup.s3-ap-southeast-1.amazonaws.com/images/bac-si_02156a3d_6d43_476f_8d12_7d10e6d3795e.png"
-                                 alt="Card image cap">
+                            <img id="images" class="card-img-top" src="https://isofhcare-backup.s3-ap-southeast-1.amazonaws.com/images/bac-si_02156a3d_6d43_476f_8d12_7d10e6d3795e.png" alt="Card image cap">
                             <div class="card-body">
-                                <h5 class="card-title">Bác sĩ</h5>
-                                <p class="card-text">Đặt khám trực tiếp tới đội ngũ bác sĩ của ISOFTCARE có trình độ
-                                    chuyên môn cao, nhiều năm kinh nghiệm, giàu y đức, giúp bạn hoàn toàn chủ động lựa
-                                    chọn thời gian khám.</p>
+                                <h5 class="card-title">Bï¿½c s?</h5>
+                                <p class="card-text">??t khï¿½m tr?c ti?p t?i ??i ng? bï¿½c s? c?a ISOFHCARE cï¿½ trï¿½nh ?? chuyï¿½n mï¿½n cao, nhi?u n?m kinh nghi?m, giï¿½u y ??c, giï¿½p b?n hoï¿½n toï¿½n ch? ??ng l?a ch?n th?i gian khï¿½m.</p>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="content-page">
-                    <img
-                         src="https://isofhcare-backup.s3-ap-southeast-1.amazonaws.com/images/kit-test-nhanh-covid-tai-nha-isofhcare-jpg_99fa2328_f5d7_4eb8_8561_ae5a4c49c9be.png" />
+                    <img src="https://isofhcare-backup.s3-ap-southeast-1.amazonaws.com/images/kit-test-nhanh-covid-tai-nha-isofhcare-jpg_99fa2328_f5d7_4eb8_8561_ae5a4c49c9be.png"/>
                 </div>
                 <div class="content-infor mt-5">
                     <div class="row container-fluid">
                         <div class="col-4">
-                            <h3>Bác sĩ nổi bật</h3>
+                            <p class="font-weight-bold">Bï¿½c s? n?i b?t</p>
                             <br>
-                            <p>Đặt khám trực tiếp tới đội ngũ bác sĩ của ISOFHCARE có trình độ chuyên môn cao, nhiều
-                                năm kinh nghiệm, giàu y đức, giúp bạn hoàn toàn chủ động lựa chọn thời gian khám</p>
-                            <img
-                                src="https://isofhcare-backup.s3-ap-southeast-1.amazonaws.com/images/bac-si-noi-bat_3aafb5a5_e84b_4be0_bf87_4689b981e5d7.png">
+                            <p>xxxxx</p>
+                            <img src="https://isofhcare-backup.s3-ap-southeast-1.amazonaws.com/images/bac-si-noi-bat_3aafb5a5_e84b_4be0_bf87_4689b981e5d7.png">
                         </div>
                         <div class="col-8 d-flex justify-content-around">
                             <div class="card" style="width: 18rem;">
-                                <img class="card-img-top1"
-                                     src="https://isofhcare-backup.s3-ap-southeast-1.amazonaws.com/images/bac-si_02156a3d_6d43_476f_8d12_7d10e6d3795e.png"
-                                     alt="Card image cap">
+                                <img id="images" class="card-img-top" src="https://isofhcare-backup.s3-ap-southeast-1.amazonaws.com/images/bac-si_02156a3d_6d43_476f_8d12_7d10e6d3795e.png" alt="Card image cap">
                                 <div class="card-body">
-                                    <h5 class="card-title">Bác sĩ</h5>
-                                    <p class="card-text">Đặt khám trực tiếp tới đội ngũ bác sĩ của ISOFTCARE có
-                                        trình độ chuyên môn cao, nhiều năm kinh nghiệm, giàu y đức, giúp bạn hoàn
-                                        toàn chủ động lựa chọn thời gian khám.</p>
+                                    <h5 class="card-title">xxxx
+                                    <p class="card-text">x.</p>
                                 </div>
                             </div>
                             <div class="card" style="width: 18rem;">
-                                <img class="card-img-top1"
-                                     src="https://isofhcare-backup.s3-ap-southeast-1.amazonaws.com/images/bac-si_02156a3d_6d43_476f_8d12_7d10e6d3795e.png"
-                                     alt="Card image cap">
+                                <img id="images" class="card-img-top" src="https://isofhcare-backup.s3-ap-southeast-1.amazonaws.com/images/bac-si_02156a3d_6d43_476f_8d12_7d10e6d3795e.png" alt="Card image cap">
                                 <div class="card-body">
-                                    <h5 class="card-title">Bác sĩ</h5>
-                                    <p class="card-text">Đặt khám trực tiếp tới đội ngũ bác sĩ của ISOFTCARE có
-                                        trình độ chuyên môn cao, nhiều năm kinh nghiệm, giàu y đức, giúp bạn hoàn
-                                        toàn chủ động lựa chọn thời gian khám.</p>
+                                    <h5 class="card-title">Bï¿½c s?</h5>
+                                    <p class="card-text">??t khï¿½m tr?c ti?p t?i ??i ng? bï¿½c s? c?a ISOFHCARE cï¿½ trï¿½nh ?? chuyï¿½n mï¿½n cao, nhi?u n?m kinh nghi?m, giï¿½u y ??c, giï¿½p b?n hoï¿½n toï¿½n ch? ??ng l?a ch?n th?i gian khï¿½m.</p>
                                 </div>
                             </div>
                             <div class="card" style="width: 18rem;">
-                                <img class="card-img-top1"
-                                     src="https://isofhcare-backup.s3-ap-southeast-1.amazonaws.com/images/bac-si_02156a3d_6d43_476f_8d12_7d10e6d3795e.png"
-                                     alt="Card image cap">
+                                <img id="images" class="card-img-top" src="https://isofhcare-backup.s3-ap-southeast-1.amazonaws.com/images/bac-si_02156a3d_6d43_476f_8d12_7d10e6d3795e.png" alt="Card image cap">
                                 <div class="card-body">
-                                    <h5 class="card-title">Bác sĩ</h5>
-                                    <p class="card-text">Đặt khám trực tiếp tới đội ngũ bác sĩ của ISOFTCARE có
-                                        trình độ chuyên môn cao, nhiều năm kinh nghiệm, giàu y đức, giúp bạn hoàn
-                                        toàn chủ động lựa chọn thời gian khám.</p>
+                                    <h5 class="card-title">Bï¿½c s?</h5>
+                                    <p class="card-text">gian khï¿½m.</p>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="row-fluid my-5">
                         <div class="col-lg-12"></div>
-                        <h1>Tin T?c</h1>
-
+                        <h1>Tin Tức</h1>
                         <div class="row d-flex justify-content-center my-1">
-                            <h2>BV H?NG NG?C K� K?T BI�N B?N H?P T�C V?I ?SQ H�N QU?C, HI?P H?I NG??I H�N T?I H� N?I V? VI?C H? TR? Y T? CHO B?NH NH�N H�N QU?C M?C COVID-19</h2>
+                            <h2>${post.title}</h2>
                         </div>
                         <div class="row border-dark my-1">
-
+                            ${post.summary}
                         </div>
                         <div class="row d-flex justify-content-start">
-                            <b><i>Nguy?n V?n B - 2022-19-10 07:00:00</i></b>
+                            <b><i>${user} : ${post.createDate} : ${post.createTime}</i></b>
                         </div>
                         <div class="row d-flex justify-content-end">
-                            <p>BV H?NG NG?C K� K?T BI�N B?N H?P T�C V?I ?SQ H�N QU?C, HI?P H?I NG??I H�N T?I H� N?I V? VI?C H? TR? Y T? CHO B?NH NH�N H�N QU?C M?C COVID-19</p>
+                            <p>${post.content}</p>
                         </div>
                     </div>
                 </div>

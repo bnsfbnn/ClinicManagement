@@ -18,18 +18,18 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
+
 /**
  *
  * @author Thanh Tung
  */
 public class DBContext {
-    
-  private String HOST = "localhost";
+
+    private String HOST = "localhost";
     private String PORT = "1433";
     private String DATABASE_NAME = "CMS";
     private String USERNAME = "sa";
     private String PASSWORD = "123456";
-
 
     /**
      * Lookup context parameters

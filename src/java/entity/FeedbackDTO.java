@@ -13,6 +13,7 @@ import java.sql.Date;
  * @author TrangCT
  */
 public class FeedbackDTO {
+
     private int feedbackId;
     private String customer;
     private String username;
@@ -20,20 +21,22 @@ public class FeedbackDTO {
     private String examination;
     private String feedbackContent;
     private Date feedbackTime;
+    private int examinationId;
+    private int serviceId;
 
-    public FeedbackDTO(int feedbackId, String customer, String service, String examination, String feedbackContent, Date feedbackTime) {
+    public FeedbackDTO(int feedbackId, String customer, String service, String examination, String feedbackContent, Date feedbackTime, int examinationId, int serviceId) {
         this.feedbackId = feedbackId;
         this.customer = customer;
         this.service = service;
         this.examination = examination;
         this.feedbackContent = feedbackContent;
         this.feedbackTime = feedbackTime;
+        this.examinationId = examinationId;
+        this.serviceId = serviceId;
     }
 
     public FeedbackDTO() {
     }
-    
-    
 
     public int getFeedbackId() {
         return feedbackId;
@@ -90,6 +93,22 @@ public class FeedbackDTO {
     public void setUsername(String username) {
         this.username = username;
     }
-    
 
+    public int getExaminationId() {
+        return examinationId;
+    }
+
+    public void setExaminationId(int examinationId) {
+        this.examinationId = examinationId;
+    }
+
+    public int getServiceId() {
+        return serviceId;
+    }
+
+    public void setServiceId(int serviceId) {
+        this.serviceId = serviceId;
+    }
+    
+    
 }

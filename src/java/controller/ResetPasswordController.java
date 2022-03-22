@@ -1,38 +1,26 @@
-
 /*
- * Copyright(C) 20022, FPT University
- * CMS:
- * Clinic Management System
- *
- * Record of change:
- * DATE            Version             AUTHOR           DESCRIPTION
- * 2022-03-08     1.0                 MinhVT          Controller View Feedback Management List
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
 package controller;
 
-import dao.FeedbackDAO;
-import dao.impl.FeedbackDAOImpl;
-import entity.FeedbackDTO;
-import entity.Pagination;
+import dao.UserDAO;
+import dao.impl.UserDAOImpl;
+import entity.User;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
- * <h1>View Feedback Management List Controller </h1>
- * Controller to view feedback management  list. Method process data form
- * FeedbackDAO and forward data to file view
- * <p>
  *
- *
- * @author MinhVT
- * @version 1.0
- * @since 2022-03-08
+ * @author Nguyễn Văn Nam
  */
-public class ViewFeedbackManagedListController extends HttpServlet {
+public class ResetPasswordController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -46,30 +34,26 @@ public class ViewFeedbackManagedListController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String page = request.getParameter("page");
-        int pageIndex = 1;
-        if (page != null) {
-            try {
-                pageIndex = Integer.parseInt(page);
-                if (pageIndex == -1) {
-                    pageIndex = 1;
-                }
-            } catch (Exception e) {
-                pageIndex = 1;
-            }
-        } else {
-            pageIndex = 1;
+        String password = request.getParameter("password");
+        String rePassword = request.getParameter("re-password");
+
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
+
+        request.setAttribute("password", password);
+        request.setAttribute("rePassword", rePassword);
+
+        if (!password.equals(rePassword)) {
+            request.setAttribute("message", "Pass word not match!!!");
+            request.getRequestDispatcher("./jsp/setPassword.jsp").forward(request, response);
+            return;
         }
+        UserDAO userDAO = new UserDAOImpl();
+        userDAO.updatePassword(user.getUsername(), rePassword);
+        session.invalidate();
+        request.setAttribute("message", "Password update success!!!");
+        request.getRequestDispatcher("./jsp/login.jsp").forward(request, response);
 
-
-        int pageSize = 5;
-
-        FeedbackDAO feedbackDAO = new FeedbackDAOImpl();
-        
-        Pagination<FeedbackDTO> feedbacks = feedbackDAO.getAllFeedback(pageIndex, pageSize, "");
-        
-        request.setAttribute("feedbacks", feedbacks);
-       request.getRequestDispatcher("./jsp/feedbackManagement.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

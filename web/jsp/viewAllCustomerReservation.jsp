@@ -107,6 +107,22 @@
     <body>
         <div class="container-fluid m-0 p-0">
             <h3 style="margin-left:20px">Reservation List</h3>
+            <div style="margin-left: 80%">
+                <form action="../ClinicManagement/ViewCustomerReservationsList" method="GET">
+                    <label for="status">Choose a status</label>
+                    <select name="status" id="status">
+                        <option selected value="${status}">
+                            ${status}
+                        </option>
+                        <option value="Đã khám">Đã khám</option>
+                        <option value="Chờ duyệt">Chờ duyệt</option>
+                        <option value="Đặt thành công">Đặt thành công</option>
+                        <option value="Đã hủy">Đã hủy</option>
+                    </select>
+                    <button class="btn-primary" type="submit">Lọc</button>
+                </form>
+            </div>
+
             <div class="container-fluid">
                 <c:forEach var="reservation" items="${reservations.data}">
                     <div class="row list">
@@ -148,16 +164,26 @@
 
                                 <div id="myModal2" class="modal">
                                     <!-- Modal content -->
-                                    <div class="modal-content">
-                                        <span class="close">&times;</span>
-                                        <div class="row-fluid">
-                                            <div class="form-group">
-                                                <label for="feedbackContent"><b>Nội dung phản hồi</b></label>
-                                                <textarea class="form-control" id="feedbackContent" rows="3"></textarea>
+                                    <form action="AddFeedbackController" method="POST">
+
+                                        <div class="modal-content">
+                                            <span class="close">&times;</span>
+                                            <div class="row-fluid">
+                                                <div class="form-group">
+                                                    <label for="feedbackContent"><b>Nội dung phản hồi</b></label>
+                                                    <textarea class="form-control" name="content" id="feedbackContent" rows="3"></textarea>
+                                                </div>
+                                                <div hidden>
+                                                    <input name="examinationId"value="${reservation.id}">
+                                                </div>
+                                                <div hidden>
+                                                    <input name="serviceId"value="${reservation.serviceId}">
+                                                </div>
+                                                <button class="btn btn-primary float-right mt-3" type="submit">Phản hồi</button>
                                             </div>
-                                            <button class="btn btn-primary float-right mt-3">Phản hồi</button>
                                         </div>
-                                    </div>
+                                    </form>
+
                                 </div>
 
                             </div>
@@ -174,28 +200,26 @@
                         <p class="text-center">Không có dữ liệu</p>
                     </div>
                 </c:if>
-                <c:if test="${reservations.totalPage > 1}">
-                    <div class="row mt-5">
-                        <div class="col-12 text-center">
-                            <ul>
-                                <c:if test="${reservations.currentPage > 1}">
-                                    <a class="btn btn-light" href="ViewCustomerReservationsList?page=${reservations.currentPage-1}">Trang trước</a>
+                <div class="row mt-5">
+                    <div class="col-12 text-center">
+                        <ul>
+                            <c:if test="${reservations.currentPage > 1}">
+                                <a class="btn btn-light" href="ViewCustomerReservationsList?page=${reservations.currentPage-1}">Trang trước</a>
+                            </c:if>
+                            <c:forEach var="pageNumber" begin="1" end="${reservations.totalPage}" step="1">
+                                <c:if test="${reservations.currentPage == pageNumber}">
+                                    <a class="btn btn-success" href="#">${pageNumber}</a>
                                 </c:if>
-                                <c:forEach var="pageNumber" begin="1" end="${reservations.totalPage}" step="1">
-                                    <c:if test="${reservations.currentPage == pageNumber}">
-                                        <a class="btn btn-success" href="#">${pageNumber}</a>
-                                    </c:if>
-                                    <c:if test="${reservations.currentPage != pageNumber}">
-                                        <a class="btn btn-light" href="ViewCustomerReservationsList?page=${pageNumber}">${pageNumber}</a>
-                                    </c:if>
-                                </c:forEach>
-                                <c:if test="${reservations.currentPage < reservations.totalPage}">
-                                    <a class="btn btn-light" href="ViewCustomerReservationsList?page=${reservations.currentPage+1}">Trang sau</a>
+                                <c:if test="${reservations.currentPage != pageNumber}">
+                                    <a class="btn btn-light" href="ViewCustomerReservationsList?page=${pageNumber}">${pageNumber}</a>
                                 </c:if>
-                            </ul>
-                        </div>
+                            </c:forEach>
+                            <c:if test="${reservations.currentPage < reservations.totalPage}">
+                                <a class="btn btn-light" href="ViewCustomerReservationsList?page=${reservations.currentPage+1}">Trang sau</a>
+                            </c:if>
+                        </ul>
                     </div>
-                </c:if>
+                </div>
 
                 <script src="./assets/js/jquery-3.6.0.min.js" crossorigin="anonymous"></script>
                 <script src="./assets/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>

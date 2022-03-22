@@ -12,8 +12,8 @@
 <!DOCTYPE html>
 <html>
     <head>
-       <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> 
+        <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> 
 
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <title>JSP Page</title>
@@ -81,7 +81,7 @@
             margin-right: 1rem;
         }     
         a{
-            
+
             color: white;
         }
 
@@ -124,7 +124,7 @@
                                     <!-- Form Group (first name)-->
                                     <div class="col-md-6">
                                         <label class="small mb-1" for="inputFirstName">Full name</label>
-                                        <input class="form-control" id="inputFirstName" type="text" placeholder="Enter your first name" value="${user.fullName}" name="fullName">
+                                        <input class="form-control" id="inputFirstName" type="text"  maxlength="20" placeholder="Enter your first name" value="${user.fullName}" name="fullName">
                                     </div>
 
                                 </div>
@@ -133,20 +133,20 @@
                                     <!-- Form Group (location)-->
                                     <div class="col-md-6">
                                         <label class="small mb-1" for="inputLocation">Location</label>
-                                        <input class="form-control" id="inputLocation" type="text" placeholder="Enter your location" value="${user.address}" name="address">
+                                        <input class="form-control" id="inputLocation" type="text" placeholder="Enter your location" maxlength="40" value="${user.address}" name="address">
                                     </div>
                                 </div>
                                 <!-- Form Group (email address)-->
                                 <div class="mb-3">
                                     <label class="small mb-1" for="inputEmailAddress">Email address</label>
-                                    <input class="form-control" id="inputEmailAddress" type="email" placeholder="Enter your email address" value="${user.email}" name="email" required>
+                                    <input class="form-control" id="inputEmailAddress" type="email" placeholder="Enter your email address"  maxlength="40"  value="${user.email}" name="email" required>
                                 </div>
                                 <!-- Form Row-->
                                 <div class="row gx-3 mb-3">
                                     <!-- Form Group (phone number)-->
                                     <div class="col-md-6">
                                         <label class="small mb-1" for="inputPhone">Phone number</label>
-                                        <input class="form-control" id="inputPhone" type="tel" placeholder="Enter your phone number" value="${user.phone}" name="phone" pattern="[0-9]{10}">
+                                        <input class="form-control" id="inputPhone" type="tel" placeholder="Enter your phone number"   value="${user.phone}" name="phone" pattern="[0][1-9][0-9]{8}">
                                     </div>
                                     <!-- Form Group (birthday)-->
                                     <div class="col-md-6">
@@ -161,10 +161,10 @@
                                 <!-- Save changes button-->
                                 <button class="btn btn-primary" type="submit">Update</button>
                                 <button class="btn btn-danger" ><a href="home.jsp"> Cancel</a>
-                                                                   </button>
+                                </button>
 
                             </form>
-                                    <div style="color: green">${message}</div>
+                            <div style="color: red">${message}</div>
                         </div>
                     </div>
                 </div>

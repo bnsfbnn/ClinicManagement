@@ -106,10 +106,6 @@
                                                             image: 'https://via.placeholder.com/60',
                                                     }]
                                             })">
-                                            <button class="btn-only-ic" data-bs-target="#detailServiceModal">
-                                                <a href="ServiceManagementDetailController?Id=${service.serviceId}" class="bi bi-eye-fill"></a>
-                                            </button>
-
                                             <button class="btn-only-ic" data-bs-target="#editServiceModal">
                                                 <a href="ServiceManagementDetailController?Id=${service.serviceId}" class="bi bi-pencil-fill"></a>
                                             </button>

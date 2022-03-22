@@ -1,19 +1,16 @@
 /*
- * Copyright(C) 2022, FPT University
- * CMS
- * CLINIC MANAGEMENT SYSTEM
- *
- * Record of change:
- * DATE            Version          AUTHOR           DESCRIPTION
- * 2022-02-08      1.0              HuongHTT         First Implement 
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
 package controller;
 
-import dao.UserDAO;
-import dao.impl.UserDAOImpl;
-import entity.User;
+import dao.ReservationDAO;
+import dao.impl.ReservationDAOImpl;
 import java.io.IOException;
-import java.sql.Date;
+import java.io.PrintWriter;
+import java.sql.Time;
+import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -25,17 +22,12 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
- * This class uses <code>dao.impl.UserDAOImpl</code> functions:<br>
- * createAccount to create an account.
  *
- * Bugs: none
- *
- * @author Hoang Thi Thu Huong
+ * @author 
  */
-public class CreateAccountController extends HttpServlet {
+public class ConfirmReservationController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -49,50 +41,26 @@ public class CreateAccountController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ParseException {
         response.setContentType("text/html;charset=UTF-8");
-        int roleId = Integer.parseInt(request.getParameter("roleId"));
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
-        String email = request.getParameter("email");
-        String fullName = request.getParameter("fullName");
+        int reservationId = Integer.parseInt(request.getParameter("id"));
+        int doctorId = Integer.parseInt(request.getParameter("doctor"));
+        String time = request.getParameter("time");
 
-        UserDAO userDAO = new UserDAOImpl();
-        if (userDAO.checkUsernameAndEmail(username.trim(), email.trim())) {
-            request.setAttribute("message", "Account existed!!!");
-            request.getRequestDispatcher("./jsp/viewAllAccount.jsp").forward(request, response);
-            return;
-        }
-
-        String birthDate = request.getParameter("date");
+        String sDate = request.getParameter("date");
         DateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
         format.setTimeZone(TimeZone.getTimeZone("Etc/UTC"));
-        java.util.Date date = format.parse(birthDate);
+        java.util.Date date = format.parse(sDate);
+        
         java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+        ReservationDAO reservationDAO = new ReservationDAOImpl();
 
-        int gender = Integer.parseInt(request.getParameter("gender"));
-        String phone = request.getParameter("phone");
-        String address = request.getParameter("address");
+        reservationDAO.confirmReservation(doctorId, time, sqlDate, reservationId);
 
-        User u = new User();
-        u.setRoleId(roleId);
-        u.setUsername(username);
-        u.setEmail(email);
-        u.setPassword(password);
-        u.setFullName(fullName);
-        u.setBirthDate(sqlDate);
-        if (gender == 1) {
-            u.setGender(true);
-        } else {
-            u.setGender(false);
-        }
-        u.setPhone(phone);
-        u.setAddress(address);
-        userDAO.createAccount(u);
+        BookScheduleController bookScheduleController = new BookScheduleController();
+        bookScheduleController.processRequest(request, response);
 
-        GetAllAccountController accountController = new GetAllAccountController();
-        accountController.processRequest(request, response);
     }
 
-// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
@@ -107,7 +75,7 @@ public class CreateAccountController extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (ParseException ex) {
-            Logger.getLogger(CreateAccountController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ConfirmReservationController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -125,7 +93,7 @@ public class CreateAccountController extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (ParseException ex) {
-            Logger.getLogger(CreateAccountController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ConfirmReservationController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

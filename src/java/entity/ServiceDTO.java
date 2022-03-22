@@ -20,6 +20,8 @@ public class ServiceDTO {
     private String serviceBrief;
     private String serviceDescription;
     private String serviceImage;
+   
+    
     private List<Doctor> doctors = new ArrayList<>();
 
     public int getServiceId() {
@@ -69,5 +71,9 @@ public class ServiceDTO {
     public void setDoctors(List<Doctor> doctors) {
         this.doctors = doctors;
     }
+
+
+    
+    
 
 }

@@ -36,7 +36,7 @@ public class UpdateCustomerProfileController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ParseException {
         response.setContentType("text/html;charset=UTF-8");
-request.setCharacterEncoding("utf-8");
+        request.setCharacterEncoding("utf-8");
         String email = request.getParameter("email").trim();
         String fullName = request.getParameter("fullName").trim();
 
@@ -45,6 +45,15 @@ request.setCharacterEncoding("utf-8");
         format.setTimeZone(TimeZone.getTimeZone("Etc/UTC"));
         java.util.Date jdate = format.parse(date);
         java.sql.Date sdate = new java.sql.Date(jdate.getTime());
+        HttpSession session = request.getSession();
+        java.util.Date today = new java.util.Date();
+        session.removeAttribute("message");
+        if (jdate.after(today)) {
+            session.setAttribute("error", true);
+            session.setAttribute("message", "Date invalid!!!");
+            response.sendRedirect("./jsp/user_profile.jsp");
+            return;
+        }
 
         String phone = request.getParameter("phone").trim();
         String address = request.getParameter("address").trim();
@@ -53,9 +62,9 @@ request.setCharacterEncoding("utf-8");
         User user = new User(0, 0, "", email, "", fullName, sdate, true, phone, address, "", id);
         UserDAO userDAO = new UserDAOImpl();
         userDAO.updateAccount(user);
-        HttpSession session = request.getSession();
+        session.setAttribute("error", false);
         session.setAttribute("user", user);
-         session.setAttribute("message", "Update Success");
+        session.setAttribute("message", "Update Success");
         response.sendRedirect("./jsp/user_profile.jsp");
 
     }

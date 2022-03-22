@@ -1,8 +1,3 @@
-<%-- 
-    Document   : feedback
-    Created on : Mar 08, 2022, 10:34:50 AM
-    Author     : TrangCT
---%>
 <!DOCTYPE html>
 <html lang="en">
     <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -10,15 +5,12 @@
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-        <link rel="stylesheet" href="./assets/css/style.css">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-        <link href="../assets/styles/jquery-ui.min.css" rel="stylesheet" type="text/css"/>
-        <link href="../assets/styles/jquery-ui.structure.min.css" rel="stylesheet" type="text/css"/>
-        <link href="../assets/styles/jquery-ui.theme.min.css" rel="stylesheet" type="text/css"/>
-        <title>Clinic Management</title>
-        <link href="./assets/css/header.css" rel="stylesheet" type="text/css"/>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+              integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <title>Document</title>
         <style>
             @media (min-width: 576px) {
                 .container {
@@ -125,64 +117,75 @@
             }
         </style>
     </head>
-    <header>
-        <jsp:include page="./components/customerHeader.jsp"/>
-    </header>
+
     <body>
         <div class="container">
             <h5 style="margin-bottom: 20px;">Đánh giá dịch vụ</h5>
+            <div style="margin-left: 80%">
+                <form action="../ClinicManagement/ViewFeedBackListController" method="GET">
+                    <label for="time">select time</label>
+                    <select name="time" id="status">
+                        <c:forEach items="${times}" var="time"  varStatus="counter" >
+                            <option value="${time}">${time}</option>
+                        </c:forEach>
+                    </select>
+                    <button class="btn-primary" type="submit">Lọc</button>
+                </form>
+            </div>
             <div class="row">
                 <div class="col-lg-8">
                     <ul style="list-style: none; padding:0;">
-                        <c:forEach items="${feedbacks.data}" var="feedback" varStatus="counter" >
+                        <c:if test="${feedbacks.data.size()  == 0}">
+                            <h1>No result</h1>
+                        </c:if>
+                        <c:forEach items="${feedbacks.data}" var="feedback"  varStatus="counter" >
                             <li class="item">
-                                <div class="item_container">
-                                    <img src="../assets/images/logo-gg-new.png">
-                                    <div>
-                                        <div class="item_header">
-                                            <div style="display: flex; flex-direction:column">
-                                                <span class="fs-12-b">${feedback.customer}</span>
-                                                <div>
-                                                    <span class="fs-12-i">Dịch vụ:</span>
-                                                    <span class="fs-12-b">${feedback.service}</span>
+                                <form action="../ClinicManagement/AddFeedbackController">
+                                    <div class="item_container">
+                                        <img src="../assets/images/logo-gg-new.png">
+                                        <div>
+                                            <div class="item_header">
+                                                <div style="display: flex; flex-direction:column">
+                                                    <span class="fs-12-b">${feedback.customer}</span>
+                                                    <div>
+                                                        <span class="fs-12-i">Dịch vụ:</span>
+                                                        <span class="fs-12-b">${feedback.service}</span>
+                                                    </div>
                                                 </div>
+                                                <time class="fs-12">${feedback.feedbackTime}</time>
                                             </div>
-                                            <time class="fs-12">${feedback.feedbackTime}</time>
-                                        </div>
-                                        <div class="item__content">
-                                            ${feedback.feedbackContent}
+                                            <div class="item__content">
+                                                ${feedback.feedbackContent}
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
+                                    <div hidden>
+                                        <input type="text"value="${feedback.serviceId}" name="serviceId">
+                                    </div>
+                                    <div hidden>
+                                        <input type="text"value="${feedback.examinationId}" name="examinationId">
+                                    </div>
+                                </form>
                             </li>
+
                         </c:forEach>
                     </ul>
                 </div>
                 <div class="col-lg-4">
-                    <div class="service">
-                        <h6 style="margin:10px">Dịch vụ</h6>
-                        <div style="margin-top:10px; margin-left:40px;">
-                            <input type="checkbox" id="1">
-                            <label for="1">Chuyên khoa mắt</label><br>
-                            <input type="checkbox" id="2">
-                            <label for="1">Chuyên khoa Tai, Mũi, Họng</label><br>
-                            <input type="checkbox" id="3">
-                            <label for="1">Chuyên khoa Tim Mạch</label><br>
-                            <input type="checkbox" id="4">
-                            <label for="1">Chuyên khoa Tiêu Hóa</label><br>
-                            <input type="checkbox" id="5">
-                            <label for="1">Chuyên khoa Da liễu</label><br>
-                            <input type="checkbox" id="6">
-                            <label for="1">Xét nghiệm</label><br>
-                            <input type="checkbox" id="7">
-                            <label for="1">Tầm soát ung thư</label><br>
-                            <input type="checkbox" id="8">
-                            <label for="1">Tiêm chủng</label><br>
-
+                    <form action="ViewFeedBackListController" method="Get">
+                        <div class="service">
+                            <h6 style="margin:10px">Dịch vụ</h6>
+                            <div style="margin-top:10px; margin-left:40px;">
+                                <c:forEach items="${services.data}" var="service"  varStatus="counter" >
+                                    <input type="radio" value="${service.serviceId}" name="serviceId">
+                                    <label for="1">${service.serviceName}</label><br>
+                                </c:forEach>
+                            </div>
+                            <div style="text-align: center; margin-top:10px; margin-bottom:15px">
+                                <button type="submit" class="btn btn-primary" style="width: 100px">Lọc</button>
+                            </div>
                         </div>
-                        <div style="text-align: center; margin-top:10px; margin-bottom:15px"><button type="button"
-                                                                                                     class="btn btn-primary" style="width: 100px">Lọc</button></div>
-                    </div>
+                    </form>
                 </div>
             </div>
 
@@ -221,7 +224,5 @@
                 integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
         </script>
     </body>
-    <footer>
-        <jsp:include page="./components/footer.jsp" />
-    </footer>
+
 </html>
