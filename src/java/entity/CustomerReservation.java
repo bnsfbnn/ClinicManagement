@@ -9,10 +9,11 @@ import java.sql.Date;
 
 /**
  *
- * @author dell
+ * @author TrangCT
  */
 public class CustomerReservation {
     private int id;
+    private int serviceId;
     private String examinationDuration;
     private String packageTitle;
     private float price;
@@ -179,6 +180,13 @@ public class CustomerReservation {
 
     public void setId(int id) {
         this.id = id;
+    }
+    public int getServiceId() {
+        return serviceId;
+    }
+
+    public void setServiceId(int serviceId) {
+        this.serviceId = serviceId;
     }
 
 }

@@ -9,10 +9,14 @@
  */
 package controller;
 
+import dao.PostDAO;
 import dao.UserDAO;
+import dao.impl.PostDAOImpl;
 import dao.impl.UserDAOImpl;
+import entity.PostEntity;
 import entity.User;
 import java.io.IOException;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -20,14 +24,13 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- * * -This class uses function getUser in
- * <code>dao.impl.UserDAOImpl</code> to get an
- * <code>java.util.String</code> object that contains a series of
+ * * -This class uses function getUser in <code>dao.impl.UserDAOImpl</code> to
+ * get an <code>java.util.String</code> object that contains a series of
  * <code>entity.User</code>
  *
  * @author Nguyen Thanh Tung
  */
-public class LoginController extends HttpServlet {
+public class HomeController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -41,20 +44,35 @@ public class LoginController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
-
-        UserDAO userDAO = new UserDAOImpl();
-        User user = userDAO.login(username.trim(), password);
-        if (user != null) {
-            HttpSession session = request.getSession();
-            session.setAttribute("user", user);
-            request.getRequestDispatcher("./jsp/home.jsp").forward(request, response);
+        HttpSession session = request.getSession();
+        User user1 = (User) session.getAttribute("user");
+        if (user1 == null) {
+            String username = request.getParameter("username");
+            String password = request.getParameter("password");
+            UserDAO userDAO = new UserDAOImpl();
+            User user = userDAO.login(username.trim(), password.trim());
+            if (user != null) {
+                session = request.getSession();
+                session.setAttribute("user", user);
+                PostDAO postDAO = new PostDAOImpl();
+                List<PostEntity> posts = postDAO.getAllPost();
+                request.setAttribute("posts", posts);
+                if (user.getRoleId() == 1) {
+                    request.getRequestDispatcher("GetAllAccountController").forward(request, response);
+                } else if (user.getRoleId() == 2) {
+                    request.getRequestDispatcher("").forward(request, response);
+                } else if (user.getRoleId() == 3) {
+                    request.getRequestDispatcher("viewMyReservation").forward(request, response);
+                } else {
+                    request.getRequestDispatcher("./jsp/home.jsp").forward(request, response);
+                }
+            } else {
+                request.setAttribute("message", "Tên đăng nhập hoặc mật khẩu không đúng!!!");
+                request.getRequestDispatcher("./jsp/login.jsp").forward(request, response);
+            }
         } else {
-            request.setAttribute("message", "Tên đăng nhập hoặc mật khẩu không đúng!!!");
-            request.getRequestDispatcher("./jsp/login.jsp").forward(request, response);
+            request.getRequestDispatcher("./jsp/home.jsp").forward(request, response);
         }
-
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

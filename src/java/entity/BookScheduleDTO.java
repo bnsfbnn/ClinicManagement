@@ -9,7 +9,7 @@ import java.sql.Date;
 
 /**
  *
- * @author dell
+ * @author Huonghtt
  */
 public class BookScheduleDTO {
     
@@ -99,5 +99,4 @@ public class BookScheduleDTO {
     public void setMedicalRequest(String medicalRequest) {
         this.medicalRequest = medicalRequest;
     }
-
 }

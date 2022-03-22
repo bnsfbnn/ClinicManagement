@@ -12,11 +12,13 @@ package controller;
 import dao.FeedbackDAO;
 import dao.impl.FeedbackDAOImpl;
 import entity.Feedback;
+import entity.User;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Locale;
 import java.util.TimeZone;
 import java.util.logging.Level;
@@ -25,11 +27,12 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * <h1>Add Feedback Controller </h1>
- * Controller to add feedback. Method process data form
- * FeedbackDAO and forward data to file view
+ * Controller to add feedback. Method process data form FeedbackDAO and forward
+ * data to file view
  * <p>
  *
  *
@@ -51,28 +54,28 @@ public class AddFeedbackController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ParseException {
         response.setContentType("text/html;charset=UTF-8");
-
-        int customerId = Integer.parseInt(request.getParameter("customerId"));
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
+        if (user == null) {
+            request.getRequestDispatcher("./jsp/login.jsp").forward(request, response);
+            return;
+        }
         int serviceId = Integer.parseInt(request.getParameter("serviceId"));
         int examinationId = Integer.parseInt(request.getParameter("examinationId"));
         String content = request.getParameter("content");
-
-        DateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
-        String date = request.getParameter("date");
-        format.setTimeZone(TimeZone.getTimeZone("Etc/UTC"));
-        java.util.Date jdate = format.parse(date);
-        java.sql.Date sdate = new java.sql.Date(jdate.getTime());
-
+        java.sql.Date date = new java.sql.Date(Calendar.getInstance().getTime().getTime());
         Feedback feedback = new Feedback();
-        feedback.setCustomerId(customerId);
+        feedback.setCustomerId(user.getUserId());
         feedback.setExaminationId(examinationId);
-        feedback.setFeedbackContent(content);
+        feedback.setFeedbackContent(content.trim());
         feedback.setServiceId(serviceId);
-        feedback.setFeedbackTime(sdate);
+        feedback.setFeedbackTime(date);
 
         FeedbackDAO feedbackDAO = new FeedbackDAOImpl();
         feedbackDAO.addFeedback(feedback);
-        
+        ViewFeedBackListController controller = new ViewFeedBackListController();
+        controller.processRequest(request, response);
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

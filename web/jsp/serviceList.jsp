@@ -33,10 +33,8 @@
             text-align: center
         }
     </style>
-    <header>
-        <jsp:include page="./components/customerHeader.jsp" />
-    </header>
     <body>
+        <%@include file="components/customerHeader.jsp" %>
         <div class="container-fluid m-0 p-0">
             <div class="row-fluid mb-3">
                 <img class="col-lg-12 p-0" src="./assets/images/banner.jpg" alt="Banner"/>
@@ -84,6 +82,7 @@
                 </div>
             </c:if>
         </div>
+        <jsp:include page="./components/footer.jsp" />
         <script src="./assets/js/jquery-3.6.0.min.js" crossorigin="anonymous"></script>
         <script src="./assets/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="./assets/js/star-rating.js" type="text/javascript"></script>
@@ -91,7 +90,4 @@
         <script src="./assets/js/select2.full.min.js"></script>
         <script src="./assets/js/custom.js"></script>
     </body>
-    <footer>
-        <jsp:include page="./components/footer.jsp" />
-    </footer>
 </html>

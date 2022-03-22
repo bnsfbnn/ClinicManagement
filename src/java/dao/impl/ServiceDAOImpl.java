@@ -178,7 +178,7 @@ public class ServiceDAOImpl extends DBContext implements ServiceDAO {
                 + "      ,[service_brief]\n"
                 + "      ,[service_description]\n"
                 + "      ,[service_image]\n"
-                + "  FROM [CMS].[dbo].[services]";
+                  + "  FROM services";
         Connection con = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -316,7 +316,7 @@ public class ServiceDAOImpl extends DBContext implements ServiceDAO {
         try {
             connecion = getConnection();
             // Get data
-            preparedStatement = connecion.prepareStatement("  delete from services where service_id = ?");
+            preparedStatement = connecion.prepareStatement("update services set isActive = 0 where service_id = ?");
             preparedStatement.setInt(1, id);
             preparedStatement.executeUpdate();
         } catch (Exception ex) {

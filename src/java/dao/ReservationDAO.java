@@ -17,6 +17,8 @@ import entity.ReservationDTO;
 import entity.User;
 import java.sql.Date;
 import java.sql.SQLException;
+import java.sql.Time;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -145,7 +147,7 @@ public interface ReservationDAO {
      */
     public int updateReservationDateTimeById(int reservationId, String confirmReservationDate, String confirmReservationTime) throws SQLException, Exception;
 
-    Pagination<CustomerReservation> getAllCustomerReservation(int pageIndex, int pageSize, int id);
+    Pagination<CustomerReservation> getAllCustomerReservation(int pageIndex, int pageSize, int id, String status);
 
     CustomerReservation getCustomerReservationById(int id);
 

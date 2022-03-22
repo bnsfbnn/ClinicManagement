@@ -1,38 +1,26 @@
-
 /*
- * Copyright(C) 20022, FPT University
- * CMS:
- * Clinic Management System
- *
- * Record of change:
- * DATE            Version             AUTHOR           DESCRIPTION
- * 2022-03-08     1.0                 MinhVT          Controller View Feedback Management List
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
 package controller;
 
-import dao.FeedbackDAO;
-import dao.impl.FeedbackDAOImpl;
-import entity.FeedbackDTO;
-import entity.Pagination;
+import dao.PostDAO;
+import dao.impl.PostDAOImpl;
+import entity.PostEntity;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * <h1>View Feedback Management List Controller </h1>
- * Controller to view feedback management  list. Method process data form
- * FeedbackDAO and forward data to file view
- * <p>
  *
- *
- * @author MinhVT
- * @version 1.0
- * @since 2022-03-08
+ * @author TrangCT
  */
-public class ViewFeedbackManagedListController extends HttpServlet {
+public class SearchPostController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -46,30 +34,12 @@ public class ViewFeedbackManagedListController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String page = request.getParameter("page");
-        int pageIndex = 1;
-        if (page != null) {
-            try {
-                pageIndex = Integer.parseInt(page);
-                if (pageIndex == -1) {
-                    pageIndex = 1;
-                }
-            } catch (Exception e) {
-                pageIndex = 1;
-            }
-        } else {
-            pageIndex = 1;
-        }
-
-
-        int pageSize = 5;
-
-        FeedbackDAO feedbackDAO = new FeedbackDAOImpl();
-        
-        Pagination<FeedbackDTO> feedbacks = feedbackDAO.getAllFeedback(pageIndex, pageSize, "");
-        
-        request.setAttribute("feedbacks", feedbacks);
-       request.getRequestDispatcher("./jsp/feedbackManagement.jsp").forward(request, response);
+        String search = request.getParameter("search");
+        PostDAO postDAO = new PostDAOImpl();
+        List<PostEntity> posts = postDAO.searchPost(search.trim());
+        request.setAttribute("posts", posts);
+        request.setAttribute("search", search);
+        request.getRequestDispatcher("./jsp/home.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

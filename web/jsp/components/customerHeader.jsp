@@ -16,7 +16,7 @@
         <!--Start header-->
         <header class="navbar navbar-expand-lg navbar-light navbar-floating navbar-sticky">
             <div class="p-2">
-                <a href="#">
+                <a href="./HomeController">
                     <img src="./assets/images/logo.png" alt="" width="30" height="30">
                 </a>
             </div>
@@ -31,16 +31,11 @@
                 </ul>
             </div>
             <div class="dropdown ml-auto">
-                <a class="avatar avatar-md p-0" href="" href="#" id="profileDropdown" role="button" data-bs-auto-close="outside" data-bs-display="static" data-bs-toggle="dropdown" aria-expanded="true">
+                <a class="avatar avatar-md p-0" href="#" id="profileDropdown" role="button" data-bs-auto-close="outside" data-bs-display="static" data-bs-toggle="dropdown" aria-expanded="true">
                     <%
                         User user = (User) request.getSession().getAttribute("user");
-                        if (user != null) {
-                            String username = user.getUsername();
-                            String ava = user.getAvatarImage();
-                            String email = user.getAvatarImage();
-                        }
                     %>
-                    <img height="45" class="avatar-img rounded-circle" src="./assets/images/avatar01.jpg" alt="avatar">
+                    <img height="45" class="avatar-img rounded-circle" src="./assets/images/${user.avatarImage}" alt="avatar">
                 </a>
                 <ul class="dropdown-menu dropdown-animation shadow pt-3 dropdown-menu-right" aria-labelledby="profileDropdown" data-bs-popper="none" style="">
                     <!-- Profile info -->
@@ -48,7 +43,7 @@
                         <div class="d-flex align-items-center">
                             <!-- Avatar -->
                             <div class="avatar me-3">
-                                <img height="40" class="avatar-img rounded-circle shadow" href="./jsp/user_profile.jsp" src="./assets/images/avatar01.jpg" alt="avatar">
+                                <img height="40" class="avatar-img rounded-circle shadow" href="./jsp/user_profile.jsp" src="./assets/images/${user.avatarImage}" alt="avatar">
                             </div>
                             <div>
                                 <a class="h6" href="./jsp/user_profile.jsp">${user.fullName}</a>

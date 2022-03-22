@@ -5,20 +5,22 @@
  *
  * Record of change:
  * DATE            Version             AUTHOR           DESCRIPTION
- * 2022-02-23      1.0                 NamNV          First Implement 
+ * 2022-02-28      1.0                 TrangCT          Post Detail
 -->
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
-<html lang="en">
+<html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-        <link rel="stylesheet" href="./assets/css/style.css">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-        <link href="../assets/styles/jquery-ui.min.css" rel="stylesheet" type="text/css"/>
-        <link href="../assets/styles/jquery-ui.structure.min.css" rel="stylesheet" type="text/css"/>
-        <link href="../assets/styles/jquery-ui.theme.min.css" rel="stylesheet" type="text/css"/>
         <title>Clinic Management</title>
+        <link href="./assets/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css" />
+        <link href="./assets/themes/krajee-fas/theme.css" media="all" rel="stylesheet" type="text/css"/>
+        <link rel="stylesheet" href="./assets/css/select2.min.css" />
+        <link rel="stylesheet" href="./assets/css/select2-bootstrap-5-theme.min.css" />
+        <link rel="stylesheet" href="./assets/css/custom.css" />
         <link href="./assets/css/header.css" rel="stylesheet" type="text/css"/>
     </head>
     <style>
@@ -53,7 +55,7 @@
         h5{
             margin-left: 45px;
         }
-        #content-page {
+        .content-page img{
             width: 100%;
             margin-top: 20px;
         }
@@ -65,10 +67,8 @@
             height: 400px;
         }
     </style>
-    <header>
-        <jsp:include page="./components/customerHeader.jsp" />
-    </header>
     <body>
+        <%@include file="components/customerHeader.jsp" %>
         <div class="container-fluid m-0 p-0">
             <div id="layoutSidenav_content">
                 <div class="row-fluid mb-3">
@@ -137,7 +137,7 @@
                 </div>
                 <div class="content-page">
                     <img
-                         src="https://isofhcare-backup.s3-ap-southeast-1.amazonaws.com/images/kit-test-nhanh-covid-tai-nha-isofhcare-jpg_99fa2328_f5d7_4eb8_8561_ae5a4c49c9be.png" />
+                        src="https://isofhcare-backup.s3-ap-southeast-1.amazonaws.com/images/kit-test-nhanh-covid-tai-nha-isofhcare-jpg_99fa2328_f5d7_4eb8_8561_ae5a4c49c9be.png" />
                 </div>
                 <div class="content-infor mt-5">
                     <div class="row container-fluid">
@@ -187,33 +187,29 @@
                     </div>
                     <div class="row-fluid my-5">
                         <div class="col-lg-12"></div>
-                        <h1>Tin T?c</h1>
-
+                        <h1>Tin Tức</h1>
                         <div class="row d-flex justify-content-center my-1">
-                            <h2>BV H?NG NG?C K� K?T BI�N B?N H?P T�C V?I ?SQ H�N QU?C, HI?P H?I NG??I H�N T?I H� N?I V? VI?C H? TR? Y T? CHO B?NH NH�N H�N QU?C M?C COVID-19</h2>
+                            <h6>${post.title}</h6>
                         </div>
                         <div class="row border-dark my-1">
-
+                            ${post.summary}
                         </div>
                         <div class="row d-flex justify-content-start">
-                            <b><i>Nguy?n V?n B - 2022-19-10 07:00:00</i></b>
+                            <b><i>${userPost} : ${post.createDate} : ${post.createTime}</i></b>
                         </div>
                         <div class="row d-flex justify-content-end">
-                            <p>BV H?NG NG?C K� K?T BI�N B?N H?P T�C V?I ?SQ H�N QU?C, HI?P H?I NG??I H�N T?I H� N?I V? VI?C H? TR? Y T? CHO B?NH NH�N H�N QU?C M?C COVID-19</p>
+                            <p>${post.content}</p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </body>
-    <footer>
         <jsp:include page="./components/footer.jsp" />
-    </footer>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-    <script src="./assets/js/scripts.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
-    <script src="./assets/demo/chart-area-demo.js"></script>
-    <script src="./assets/demo/chart-bar-demo.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
-    <script src="./assets/js/datatables-simple-demo.js"></script>
+        <script src="./assets/js/jquery-3.6.0.min.js" crossorigin="anonymous"></script>
+        <script src="./assets/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+        <script src="./assets/js/star-rating.js" type="text/javascript"></script>
+        <script src="./assets/themes/krajee-fas/theme.js" type="text/javascript"></script>
+        <script src="./assets/js/select2.full.min.js"></script>
+        <script src="./assets/js/custom.js"></script>
+    </body>
 </html>

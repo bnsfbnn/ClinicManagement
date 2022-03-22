@@ -22,6 +22,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import util.Utils;
 
 /**
@@ -35,19 +36,21 @@ import util.Utils;
 public class ViewAllReservationsController extends HttpServlet {
 
     /**
-     * -Use function getReservations in <code>dao.impl.ReservationDAOImpl</code> to
-     * get an <code>java.util.ArrayList</code> object that contains a series of
-     * <code>entity.Reservation</code><br>
-     * -Use function getDoctorsHasReservation in <code>dao.impl.ReservationDAOImpl</code> to
-     * get an <code>java.util.ArrayList</code> object that contains a series of
-     * <code>entity.User</code><br> represent for a doctor
-     * -Use function getServices in <code>dao.impl.ServiceDAOImpl</code> to
-     * get an <code>java.util.ArrayList</code> object that contains a series of
-     * <code>entity.Service</code><br> 
-     * 
+     * -Use function getReservations in <code>dao.impl.ReservationDAOImpl</code>
+     * to get an <code>java.util.ArrayList</code> object that contains a series
+     * of <code>entity.Reservation</code><br>
+     * -Use function getDoctorsHasReservation in
+     * <code>dao.impl.ReservationDAOImpl</code> to get an
+     * <code>java.util.ArrayList</code> object that contains a series of
+     * <code>entity.User</code><br> represent for a doctor -Use function
+     * getServices in <code>dao.impl.ServiceDAOImpl</code> to get an
+     * <code>java.util.ArrayList</code> object that contains a series of
+     * <code>entity.Service</code><br>
+     *
      * -Set parameters: viewDay, doctors, services, reservations<br>
-     * -Finally forward user to the <code>viewAllReservation.jsp</code> page. Processes
-     * requests for both HTTP <code>GET</code> and <code>POST</code> methods.
+     * -Finally forward user to the <code>viewAllReservation.jsp</code> page.
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
      *
      * @param request servlet request
      * @param response servlet response is
@@ -57,14 +60,17 @@ public class ViewAllReservationsController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
+            HttpSession session = request.getSession();
+            User user = (User) session.getAttribute("user");
+            
             String viewDay = (request.getParameter("viewDay") != null) ? Utils.parseDateFormat(request.getParameter("viewDay").trim()) : Utils.getToday();
-            int serviceId = (request.getParameter("serviceId") != null) ? Integer.parseInt(request.getParameter("serviceId").trim()): -1;
+            int serviceId = (request.getParameter("serviceId") != null) ? Integer.parseInt(request.getParameter("serviceId").trim()) : -1;
             ServiceDAO serviceDAO = new ServiceDAOImpl(); // get serviceDAO object
             ReservationDAO reservationDAO = new ReservationDAOImpl();// get reservationDAO object
             ArrayList<Service> services = serviceDAO.getServices();
             ArrayList<User> doctors = reservationDAO.getDoctorsHasReservation(viewDay, serviceId);
             ArrayList<Reservation> reservations = reservationDAO.getReservationsByDay(viewDay, serviceId);
-            
+
             request.setAttribute("viewDay", Utils.revertParseDateFormat(viewDay));
             request.setAttribute("serviceId", serviceId);
             request.setAttribute("doctors", doctors);
