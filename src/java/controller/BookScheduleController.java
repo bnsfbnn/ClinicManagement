@@ -5,16 +5,27 @@
  */
 package controller;
 
+import dao.ReservationDAO;
 import dao.UserDAO;
+import dao.impl.ReservationDAOImpl;
 import dao.impl.UserDAOImpl;
+import entity.BookScheduleDTO;
+import entity.Doctor;
+import entity.Pagination;
+import entity.User;
 import java.io.IOException;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-
-public class DeleteAccountController extends HttpServlet {
+/**
+ *
+ * @author dell
+ */
+public class BookScheduleController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -28,11 +39,34 @@ public class DeleteAccountController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        int id = Integer.parseInt(request.getParameter("id"));
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
+//        if (user == null) {
+//            request.getRequestDispatcher("./jsp/login.jsp").forward(request, response);
+//            return;
+//        }
+        String page = (request.getParameter("page") == null) ? "1" : request.getParameter("page");
+        int pageIndex = 1;
+        if (page != null) {// check page if not null
+            try {
+                //convert page(string) to pageIndex(int)
+                pageIndex = Integer.parseInt(page);
+                if (pageIndex == -1) {
+                    pageIndex = 0;
+                }
+            } catch (NumberFormatException e) {
+                //default pageIndex = 1
+                pageIndex = 0;
+            }
+        }
+        int pageSize = 5;
+        ReservationDAO reservationDAO = new ReservationDAOImpl();
+        Pagination<BookScheduleDTO> reservations = reservationDAO.getAllReservation(pageIndex, pageSize);
         UserDAO userDAO = new UserDAOImpl();
-        userDAO.deleteAccount(id);
-        GetAllAccountController accountController = new GetAllAccountController();
-        accountController.processRequest(request, response);
+        List<Doctor> doctors = userDAO.getAllDoctor();
+        request.setAttribute("reservations", reservations);
+        request.setAttribute("doctors", doctors);
+        request.getRequestDispatcher("./jsp/showReservation.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

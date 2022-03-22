@@ -23,9 +23,9 @@
         <link rel="stylesheet" href="./assets/css/custom.css" />
         <link href="./assets/css/header.css" rel="stylesheet" type="text/css"/>
     </head>
-    <!--    <header>
-    <%--<jsp:include page="../components/customerHeader.jsp" />--%>
-</header>-->
+    <header>
+        <jsp:include page="../components/customerHeader.jsp" />
+    </header>
     <body>
         <div class="container-fuild">
             <div class="row-fluid mb-5">
@@ -62,7 +62,7 @@
                             <span class="justify-content-center"><b>Giá: </b><h3 class="font-weight-bold text-primary">${i.price} VND</h3></span>
                         </div>
                         <div class="row-fluid px-auto ml-5 my-1">
-                            <a href="./jsp/bookAReservation.jsp?serviceId=${service.serviceId}&packageId=${i.packageId}" class="button">
+                            <a href="./jsp/bookAReservation.jsp?serviceId=${service.serviceId}&packageId=${i.packageId}&packageName=${i.packageTitle}&serviceName=${service.serviceName}" class="button">
                                 <button type="button" class="btn btn-primary w-75">Đăng ký</button>
                             </a>
                         </div>
@@ -77,4 +77,7 @@
         <script src="./assets/js/select2.full.min.js"></script>
         <script src="./assets/js/custom.js"></script>
     </body>
+    <footer>
+        <jsp:include page="./components/footer.jsp" />
+    </footer>
 </html>

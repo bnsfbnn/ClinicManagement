@@ -9,11 +9,13 @@
  */
 package dao;
 
+import entity.BookScheduleDTO;
 import entity.CustomerReservation;
 import entity.Pagination;
 import entity.Reservation;
 import entity.ReservationDTO;
 import entity.User;
+import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -101,4 +103,8 @@ public interface ReservationDAO {
     CustomerReservation getCustomerReservationById(int id);
 
     void bookReservation(ReservationDTO reservation);
+    
+    Pagination<BookScheduleDTO> getAllReservation(int pageIndex, int pageSize);
+
+    void confirmReservation(int doctorId, String time, Date date, int id);
 }

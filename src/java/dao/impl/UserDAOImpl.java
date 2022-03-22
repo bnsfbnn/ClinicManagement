@@ -88,7 +88,7 @@ public class UserDAOImpl extends DBContext implements UserDAO {
     * a <code>java.util.List</code> object 
      */
     @Override
-    public Pagination<Account> getAllAccount(int pageIndex, int pageSize) {
+    public Pagination<Account> getAllAccount(int pageIndex, int pageSize, String search) {
         Pagination<Account> pagination = new Pagination<>();
         logger.log(Level.INFO, "Login Controller");
         Connection connecion = null;
@@ -97,16 +97,16 @@ public class UserDAOImpl extends DBContext implements UserDAO {
         List<Account> users = new ArrayList<>();
         try {
             connecion = getConnection();
-            int totalItem = count(); // 
+            int totalItem = count(search); // 
             pagination.setCurrentPage(pageIndex);
             pagination.setItemPerPage(pageSize);
             pagination.setTotalItem(totalItem);
             // Get data
             preparedStatement = connecion.prepareStatement("SELECT  *\n"
                     + "FROM  ( SELECT  ROW_NUMBER() OVER ( ORDER BY  c.user_id ) AS RowNum,  c.user_id, c.role_id, c.username, c.email, c.password, c.full_name, c.birth_date, c.gender, c.phone, c.avatar_image, c.service_id, c.address, c.is_active, r.role_name\n"
-                    + "          FROM users c join roles r on c.role_id = r.role_id and c.is_active = 1\n"
+                    + "          FROM users c join roles r on c.role_id = r.role_id and c.is_active = 1 and (c.username like N'%" + search + "%' or c.email like N'%" + search + "%' or c.full_name like N'%" + search + "%')\n"
                     + "        ) AS RowConstrainedResult\n"
-                    + "WHERE   RowNum >= ?\n"
+                    + "WHERE   RowNum > ?\n"
                     + "    AND RowNum <= ?\n"
                     + "ORDER BY RowNum");
             preparedStatement.setInt(1, (pageIndex - 1) * pageSize);
@@ -139,14 +139,15 @@ public class UserDAOImpl extends DBContext implements UserDAO {
         pagination.setData(users);
         return pagination;
     }
-    
-    public int count() {
+
+    public int count(String search) {
         Connection connecion = null;
         PreparedStatement countPreparedStatement = null;
         ResultSet countResultSet = null;
         try {
             connecion = getConnection();
-            countPreparedStatement = connecion.prepareStatement("SELECT COUNT(user_id) AS id FROM users where is_active = 1");
+            String sql = " SELECT  COUNT(c.user_id) FROM users c join roles r on c.role_id = r.role_id and c.is_active = 1 and (c.username like N'%" + search + "%' or email like N'%" + search + "%' or full_name like N'%" + search + "%')";
+            countPreparedStatement = connecion.prepareStatement(sql);
             countResultSet = countPreparedStatement.executeQuery();
             if (countResultSet.next()) {
                 // get and return count total services
@@ -193,10 +194,10 @@ public class UserDAOImpl extends DBContext implements UserDAO {
             connecion = getConnection();
             // Get data
             preparedStatement = connecion.prepareStatement("insert into users (role_id, username, full_name, email, birth_date, gender, phone, address, is_active, password)\n"
-                    + "values (?,?,?,?,?,?,?,?, 1,'123456')");
+                    + "values (?,?,?,?,?,?,?,?, 1,?)");
             preparedStatement.setInt(1, user.getRoleId());
             preparedStatement.setString(2, user.getUsername());
-            preparedStatement.setString(3, user.getFullName());
+            preparedStatement.setNString(3, user.getFullName());
             preparedStatement.setString(4, user.getEmail());
             preparedStatement.setDate(5, user.getBirthDate());
             if (user.isGender()) {
@@ -206,6 +207,7 @@ public class UserDAOImpl extends DBContext implements UserDAO {
             }
             preparedStatement.setString(7, user.getPhone());
             preparedStatement.setString(8, user.getAddress());
+            preparedStatement.setString(9, user.getPassword());
             preparedStatement.executeUpdate();
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -384,6 +386,74 @@ public class UserDAOImpl extends DBContext implements UserDAO {
         return null;
     }
 
+    @Override
+    public boolean checkUsernameAndEmail(String username, String email) {
+        logger.log(Level.INFO, "Login Controller");
+        Connection connecion = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet rs = null;
+
+        try {
+            connecion = getConnection();
+            // Get data
+            preparedStatement = connecion.prepareStatement("select * from users where username = ? or email = ?");
+            preparedStatement.setNString(1, username);
+            preparedStatement.setNString(2, email);
+            rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                return true;
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            Logger.getLogger(UserDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            closeResultSet(rs);
+            closePreparedStatement(preparedStatement);
+            closeConnection(connecion);
+        }
+        return false;
+    }
+    
+    @Override
+    public User getUserByEmail(String email) {
+        logger.log(Level.INFO, "Login Controller");
+        Connection connecion = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet rs = null;
+
+        try {
+            connecion = getConnection();
+            // Get data
+            preparedStatement = connecion.prepareStatement("select * from users  where email = ?");
+            preparedStatement.setNString(1, email);
+            rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                User user = new User();
+                user.setUserId(rs.getInt("user_id"));
+                user.setRoleId(rs.getInt("role_id"));
+                user.setServiceId(rs.getInt("service_id"));
+                user.setUsername(rs.getString("username"));
+                user.setEmail(rs.getString("email"));
+                user.setPassword(rs.getString("password"));
+                user.setFullName(rs.getString("full_name"));
+                user.setBirthDate(rs.getDate("birth_date"));
+                user.setGender(rs.getBoolean("gender"));
+                user.setPhone(rs.getString("phone"));
+                user.setAddress(rs.getString("address"));
+                user.setAvatarImage(rs.getString("avatar_image"));
+                return user;
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            Logger.getLogger(UserDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            closeResultSet(rs);
+            closePreparedStatement(preparedStatement);
+            closeConnection(connecion);
+        }
+        return null;
+    }
+    
     @Override
     public void updateAccount(User user) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

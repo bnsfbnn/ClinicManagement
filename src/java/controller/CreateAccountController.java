@@ -1,3 +1,4 @@
+
 /*
  * Copyright(C) 2022, FPT University
  * CMS
@@ -13,7 +14,6 @@ import dao.UserDAO;
 import dao.impl.UserDAOImpl;
 import entity.User;
 import java.io.IOException;
-import java.sql.Date;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -25,6 +25,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * This class uses <code>dao.impl.UserDAOImpl</code> functions:<br>
@@ -47,26 +48,48 @@ public class CreateAccountController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ParseException {
+        HttpSession session = request.getSession();
         response.setContentType("text/html;charset=UTF-8");
         int roleId = Integer.parseInt(request.getParameter("roleId"));
         String username = request.getParameter("username");
+        String password = request.getParameter("password");
         String email = request.getParameter("email");
         String fullName = request.getParameter("fullName");
-
         String birthDate = request.getParameter("date");
         DateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
         format.setTimeZone(TimeZone.getTimeZone("Etc/UTC"));
         java.util.Date date = format.parse(birthDate);
         java.sql.Date sqlDate = new java.sql.Date(date.getTime());
 
+        java.util.Date today = new java.util.Date();
         int gender = Integer.parseInt(request.getParameter("gender"));
         String phone = request.getParameter("phone");
         String address = request.getParameter("address");
+
+        session.setAttribute("username", username);
+        session.setAttribute("fullName", fullName);
+        session.setAttribute("address", address);
+        session.setAttribute("phone", phone);
+        session.setAttribute("email", email);
+
+        if (date.after(today)) {
+            request.setAttribute("message", "Date invalid");
+            request.getRequestDispatcher("./jsp/viewAllAccount.jsp").forward(request, response);
+            return;
+        }
+
+        UserDAO userDAO = new UserDAOImpl();
+        if (userDAO.checkUsernameAndEmail(username.trim(), email.trim())) {
+            request.setAttribute("message", "Account existed!!!");
+            request.getRequestDispatcher("./jsp/viewAllAccount.jsp").forward(request, response);
+            return;
+        }
 
         User u = new User();
         u.setRoleId(roleId);
         u.setUsername(username);
         u.setEmail(email);
+        u.setPassword(password);
         u.setFullName(fullName);
         u.setBirthDate(sqlDate);
         if (gender == 1) {
@@ -76,7 +99,6 @@ public class CreateAccountController extends HttpServlet {
         }
         u.setPhone(phone);
         u.setAddress(address);
-        UserDAO userDAO = new UserDAOImpl();
         userDAO.createAccount(u);
 
         GetAllAccountController accountController = new GetAllAccountController();

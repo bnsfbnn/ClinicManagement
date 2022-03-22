@@ -35,10 +35,10 @@ public interface UserDAO {
      * -It is a <code>java.util.List</code> object
      * @throws SQLException when <code>java.sql.SQLException</code> occurs.
      */
-    Pagination<Account> getAllAccount(int pageIndex, int pageSize);
+    Pagination<Account> getAllAccount(int pageIndex, int pageSize, String search);
 
     void deleteAccount(int id);
-    
+
     void updateAccount(User user);
 
     void createAccount(User user);
@@ -48,9 +48,13 @@ public interface UserDAO {
     List<Doctor> getAllDoctor();
 
     List<Doctor> getDoctorByServiceId(int id);
-    
-     void updateAccountByAdmin(User user);
-     
-     User getUserById(int id);
+
+    void updateAccountByAdmin(User user);
+
+    User getUserById(int id);
+
+    boolean checkUsernameAndEmail(String username, String email);
+
+    User getUserByEmail(String email);
 
 }

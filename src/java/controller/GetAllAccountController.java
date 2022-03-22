@@ -13,10 +13,7 @@ import dao.UserDAO;
 import dao.impl.UserDAOImpl;
 import entity.Account;
 import entity.Pagination;
-import entity.User;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -50,6 +47,10 @@ public class GetAllAccountController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String page = request.getParameter("page");
+        String search = request.getParameter("search");
+        if (search == null) {
+            search = "";
+        }
         int pageIndex = 1;
         if (page != null) {
             try {
@@ -63,10 +64,11 @@ public class GetAllAccountController extends HttpServlet {
         } else {
             pageIndex = 1;
         }
-        int pageSize = 5;
+        int pageSize = 10;
         UserDAO userDAO = new UserDAOImpl();
-        Pagination<Account> users = userDAO.getAllAccount(pageIndex, pageSize);
+        Pagination<Account> users = userDAO.getAllAccount(pageIndex, pageSize, search);
         request.setAttribute("users", users);
+        request.setAttribute("search", search);
         request.getRequestDispatcher("./jsp/viewAllAccount.jsp").forward(request, response);
     }
 

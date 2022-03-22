@@ -132,6 +132,10 @@
         <servlet-name>ViewCustomerReservationsList</servlet-name>
         <servlet-class>controller.ViewCustomerReservationsList</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>BookScheduleController</servlet-name>
+        <servlet-class>controller.BookScheduleController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
         <url-pattern>/LoginController</url-pattern>
@@ -264,6 +268,10 @@
         <servlet-name>AddNewExaminationController</servlet-name>
         <url-pattern>/addNewExamination</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BookScheduleController</servlet-name>
+        <url-pattern>/BookScheduleController</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
@@ -292,7 +300,7 @@
     <env-entry>
         <env-entry-name>password</env-entry-name>
         <env-entry-type>java.lang.String</env-entry-type>
-        <env-entry-value>123</env-entry-value>
+        <env-entry-value>123456</env-entry-value>
     </env-entry>
     <welcome-file-list>
         <welcome-file>./jsp/login.jsp</welcome-file>
