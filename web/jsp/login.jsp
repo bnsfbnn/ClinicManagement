@@ -35,11 +35,11 @@
                                 </div>
                                 <form action="HomeController" method="POST" class="signin-form">
                                     <div class="form-group mt-3">
-                                        <input type="text" class="form-control" required name="username">
+                                        <input type="text" class="form-control" required name="username" maxlength="15">
                                         <label class="form-control-placeholder" for="username">Tên đăng nhập...</label>
                                     </div>
                                     <div class="form-group">
-                                        <input id="password-field" type="password" class="form-control" required name="password">
+                                        <input id="password-field" type="password" class="form-control" required name="password" maxlength="15">
                                         <label class="form-control-placeholder" for="password">Mật khẩu...</label>
                                         <span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
                                     </div>
@@ -49,7 +49,10 @@
 
                                 </form>
                                 <p class="text-center">không phải thành viên? <a  href="./jsp/Register.jsp">Đăng kí</a></p>
-                                <p style="color: red"> ${message}</p>
+                                <c:if test="${messageLogin != null}">
+                                    <p class="text-center">Quên mật khẩu? <a  href="./jsp/forgotPass.jsp">Quên mật khẩu</a></p>
+                                </c:if>
+                                <p style="color: red"> ${messageLogin}</p>
                             </div>
                         </div>
                     </div>

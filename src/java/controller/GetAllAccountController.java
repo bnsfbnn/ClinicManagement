@@ -50,6 +50,10 @@ public class GetAllAccountController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String page = request.getParameter("page");
+        String search = request.getParameter("search");
+        if (search == null) {
+            search = "";
+        }
         int pageIndex = 1;
         if (page != null) {
             try {
@@ -65,8 +69,9 @@ public class GetAllAccountController extends HttpServlet {
         }
         int pageSize = 5;
         UserDAO userDAO = new UserDAOImpl();
-        Pagination<Account> users = userDAO.getAllAccount(pageIndex, pageSize);
+        Pagination<Account> users = userDAO.getAllAccount(pageIndex, pageSize, search);
         request.setAttribute("users", users);
+        request.setAttribute("search", search);
         request.getRequestDispatcher("./jsp/viewAllAccount.jsp").forward(request, response);
     }
 

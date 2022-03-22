@@ -277,16 +277,6 @@ public class ReservationDAOImpl extends DBContext implements ReservationDAO {
         return result;
     }
 
-    /**
-     * - Get reservation information by reservation id
-     *
-     * @param reservationId is a <code>java.lang.int</code> object used to get
-     * reservation by reservationId
-     * @return a list of <code>Reservation</code> objects. <br>
-     * -It is a <code>java.util.ArrayList</code> object
-     * @throws SQLException when <code>java.sql.SQLException</code> occurs.
-     * @throws Exception when <code>java.sql.Exception</code> occurs.
-     */
     @Override
     public Reservation getReservationById(int reservationId) throws SQLException, Exception {
         Reservation result = new Reservation();
@@ -580,115 +570,117 @@ public class ReservationDAOImpl extends DBContext implements ReservationDAO {
     }
 
     @Override
-    public int cancelReceiveReservationById(int reservationId, String reservationStatus, String today) throws SQLException, Exception {
-        int check = 0;
-        String sql = "UPDATE reservations\n"
-                + "   SET reservation_status = ? ,confirmed_doctor_id = NULL, confirmed_examination_date = NULL, confirmed_examination_time = NULL, reservation_date = ?\n"
-                + " WHERE reservations.reservation_id = ?";
-        Connection con = null;
-        PreparedStatement ps = null;
-        try {
-            con = getConnection(); //get connection
-            ps = con.prepareStatement(sql);
-            ps.setString(1, reservationStatus);
-            ps.setString(2, today);
-            ps.setInt(3, reservationId);
-            check = ps.executeUpdate();
-        } catch (SQLException ex) {
-            Logger.getLogger(ReservationDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
-            throw ex;
-        } catch (Exception ex) {
-            Logger.getLogger(ReservationDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
-            throw ex;
-        } finally {
-            this.closePreparedStatement(ps);
-            this.closeConnection(con);
-        }
-        return check;
-    }
-
-    @Override
-    public ArrayList<String> getTimeScheduleByDoctorId(int doctorId, String date) throws SQLException, Exception {
-        ArrayList<String> result = new ArrayList<>();
-        String sql = "SELECT DISTINCT reservations.confirmed_examination_time\n"
-                + "FROM reservations\n"
-                + "INNER JOIN\n"
-                + "  (SELECT users.username AS doctor_username,\n"
-                + "          users.full_name AS doctor_full_name,\n"
-                + "          users.user_id AS doctor_id\n"
-                + "   FROM reservations\n"
-                + "   LEFT JOIN users ON reservations.confirmed_doctor_id = users.user_id) AS doctors ON reservations.confirmed_doctor_id = doctors.doctor_id\n"
-                + "WHERE doctors.doctor_id = ? and reservations.confirmed_examination_date = ?";
+    public Pagination<BookScheduleDTO> getAllReservation(int pageIndex, int pageSize) {
+        Pagination<BookScheduleDTO> pagination = new Pagination<>();
+        List<BookScheduleDTO> bookScheduleDTOs = new ArrayList<>();
+        String sql = "SELECT *\n"
+                + "                    FROM (SELECT ROW_NUMBER() OVER ( ORDER BY full_name )\n"
+                + "                    AS RowNum, u.full_name, s.service_name, p.package_title, r.reservation_id, r.request_examination_date, r.reservation_date, r.medical_request, r.reservation_status from reservations r\n"
+                + "				  join users u\n"
+                + "				  on r.customer_id = u.user_id\n"
+                + "				  join services s\n"
+                + "				  on r.service_id = s.service_id\n"
+                + "				  join packages p\n"
+                + "				  on r.package_id = p.package_id\n"
+                + "				  where r.reservation_status = N'Chờ duyệt') \n"
+                + "                    AS RowConstrainedResult\n"
+                + "                    WHERE   RowNum >= ?\n"
+                + "                        AND RowNum <= ?\n"
+                + "                    ORDER BY RowNum";
         Connection con = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
         try {
             con = getConnection(); //get connection
             ps = con.prepareStatement(sql);
-            ps.setInt(1, doctorId);
-            ps.setString(2, date);
+            ps.setInt(1, (pageIndex - 1) * pageSize);
+            ps.setInt(2, (pageIndex - 1) * pageSize + pageSize);
             rs = ps.executeQuery();
             /**
              * set attributes for doctors from result set then add its to result
              * list
              */
+            int totalItem = countReservation();
+            pagination.setCurrentPage(pageIndex);
+            pagination.setItemPerPage(pageSize);
+            pagination.setTotalItem(totalItem);
             while (rs.next()) {
-                result.add(rs.getString("confirmed_examination_time"));
+                BookScheduleDTO reservation = new BookScheduleDTO();
+                reservation.setReservationId(rs.getInt("reservation_id"));
+                reservation.setPatientName(rs.getString("full_name"));
+                reservation.setService(rs.getString("service_name"));
+                reservation.setPackageService(rs.getString("package_title"));
+                reservation.setRequestDate(rs.getDate("request_examination_date"));
+                reservation.setConfirmDate(rs.getDate("reservation_date"));
+                reservation.setMedicalRequest(rs.getString("medical_request"));
+                reservation.setStatus(rs.getString("reservation_status"));
+                bookScheduleDTOs.add(reservation);
             }
         } catch (SQLException ex) {
             Logger.getLogger(ReservationDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
-            throw ex;
         } catch (Exception ex) {
             Logger.getLogger(ReservationDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
-            throw ex;
+            /**
+             * close result set, prepared statement and connection by
+             * corresponding order
+             */
         } finally {
             this.closeResultSet(rs);
             this.closePreparedStatement(ps);
             this.closeConnection(con);
         }
-        return result;
+        pagination.setData(bookScheduleDTOs);
+        return pagination;
+
     }
 
-    /**
-     * - Update reservation date, time
-     *
-     * @param reservationId is a <code>java.lang.int</code> object used to
-     * update reservation by new reservation date, time
-     * @param confirmReservationDate is a <code>java.lang.String</code> object
-     * used to update reservation by new reservation date, time
-     * @param confirmReservationTime is a <code>java.lang.String</code> object
-     * used to update reservation by new reservation date, time
-     * @return a list of <code>Reservation</code> objects. <br>
-     * -It is a <code>java.util.ArrayList</code> object
-     * @throws SQLException when <code>java.sql.SQLException</code> occurs.
-     * @throws Exception when <code>java.sql.Exception</code> occurs.
-     */
+    public int countReservation() {
+        Connection connecion = null;
+        PreparedStatement countPreparedStatement = null;
+        ResultSet countResultSet = null;
+        try {
+            connecion = getConnection();
+            String sql = "select COUNT(*) from reservations  where reservation_status = N'Chờ duyệt'";
+            countPreparedStatement = connecion.prepareStatement(sql);
+
+            countResultSet = countPreparedStatement.executeQuery();
+            if (countResultSet.next()) {
+                // get and return count total services
+                return countResultSet.getInt(1);
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            closeResultSet(countResultSet);
+            closePreparedStatement(countPreparedStatement);
+            closeConnection(connecion);
+        }
+        return 0;
+    }
+
     @Override
-    public int updateReservationDateTimeById(int reservationId, String confirmReservationDate, String confirmReservationTime) throws SQLException, Exception {
-        int check = 0;
-        String sql = "UPDATE reservations\n"
-                + "   SET confirmed_examination_date = ?, confirmed_examination_time = ?\n"
-                + " WHERE reservations.reservation_id = ?";
+    public void confirmReservation(int doctorId, String time, Date date, int reservationId) {
+
+        String sql = "update reservations set confirmed_doctor_id = ?, "
+                + "confirmed_examination_date = ?, "
+                + "confirmed_examination_time = ?,"
+                + "reservation_status = N'Đặt thành công'"
+                + "where reservation_id = ?";
         Connection con = null;
         PreparedStatement ps = null;
         try {
             con = getConnection(); //get connection
             ps = con.prepareStatement(sql);
-            ps.setString(1, confirmReservationDate);
-            ps.setString(2, confirmReservationTime);
-            ps.setInt(3, reservationId);
-            check = ps.executeUpdate();
+            ps.setInt(1, doctorId);
+            ps.setDate(2, date);
+            ps.setString(3, time);
+            ps.setInt(4, reservationId);
+            ps.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(ReservationDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
-            throw ex;
         } catch (Exception ex) {
             Logger.getLogger(ReservationDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
-            throw ex;
-        } finally {
-            this.closePreparedStatement(ps);
-            this.closeConnection(con);
         }
-        return check;
     }
         @Override
     public Pagination<BookScheduleDTO> getAllReservation(int pageIndex, int pageSize) {

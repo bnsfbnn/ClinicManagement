@@ -84,13 +84,11 @@
                 </div>
                 <div class="container-fluid mt-3">
                     <div>
-                        <h5>Dịch vụ của chúng tôi</h5>
+                        <h5 >Dịch vụ của chúng tôi</h5>
                     </div>
                     <div class="d-flex justify-content-around mt-3">
                         <div class="card" style="width: 18rem;">
-                            <img class="card-img-top"
-                                 src="https://isofhcare-backup.s3-ap-southeast-1.amazonaws.com/images/bac-si_02156a3d_6d43_476f_8d12_7d10e6d3795e.png"
-                                 alt="Card image cap">
+                            <img id="images" class="card-img-top" src="https://isofhcare-backup.s3-ap-southeast-1.amazonaws.com/images/bac-si_02156a3d_6d43_476f_8d12_7d10e6d3795e.png" alt="Card image cap">
                             <div class="card-body">
                                 <h5 class="card-title">Bác sĩ</h5>
                                 <p class="card-text">Đặt khám trực tiếp tới đội ngũ bác sĩ của ISOFTCARE có
@@ -101,9 +99,7 @@
                             </div>
                         </div>
                         <div class="card" style="width: 18rem;">
-                            <img class="card-img-top"
-                                 src="https://isofhcare-backup.s3-ap-southeast-1.amazonaws.com/images/benh-vien_3af5757b_be9b_4a39_9948_6d2062b72316.png"
-                                 alt="Card image cap">
+                            <img id="images" class="card-img-top" src="https://isofhcare-backup.s3-ap-southeast-1.amazonaws.com/images/benh-vien_3af5757b_be9b_4a39_9948_6d2062b72316.png" alt="Card image cap">
                             <div class="card-body">
                                 <h5 class="card-title">Bệnh viện</h5>
                                 <p class="card-text">Đặt khám theo gói dịch vụ chất lượng, dịch vụ xét
@@ -114,9 +110,7 @@
                             </div>
                         </div>
                         <div class="card" style="width: 18rem;">
-                            <img class="card-img-top"
-                                 src="https://isofhcare-backup.s3-ap-southeast-1.amazonaws.com/images/cam-nang_9ec6df99_ba08_4015_b679_2459308c5e26.png"
-                                 alt="Card image cap">
+                            <img id="images" class="card-img-top" src="https://isofhcare-backup.s3-ap-southeast-1.amazonaws.com/images/cam-nang_9ec6df99_ba08_4015_b679_2459308c5e26.png" alt="Card image cap">
                             <div class="card-body">
                                 <h5 class="card-title">Cẩm nang</h5>
                                 <p class="card-text">Với lượng bài đăng phong phú, chuyên mục Cẩm nang y tế
@@ -126,9 +120,7 @@
                             </div>
                         </div>
                         <div class="card" style="width: 18rem;">
-                            <img class="card-img-top"
-                                 src="https://isofhcare-backup.s3-ap-southeast-1.amazonaws.com/images/cong-dong_15c2ee3e_0448_4635_ac97_645a84969848.png"
-                                 alt="Card image cap">
+                            <img id="images" class="card-img-top" src="https://isofhcare-backup.s3-ap-southeast-1.amazonaws.com/images/cong-dong_15c2ee3e_0448_4635_ac97_645a84969848.png" alt="Card image cap">
                             <div class="card-body">
                                 <h5 class="card-title">Cộng đồng</h5>
                                 <p class="card-text">Cộng đồng y tế đông đảo với sự tham gia của các bác sĩ
@@ -139,9 +131,7 @@
                             </div>
                         </div>
                         <div class="card" style="width: 18rem;">
-                            <img class="card-img-top"
-                                 src="https://isofhcare-backup.s3-ap-southeast-1.amazonaws.com/images/bac-si_02156a3d_6d43_476f_8d12_7d10e6d3795e.png"
-                                 alt="Card image cap">
+                            <img id="images" class="card-img-top" src="https://isofhcare-backup.s3-ap-southeast-1.amazonaws.com/images/bac-si_02156a3d_6d43_476f_8d12_7d10e6d3795e.png" alt="Card image cap">
                             <div class="card-body">
                                 <h5 class="card-title">Bác sĩ</h5>
                                 <p class="card-text">Đặt khám trực tiếp tới đội ngũ bác sĩ của ISOFTCARE có
@@ -169,36 +159,24 @@
                         </div>
                         <div class="col-8 d-flex justify-content-around">
                             <div class="card" style="width: 18rem;">
-                                <img class="card-img-top1"
-                                     src="https://isofhcare-backup.s3-ap-southeast-1.amazonaws.com/images/bac-si_02156a3d_6d43_476f_8d12_7d10e6d3795e.png"
-                                     alt="Card image cap">
+                                <img id="images" class="card-img-top" src="https://isofhcare-backup.s3-ap-southeast-1.amazonaws.com/images/bac-si_02156a3d_6d43_476f_8d12_7d10e6d3795e.png" alt="Card image cap">
                                 <div class="card-body">
                                     <h5 class="card-title">Bác sĩ</h5>
-                                    <p class="card-text">Đặt khám trực tiếp tới đội ngũ bác sĩ của ISOFTCARE có
-                                        trình độ chuyên môn cao, nhiều năm kinh nghiệm, giàu y đức, giúp bạn hoàn
-                                        toàn chủ động lựa chọn thời gian khám.</p>
+                                    <p class="card-text">Đặt khám trực tiếp tới đội ngũ bác sĩ của ISOFTCARE có trình độ chuyên môn cao, nhiều năm kinh nghiệm, giàu y đức, giúp bạn hoàn toàn chủ động lựa chọn thời gian khám.</p>
                                 </div>
                             </div>
                             <div class="card" style="width: 18rem;">
-                                <img class="card-img-top1"
-                                     src="https://isofhcare-backup.s3-ap-southeast-1.amazonaws.com/images/bac-si_02156a3d_6d43_476f_8d12_7d10e6d3795e.png"
-                                     alt="Card image cap">
+                                <img id="images" class="card-img-top" src="https://isofhcare-backup.s3-ap-southeast-1.amazonaws.com/images/bac-si_02156a3d_6d43_476f_8d12_7d10e6d3795e.png" alt="Card image cap">
                                 <div class="card-body">
                                     <h5 class="card-title">Bác sĩ</h5>
-                                    <p class="card-text">Đặt khám trực tiếp tới đội ngũ bác sĩ của ISOFTCARE có
-                                        trình độ chuyên môn cao, nhiều năm kinh nghiệm, giàu y đức, giúp bạn hoàn
-                                        toàn chủ động lựa chọn thời gian khám.</p>
+                                    <p class="card-text">Đặt khám trực tiếp tới đội ngũ bác sĩ của ISOFTCARE có trình độ chuyên môn cao, nhiều năm kinh nghiệm, giàu y đức, giúp bạn hoàn toàn chủ động lựa chọn thời gian khám.</p>
                                 </div>
                             </div>
                             <div class="card" style="width: 18rem;">
-                                <img class="card-img-top1"
-                                     src="https://isofhcare-backup.s3-ap-southeast-1.amazonaws.com/images/bac-si_02156a3d_6d43_476f_8d12_7d10e6d3795e.png"
-                                     alt="Card image cap">
+                                <img id="images" class="card-img-top" src="https://isofhcare-backup.s3-ap-southeast-1.amazonaws.com/images/bac-si_02156a3d_6d43_476f_8d12_7d10e6d3795e.png" alt="Card image cap">
                                 <div class="card-body">
                                     <h5 class="card-title">Bác sĩ</h5>
-                                    <p class="card-text">Đặt khám trực tiếp tới đội ngũ bác sĩ của ISOFTCARE có
-                                        trình độ chuyên môn cao, nhiều năm kinh nghiệm, giàu y đức, giúp bạn hoàn
-                                        toàn chủ động lựa chọn thời gian khám.</p>
+                                    <p class="card-text">Đặt khám trực tiếp tới đội ngũ bác sĩ của ISOFTCARE có trình độ chuyên môn cao, nhiều năm kinh nghiệm, giàu y đức, giúp bạn hoàn toàn chủ động lựa chọn thời gian khám.</p>
                                 </div>
                             </div>
                         </div>

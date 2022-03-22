@@ -8,7 +8,7 @@
 <html>
     <head>
         <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> 
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> 
         <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="./assets/css/style.css">
@@ -29,18 +29,17 @@
 
                                     <div class="form-outline mb-4">
                                         <label class="form-label" for="form3Example1q">Username<span class="text-danger"> *</span></label>
-
-                                        <input type="text" id="form3Example1q" class="form-control"  maxlength="30" required name="username" />
+                                        <input type="text" id="form3Example1q" class="form-control"  maxlength="30" required name="username" value="${username}" />
                                     </div>
                                     <div class="form-outline mb-4">
                                         <label class="form-label" for="form3Example1q">Họ và tên<span class="text-danger"> *</span></label>
 
-                                        <input type="text" id="form3Example1q" class="form-control" maxlength="30" required name="fullName" />
+                                        <input type="text" id="form3Example1q" class="form-control" maxlength="30" required name="fullName"  value="${fullName}" />
                                     </div>
                                     <div class="form-outline mb-4">
                                         <label class="form-label" for="form3Example1q">Ngày sinh<span class="text-danger" > *</span></label>
 
-                                        <input type="date" id="form3Example1q" class="form-control" required name="date"/>
+                                        <input type="date" id="form3Example1q" class="form-control" value="${date}" required name="date"/>
                                     </div>
 
                                     <div class="form-outline mb-4">
@@ -66,41 +65,38 @@
                                                 />
                                             <label class="form-check-label" for="femaleGender">Nữ</label>
                                         </div>
-                                        
-
                                     </div>
-
 
                                     <div class="form-outline mb-4">
                                         <label class="form-label" for="form3Example1q">Điện thoại<span class="text-danger"> *</span></label>
 
-                                        <input type="tel" id="form3Example1q" class="form-control"  required name="phone" pattern="[0-9]{10}"/>
+                                        <input type="tel" id="form3Example1q" class="form-control" maxlength="10" value="${phone}"  required name="phone" pattern="[0][0-9]{9}"/>
                                     </div>
                                     <div class="form-outline mb-4">
                                         <label class="form-label" for="form3Example1q">Email<span class="text-danger"> *</span></label>
 
-                                        <input type="email" id="form3Example1q" class="form-control" required maxlength="30" name="email"/>
+                                        <input type="email" id="form3Example1q" class="form-control" value="${email}" required maxlength="30" name="email"/>
                                     </div>
                                     <div class="form-outline mb-4">
                                         <label class="form-label" for="form3Example1q">Mật khẩu<span class="text-danger"> *</span></label>
 
-                                        <input type="password" id="form3Example1q" class="form-control" required name="password"/>
+                                        <input type="password" id="form3Example1q" class="form-control" maxlength="20" value="${password}" required name="password"/>
                                     </div>
                                     <div class="form-outline mb-4">
                                         <label class="form-label" for="form3Example1q">Nhập lại mật khẩu<span class="text-danger"> *</span></label>
 
-                                        <input type="password" id="form3Example1q" class="form-control" required name="re-password"/>
+                                        <input type="password" id="form3Example1q" class="form-control" maxlength="20" value="${rePassword}" required name="re-password"/>
                                     </div>
                                     <div class="form-outline mb-4">
                                         <label class="form-label" for="form3Example1q">Địa chỉ<span class="text-danger"> *</span></label>
 
-                                        <input type="text" id="form3Example1q" class="form-control"  maxlength="30" required name="address"/>
+                                        <input type="text" id="form3Example1q" class="form-control"  maxlength="30" value="${address}" required name="address"/>
                                     </div>
 
                                     <button type="submit" class="btn btn-success btn-lg mb-1">Đăng kí</button>
                                 </form>
                                 <div style="color: red"> ${message}</div>
-                               
+
                             </div>
                         </div>
                     </div>

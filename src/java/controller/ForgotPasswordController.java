@@ -9,20 +9,18 @@ import dao.UserDAO;
 import dao.impl.UserDAOImpl;
 import entity.User;
 import java.io.IOException;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Locale;
-import java.util.TimeZone;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-public class UpdateCustomerProfileController extends HttpServlet {
+/**
+ *
+ * @author Nguyễn Văn Nam
+ */
+public class ForgotPasswordController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,39 +32,19 @@ public class UpdateCustomerProfileController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, ParseException {
+            throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        request.setCharacterEncoding("utf-8");
-        String email = request.getParameter("email").trim();
-        String fullName = request.getParameter("fullName").trim();
-
-        DateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
-        String date = request.getParameter("date").trim();
-        format.setTimeZone(TimeZone.getTimeZone("Etc/UTC"));
-        java.util.Date jdate = format.parse(date);
-        java.sql.Date sdate = new java.sql.Date(jdate.getTime());
-        HttpSession session = request.getSession();
-        java.util.Date today = new java.util.Date();
-        session.removeAttribute("message");
-        if (jdate.after(today)) {
-            session.setAttribute("error", true);
-            session.setAttribute("message", "Date invalid!!!");
-            response.sendRedirect("./jsp/user_profile.jsp");
+        String email = request.getParameter("email");
+        UserDAO userDAO = new UserDAOImpl();
+        User user = userDAO.getUserByEmail(email);
+        if (user == null) {
+            request.setAttribute("message", "Email not existed !!!");
+            request.getRequestDispatcher("./jsp/forgotPass.jsp").forward(request, response);
             return;
         }
-
-        String phone = request.getParameter("phone").trim();
-        String address = request.getParameter("address").trim();
-        int id = Integer.parseInt(request.getParameter("id"));
-
-        User user = new User(0, 0, "", email, "", fullName, sdate, true, phone, address, "", id);
-        UserDAO userDAO = new UserDAOImpl();
-        userDAO.updateAccount(user);
-        session.setAttribute("error", false);
+        HttpSession session = request.getSession();
         session.setAttribute("user", user);
-        session.setAttribute("message", "Update Success");
-        response.sendRedirect("./jsp/user_profile.jsp");
-
+        request.getRequestDispatcher("./jsp/setPassword.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -81,11 +59,7 @@ public class UpdateCustomerProfileController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (ParseException ex) {
-            Logger.getLogger(UpdateCustomerProfileController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        processRequest(request, response);
     }
 
     /**
@@ -99,11 +73,7 @@ public class UpdateCustomerProfileController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (ParseException ex) {
-            Logger.getLogger(UpdateCustomerProfileController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        processRequest(request, response);
     }
 
     /**

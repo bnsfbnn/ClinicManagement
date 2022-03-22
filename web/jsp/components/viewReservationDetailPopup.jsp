@@ -40,7 +40,7 @@
             <input type="text" class="form-control" id="address" value="${reservation.customer.address}" disabled="disabled"/>
         </div>
         <div class="col-md-6">
-            <dl class="row ml-auto mb-5">
+            <dl class="row ml-auto mb-2">
                 <dt class="col-sm-7">Dịch vụ:</dt>
                 <dd class="col-sm-5">${reservation.service.serviceName}</dd>
                 <dt class="col-sm-7">Gói:</dt>

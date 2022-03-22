@@ -10,11 +10,18 @@
 
 <%@page import="entity.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
+<style>
+    .dropdown-menu{
+        left: -180px !important;
+    }
+</style>
 <html>
     <body class="m-0 p-0">
         <!--Start header-->
-        <header class="navbar navbar-expand-lg navbar-light navbar-floating navbar-sticky">
+        <header class="navbar navbar-expand-lg navbar-light navbar-floating navbar-sticky ">
             <div class="p-2">
                 <a href="./HomeController">
                     <img src="./assets/images/logo.png" alt="" width="30" height="30">
@@ -54,8 +61,10 @@
                     </li>
                     <!-- Links -->
                     <li><a class="dropdown-item" href="./jsp/user_profile.jsp"><i class="bi bi-person fa-fw me-2"></i>Xem thông tin cá nhân</a></li>
-                    <li><a class="dropdown-item bg-danger-soft-hover" href="./ViewCustomerReservationsList"><i class="bi bi-power fa-fw me-2"></i>Xem danh sách đặt chỗ</a></li>
-                    <li><a class="dropdown-item" href="#"><i class="bi bi-person fa-fw me-2"></i>Đổi mật khẩu</a></li>
+                        <c:if test = "${role == 1}">
+                        <li><a class="dropdown-item bg-danger-soft-hover" href="./ViewCustomerReservationsList"><i class="bi bi-power fa-fw me-2"></i>Xem danh sách đặt chỗ</a></li>
+                        </c:if>
+                    <li><a class="dropdown-item" href="./jsp/changePass.jsp"><i class="bi bi-person fa-fw me-2"></i>Đổi mật khẩu</a></li>
                     <li><a class="dropdown-item bg-danger-soft-hover" href="./LogoutController"><i class="bi bi-power fa-fw me-2"></i>Đăng xuất</a></li>
                     <li> <hr class="dropdown-divider"></li>
                     <!-- Dark mode switch END -->

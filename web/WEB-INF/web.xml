@@ -81,14 +81,6 @@
         <servlet-class>controller.AddFeedbackController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>RegisterForCustomerController</servlet-name>
-        <servlet-class>controller.RegisterForCustomerController</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>UpdateCustomerProfileController</servlet-name>
-        <servlet-class>controller.UpdateCustomerProfileController</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>ViewFeedbackManagedListController</servlet-name>
         <servlet-class>controller.ViewFeedbackManagedListController</servlet-class>
     </servlet>
@@ -141,12 +133,48 @@
         <servlet-class>controller.ViewCustomerReservationsList</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>CancelReceiveReservationController</servlet-name>
-        <servlet-class>controller.CancelReceiveReservationController</servlet-class>
+        <servlet-name>BookScheduleController</servlet-name>
+        <servlet-class>controller.BookScheduleController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>ChangeReservationDate</servlet-name>
-        <servlet-class>controller.ChangeReservationDateController</servlet-class>
+        <servlet-name>ConfirmReservationController</servlet-name>
+        <servlet-class>controller.ConfirmReservationController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CancelPendingReservationController</servlet-name>
+        <servlet-class>controller.CancelPendingReservationController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SearchAccountController</servlet-name>
+        <servlet-class>controller.SearchAccountController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ChangePasswordController</servlet-name>
+        <servlet-class>controller.ChangePasswordController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ForgotPasswordController</servlet-name>
+        <servlet-class>controller.ForgotPasswordController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ResetPasswordController</servlet-name>
+        <servlet-class>controller.ResetPasswordController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SearchPostController</servlet-name>
+        <servlet-class>controller.SearchPostController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>PostDetailController</servlet-name>
+        <servlet-class>controller.PostDetailController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateCustomerProfileController</servlet-name>
+        <servlet-class>controller.UpdateCustomerProfileController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RegisterForCustomerController</servlet-name>
+        <servlet-class>controller.RegisterForCustomerController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>SearchPostController</servlet-name>
@@ -281,12 +309,48 @@
         <url-pattern>/addNewExamination</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>CancelReceiveReservationController</servlet-name>
-        <url-pattern>/cancelReceiveReservation</url-pattern>
+        <servlet-name>BookScheduleController</servlet-name>
+        <url-pattern>/BookScheduleController</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>ChangeReservationDate</servlet-name>
-        <url-pattern>/changeReservationDate</url-pattern>
+        <servlet-name>ConfirmReservationController</servlet-name>
+        <url-pattern>/ConfirmReservationController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CancelPendingReservationController</servlet-name>
+        <url-pattern>/CancelPendingReservationController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchAccountController</servlet-name>
+        <url-pattern>/SearchAccountController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ChangePasswordController</servlet-name>
+        <url-pattern>/ChangePasswordController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ForgotPasswordController</servlet-name>
+        <url-pattern>/ForgotPasswordController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ResetPasswordController</servlet-name>
+        <url-pattern>/ResetPasswordController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchPostController</servlet-name>
+        <url-pattern>/SearchPostController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PostDetailController</servlet-name>
+        <url-pattern>/PostDetailController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateCustomerProfileController</servlet-name>
+        <url-pattern>/UpdateCustomerProfileController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RegisterForCustomerController</servlet-name>
+        <url-pattern>/RegisterForCustomerController</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>SearchPostController</servlet-name>
@@ -324,7 +388,7 @@
     <env-entry>
         <env-entry-name>password</env-entry-name>
         <env-entry-type>java.lang.String</env-entry-type>
-        <env-entry-value>123</env-entry-value>
+        <env-entry-value>123456</env-entry-value>
     </env-entry>
     <welcome-file-list>
         <welcome-file>./jsp/login.jsp</welcome-file>

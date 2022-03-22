@@ -5,24 +5,28 @@
  */
 package controller;
 
+import dao.ReservationDAO;
 import dao.UserDAO;
+import dao.impl.ReservationDAOImpl;
 import dao.impl.UserDAOImpl;
+import entity.BookScheduleDTO;
+import entity.Doctor;
+import entity.Pagination;
 import entity.User;
 import java.io.IOException;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Locale;
-import java.util.TimeZone;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-public class UpdateCustomerProfileController extends HttpServlet {
+/**
+ *
+ * @author Nguyễn Văn Nam
+ */
+public class BookScheduleController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,39 +38,36 @@ public class UpdateCustomerProfileController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, ParseException {
+            throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        request.setCharacterEncoding("utf-8");
-        String email = request.getParameter("email").trim();
-        String fullName = request.getParameter("fullName").trim();
-
-        DateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
-        String date = request.getParameter("date").trim();
-        format.setTimeZone(TimeZone.getTimeZone("Etc/UTC"));
-        java.util.Date jdate = format.parse(date);
-        java.sql.Date sdate = new java.sql.Date(jdate.getTime());
         HttpSession session = request.getSession();
-        java.util.Date today = new java.util.Date();
-        session.removeAttribute("message");
-        if (jdate.after(today)) {
-            session.setAttribute("error", true);
-            session.setAttribute("message", "Date invalid!!!");
-            response.sendRedirect("./jsp/user_profile.jsp");
-            return;
+        User user = (User) session.getAttribute("user");
+//        if (user == null) {
+//            request.getRequestDispatcher("./jsp/login.jsp").forward(request, response);
+//            return;
+//        }
+        String page = (request.getParameter("page") == null) ? "1" : request.getParameter("page");
+        int pageIndex = 1;
+        if (page != null) {// check page if not null
+            try {
+                //convert page(string) to pageIndex(int)
+                pageIndex = Integer.parseInt(page);
+                if (pageIndex == -1) {
+                    pageIndex = 0;
+                }
+            } catch (NumberFormatException e) {
+                //default pageIndex = 1
+                pageIndex = 0;
+            }
         }
-
-        String phone = request.getParameter("phone").trim();
-        String address = request.getParameter("address").trim();
-        int id = Integer.parseInt(request.getParameter("id"));
-
-        User user = new User(0, 0, "", email, "", fullName, sdate, true, phone, address, "", id);
+        int pageSize = 5;
+        ReservationDAO reservationDAO = new ReservationDAOImpl();
+        Pagination<BookScheduleDTO> reservations = reservationDAO.getAllReservation(pageIndex, pageSize);
         UserDAO userDAO = new UserDAOImpl();
-        userDAO.updateAccount(user);
-        session.setAttribute("error", false);
-        session.setAttribute("user", user);
-        session.setAttribute("message", "Update Success");
-        response.sendRedirect("./jsp/user_profile.jsp");
-
+        List<Doctor> doctors = userDAO.getAllDoctor();
+        request.setAttribute("reservations", reservations);
+        request.setAttribute("doctors", doctors);
+        request.getRequestDispatcher("./jsp/showReservation.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -81,11 +82,7 @@ public class UpdateCustomerProfileController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (ParseException ex) {
-            Logger.getLogger(UpdateCustomerProfileController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        processRequest(request, response);
     }
 
     /**
@@ -99,11 +96,7 @@ public class UpdateCustomerProfileController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (ParseException ex) {
-            Logger.getLogger(UpdateCustomerProfileController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        processRequest(request, response);
     }
 
     /**

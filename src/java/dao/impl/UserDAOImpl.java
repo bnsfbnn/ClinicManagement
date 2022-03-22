@@ -33,12 +33,13 @@ public class UserDAOImpl extends DBContext implements UserDAO {
      * Logger for system
      */
     private static Logger logger = Logger.getLogger(UserDAOImpl.class.getName());
-/*
+
+    /*
     * Get all user from database. 
     * 
     * @return a list of <code>User</code> objects. It is
     * a <code>java.util.List</code> object 
-    */
+     */
     @Override
     public User login(String username, String password) {
         logger.log(Level.INFO, "Login Controller");
@@ -88,7 +89,7 @@ public class UserDAOImpl extends DBContext implements UserDAO {
     * a <code>java.util.List</code> object 
      */
     @Override
-    public Pagination<Account> getAllAccount(int pageIndex, int pageSize) {
+    public Pagination<Account> getAllAccount(int pageIndex, int pageSize, String search) {
         Pagination<Account> pagination = new Pagination<>();
         logger.log(Level.INFO, "Login Controller");
         Connection connecion = null;
@@ -104,7 +105,7 @@ public class UserDAOImpl extends DBContext implements UserDAO {
             // Get data
             preparedStatement = connecion.prepareStatement("SELECT  *\n"
                     + "FROM  ( SELECT  ROW_NUMBER() OVER ( ORDER BY  c.user_id ) AS RowNum,  c.user_id, c.role_id, c.username, c.email, c.password, c.full_name, c.birth_date, c.gender, c.phone, c.avatar_image, c.service_id, c.address, c.is_active, r.role_name\n"
-                    + "          FROM users c join roles r on c.role_id = r.role_id and c.is_active = 1\n"
+                    + "          FROM users c join roles r on c.role_id = r.role_id and c.is_active = 1 and (c.username like N'%" + search + "%' or c.email like N'%" + search + "%' or c.full_name like N'%" + search + "%')\n"
                     + "        ) AS RowConstrainedResult\n"
                     + "WHERE   RowNum >= ?\n"
                     + "    AND RowNum <= ?\n"
@@ -139,7 +140,7 @@ public class UserDAOImpl extends DBContext implements UserDAO {
         pagination.setData(users);
         return pagination;
     }
-    
+
     public int count() {
         Connection connecion = null;
         PreparedStatement countPreparedStatement = null;
@@ -162,7 +163,7 @@ public class UserDAOImpl extends DBContext implements UserDAO {
         return 0;
     }
 
-   @Override
+    @Override
     public void deleteAccount(int id) {
         logger.log(Level.INFO, "Delete account with id");
         Connection connecion = null;
@@ -223,7 +224,7 @@ public class UserDAOImpl extends DBContext implements UserDAO {
                     + "values (?,?,?,?,?,?,?,?, 1,?)");
             preparedStatement.setInt(1, user.getRoleId());
             preparedStatement.setString(2, user.getUsername());
-            preparedStatement.setString(3, user.getFullName());
+            preparedStatement.setNString(3, user.getFullName());
             preparedStatement.setString(4, user.getEmail());
             preparedStatement.setDate(5, user.getBirthDate());
             if (user.isGender()) {
@@ -233,7 +234,7 @@ public class UserDAOImpl extends DBContext implements UserDAO {
             }
             preparedStatement.setString(7, user.getPhone());
             preparedStatement.setString(8, user.getAddress());
-              preparedStatement.setString(9, user.getPassword());
+            preparedStatement.setString(9, user.getPassword());
             preparedStatement.executeUpdate();
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -384,6 +385,98 @@ public class UserDAOImpl extends DBContext implements UserDAO {
             // Get data
             preparedStatement = connecion.prepareStatement("select * from users c join roles r on c.role_id = r.role_id where user_id =?");
             preparedStatement.setInt(1, id);
+            rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                User user = new User();
+                user.setUserId(rs.getInt("user_id"));
+                user.setRoleId(rs.getInt("role_id"));
+                user.setServiceId(rs.getInt("service_id"));
+                user.setUsername(rs.getString("username"));
+                user.setEmail(rs.getString("email"));
+                user.setPassword(rs.getString("password"));
+                user.setFullName(rs.getString("full_name"));
+                user.setBirthDate(rs.getDate("birth_date"));
+                user.setGender(rs.getBoolean("gender"));
+                user.setPhone(rs.getString("phone"));
+                user.setAddress(rs.getString("address"));
+                user.setAvatarImage(rs.getString("avatar_image"));
+                return user;
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            Logger.getLogger(UserDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            closeResultSet(rs);
+            closePreparedStatement(preparedStatement);
+            closeConnection(connecion);
+        }
+        return null;
+    }
+
+    @Override
+    public boolean checkUsernameAndEmail(String username, String email) {
+        logger.log(Level.INFO, "Login Controller");
+        Connection connecion = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet rs = null;
+
+        try {
+            connecion = getConnection();
+            // Get data
+            preparedStatement = connecion.prepareStatement("select * from users where username = ? or email = ?");
+            preparedStatement.setNString(1, username);
+            preparedStatement.setNString(2, email);
+            rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                return true;
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            Logger.getLogger(UserDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            closeResultSet(rs);
+            closePreparedStatement(preparedStatement);
+            closeConnection(connecion);
+        }
+        return false;
+
+    }
+
+    @Override
+    public void updatePassword(String username, String password) {
+        Connection connecion = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet rs = null;
+        try {
+            connecion = getConnection();
+            // Get data
+            preparedStatement = connecion.prepareStatement("update users set password = ? where username = ?");
+
+            preparedStatement.setString(1, password);
+            preparedStatement.setString(2, username);
+
+            preparedStatement.executeUpdate();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            Logger.getLogger(UserDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            closePreparedStatement(preparedStatement);
+            closeConnection(connecion);
+        }
+    }
+
+    @Override
+    public User getUserByEmail(String email) {
+        logger.log(Level.INFO, "Login Controller");
+        Connection connecion = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet rs = null;
+
+        try {
+            connecion = getConnection();
+            // Get data
+            preparedStatement = connecion.prepareStatement("select * from users  where email = ?");
+            preparedStatement.setNString(1, email);
             rs = preparedStatement.executeQuery();
             while (rs.next()) {
                 User user = new User();

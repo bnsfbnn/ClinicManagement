@@ -22,34 +22,63 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author Nguyen Van Nam
  */
 public class RegisterForCustomerController extends HttpServlet {
-
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ParseException {
-     response.setContentType("text/html;charset=UTF-8");
-request.setCharacterEncoding("utf-8");
+        response.setContentType("text/html;charset=UTF-8");
+        request.setCharacterEncoding("utf-8");
         String username = request.getParameter("username").trim();
         String email = request.getParameter("email").trim();
         String password = request.getParameter("password").trim();
         String rePassword = request.getParameter("re-password").trim();
-        if (!password.equals(rePassword)) {
-            request.setAttribute("message", "Password not match");
-            request.getRequestDispatcher("./jsp/Register.jsp").forward(request, response);
-            return;
-        }
+        
         String fullName = request.getParameter("fullName").trim();
-
+        
         DateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
+        
         String date = request.getParameter("date").trim();
         format.setTimeZone(TimeZone.getTimeZone("Etc/UTC"));
         java.util.Date jdate = format.parse(date);
-        java.sql.Date sdate = new java.sql.Date(jdate.getTime());
+        java.util.Date today = new java.util.Date();
+        String phone = request.getParameter("phone").trim();
+        String address = request.getParameter("address").trim();
+        
+        HttpSession session = request.getSession();
+        
+        session.setAttribute("username", username);
+        session.setAttribute("username", username);
+        session.setAttribute("email", email);
+        session.setAttribute("password", password);
+        session.setAttribute("rePassword", rePassword);
+        session.setAttribute("fullName", fullName);
+        session.setAttribute("phone", phone);
+        session.setAttribute("address", address);
+                session.setAttribute("date", date);
 
+        
+        session.removeAttribute("message");
+        if (jdate.after(today)) {
+            session.setAttribute("message", "Date invalid");
+            response.sendRedirect("./jsp/Register.jsp");
+            return;
+        }
+        
+        if (!password.equals(rePassword)) {
+            session.setAttribute("message", "Password not match");
+            response.sendRedirect("./jsp/Register.jsp");
+            return;
+        }
+        
+        java.sql.Date sdate = new java.sql.Date(jdate.getTime());
+        request.setAttribute("date", sdate);
+        
         int check = Integer.parseInt(request.getParameter("gender").trim());
         boolean gender;
         if (check == 1) {
@@ -57,18 +86,17 @@ request.setCharacterEncoding("utf-8");
         } else {
             gender = false;
         }
-        String phone = request.getParameter("phone").trim();
-        String address = request.getParameter("address").trim();
-
+        
         User user = new User(4, 0, username, email, password, fullName, sdate, gender, phone, address, "", 0);
         UserDAO userDAO = new UserDAOImpl();
+        
         if (userDAO.login(username, password) != null) {
-            request.setAttribute("message", "Username existed");
-            request.getRequestDispatcher("./jsp/Register.jsp").forward(request, response);
+            session.setAttribute("message", "Username existed");
         } else {
             userDAO.createAccount(user);
-            request.getRequestDispatcher("./jsp/login.jsp").forward(request, response);
+            session.setAttribute("message", "Register Successfully");
         }
+        response.sendRedirect("./jsp/Register.jsp");
     }
 
 // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
