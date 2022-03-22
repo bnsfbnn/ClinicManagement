@@ -122,7 +122,7 @@
     </head>
     <body>
         <%@include file="components/customerHeader.jsp" %>
-        <div class="container-fluid m-0 p-0">
+        <div class="container-fluid m-0 p-5">
             <h5 style="margin-bottom: 20px;">Đánh giá dịch vụ</h5>
             <div style="margin-left: 80%">
                 <form action="../ClinicManagement/ViewFeedBackListController" method="GET">

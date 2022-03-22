@@ -355,7 +355,7 @@ public class FeedbackDAOImpl extends DBContext implements FeedbackDAO {
 
             if (time.equals("")) {
                 sql = "SELECT * FROM  ( SELECT  ROW_NUMBER() OVER ( ORDER BY  f.feedback_id ) AS RowNum,  f.feedback_id, f.feedback_content, f.feedback_time,  u.username, u.full_name, s.service_name, s.service_id, e.examination_id, e.examination_prescription from feedbacks f join users u\n"
-                        + "  on f.customer_id = u.user_id u.user_id = ?\n"
+                        + "  on f.customer_id = u.user_id and u.user_id = ?\n"
                         + "  join services s\n"
                         + "  on f.service_id = s.service_id and s.service_id = ?\n"
                         + "  join examinations e\n"
