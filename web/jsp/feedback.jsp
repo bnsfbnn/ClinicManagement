@@ -5,7 +5,7 @@
  *
  * Record of change:
  * DATE            Version             AUTHOR           DESCRIPTION
- * 2022-02-22      1.0                 TrangCT          List service
+ * 2022-02-22      1.0                 TrangCT          Feedback
 -->
 
 <!DOCTYPE html>
@@ -138,6 +138,7 @@
                 <form action="../ClinicManagement/ViewFeedBackListController" method="GET">
                     <label for="time">Select time</label>
                     <select name="time" id="status">
+                          <option value="">Tất cả</option>
                         <c:forEach items="${times}" var="time"  varStatus="counter" >
                             <option value="${time}">${time}</option>
                         </c:forEach>

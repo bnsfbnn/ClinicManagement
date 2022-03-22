@@ -11,6 +11,47 @@
         </file>
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/C:/Users/trang/Desktop/project/ClinicManagement/src/java/entity/ReservationDTO.java</file>
+            <file>file:/C:/Users/trang/Desktop/project/ClinicManagement/web/assets/images/avatar07.jpg</file>
+            <file>file:/C:/Users/trang/Desktop/project/ClinicManagement/web/jsp/serviceList.jsp</file>
+            <file>file:/C:/Users/trang/Desktop/project/ClinicManagement/src/java/entity/ServicePackage.java</file>
+            <file>file:/C:/Users/trang/Desktop/project/ClinicManagement/src/java/controller/ViewExaminationHistoryDetailController.java</file>
+            <file>file:/C:/Users/trang/Desktop/project/ClinicManagement/src/java/entity/CustomerReservation.java</file>
+            <file>file:/C:/Users/trang/Desktop/project/ClinicManagement/web/jsp/postDetail.jsp</file>
+            <file>file:/C:/Users/trang/Desktop/project/ClinicManagement/src/java/dao/impl/PostDAOImpl.java</file>
+            <file>file:/C:/Users/trang/Desktop/project/ClinicManagement/src/java/dao/ReservationDAO.java</file>
+            <file>file:/C:/Users/trang/Desktop/project/ClinicManagement/src/java/dao/PostDAO.java</file>
+            <file>file:/C:/Users/trang/Desktop/project/ClinicManagement/src/java/entity/Feedback.java</file>
+            <file>file:/C:/Users/trang/Desktop/project/ClinicManagement/src/java/controller/ServiceDetailController.java</file>
+            <file>file:/C:/Users/trang/Desktop/project/ClinicManagement/src/java/controller/PostDetailController.java</file>
+            <file>file:/C:/Users/trang/Desktop/project/ClinicManagement/src/java/entity/PostEntity.java</file>
+            <file>file:/C:/Users/trang/Desktop/project/ClinicManagement/web/jsp/serviceDetail.jsp</file>
+            <file>file:/C:/Users/trang/Desktop/project/ClinicManagement/src/java/dao/impl/UserDAOImpl.java</file>
+            <file>file:/C:/Users/trang/Desktop/project/ClinicManagement/src/java/dao/impl/ReservationDAOImpl.java</file>
+            <file>file:/C:/Users/trang/Desktop/project/ClinicManagement/src/java/dao/FeedbackDAO.java</file>
+            <file>file:/C:/Users/trang/Desktop/project/ClinicManagement/src/java/entity/FeedbackDTO.java</file>
+            <file>file:/C:/Users/trang/Desktop/project/ClinicManagement/src/java/controller/AddFeedbackController.java</file>
+            <file>file:/C:/Users/trang/Desktop/project/ClinicManagement/src/java/dao/impl/ServiceDAOImpl.java</file>
+            <file>file:/C:/Users/trang/Desktop/project/ClinicManagement/src/java/controller/ViewCustomerReservationsList.java</file>
+            <file>file:/C:/Users/trang/Desktop/project/ClinicManagement/web/jsp/viewAllCustomerReservation.jsp</file>
+            <file>file:/C:/Users/trang/Desktop/project/ClinicManagement/src/java/controller/AddDoctorForService.java</file>
+            <file>file:/C:/Users/trang/Desktop/project/ClinicManagement/src/java/controller/ViewFeedBackListController.java</file>
+            <file>file:/C:/Users/trang/Desktop/project/ClinicManagement/src/java/controller/ViewFeedbackManagedListController.java</file>
+            <file>file:/C:/Users/trang/Desktop/project/ClinicManagement/src/java/controller/SearchPostController.java</file>
+            <file>file:/C:/Users/trang/Desktop/project/ClinicManagement/src/java/controller/ServiceController.java</file>
+            <file>file:/C:/Users/trang/Desktop/project/ClinicManagement/src/java/entity/FeedbackReply.java</file>
+            <file>file:/C:/Users/trang/Desktop/project/ClinicManagement/web/jsp/home.jsp</file>
+            <file>file:/C:/Users/trang/Desktop/project/ClinicManagement/src/java/entity/ServiceDTO.java</file>
+            <file>file:/C:/Users/trang/Desktop/project/ClinicManagement/src/java/controller/ViewCustomerReservationDetail.java</file>
+            <file>file:/C:/Users/trang/Desktop/project/ClinicManagement/web/assets/images/avatar06.jpg</file>
+            <file>file:/C:/Users/trang/Desktop/project/ClinicManagement/src/java/entity/Reservation.java</file>
+            <file>file:/C:/Users/trang/Desktop/project/ClinicManagement/src/java/entity/Service.java</file>
+            <file>file:/C:/Users/trang/Desktop/project/ClinicManagement/src/java/dao/impl/RoleDAOImpl.java</file>
+            <file>file:/C:/Users/trang/Desktop/project/ClinicManagement/src/java/entity/Account.java</file>
+            <file>file:/C:/Users/trang/Desktop/project/ClinicManagement/src/java/controller/HomeController.java</file>
+            <file>file:/C:/Users/trang/Desktop/project/ClinicManagement/src/java/dao/impl/FeedbackDAOImpl.java</file>
+            <file>file:/C:/Users/trang/Desktop/project/ClinicManagement/src/java/dao/ServiceDAO.java</file>
+        </group>
     </open-files>
 </project-private>

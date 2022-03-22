@@ -60,7 +60,7 @@ public class AddFeedbackController extends HttpServlet {
             request.getRequestDispatcher("./jsp/login.jsp").forward(request, response);
             return;
         }
-        int serviceId = Integer.parseInt(request.getParameter("serviceId"));
+        int serviceId = Integer.parseInt(request.getParameter("service"));
         int examinationId = Integer.parseInt(request.getParameter("examinationId"));
         String content = request.getParameter("content");
         java.sql.Date date = new java.sql.Date(Calendar.getInstance().getTime().getTime());
