@@ -480,9 +480,4 @@ public class UserDAOImpl extends DBContext implements UserDAO {
         }
         return null;
     }
-    
-    @Override
-    public void updateAccount(User user) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 }

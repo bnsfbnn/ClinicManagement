@@ -58,7 +58,7 @@ public class HomeController extends HttpServlet {
                 List<PostEntity> posts = postDAO.getAllPost();
                 request.setAttribute("posts", posts);
                 if (user.getRoleId() == 1) {
-                    request.getRequestDispatcher("GetAllAccountController").forward(request, response);
+                    response.sendRedirect("GetAllAccountController");
                 } else if (user.getRoleId() == 2) {
                     request.getRequestDispatcher("").forward(request, response);
                 } else if (user.getRoleId() == 3) {
@@ -71,7 +71,15 @@ public class HomeController extends HttpServlet {
                 request.getRequestDispatcher("./jsp/login.jsp").forward(request, response);
             }
         } else {
-            request.getRequestDispatcher("./jsp/home.jsp").forward(request, response);
+            if (user1.getRoleId() == 1) {
+                response.sendRedirect("GetAllAccountController");
+            } else if (user1.getRoleId() == 2) {
+                request.getRequestDispatcher("").forward(request, response);
+            } else if (user1.getRoleId() == 3) {
+                response.sendRedirect("viewMyReservation");
+            } else {
+                request.getRequestDispatcher("./jsp/home.jsp").forward(request, response);
+            }
         }
     }
 

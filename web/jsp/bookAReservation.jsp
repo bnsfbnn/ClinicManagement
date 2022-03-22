@@ -37,14 +37,14 @@
                 <div class="col-md-6 mx-auto">
                     <form class="row g-3" action="../BookReservationController" method="POST">
                         <div class="col-md-6">
-                            <label for="time">gói dịch vụ</label>
-                            <input type="text" value=" <%= request.getParameter("packageName")%>" readonly>
+                            <label for="time">Gói dịch vụ</label>
+                            <input type="text" name="packageName" value=" <%= request.getParameter("packageName")%>" readonly>
                             <input hidden name="packageId" value=" <%= request.getParameter("packageId")%>" readonly>
                         </div>
                         <div class="col-md-6">
                             <label for="service" class="form-label">Dịch vụ</label>
-                            <input type="text" value=" <%= request.getParameter("serviceName")%>" readonly>
-                             <input hidden name="serviceId" value=" <%= request.getParameter("serviceId")%>" readonly>
+                            <input type="text" name="serviceName" value=" <%= request.getParameter("serviceName")%>" readonly>
+                            <input hidden name="serviceId" value=" <%= request.getParameter("serviceId")%>" readonly>
                         </div>
                         <div class="col-md-6">
                             <label for="date" class="form-label">Chọn ngày khám</label>
@@ -65,6 +65,9 @@
                         <div class="col-12 mx-auto">
                             <label class="form-label"></label> </br>
                             <button type="submit" class="btn btn-primary">Đăng ký</button>
+                        </div>
+                        <div style="color: red">
+                            <h1>${message}</h1>
                         </div>
                     </form>
                 </div>

@@ -14,6 +14,7 @@ import dao.impl.ReservationDAOImpl;
 import entity.ReservationDTO;
 import entity.User;
 import java.io.IOException;
+import java.net.URLEncoder;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -45,9 +46,14 @@ public class BookReservationController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ParseException {
         response.setContentType("text/html;charset=UTF-8");
-
+        request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
         int serviceId = Integer.parseInt(request.getParameter("serviceId").trim());
         int packageId = Integer.parseInt(request.getParameter("packageId").trim());
+
+        String packageName = request.getParameter("packageName").trim();
+        String serviceName = request.getParameter("serviceName").trim();
+
         DateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
@@ -61,21 +67,27 @@ public class BookReservationController extends HttpServlet {
         java.util.Date jdate1 = format.parse(date1);
         java.sql.Date sdate1 = new java.sql.Date(jdate1.getTime());
 
-        String time = request.getParameter("time");
+        java.util.Date today = new java.util.Date();
+        if (sdate1.before(today)) {
+            session.setAttribute("message", "Date invalid");
+            response.sendRedirect("./jsp/bookAReservation.jsp?serviceId=" + serviceId + "&packageId=" + packageId + "&packageName=" + URLEncoder.encode(packageName, "UTF-8") + "&serviceName=" + URLEncoder.encode(serviceName, "UTF-8"));
+            return;
+        } else {
+            String time = request.getParameter("time");
+            String reqeust = request.getParameter("request").trim();
+            ReservationDTO reservation = new ReservationDTO();
+            reservation.setCustomerRequest(reqeust);
+            reservation.setRequestDate(sdate1);
+            reservation.setId(user.getUserId());
+            reservation.setPackageId(packageId);
+            reservation.setServiceId(serviceId);
 
-        String reqeust = request.getParameter("request").trim();
+            ReservationDAO reservationDAO = new ReservationDAOImpl();
+            reservationDAO.bookReservation(reservation);
+            ViewCustomerReservationsList controller = new ViewCustomerReservationsList();
+            controller.processRequest(request, response);
+        }
 
-        ReservationDTO reservation = new ReservationDTO();
-        reservation.setCustomerRequest(reqeust);
-        reservation.setRequestDate(sdate1);
-        reservation.setId(user.getUserId());
-        reservation.setPackageId(packageId);
-        reservation.setServiceId(serviceId);
-
-        ReservationDAO reservationDAO = new ReservationDAOImpl();
-        reservationDAO.bookReservation(reservation);
-        ViewCustomerReservationsList controller = new ViewCustomerReservationsList();
-        controller.processRequest(request, response);
     }
 
 // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
