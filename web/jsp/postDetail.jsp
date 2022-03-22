@@ -195,7 +195,7 @@
                             ${post.summary}
                         </div>
                         <div class="row d-flex justify-content-start">
-                            <b><i>${user} : ${post.createDate} : ${post.createTime}</i></b>
+                            <b><i>${userPost} : ${post.createDate} : ${post.createTime}</i></b>
                         </div>
                         <div class="row d-flex justify-content-end">
                             <p>${post.content}</p>

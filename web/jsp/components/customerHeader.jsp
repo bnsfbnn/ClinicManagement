@@ -34,11 +34,6 @@
                 <a class="avatar avatar-md p-0" href="#" id="profileDropdown" role="button" data-bs-auto-close="outside" data-bs-display="static" data-bs-toggle="dropdown" aria-expanded="true">
                     <%
                         User user = (User) request.getSession().getAttribute("user");
-                        if (user != null) {
-                            String username = user.getUsername();
-                            String ava = user.getAvatarImage();
-                            String email = user.getAvatarImage();
-                        }
                     %>
                     <img height="45" class="avatar-img rounded-circle" src="./assets/images/${user.avatarImage}" alt="avatar">
                 </a>

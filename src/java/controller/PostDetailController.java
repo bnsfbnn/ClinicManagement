@@ -42,7 +42,7 @@ public class PostDetailController extends HttpServlet {
         UserDAO userDAO = new UserDAOImpl();
         User user = userDAO.getUserById(post.getUserId());
         request.setAttribute("post", post);
-        request.setAttribute("user", user.getFullName());
+        request.setAttribute("userPost", user.getFullName());
         request.getRequestDispatcher("./jsp/postDetail.jsp").forward(request, response);
     }
 
