@@ -33,7 +33,7 @@
                                         <h3 class="mb-4">Đăng nhập</h3>
                                     </div>
                                 </div>
-                                <form action="LoginController" method="POST" class="signin-form">
+                                <form action="HomeController" method="POST" class="signin-form">
                                     <div class="form-group mt-3">
                                         <input type="text" class="form-control" required name="username">
                                         <label class="form-control-placeholder" for="username">Tên đăng nhập...</label>
@@ -48,7 +48,7 @@
                                     </div>
 
                                 </form>
-                                <p class="text-center">không phải thành viên? <a data-toggle="tab" href="#signup">Đăng kí</a></p>
+                                <p class="text-center">không phải thành viên? <a  href="./jsp/Register.jsp">Đăng kí</a></p>
                                 <p style="color: red"> ${message}</p>
                             </div>
                         </div>

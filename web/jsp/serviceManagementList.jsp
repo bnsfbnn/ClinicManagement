@@ -48,7 +48,7 @@
                                 <a class="nav-link active" href="#">Quản lý dịch vụ</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="../FeedbackManagement/index.html">Quản lý phản hồi</a>
+                                <a class="nav-link" href="../ClinicManagement/ViewFeedbackManagedListController">Quản lý phản hồi</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link p-0" href="#">Xem tất cả lịch khám bệnh</a>

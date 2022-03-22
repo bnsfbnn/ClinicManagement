@@ -16,22 +16,22 @@
         <!--Start header-->
         <header class="navbar navbar-expand-lg navbar-light navbar-floating navbar-sticky">
             <div class="p-2">
-                <a href="#">
+                <a href="./HomeController">
                     <img src="./assets/images/logo.png" alt="" width="30" height="30">
                 </a>
             </div>
             <div>
                 <ul class="navbar-nav">
-                    <li class="nav-item active">
-                        <a class="nav-link py-3" href="#">Dịch vụ<span class="sr-only">(current)</span></a>
+                    <li class="nav-item">
+                        <a class="nav-link py-3" href="./ServiceController">Dịch vụ</a>
                     </li>
-                    <li class=nav-item">
-                        <a class="nav-link py-3" href="#">Phản hồi</a>
+                    <li class="nav-item">
+                        <a class="nav-link py-3" href="./ViewFeedBackListController">Phản hồi</a>
                     </li>
                 </ul>
             </div>
             <div class="dropdown ml-auto">
-                <a class="avatar avatar-md p-0" href="" href="#" id="profileDropdown" role="button" data-bs-auto-close="outside" data-bs-display="static" data-bs-toggle="dropdown" aria-expanded="true">
+                <a class="avatar avatar-md p-0" href="#" id="profileDropdown" role="button" data-bs-auto-close="outside" data-bs-display="static" data-bs-toggle="dropdown" aria-expanded="true">
                     <%
                         User user = (User) request.getSession().getAttribute("user");
                         if (user != null) {
@@ -40,28 +40,28 @@
                             String email = user.getAvatarImage();
                         }
                     %>
-                    <img height="45" class="avatar-img rounded-circle" src="./assets/images/avatar01.jpg" alt="avatar">
+                    <img height="45" class="avatar-img rounded-circle" src="./assets/images/${user.avatarImage}" alt="avatar">
                 </a>
-                    <ul class="dropdown-menu dropdown-animation shadow pt-3 dropdown-menu-right" aria-labelledby="profileDropdown" data-bs-popper="none" style="">
+                <ul class="dropdown-menu dropdown-animation shadow pt-3 dropdown-menu-right" aria-labelledby="profileDropdown" data-bs-popper="none" style="">
                     <!-- Profile info -->
                     <li class="px-3">
                         <div class="d-flex align-items-center">
                             <!-- Avatar -->
                             <div class="avatar me-3">
-                                <img height="40" class="avatar-img rounded-circle shadow" src="./assets/images/avatar01.jpg" alt="avatar">
+                                <img height="40" class="avatar-img rounded-circle shadow" href="./jsp/user_profile.jsp" src="./assets/images/${user.avatarImage}" alt="avatar">
                             </div>
                             <div>
-                                <a class="h6" href="#">Lori Ferguson</a>
-                                <p class="small m-0">example@gmail.com</p>
+                                <a class="h6" href="./jsp/user_profile.jsp">${user.fullName}</a>
+                                <p class="small m-0">${user.email}</p>
                             </div>
                         </div>
                         <hr>
                     </li>
                     <!-- Links -->
-                    <li><a class="dropdown-item" href="#"><i class="bi bi-person fa-fw me-2"></i>Edit Profile</a></li>
-                    <li><a class="dropdown-item" href="#"><i class="bi bi-gear fa-fw me-2"></i>Account Settings</a></li>
-                    <li><a class="dropdown-item" href="#"><i class="bi bi-info-circle fa-fw me-2"></i>Help</a></li>
-                    <li><a class="dropdown-item bg-danger-soft-hover" href="#"><i class="bi bi-power fa-fw me-2"></i>Sign Out</a></li>
+                    <li><a class="dropdown-item" href="./jsp/user_profile.jsp"><i class="bi bi-person fa-fw me-2"></i>Xem thông tin cá nhân</a></li>
+                    <li><a class="dropdown-item bg-danger-soft-hover" href="./ViewCustomerReservationsList"><i class="bi bi-power fa-fw me-2"></i>Xem danh sách đặt chỗ</a></li>
+                    <li><a class="dropdown-item" href="#"><i class="bi bi-person fa-fw me-2"></i>Đổi mật khẩu</a></li>
+                    <li><a class="dropdown-item bg-danger-soft-hover" href="./LogoutController"><i class="bi bi-power fa-fw me-2"></i>Đăng xuất</a></li>
                     <li> <hr class="dropdown-divider"></li>
                     <!-- Dark mode switch END -->
                 </ul>

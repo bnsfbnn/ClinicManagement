@@ -23,50 +23,52 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
+/**
+ *
+ * @author Nguyen Van Nam
+ */
 public class RegisterForCustomerController extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ParseException {
-        response.setContentType("text/html;charset=UTF-8");
-        int roleId = Integer.parseInt(request.getParameter("roleId"));
-        int serviceId = Integer.parseInt(request.getParameter("serviceId"));
-        String username = request.getParameter("username");
-        String email = request.getParameter("email");
-        String password = request.getParameter("password");
-        String fullName = request.getParameter("fullName");
+     response.setContentType("text/html;charset=UTF-8");
+request.setCharacterEncoding("utf-8");
+        String username = request.getParameter("username").trim();
+        String email = request.getParameter("email").trim();
+        String password = request.getParameter("password").trim();
+        String rePassword = request.getParameter("re-password").trim();
+        if (!password.equals(rePassword)) {
+            request.setAttribute("message", "Password not match");
+            request.getRequestDispatcher("./jsp/Register.jsp").forward(request, response);
+            return;
+        }
+        String fullName = request.getParameter("fullName").trim();
 
         DateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
-        String date = request.getParameter("date");
+        String date = request.getParameter("date").trim();
         format.setTimeZone(TimeZone.getTimeZone("Etc/UTC"));
         java.util.Date jdate = format.parse(date);
         java.sql.Date sdate = new java.sql.Date(jdate.getTime());
 
-        int check = Integer.parseInt(request.getParameter("gender"));
+        int check = Integer.parseInt(request.getParameter("gender").trim());
         boolean gender;
         if (check == 1) {
             gender = true;
         } else {
             gender = false;
         }
-        String phone = request.getParameter("phone");
-        String address = request.getParameter("address");
-        String avatarImage = request.getParameter("avatarImage");
+        String phone = request.getParameter("phone").trim();
+        String address = request.getParameter("address").trim();
 
-        User user = new User(roleId, serviceId, username, email, password, fullName, sdate, gender, phone, address, avatarImage);
-
+        User user = new User(4, 0, username, email, password, fullName, sdate, gender, phone, address, "", 0);
         UserDAO userDAO = new UserDAOImpl();
-        userDAO.createAccount(user);
-
+        if (userDAO.login(username, password) != null) {
+            request.setAttribute("message", "Username existed");
+            request.getRequestDispatcher("./jsp/Register.jsp").forward(request, response);
+        } else {
+            userDAO.createAccount(user);
+            request.getRequestDispatcher("./jsp/login.jsp").forward(request, response);
+        }
     }
 
 // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

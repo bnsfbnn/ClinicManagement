@@ -1,5 +1,3 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page language="java" contentType="text/html;charset=UTF-8" %>
 <!--
  * Copyright(C) 20022, FPT University
  * CMS:
@@ -9,7 +7,9 @@
  * DATE            Version             AUTHOR           DESCRIPTION
  * 2022-02-08      1.0                 TrangCT          Controller Service Detail
 -->
-
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -23,10 +23,8 @@
         <link rel="stylesheet" href="./assets/css/custom.css" />
         <link href="./assets/css/header.css" rel="stylesheet" type="text/css"/>
     </head>
-    <!--    <header>
-    <%--<jsp:include page="../components/customerHeader.jsp" />--%>
-</header>-->
     <body>
+        <jsp:include page="./components/customerHeader.jsp" />
         <div class="container-fuild">
             <div class="row-fluid mb-5">
                 <img class="col-lg-12 p-0" src="./assets/images/banner.jpg" alt="Banner"/>
@@ -70,6 +68,7 @@
                 </c:forEach>
             </div>
         </div>
+        <%@include file="components/footer.jsp" %>
         <script src="./assets/js/jquery-3.6.0.min.js" crossorigin="anonymous"></script>
         <script src="./assets/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="./assets/js/star-rating.js" type="text/javascript"></script>

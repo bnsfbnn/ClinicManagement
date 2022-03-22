@@ -5,12 +5,15 @@
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
     <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-              integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-        <title>Document</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Clinic Management</title>
+        <link href="./assets/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css" />
+        <link href="./assets/themes/krajee-fas/theme.css" media="all" rel="stylesheet" type="text/css"/>
+        <link rel="stylesheet" href="./assets/css/select2.min.css" />
+        <link rel="stylesheet" href="./assets/css/select2-bootstrap-5-theme.min.css" />
+        <link rel="stylesheet" href="./assets/css/custom.css" />
+        <link href="./assets/css/header.css" rel="stylesheet" type="text/css"/>
         <style>
             @media (min-width: 576px) {
                 .container {
@@ -117,9 +120,9 @@
             }
         </style>
     </head>
-
     <body>
-        <div class="container">
+        <%@include file="components/customerHeader.jsp" %>
+        <div class="container-fluid m-0 p-0">
             <h5 style="margin-bottom: 20px;">Đánh giá dịch vụ</h5>
             <div style="margin-left: 80%">
                 <form action="../ClinicManagement/ViewFeedBackListController" method="GET">
@@ -214,15 +217,12 @@
                 </div>
             </c:if>
         </div>
-        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-                integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
-        </script>
-        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
-                integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
-        </script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
-                integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
-        </script>
+        <%@include file="components/footer.jsp" %>
+        <script src="./assets/js/jquery-3.6.0.min.js" crossorigin="anonymous"></script>
+        <script src="./assets/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+        <script src="./assets/js/star-rating.js" type="text/javascript"></script>
+        <script src="./assets/themes/krajee-fas/theme.js" type="text/javascript"></script>
+        <script src="./assets/js/select2.full.min.js"></script>
+        <script src="./assets/js/custom.js"></script>
     </body>
-
 </html>

@@ -24,7 +24,10 @@
             <div>
                 <ul class="navbar-nav">
                     <li class="nav-item active">
-                        <a class="nav-link py-3" href="#">Xem tất danh sách đặt chỗ<span class="sr-only">(current)</span></a>
+                        <a class="nav-link py-3" href="/viewAllReservation">Xem tất danh sách đặt chỗ<span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link py-3" href="#">Xác nhận lịch đặt chỗ</a>
                     </li>
                     <li class=nav-item">
                         <a class="nav-link py-3" href="#">Quản lý dịch vụ</a>
@@ -32,12 +35,10 @@
                     <li class=nav-item">
                         <a class="nav-link py-3" href="#">Quản lý Phản hồi</a>
                     </li>
+                    <li class=nav-item">
+                        <a class="nav-link py-3" href="#">Duyệt lịch đặt chỗ</a>
+                    </li>
                 </ul>
-            </div>
-            <div class="dropdown ml-auto">
-                <a class="avatar avatar-md p-0 show" href="">
-                    <img height="45" class="avatar-img rounded-circle" src="./assets/images/avatar01.jpg" alt="avatar">
-                </a>
             </div>
             <!--End header-->
         </header>

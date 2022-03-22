@@ -12,12 +12,14 @@ package controller;
 import dao.ReservationDAO;
 import dao.impl.ReservationDAOImpl;
 import entity.Reservation;
+import entity.User;
 import java.io.IOException;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import util.Utils;
 
 /**
@@ -49,20 +51,26 @@ public class ViewMyReservationController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            String viewDay = (request.getParameter("viewDay") != null) ? Utils.parseDateFormat(request.getParameter("viewDay").trim()) : Utils.getToday();
-            String today = Utils.getToday();
-            String startWeek = (request.getParameter("startWeek") != null) ? (request.getParameter("startWeek").trim()) : Utils.getMondayOfThisWeek();
-            String endWeek = (request.getParameter("endWeek") != null) ? (request.getParameter("endWeek").trim()) : Utils.getSundayOfThisWeek();
-            ReservationDAO reservationDAO = new ReservationDAOImpl();
-            ArrayList<Reservation> reservations = reservationDAO.getReservationByDoctorId(7, startWeek, endWeek);
-            ArrayList<String> dayOfWeek = Utils.getDayOfThisWeek(viewDay);
-            request.setAttribute("dayOfWeek", dayOfWeek);
-            request.setAttribute("startWeek", startWeek);
-            request.setAttribute("endWeek", endWeek);
-            request.setAttribute("viewDay", Utils.revertParseDateFormat(viewDay));
-            request.setAttribute("today", today);
-            request.setAttribute("reservations", reservations);
-            request.getRequestDispatcher("jsp/viewMyReservation.jsp").forward(request, response);
+            HttpSession session = request.getSession();
+            User user = (User) session.getAttribute("user");
+            if (user != null) {
+                String viewDay = (request.getParameter("viewDay") != null) ? Utils.parseDateFormat(request.getParameter("viewDay").trim()) : Utils.getToday();
+                String today = Utils.getToday();
+                String startWeek = (request.getParameter("startWeek") != null) ? (request.getParameter("startWeek").trim()) : Utils.getMondayOfThisWeek();
+                String endWeek = (request.getParameter("endWeek") != null) ? (request.getParameter("endWeek").trim()) : Utils.getSundayOfThisWeek();
+                ReservationDAO reservationDAO = new ReservationDAOImpl();
+                ArrayList<Reservation> reservations = reservationDAO.getReservationByDoctorId(user.getUserId(), startWeek, endWeek);
+                ArrayList<String> dayOfWeek = Utils.getDayOfThisWeek(viewDay);
+                request.setAttribute("dayOfWeek", dayOfWeek);
+                request.setAttribute("startWeek", startWeek);
+                request.setAttribute("endWeek", endWeek);
+                request.setAttribute("viewDay", Utils.revertParseDateFormat(viewDay));
+                request.setAttribute("today", today);
+                request.setAttribute("reservations", reservations);
+                request.getRequestDispatcher("jsp/viewMyReservation.jsp").forward(request, response);
+            } else {
+                 request.getRequestDispatcher("jsp/login.jsp").forward(request, response);
+            }
         } catch (Exception e) {
             request.setAttribute("errorMessage", "Không thể tải dữ liệu từ cơ sở dữ liệu");
             request.setAttribute("exceptionMessage", e.getMessage());

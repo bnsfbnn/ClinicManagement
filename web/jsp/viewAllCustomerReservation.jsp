@@ -13,14 +13,14 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-        <link rel="stylesheet" href="./assets/css/style.css">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-        <link href="./assets/styles/jquery-ui.min.css" rel="stylesheet" type="text/css"/>
-        <link href="./assets/styles/jquery-ui.structure.min.css" rel="stylesheet" type="text/css"/>
-        <link href="./assets/styles/jquery-ui.theme.min.css" rel="stylesheet" type="text/css"/>
+        <title>Clinic Management</title>
+        <link href="./assets/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css" />
+        <link href="./assets/themes/krajee-fas/theme.css" media="all" rel="stylesheet" type="text/css"/>
+        <link rel="stylesheet" href="./assets/css/select2.min.css" />
+        <link rel="stylesheet" href="./assets/css/select2-bootstrap-5-theme.min.css" />
+        <link rel="stylesheet" href="./assets/css/custom.css" />
         <link href="./assets/css/header.css" rel="stylesheet" type="text/css"/>
-        <title>Account Management</title>
     </head>
     <style>
         .list{
@@ -101,10 +101,8 @@
             padding: 10px;
         }
     </style>
-    <header>
-        <jsp:include page="./components/customerHeader.jsp" />
-    </header>
     <body>
+        <%@include file="components/customerHeader.jsp" %>
         <div class="container-fluid m-0 p-0">
             <h3 style="margin-left:20px">Reservation List</h3>
             <div style="margin-left: 80%">
@@ -134,65 +132,71 @@
                                 <p>Dịch vụ: <b>${reservation.serviceName}</b></p>
                                 <p>Gói: <b>${reservation.packageTitle}</b></p>
                                 <div class="row">
-                                    <button class="btn btn-success mx-1">
-                                        <a id="myBtn" style="color:white">Xem chi tiết</a>
-                                    </button>
+                                    <button class="btn btn-success mx-1" data-toggle="modal" data-target="#myModal${reservation.id}"> Xem chi tiết</button>
                                     <c:if test="${reservation.reservationStatus eq 'Đã khám'}">
-                                        <button class="btn btn-primary mx-1">
-                                            <a id="myBtn2" style="color:white">Phản hồi</a>
-                                        </button>
+                                        <button class="btn btn-primary mx-1" data-toggle="modal" data-target="#myModal2${reservation.id}"> Phản hồi</button>
                                     </c:if>
                                 </div>
-                                <!-- The Modal -->
-                                <div id="myModal" class="modal">
-                                    <!-- Modal content -->
-                                    <div class="modal-content">
-                                        <span class="close">&times;</span>
-                                        <p>Dịch vụ: <b>${reservation.serviceName}</b></p>
-                                        <p>Gói: <b>${reservation.packageTitle}</b></p>
-
-                                        <p>Giá: <b> ${reservation.price} đ</b></p>
-                                        <p class="status">${reservation.reservationStatus}</p>
-                                        <h4>Chi tiết lịch đặt</h4>
-                                        Ngày yêu cầu khám bệnh :${(reservation.requestExaminationDate != null)?reservation.requestExaminationDate:'Không có'}
-                                        <br/>
-                                        Ngày khám bệnh xác nhận :${(reservation.confirmedExaminationDate != null)?reservation.confirmedExaminationDate:'Chưa có'}
-                                        <br/>
-                                        Yêu cầu y tế :${(reservation.medicalRequest != "")?reservation.medicalRequest:'Không có yêu cầu y tế'}
-                                    </div>
-                                </div>
-
-                                <div id="myModal2" class="modal">
-                                    <!-- Modal content -->
-                                    <form action="AddFeedbackController" method="POST">
-
+                                <div class="modal fade" id="myModal${reservation.id}" data-backdrop="false" data-keyboard="true">
+                                    <div class="modal-dialog modal-lg">
                                         <div class="modal-content">
-                                            <span class="close">&times;</span>
-                                            <div class="row-fluid">
-                                                <div class="form-group">
-                                                    <label for="feedbackContent"><b>Nội dung phản hồi</b></label>
-                                                    <textarea class="form-control" name="content" id="feedbackContent" rows="3"></textarea>
-                                                </div>
-                                                <div hidden>
-                                                    <input name="examinationId"value="${reservation.id}">
-                                                </div>
-                                                <div hidden>
-                                                    <input name="serviceId"value="${reservation.serviceId}">
-                                                </div>
-                                                <button class="btn btn-primary float-right mt-3" type="submit">Phản hồi</button>
+                                            <div class="modal-header">
+                                                <button type="button" class="btn btn-primary" data-dismiss="modal">Trở lại</button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <p>Dịch vụ: <b>${reservation.serviceName}</b></p>
+                                                <p>Gói: <b>${reservation.packageTitle}</b></p>
+
+                                                <p>Giá: <b> ${reservation.price} đ</b></p>
+                                                <p class="status">${reservation.reservationStatus}</p>
+                                                <h4>Chi tiết lịch đặt</h4>
+                                                Ngày yêu cầu khám bệnh :${(reservation.requestExaminationDate != null)?reservation.requestExaminationDate:'Không có'}
+                                                <br/>
+                                                Ngày khám bệnh xác nhận :${(reservation.confirmedExaminationDate != null)?reservation.confirmedExaminationDate:'Chưa có'}
+                                                <br/>
+                                                Yêu cầu y tế :${(reservation.medicalRequest != "")?reservation.medicalRequest:'Không có yêu cầu y tế'}
+                                            </div>
+                                            <div class="modal-footer" hidden="true">
                                             </div>
                                         </div>
-                                    </form>
-
+                                    </div>
                                 </div>
-
+                                <c:if test="${reservation.reservationStatus eq 'Đã khám'}">
+                                    <div class="modal fade" id="myModal2${reservation.id}" data-backdrop="false" data-keyboard="true">
+                                        <div class="modal-dialog modal-lg">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="btn btn-primary" data-dismiss="modal">Trở lại</button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <form action="AddFeedbackController" method="POST">
+                                                        <div class="row-fluid">
+                                                            <div class="form-group">
+                                                                <label for="feedbackContent"><b>Nội dung phản hồi</b></label>
+                                                                <textarea class="form-control" name="content" id="feedbackContent" rows="3"></textarea>
+                                                            </div>
+                                                            <div hidden>
+                                                                <input name="examinationId"value="${reservation.id}">
+                                                            </div>
+                                                            <div hidden>
+                                                                <input name="serviceId"value="${reservation.serviceId}">
+                                                            </div>
+                                                            <button class="btn btn-primary float-right mt-3" type="submit">Phản hồi</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                                <div class="modal-footer" hidden="true">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </c:if>
                             </div>
                         </div>
                         <div style="margin-top:30px;">
                             <p>Giá: <b> ${reservation.price} đ</b></p>  
                             <p class="status"> ${reservation.reservationStatus}</p>
                         </div>
-
                     </div>
                 </c:forEach>
                 <c:if test="${reservations.totalItem == 0}">
@@ -220,54 +224,21 @@
                         </ul>
                     </div>
                 </div>
-
-                <script src="./assets/js/jquery-3.6.0.min.js" crossorigin="anonymous"></script>
-                <script src="./assets/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-                <script src="./assets/js/star-rating.js" type="text/javascript"></script>
-                <script src="./assets/themes/krajee-fas/theme.js" type="text/javascript"></script>
-                <script src="./assets/js/select2.full.min.js"></script>
-                <script src="./assets/js/custom.js"></script>
             </div>
         </div>
+        <%@include file="components/footer.jsp" %>
+        <script src="./assets/js/jquery-3.6.0.min.js" type="text/javascript"></script>
+        <script src="./assets/js/popper.js" type="text/javascript"></script>
+        <script src="./assets/js/bootstrap.min.js" type="text/javascript"></script>
+        <script src="./assets/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+        <script src="./assets/js/star-rating.js" type="text/javascript"></script>
+        <script src="./assets/themes/krajee-fas/theme.js" type="text/javascript"></script>
+        <script src="./assets/js/select2.full.min.js"></script>
+        <script src="./assets/js/custom.js"></script>
     </body>
-    <footer>
-        <jsp:include page="./components/footer.jsp" />
-    </footer>
     <script>
         $("p:contains('Chờ duyệt')").css("background-color", "orange");
         $("p:contains('Đã khám')").css("background-color", "blue");
         $("p:contains('Đặt thành công')").css("background-color", "green");
-// Get the modal
-        var modal = document.getElementById("myModal");
-        var modal2 = document.getElementById("myModal2");
-// Get the button that opens the modal
-        var btn = document.getElementById("myBtn");
-        var btn2 = document.getElementById("myBtn2");
-// Get the <span> element that closes the modal
-        var span = document.getElementsByClassName("close")[0];
-        var span2 = document.getElementsByClassName("close")[1];
-// When the user clicks on the button, open the modal
-        btn.onclick = function () {
-            modal.style.display = "block";
-        }
-        btn2.onclick = function () {
-            modal2.style.display = "block";
-        }
-// When the user clicks on <span> (x), close the modal
-        span.onclick = function () {
-            modal.style.display = "none";
-        }
-        span2.onclick = function () {
-            modal2.style.display = "none";
-        }
-// When the user clicks anywhere outside of the modal, close it
-        window.onclick = function (event) {
-            if (event.target == modal) {
-                modal.style.display = "none";
-            }
-            if (event.target == modal2) {
-                modal2.style.display = "none";
-            }
-        }
     </script>
 </html>

@@ -15,14 +15,14 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Clinic Management</title>
         <link href="./assets/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css" />
         <link href="./assets/themes/krajee-fas/theme.css" media="all" rel="stylesheet" type="text/css"/>
         <link rel="stylesheet" href="./assets/css/select2.min.css" />
         <link rel="stylesheet" href="./assets/css/select2-bootstrap-5-theme.min.css" />
         <link rel="stylesheet" href="./assets/css/custom.css" />
-        <link href="../assets/css/header.css" rel="stylesheet" type="text/css"/>
+        <link href="./assets/css/header.css" rel="stylesheet" type="text/css"/>
     </head>
     <style>
         .card{
@@ -33,10 +33,8 @@
             text-align: center
         }
     </style>
-    <header>
-        <jsp:include page="./components/customerHeader.jsp" />
-    </header>
     <body>
+        <%@include file="components/customerHeader.jsp" %>
         <div class="container-fluid m-0 p-0">
             <div class="row-fluid mb-3">
                 <img class="col-lg-12 p-0" src="./assets/images/banner.jpg" alt="Banner"/>
@@ -84,6 +82,7 @@
                 </div>
             </c:if>
         </div>
+        <jsp:include page="./components/footer.jsp" />
         <script src="./assets/js/jquery-3.6.0.min.js" crossorigin="anonymous"></script>
         <script src="./assets/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="./assets/js/star-rating.js" type="text/javascript"></script>
@@ -91,7 +90,4 @@
         <script src="./assets/js/select2.full.min.js"></script>
         <script src="./assets/js/custom.js"></script>
     </body>
-    <footer>
-        <jsp:include page="./components/footer.jsp" />
-    </footer>
 </html>
