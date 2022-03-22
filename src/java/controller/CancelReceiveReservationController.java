@@ -11,51 +11,22 @@ package controller;
 
 import dao.ReservationDAO;
 import dao.impl.ReservationDAOImpl;
-import entity.Reservation;
 import java.io.IOException;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import util.Utils;
 
 /**
- * * -This class uses function getReservationById in
- * <code>dao.impl.ReservationDAOImpl</code> to get an
- * <code>entity.Reservation</code>
+ * -Use function updateReservationStatusById in
+ * <code>dao.impl.ReservationDAOImpl</code> to update reservation status of
+ * <code>entity.Reservation</code>.
  *
  * @author Nguyen Thanh Tung
  */
-public class ViewMyReservationDetailController extends HttpServlet {
-
-    /**
-     * -Use function getReservationById in
-     * <code>dao.impl.ReservationDAOImpl</code> to get an
-     * <code>entity.Reservation</code> object 
-     *
-     * -Set parameters: reservation<br>
-     * -Finally forward user to the <code>viewReservationDetailPopup.jsp</code> page.
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response is
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        try {
-            int reservationId = (request.getParameter("reservationId") != null) ? Integer.parseInt(request.getParameter("reservationId").trim()) : -1;
-            ReservationDAO reservationDAO = new ReservationDAOImpl();
-            Reservation reservation = reservationDAO.getReservationById(reservationId);
-            request.setAttribute("reservation", reservation);
-            request.getRequestDispatcher("jsp/components/viewReservationDetailPopup.jsp").forward(request, response);
-        } catch (Exception e) {
-            request.setAttribute("errorMessage", "Không thể tải dữ liệu từ cơ sở dữ liệu");
-            request.setAttribute("exceptionMessage", e.getMessage());
-            request.getRequestDispatcher("jsp/error.jsp").forward(request, response);
-        }
-    }
+public class CancelReceiveReservationController extends HttpServlet {
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -69,7 +40,17 @@ public class ViewMyReservationDetailController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            int reservationId = (request.getParameter("reservationId") != null) ? Integer.parseInt(request.getParameter("reservationId").trim()) : -1;
+            int cancelReceiveReservation = (request.getParameter("cancelReceiveReservation") != null) ? Integer.parseInt(request.getParameter("cancelReceiveReservation").trim()) : 0;
+            request.setAttribute("cancelReceiveReservation", cancelReceiveReservation);
+            request.setAttribute("reservationId", reservationId);
+            request.getRequestDispatcher("jsp/components/confirmDialog.jsp").forward(request, response);
+        } catch (Exception e) {
+            request.setAttribute("errorMessage", "Không thể tải dữ liệu từ cơ sở dữ liệu");
+            request.setAttribute("exceptionMessage", e.getMessage());
+            request.getRequestDispatcher("jsp/error.jsp").forward(request, response);
+        }
     }
 
     /**
@@ -83,7 +64,17 @@ public class ViewMyReservationDetailController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            int reservationId = (request.getParameter("reservationId") != null) ? Integer.parseInt(request.getParameter("reservationId").trim()) : -1;
+            String reservationStatus = "Chờ duyệt";
+            ReservationDAO reservationDAO = new ReservationDAOImpl();
+            reservationDAO.cancelReceiveReservationById(reservationId, reservationStatus, Utils.getToday());
+            response.sendRedirect("viewMyReservation");
+        } catch (Exception e) {
+            request.setAttribute("errorMessage", "Không thể tải dữ liệu từ cơ sở dữ liệu");
+            request.setAttribute("exceptionMessage", e.getMessage());
+            request.getRequestDispatcher("jsp/error.jsp").forward(request, response);
+        }
     }
 
     /**

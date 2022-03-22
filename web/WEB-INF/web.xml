@@ -136,6 +136,14 @@
         <servlet-name>BookScheduleController</servlet-name>
         <servlet-class>controller.BookScheduleController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CancelReceiveReservationController</servlet-name>
+        <servlet-class>controller.CancelReceiveReservationController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ChangeReservationDate</servlet-name>
+        <servlet-class>controller.ChangeReservationDateController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
         <url-pattern>/LoginController</url-pattern>
@@ -209,14 +217,6 @@
         <url-pattern>/AddFeedbackController</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>RegisterForCustomerController</servlet-name>
-        <url-pattern>/RegisterForCustomerController</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>UpdateCustomerProfileController</servlet-name>
-        <url-pattern>/UpdateCustomerProfileController</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>ViewFeedbackManagedListController</servlet-name>
         <url-pattern>/ViewFeedbackManagedListController</url-pattern>
     </servlet-mapping>
@@ -271,6 +271,14 @@
     <servlet-mapping>
         <servlet-name>BookScheduleController</servlet-name>
         <url-pattern>/BookScheduleController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CancelReceiveReservationController</servlet-name>
+        <url-pattern>/cancelReceiveReservation</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ChangeReservationDate</servlet-name>
+        <url-pattern>/changeReservationDate</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

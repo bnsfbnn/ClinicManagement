@@ -53,7 +53,7 @@
         h5{
             margin-left: 45px;
         }
-        .content-page img{
+        #content-page {
             width: 100%;
             margin-top: 20px;
         }
@@ -183,6 +183,23 @@
                                         toàn chủ động lựa chọn thời gian khám.</p>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                    <div class="row-fluid my-5">
+                        <div class="col-lg-12"></div>
+                        <h1>Tin T?c</h1>
+
+                        <div class="row d-flex justify-content-center my-1">
+                            <h2>BV H?NG NG?C K� K?T BI�N B?N H?P T�C V?I ?SQ H�N QU?C, HI?P H?I NG??I H�N T?I H� N?I V? VI?C H? TR? Y T? CHO B?NH NH�N H�N QU?C M?C COVID-19</h2>
+                        </div>
+                        <div class="row border-dark my-1">
+
+                        </div>
+                        <div class="row d-flex justify-content-start">
+                            <b><i>Nguy?n V?n B - 2022-19-10 07:00:00</i></b>
+                        </div>
+                        <div class="row d-flex justify-content-end">
+                            <p>BV H?NG NG?C K� K?T BI�N B?N H?P T�C V?I ?SQ H�N QU?C, HI?P H?I NG??I H�N T?I H� N?I V? VI?C H? TR? Y T? CHO B?NH NH�N H�N QU?C M?C COVID-19</p>
                         </div>
                     </div>
                 </div>

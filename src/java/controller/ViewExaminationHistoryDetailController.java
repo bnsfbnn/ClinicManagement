@@ -49,9 +49,9 @@ public class ViewExaminationHistoryDetailController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            int isAddNew = (request.getParameter("isAddNew") != null) ? Integer.parseInt(request.getParameter("isAddNew")) : 0;
-            int reservationId = (request.getParameter("reservationId") != null) ? Integer.parseInt(request.getParameter("reservationId")) : -1;
-            int examinationId = (request.getParameter("examinationId") != null) ? Integer.parseInt(request.getParameter("examinationId")) : -1;
+            int isAddNew = (request.getParameter("isAddNew") != null) ? Integer.parseInt(request.getParameter("isAddNew").trim()) : 0;
+            int reservationId = (request.getParameter("reservationId") != null) ? Integer.parseInt(request.getParameter("reservationId").trim()) : -1;
+            int examinationId = (request.getParameter("examinationId") != null) ? Integer.parseInt(request.getParameter("examinationId").trim()) : -1;
             ExaminationDAO examinationDAO = new ExaminationDAOImpl();
             Examination examination = examinationDAO.getExamninationById(examinationId);
             request.setAttribute("examination", examination);

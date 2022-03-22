@@ -24,7 +24,7 @@
         <link href="./assets/css/header.css" rel="stylesheet" type="text/css"/>
     </head>
     <header>
-        <jsp:include page="../components/customerHeader.jsp" />
+        <jsp:include page="./components/customerHeader.jsp" />
     </header>
     <body>
         <div class="container-fuild">

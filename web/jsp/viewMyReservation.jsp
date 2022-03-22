@@ -22,6 +22,13 @@
         <link href="./assets/css/jquery-ui.structure.min.css" rel="stylesheet" type="text/css"/>
         <link href="./assets/css/jquery-ui.theme.min.css" rel="stylesheet" type="text/css"/>
     </head>
+    <style>
+        @media screen and (min-width: 676px) {
+            .modal-ex-lg {
+                max-width: 1000px; /* New width for default modal */
+            }
+        }
+    </style>
     <body>
         <!--Import header-->
         <%@include file="components/doctorHeader.jsp" %>
@@ -183,7 +190,7 @@
             </div>
         </div>
         <div class="modal fade" id="viewExaminationHistoryPopup" data-backdrop="static" data-keyboard="false">
-            <div class="modal-dialog modal-lg">
+            <div class="modal-dialog modal-ex-lg">
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#viewDetailReservationPopup" data-dismiss="modal">Trở lại</button>
@@ -234,13 +241,59 @@
             </div>
         </div>
         <div class="modal fade" id="cancelReservationPopup" data-backdrop="static" data-keyboard="false">
-            <div class="modal-dialog modal-sm">
+            <div class="modal-dialog modal-md">
                 <div class="modal-content">
                     <div class="modal-body">
                         <div class="container-fluid">
                             <div class="row mt-2" id="cancelExaminationPopupContent">
                             </div>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="cancelReceiveReservationPopup" data-backdrop="static" data-keyboard="false">
+            <div class="modal-dialog modal-md">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <div class="container-fluid">
+                            <div class="row mt-2" id="cancelReceiveExaminationPopupContent">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="changeReservationDatePopup" data-backdrop="true" data-keyboard="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Trở lại</button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="container-fluid">
+                            <div class="row mt-2 mb-5" id="changeReservationDatePopupContent">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer" hidden="true">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="changeReservationDatePopupConfirm" data-backdrop="true" data-keyboard="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Trở lại</button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="container-fluid">
+                            <div class="row mt-2 mb-5" id="changeReservationDatePopupConfirmContent">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer" hidden="true">
                     </div>
                 </div>
             </div>
@@ -259,7 +312,8 @@
                     type: "post",
                     dataType: "text",
                     data: {
-                        reservationId: id
+                        reservationId: id,
+
                     },
                     success: function (result) {
                         $("#viewDetailReservationPopupContent").html(result);
@@ -311,15 +365,63 @@
             }
             function openCancelReservationConfirmDialog(elem) {
                 var id = $(elem).attr("id");
+                var cancelReservation = 1;
                 $.ajax({
                     url: "${pageContext.request.contextPath}/cancelReservation",
+                    type: "get",
+                    dataType: "text",
+                    data: {
+                        reservationId: id,
+                        cancelReservation: cancelReservation
+                    },
+                    success: function (result) {
+                        $("#cancelExaminationPopupContent").html(result);
+                    }
+                });
+            }
+            function openCancelReceiveReservationConfirmDialog(elem) {
+                var id = $(elem).attr("id");
+                var cancelReceiveReservation = 1;
+                $.ajax({
+                    url: "${pageContext.request.contextPath}/cancelReceiveReservation",
+                    type: "get",
+                    dataType: "text",
+                    data: {
+                        reservationId: id,
+                        cancelReceiveReservation: cancelReceiveReservation
+                    },
+                    success: function (result) {
+                        $("#cancelReceiveExaminationPopupContent").html(result);
+                    }
+                });
+            }
+            function openChangeReservationDate(elem) {
+                var id = $(elem).attr("id");
+                $.ajax({
+                    url: "${pageContext.request.contextPath}/changeReservationDate",
                     type: "get",
                     dataType: "text",
                     data: {
                         reservationId: id
                     },
                     success: function (result) {
-                        $("#cancelExaminationPopupContent").html(result);
+                        $("#changeReservationDatePopupContent").html(result);
+                    }
+                });
+            }
+            function openChangeReservationDatePopupConfirm(elem1, elem2, elem3, elem4) {
+                $.ajax({
+                    url: "${pageContext.request.contextPath}/changeReservationDate",
+                    type: "post",
+                    dataType: "text",
+                    data: {
+                        getConfirmDialog: elem1,
+                        reservationId: elem2,
+                        confirmedExaminationDate: elem3,
+                        confirmedExaminationTime: elem4
+                    },
+                    success: function (result) {
+                        $("#changeReservationDatePopupConfirmContent").html(result);
                     }
                 });
             }
@@ -386,7 +488,7 @@
                 $("#" + idProperties).text("");
                 var reservationStatus = '${i.reservationStatus}';
                 if (reservationStatus === 'Đặt thành công') {
-                    $("#" + idProperties).append("<div class=\"rounded bg-primary text-white m-0 p-0\"><b>${i.customer.fullName}</b><br/><a class=\"text-white\" href=\"#viewDetailReservationPopup\" id=\"${i.reservationId}\" data-toggle=\"modal\" onClick=\"openViewReservationDetailPopup(this)\">Chi tiết</a></div>");
+                    $("#" + idProperties).append("<div class=\"rounded bg-primary text-white m-0 p-0\"><b>${i.customer.fullName}</b><br/><i>${i.reservationStatus}</i><br/><a class=\"text-white\" href=\"#viewDetailReservationPopup\" id=\"${i.reservationId}\" data-toggle=\"modal\" onClick=\"openViewReservationDetailPopup(this)\">Chi tiết</a></div>");
                 } else if (reservationStatus === 'Đã khám') {
                     $("#" + idProperties).append("<div class=\"rounded bg-success text-white m-0 p-0\"><b>${i.customer.fullName}</b><br/><i>${i.reservationStatus}</i></div>");
                 } else if (reservationStatus === 'Đã hủy') {

@@ -146,7 +146,9 @@ public class User {
         this.address = address;
         this.avatarImage = avatarImage;
     }
-    public User(int roleId, int serviceId, String username, String email, String password, String fullName, Date birthDate, boolean gender, String phone, String address, String avatarImage) {
+
+    public User(int roleId, int serviceId, String username, String email, String password, String fullName, Date birthDate, boolean gender, String phone, String address, String avatarImage, int id) {
+
         this.roleId = roleId;
         this.serviceId = serviceId;
         this.username = username;
@@ -158,6 +160,7 @@ public class User {
         this.phone = phone;
         this.address = address;
         this.avatarImage = avatarImage;
+        this.userId = id;
     }
     /**
      * Create an instance of <code>User</code> object with value of attributes
@@ -202,7 +205,7 @@ public class User {
      * of the User.
      */
     public void setRoleId(int role) {
-        this.roleId = roleId;
+        this.roleId = role;
     }
 
     /**

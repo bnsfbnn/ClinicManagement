@@ -1,3 +1,12 @@
+<!--
+ * Copyright(C) 20022, FPT University
+ * CMS:
+ * Clinic Management System
+ *
+ * Record of change:
+ * DATE            Version             AUTHOR           DESCRIPTION
+ * 2022-03-06      1.0                 MinhVT         Feed Back Management
+ -->
 <html lang="en">
     <%@page contentType="text/html" pageEncoding="UTF-8"%>
     <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -33,7 +42,7 @@
                                 <a class="nav-link" aria-current="page" href="#">Trang chủ</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="../ServiceManagement/index.html">Quản lý dịch vụ</a>
+                                <a class="nav-link" href="../ClinicManagement/ServiceManagementController">Quản lý dịch vụ</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link active" href="#">Quản lý phản hồi</a>
