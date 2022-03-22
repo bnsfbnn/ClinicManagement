@@ -147,8 +147,25 @@ public interface ReservationDAO {
      */
     public int updateReservationDateTimeById(int reservationId, String confirmReservationDate, String confirmReservationTime) throws SQLException, Exception;
 
+    /**
+     * - Get all reservation of customer
+     *
+     * @param pageIndex integer
+     * @param pageSize integer
+     * @param id integer
+     * @param status string
+     * @return pagination Pagination 
+     * Author: TrangCT
+     */
     Pagination<CustomerReservation> getAllCustomerReservation(int pageIndex, int pageSize, int id, String status);
 
+    /**
+     * Get resrvation customer by id
+     *
+     * @param id
+     * @return service
+     *  Author: TrangCT
+     */
     CustomerReservation getCustomerReservationById(int id);
 
     void bookReservation(ReservationDTO reservation);

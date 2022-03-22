@@ -21,7 +21,6 @@ import java.sql.Date;
  * @version 1.0
  * @since 2022-02-22
  */
-
 public class ReservationDTO {
 
     private int id;
@@ -33,7 +32,6 @@ public class ReservationDTO {
     private int serviceId;
 
     private int packageId;
-   
 
     /**
      * Get requestDate
@@ -49,7 +47,6 @@ public class ReservationDTO {
      *
      * @param requestDate
      */
-
     public void setRequestDate(Date requestDate) {
         this.requestDate = requestDate;
     }
@@ -68,7 +65,6 @@ public class ReservationDTO {
      *
      * @param customerRequest
      */
-
     public void setCustomerRequest(String customerRequest) {
         this.customerRequest = customerRequest;
     }
@@ -78,7 +74,6 @@ public class ReservationDTO {
      *
      * @return id int
      */
-
     public int getId() {
         return id;
     }
@@ -91,21 +86,41 @@ public class ReservationDTO {
     public void setId(int id) {
         this.id = id;
     }
-    
+
+    /**
+     * Get serviceId
+     *
+     * @return serviceId int
+     */
     public int getServiceId() {
         return serviceId;
     }
 
+    /**
+     * Set serviceId
+     *
+     * @param serviceId
+     */
     public void setServiceId(int serviceId) {
         this.serviceId = serviceId;
     }
 
+    /**
+     * Get packageId
+     *
+     * @return packageId int
+     */
     public int getPackageId() {
         return packageId;
     }
 
+    /**
+     * Set packageId
+     *
+     * @param packageId
+     */
     public void setPackageId(int packageId) {
         this.packageId = packageId;
     }
-   
+
 }

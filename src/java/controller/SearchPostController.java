@@ -1,7 +1,11 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Copyright(C) 20022, FPT University
+ * CMS:
+ * Clinic Management System
+ *
+ * Record of change:
+ * DATE            Version             AUTHOR           DESCRIPTION
+ * 2022-02-28     1.0                 TrangCT          Controller Search Post
  */
 package controller;
 
@@ -17,8 +21,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
+ * <h1>Search Post Controller </h1>
+ * Controller to search post. Method process data form PostDAO and
+ * forward data to file view
+ * <p>
+ *
  *
  * @author TrangCT
+ * @version 1.0
+ * @since 2022-02-28
  */
 public class SearchPostController extends HttpServlet {
 
