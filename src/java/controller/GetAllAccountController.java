@@ -32,11 +32,24 @@ import javax.servlet.http.HttpSession;
 public class GetAllAccountController extends HttpServlet {
 
     /**
+     * -Use function getReservations in <code>dao.impl.ReservationDAOImpl</code>
+     * to get an <code>java.util.ArrayList</code> object that contains a series
+     * of <code>entity.Reservation</code><br>
+     * -Use function getDoctorsHasReservation in
+     * <code>dao.impl.ReservationDAOImpl</code> to get an
+     * <code>java.util.ArrayList</code> object that contains a series of
+     * <code>entity.User</code><br> represent for a doctor -Use function
+     * getServices in <code>dao.impl.ServiceDAOImpl</code> to get an
+     * <code>java.util.ArrayList</code> object that contains a series of
+     * <code>entity.Service</code><br>
+     *
+     * -Set parameters: viewDay, doctors, services, reservations<br>
+     * -Finally forward user to the <code>viewAllReservation.jsp</code> page.
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
      *
      * @param request servlet request
-     * @param response servlet response
+     * @param response servlet response is
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
@@ -76,7 +89,7 @@ public class GetAllAccountController extends HttpServlet {
             request.setAttribute("search", search);
             request.getRequestDispatcher("./jsp/viewAllAccount.jsp").forward(request, response);
         } else {
-            request.getRequestDispatcher("jsp/login.jsp").forward(request, response);
+            request.getRequestDispatcher("HomeController").forward(request, response);
         }
     }
 

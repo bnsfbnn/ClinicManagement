@@ -82,7 +82,7 @@ public class UserDAOImpl extends DBContext implements UserDAO {
     }
 
     /*
-    * Get all accounts from database. 
+    * Get all accounts from database; search by username, email, fullname and pagging. 
     * 
     * @return a list of <code>Account</code> objects. It is
     * a <code>java.util.List</code> object 

@@ -244,183 +244,180 @@
             </div>
             <!-- /.modal-dialog --> 
         </div>
-        <c:forEach var="user" items="${users.data}">
-            <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="view" aria-hidden="true" id="view${user.userId}">
+    </div>
+    <c:forEach var="user" items="${users.data}">
+        <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="view" aria-hidden="true" id="view${user.userId}">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">                   
+                        <h4 class="modal-title custom_align" id="Heading">Chi tiết tài khoản</h4>
+
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="inputRole">Chức vụ</label>
+                                    <input type="text" class="form-control" name="inputRole" value="${user.role}" readonly>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="inputAccount">Tài khoản</label>
+                                    <input type="text" class="form-control" name="inputAccount" value="${user.username}" readonly>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Họ và tên</label>
+                                <input type="text" class="form-control" name="inputName" value="${user.fullName}" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label>Email</label>
+                                <input type="email" class="form-control" name="inputEmail" value="${user.email}" readonly>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label>Địa chỉ</label>
+                                    <input type="text" class="form-control" name="inputAddress" value="${user.address}" readonly>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label>Số điện thoại</label>
+                                    <input type="text" class="form-control" name="inputPhone" value="${user.phone}" readonly>
+
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label>Ngày sinh</label>
+                                    <input type="date" class="form-control" name="date" value="${user.birthDate}" readonly>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label>Giới tính</label>
+                                    <input type="text" class="form-control" id="inputGender" value="${user.gender == "true" ? "Nam" : "Nữ"}" readonly>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+                <!-- /.modal-content --> 
+            </div>
+            <!-- /.modal-dialog --> 
+        </div>
+        <form action="DeleteAccountController">
+            <div hidden>
+                <input name="id" value="${user.userId}">
+            </div>
+            <div class="modal fade" id="delete${user.userId}">
                 <div class="modal-dialog">
                     <div class="modal-content">
-                        <div class="modal-header">                   
-                            <h4 class="modal-title custom_align" id="Heading">Chi tiết tài khoản</h4>
+                        <div class="modal-header">
+                            <h4 class="modal-title custom_align" id="Heading">Xóa tài khoản</h4>
 
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
-
                         </div>
                         <div class="modal-body">
-                            <form>
-                                <div class="form-row">
-                                    <div class="form-group col-md-6">
-                                        <label for="inputRole">Chức vụ</label>
-                                        <input type="text" class="form-control" name="inputRole" value="${user.role}" readonly>
-                                    </div>
-                                    <div class="form-group col-md-6">
-                                        <label for="inputAccount">Tài khoản</label>
-                                        <input type="text" class="form-control" name="inputAccount" value="${user.username}" readonly>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label>Họ và tên</label>
-                                    <input type="text" class="form-control" name="inputName" value="${user.fullName}" readonly>
-                                </div>
-                                <div class="form-group">
-                                    <label>Email</label>
-                                    <input type="email" class="form-control" name="inputEmail" value="${user.email}" readonly>
-                                </div>
-                                <div class="form-row">
-                                    <div class="form-group col-md-6">
-                                        <label>Địa chỉ</label>
-                                        <input type="text" class="form-control" name="inputAddress" value="${user.address}" readonly>
-                                    </div>
-                                    <div class="form-group col-md-6">
-                                        <label>Số điện thoại</label>
-                                        <input type="text" class="form-control" name="inputPhone" value="${user.phone}" readonly>
-
-                                    </div>
-                                    <div class="form-group col-md-6">
-                                        <label>Ngày sinh</label>
-                                        <input type="date" class="form-control" name="date" value="${user.birthDate}" readonly>
-                                    </div>
-                                    <div class="form-group col-md-6">
-                                        <label>Giới tính</label>
-                                        <input type="text" class="form-control" id="inputGender" value="${user.gender == "true" ? "Nam" : "Nữ"}" readonly>
-                                    </div>
-                                </div>
-                            </form>
+                            <div class="alert alert-danger"><span class="glyphicon glyphicon-warning-sign"></span>Bạn chắc chắn muốn xóa tài khoản ${user.username} này chứ?</div>
                         </div>
-
+                        <div class="modal-footer ">
+                            <button type="submit" class="btn btn-success" ><span class="glyphicon glyphicon-ok-sign"></span> Có</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Không</button>
+                        </div>
                     </div>
                     <!-- /.modal-content --> 
                 </div>
                 <!-- /.modal-dialog --> 
             </div>
-            <form action="DeleteAccountController">
-                <div hidden>
-                    <input name="id" value="${user.userId}">
-                </div>
-                <div class="modal fade" id="delete${user.userId}">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h4 class="modal-title custom_align" id="Heading">Xóa tài khoản</h4>
+        </form>
 
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
+        <div class="modal fade" id="edit${user.userId}">
+            <div class="modal-dialog">
+                <form action="UpdateAccountController" method="GET">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title custom_align" id="Heading">Chỉnh sửa tài khoản</h4>
+
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="inputRole">Chức vụ</label>
+                                    <select id="inputRole" class="form-control" name="roleId" value="${user.role}">
+                                        <option value="1">Admin</option>
+                                        <option value="2">Manager</option>
+                                        <option value="3">Doctor</option>
+                                        <option value="4">Customer</option>
+                                    </select>                                    
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="inputAccount">Tài khoản</label>
+                                    <input type="text" class="form-control" required maxlength="20" name="username" value="${user.username}">
+                                </div>
                             </div>
-                            <div class="modal-body">
-                                <div class="alert alert-danger"><span class="glyphicon glyphicon-warning-sign"></span>Bạn chắc chắn muốn xóa tài khoản ${user.username} này chứ?</div>
+                            <div class="form-group">
+                                <label>Họ và tên</label>
+                                <input type="text" class="form-control"required maxlength="20" name="fullName" value="${user.fullName}">
                             </div>
-                            <div class="modal-footer ">
-                                <button type="submit" class="btn btn-success" ><span class="glyphicon glyphicon-ok-sign"></span> Có</button>
-                                <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Không</button>
+                            <div class="form-group">
+                                <label>Email</label>
+                                <input type="email" class="form-control"required maxlength="30" name="email" value="${user.email}">
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label>Địa chỉ</label>
+                                    <input type="text" class="form-control"required maxlength="30" name="address" value="${user.address}">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label>Số điện thoại</label>
+                                    <input type="tel" class="form-control"required maxlength="15" name="phone" value="${user.phone}" pattern="[0][0-9]{9}">
+
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label>Ngày sinh</label>
+                                    <input type="date" class="form-control" name="date" required id="inputBirthDate" value="${user.birthDate}">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label>Giới tính</label>
+                                    <select id="inputGender" class="form-control" name="gender" value="${user.gender == "true" ? "Nam" : "Nữ"}">
+                                        <option value="1">Nam</option>
+                                        <option value="2">Nữ</option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
-                        <!-- /.modal-content --> 
+                        <div class="form-group col-md-6" hidden>
+                            <input type="text" class="form-control" name="userId" id="inputBirthDate" value="${user.userId}">
+                        </div>
+                        <div class="modal-footer ">
+                            <button type="submit" class="btn btn-primary btn-xs btn-lg col-md-6" style="width: 100%;">Lưu</button>
+                            <button type="button" data-dismiss="modal" aria-label="Close" class="btn btn-danger btn-lg col-md-6" style="width: 100%;">Hủy</button>
+                        </div>
                     </div>
-                    <!-- /.modal-dialog --> 
-                </div>
-            </form>
+                </form>
 
-
-
-            <div class="modal fade" id="edit${user.userId}">
-                <div class="modal-dialog">
-                    <form action="UpdateAccountController" method="GET">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h4 class="modal-title custom_align" id="Heading">Chỉnh sửa tài khoản</h4>
-
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <div class="form-row">
-                                    <div class="form-group col-md-6">
-                                        <label for="inputRole">Chức vụ</label>
-                                        <select id="inputRole" class="form-control" name="roleId" value="${user.role}">
-                                            <option value="1">Admin</option>
-                                            <option value="2">Manager</option>
-                                            <option value="3">Doctor</option>
-                                            <option value="4">Customer</option>
-                                        </select>                                    
-                                    </div>
-                                    <div class="form-group col-md-6">
-                                        <label for="inputAccount">Tài khoản</label>
-                                        <input type="text" class="form-control" required maxlength="20" name="username" value="${user.username}">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label>Họ và tên</label>
-                                    <input type="text" class="form-control"required maxlength="20" name="fullName" value="${user.fullName}">
-                                </div>
-                                <div class="form-group">
-                                    <label>Email</label>
-                                    <input type="email" class="form-control"required maxlength="30" name="email" value="${user.email}">
-                                </div>
-                                <div class="form-row">
-                                    <div class="form-group col-md-6">
-                                        <label>Địa chỉ</label>
-                                        <input type="text" class="form-control"required maxlength="30" name="address" value="${user.address}">
-                                    </div>
-                                    <div class="form-group col-md-6">
-                                        <label>Số điện thoại</label>
-                                        <input type="tel" class="form-control"required maxlength="15" name="phone" value="${user.phone}" pattern="[0][0-9]{9}">
-
-                                    </div>
-                                    <div class="form-group col-md-6">
-                                        <label>Ngày sinh</label>
-                                        <input type="date" class="form-control" name="date" required id="inputBirthDate" value="${user.birthDate}">
-                                    </div>
-                                    <div class="form-group col-md-6">
-                                        <label>Giới tính</label>
-                                        <select id="inputGender" class="form-control" name="gender" value="${user.gender == "true" ? "Nam" : "Nữ"}">
-                                            <option value="1">Nam</option>
-                                            <option value="2">Nữ</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group col-md-6" hidden>
-                                <input type="text" class="form-control" name="userId" id="inputBirthDate" value="${user.userId}">
-                            </div>
-                            <div class="modal-footer ">
-                                <button type="submit" class="btn btn-primary btn-xs btn-lg col-md-6" style="width: 100%;">Lưu</button>
-                                <button type="button" data-dismiss="modal" aria-label="Close" class="btn btn-danger btn-lg col-md-6" style="width: 100%;">Hủy</button>
-                            </div>
-                        </div>
-                    </form>
-
-                    <!-- /.modal-content --> 
-                </div>
-                <!-- /.modal-dialog --> 
+                <!-- /.modal-content --> 
             </div>
+            <!-- /.modal-dialog --> 
+        </div>
+    </c:forEach>
+    <script src="./assets/js/jquery-3.6.0.min.js" crossorigin="anonymous"></script>
+    <script src="./assets/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+    <script language="JavaScript" src="https://code.jquery.com/jquery-1.11.1.min.js" type="text/javascript"></script>
+    <script language="JavaScript" src="https://cdn.datatables.net/1.10.4/js/jquery.dataTables.min.js" type="text/javascript"></script>
+    <script language="JavaScript" src="https://cdn.datatables.net/plug-ins/3cfcc339e89/integration/bootstrap/3/dataTables.bootstrap.js" type="text/javascript"></script>
+    <script src="./assets/js/jquery-3.6.0.min.js" crossorigin="anonymous"></script>
+    <script src="./assets/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 
-
-        </c:forEach>
-        <script src="./assets/js/jquery-3.6.0.min.js" crossorigin="anonymous"></script>
-        <script src="./assets/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-        <!--<script language="JavaScript" src="https://code.jquery.com/jquery-1.11.1.min.js" type="text/javascript"></script>-->
-        <script language="JavaScript" src="https://cdn.datatables.net/1.10.4/js/jquery.dataTables.min.js" type="text/javascript"></script>
-        <script language="JavaScript" src="https://cdn.datatables.net/plug-ins/3cfcc339e89/integration/bootstrap/3/dataTables.bootstrap.js" type="text/javascript"></script>
-        <!--                <script src="./assets/js/jquery-3.6.0.min.js" crossorigin="anonymous"></script>
-                        <script src="./assets/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>-->
-
-        <script>
+    <script>
                                     function myFunction() {
                                         document.getElementById("myForm").reset();
                                     }
-        </script>
-    </body>
+    </script>
+</body>
 
 </html>
