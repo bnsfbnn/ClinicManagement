@@ -9,6 +9,7 @@
  */
 package dao.impl;
 
+import static config.Configuration.PAGE_SIZE;
 import context.DBContext;
 import dao.ExaminationDAO;
 import entity.Examination;
@@ -47,24 +48,26 @@ public class ExaminationDAOImpl extends DBContext implements ExaminationDAO {
      * @throws Exception when <code>java.sql.Exception</code> occurs.
      */
     @Override
-    public ArrayList<Examination> getExamninationByUserId(int userId) throws SQLException, Exception {
+    public ArrayList<Examination> getExamninationByUserId(int userId, int PAGE_SIZE, int currentPage) throws SQLException, Exception {
         ArrayList<Examination> result = new ArrayList<>();
-        String sql = "SELECT services.service_name,\n"
-                + "       packages.package_title,\n"
-                + "       users.full_name,\n"
-                + "       reservations.reservation_status,\n"
-                + "       examinations.examination_disgnosis,\n"
+        String sql = "SELECT * FROM (SELECT services.service_name,\n"
+                + "      packages.package_title,\n"
+                + "      users.full_name,\n"
+                + "     reservations.reservation_status,\n"
+                + "      examinations.examination_disgnosis,\n"
                 + "       examinations.examination_prescription,\n"
                 + "	  examinations.examination_date,\n"
                 + "	  reservations.reservation_id,\n"
-                + "	  examinations.examination_id\n"
+                + "	  examinations.examination_id,\n"
+                + "	  ROW_NUMBER() OVER (ORDER BY examinations.examination_date DESC) AS row_num\n"
                 + "FROM examinations\n"
                 + "INNER JOIN reservations ON examinations.reservation_id = reservations.reservation_id\n"
                 + "INNER JOIN users ON examinations.doctor_id = users.user_id\n"
                 + "INNER JOIN packages ON reservations.package_id = packages.package_id\n"
                 + "INNER JOIN services ON users.service_id = services.service_id\n"
-                + "WHERE reservations.customer_id = ?\n"
-                + "ORDER BY examination_date DESC";
+                + "WHERE reservations.customer_id = ?) as [examination]\n"
+                + "WHERE row_num >= ? * (? - 1) + 1\n"
+                + "AND row_num <= ? * ?";
         Connection con = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -72,6 +75,10 @@ public class ExaminationDAOImpl extends DBContext implements ExaminationDAO {
             con = getConnection(); //get connection
             ps = con.prepareStatement(sql);
             ps.setInt(1, userId);
+            ps.setInt(2, PAGE_SIZE);
+            ps.setInt(3, currentPage);
+            ps.setInt(4, PAGE_SIZE);
+            ps.setInt(5, currentPage);
             rs = ps.executeQuery();
             /**
              * set attributes for reservation from result set then add its to
@@ -223,5 +230,44 @@ public class ExaminationDAOImpl extends DBContext implements ExaminationDAO {
             this.closeConnection(con);
         }
         return check;
+    }
+
+    @Override
+    public int countExamninationByUserId(int userId) throws SQLException, Exception {
+        int number = -1;
+        String sql = "SELECT Count(examinations.examination_id) as nOE\n"
+                + "FROM examinations\n"
+                + "INNER JOIN reservations ON examinations.reservation_id = reservations.reservation_id\n"
+                + "INNER JOIN users ON examinations.doctor_id = users.user_id\n"
+                + "INNER JOIN packages ON reservations.package_id = packages.package_id\n"
+                + "INNER JOIN services ON users.service_id = services.service_id\n"
+                + "WHERE reservations.customer_id = ?";
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            con = getConnection(); //get connection
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, userId);
+            rs = ps.executeQuery();
+            /**
+             * set attributes for reservation from result set then add its to
+             * result list
+             */
+            while (rs.next()) {
+                number = rs.getInt("nOE");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ExaminationDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+            throw ex;
+        } catch (Exception ex) {
+            Logger.getLogger(ExaminationDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+            throw ex;
+        } finally {
+            this.closeResultSet(rs);
+            this.closePreparedStatement(ps);
+            this.closeConnection(con);
+        }
+        return number;
     }
 }

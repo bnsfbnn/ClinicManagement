@@ -325,12 +325,14 @@
             }
             function openViewExaminationHistoryPopup(elem) {
                 var id = $(elem).attr("id");
+                var currentPage = $(elem).val();
                 $.ajax({
                     url: "${pageContext.request.contextPath}/viewExaminationHistory",
                     type: "post",
                     dataType: "text",
                     data: {
-                        customerId: id
+                        customerId: id,
+                        currentPage: currentPage
                     },
                     success: function (result) {
                         $("#viewExaminationHistoryPopupContent").html(result);

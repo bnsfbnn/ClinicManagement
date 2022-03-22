@@ -9,6 +9,7 @@
  */
 package controller;
 
+import static config.Configuration.PAGE_SIZE;
 import dao.ExaminationDAO;
 import dao.impl.ExaminationDAOImpl;
 import entity.Examination;
@@ -49,8 +50,14 @@ public class ViewExaminationHistoryController extends HttpServlet {
             throws ServletException, IOException {
         try {
             int customerId = (request.getParameter("customerId") != null) ? Integer.parseInt(request.getParameter("customerId").trim()) : -1;
+            int currentPage = request.getParameter("currentPage") != null ? Integer.parseInt(request.getParameter("currentPage").trim()) : 1;
             ExaminationDAO examinationDAO = new ExaminationDAOImpl();
-            ArrayList<Examination> examination = examinationDAO.getExamninationByUserId(customerId);
+            int numberOfExamination = examinationDAO.countExamninationByUserId(customerId);
+            int numberOfPage = (numberOfExamination % PAGE_SIZE == 0) ? numberOfExamination / PAGE_SIZE : numberOfExamination / PAGE_SIZE + 1;
+            ArrayList<Examination> examination = examinationDAO.getExamninationByUserId(customerId, PAGE_SIZE, currentPage);
+            request.setAttribute("customerId", customerId);
+            request.setAttribute("currentPage", currentPage);
+            request.setAttribute("numberOfPage", numberOfPage);
             request.setAttribute("examination", examination);
             request.getRequestDispatcher("jsp/components/viewExaminationHistoryPopup.jsp").forward(request, response);
         } catch (Exception e) {

@@ -62,7 +62,7 @@ public class HomeController extends HttpServlet {
                 } else if (user.getRoleId() == 2) {
                     request.getRequestDispatcher("").forward(request, response);
                 } else if (user.getRoleId() == 3) {
-                    request.getRequestDispatcher("viewMyReservation").forward(request, response);
+                    response.sendRedirect("viewMyReservation");
                 } else {
                     request.getRequestDispatcher("./jsp/home.jsp").forward(request, response);
                 }

@@ -38,6 +38,38 @@
                     </c:forEach>
                 </tbody>
             </table>
+            <div class="row ml-auto justify-content-center" >
+                <input type="hidden" name="customerId" value="${customerId}"/>
+                <button ${currentPage>1?'class="btn btn-primary"':'class="btn btn-secondary" disabled'} value="${currentPage-1}" id="${customerId}" onClick="openViewExaminationHistoryPopup(this)">Trang trước</button>
+                <c:choose>
+                    <c:when test="${numberOfPage > 5}">
+                        <c:choose>
+                            <c:when test="${currentPage<=2}">
+                                <c:forEach var="i" begin="1" end="5">
+                                    <button class="${i eq currentPage?'btn btn-dark':'btn btn-light'}" value="${i}" id="${customerId}" onClick="openViewExaminationHistoryPopup(this)">${i}</button>  
+                                </c:forEach>
+                            </c:when>
+                            <c:when test="${currentPage>=numberOfPage-1}">
+                                <c:forEach var="i" begin="${currentPage-2}" end="${numberOfPage}">
+                                    <button class="${i eq currentPage?'btn btn-dark':'btn btn-light'}" value="${i}" id="${customerId}" onClick="openViewExaminationHistoryPopup(this)">${i}</button>  
+                                </c:forEach>
+                            </c:when>
+                            <c:otherwise>
+                                <c:forEach var="i" begin="${currentPage-2}" end="${currentPage+2}">
+                                    <button class="${i eq currentPage?'btn btn-dark':'btn btn-light'}" value="${i}" id="${customerId}" onClick="openViewExaminationHistoryPopup(this)">${i}</button>  
+                                </c:forEach>
+                            </c:otherwise>
+                        </c:choose>
+                    </c:when>
+                    <c:otherwise>
+                        <c:forEach var="i" begin="1" end="${numberOfPage}">
+                            <button class="${i eq currentPage?'btn btn-dark':'btn btn-light'}" value="${i}" id="${customerId}" onClick="openViewExaminationHistoryPopup(this)">${i}</button>  
+                        </c:forEach>
+                    </c:otherwise>
+                </c:choose>
+                <button ${currentPage<numberOfPage?'class="btn btn-primary"':'class="btn btn-secondary" disabled'} value="${currentPage+1}" id="${customerId}" onClick="openViewExaminationHistoryPopup(this)">Trang sau</button>
+                <!--End paging -->
+            </div>
         </div>                          
     </body>
 </html>

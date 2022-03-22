@@ -9,6 +9,7 @@
  */
 package dao;
 
+import static config.Configuration.PAGE_SIZE;
 import entity.Examination;
 import java.sql.Date;
 import java.sql.SQLException;
@@ -33,7 +34,7 @@ public interface ExaminationDAO {
      * @throws SQLException when <code>java.sql.SQLException</code> occurs.
      * @throws Exception when <code>java.sql.Exception</code> occurs.
      */
-    public ArrayList<Examination> getExamninationByUserId(int userId) throws SQLException, Exception;
+    public ArrayList<Examination> getExamninationByUserId(int userId, int PAGE_SIZE, int currentPage) throws SQLException, Exception;
 
     /**
      * - Get full information about a examination (such as customer information,
@@ -51,11 +52,16 @@ public interface ExaminationDAO {
     /**
      * - insert new examination after execute examination
      *
-     * @param reservationId is a <code>java.lang.int</code> object used to add new examination
-     * @param doctorId is a <code>java.lang.int</code> object used to add new examination
-     * @param examinationDisgosis is a <code>java.lang.String</code> object used to add new examination
-     * @param examinationPrescription is a <code>java.lang.String</code> object used to add new examination
-     * @param examinationDate is a <code>java.lang.Date</code> object used to add new examination
+     * @param reservationId is a <code>java.lang.int</code> object used to add
+     * new examination
+     * @param doctorId is a <code>java.lang.int</code> object used to add new
+     * examination
+     * @param examinationDisgosis is a <code>java.lang.String</code> object used
+     * to add new examination
+     * @param examinationPrescription is a <code>java.lang.String</code> object
+     * used to add new examination
+     * @param examinationDate is a <code>java.lang.Date</code> object used to
+     * add new examination
      *
      * @return a <code>Examination</code> objects. <br>
      * @throws SQLException when <code>java.sql.SQLException</code> occurs.
@@ -63,4 +69,16 @@ public interface ExaminationDAO {
      */
     public int insertNewExamination(int reservationId, int doctorId, String examinationDisgosis, String examinationPrescription, Date examinationDate) throws SQLException, Exception;
 
+    /**
+     * - Get number of examination by user id
+     *
+     * @param userId is a <code>java.lang.int</code> object used to get
+     * examination by userId
+     *
+     * @return a list of <code>Examination</code> objects. <br>
+     * -It is a <code>java.util.ArrayList</code> object
+     * @throws SQLException when <code>java.sql.SQLException</code> occurs.
+     * @throws Exception when <code>java.sql.Exception</code> occurs.
+     */
+    public int countExamninationByUserId(int userId) throws SQLException, Exception;
 }

@@ -156,4 +156,5 @@ public interface ReservationDAO {
     Pagination<BookScheduleDTO> getAllReservation(int pageIndex, int pageSize);
 
     void confirmReservation(int doctorId, String time, Date date, int id);
+    
 }
