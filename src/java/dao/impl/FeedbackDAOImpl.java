@@ -1,3 +1,12 @@
+/*
+ * Copyright(C) 20022, FPT University
+ * CMS:
+ * Clinic Management System
+ *
+ * Record of change:
+ * DATE            Version             AUTHOR           DESCRIPTION
+ * 2022-02-22      1.0                 TrangCT          Feedback DAO Implement
+ */
 package dao.impl;
 
 import context.DBContext;
@@ -16,8 +25,16 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
+ * <h1>Feedback DAO</h1>
+ * Data access object connect database and access data. - addfeedback : add
+ * feedback feedback - getAllCustomerFeedback : get list feedback customer by
+ * paging - getById : get
+ * <p>
+ *
  *
  * @author TrangCT
+ * @version 1.0
+ * @since 2022-02-08
  */
 public class FeedbackDAOImpl extends DBContext implements FeedbackDAO {
 
@@ -30,7 +47,7 @@ public class FeedbackDAOImpl extends DBContext implements FeedbackDAO {
         ResultSet rs = null;
         try {
             connecion = getConnection();
-            int totalItem = count(); // 
+            int totalItem = count(0, time); // 
             pagination.setCurrentPage(pageIndex);
             pagination.setItemPerPage(pageSize);
             pagination.setTotalItem(totalItem);
@@ -99,18 +116,30 @@ public class FeedbackDAOImpl extends DBContext implements FeedbackDAO {
         return pagination;
     }
 
-    public int count() {
+    public int count(int service, String time) {
         Connection connecion = null;
         PreparedStatement countPreparedStatement = null;
         ResultSet countResultSet = null;
         try {
             connecion = getConnection();
-            countPreparedStatement = connecion.prepareStatement("SELECT COUNT(*)   from feedbacks f join users u\n"
-                    + "  on f.customer_id = u.user_id\n"
-                    + "  join services s\n"
-                    + "  on f.service_id = s.service_id \n"
-                    + "  join examinations e\n"
-                    + "  on f.examination_id = e.examination_id");
+            String sql = "select  COUNT(f.feedback_id) from feedbacks f join users u\n"
+                    + "                          on f.customer_id = u.user_id and u.user_id = 5 and f.feedback_time like '%" + time + "%' \n"
+                    + "                          join services s\n"
+                    + "                          on f.service_id = s.service_id \n"
+                    + "                          join examinations e\n"
+                    + "                          on f.examination_id = e.examination_id";
+            if (service != 0) {
+                sql = "select  COUNT(f.feedback_id) from feedbacks f join users u\n"
+                        + "                          on f.customer_id = u.user_id and u.user_id = 5 and f.feedback_time like '%" + time + "%' \n"
+                        + "                          join services s\n"
+                        + "                          on f.service_id = s.service_id and s.service_id = ?\n"
+                        + "                          join examinations e\n"
+                        + "                          on f.examination_id = e.examination_id";
+            }
+            countPreparedStatement = connecion.prepareStatement(sql);
+            if (service != 0) {
+                countPreparedStatement.setInt(1, service);
+            }
             countResultSet = countPreparedStatement.executeQuery();
             if (countResultSet.next()) {
                 // get and return count total services
@@ -125,6 +154,14 @@ public class FeedbackDAOImpl extends DBContext implements FeedbackDAO {
         }
         return 0;
     }
+
+    /**
+     * - Add feedback
+     *
+     * @param feedback is a <code>java.lang.feedback</code> object used to
+     * @throws SQLException when <code>java.sql.SQLException</code> occurs.
+     * @throws Exception when <code>java.sql.Exception</code> occurs.
+     */
 
     @Override
     public void addFeedback(Feedback feedback) {
@@ -160,7 +197,7 @@ public class FeedbackDAOImpl extends DBContext implements FeedbackDAO {
         ResultSet rs = null;
         try {
             connecion = getConnection();
-            int totalItem = count(); // 
+            int totalItem = count(service, time); // 
             pagination.setCurrentPage(pageIndex);
             pagination.setItemPerPage(pageSize);
             pagination.setTotalItem(totalItem);
@@ -230,6 +267,10 @@ public class FeedbackDAOImpl extends DBContext implements FeedbackDAO {
         return pagination;
     }
 
+    /**
+     * Method: Get All Date of feedback
+     *
+     */
     @Override
     public List<Date> getAllDate() {
         List<Date> dates = new ArrayList<>();
@@ -256,6 +297,18 @@ public class FeedbackDAOImpl extends DBContext implements FeedbackDAO {
         return dates;
     }
 
+    /**
+     * Method: Get All Customer Feedback
+     *
+     * - get all feedback customer by pageIndex and pageSize and time and id
+     *
+     * @param pageIndex integer
+     * @param pageSize integer
+     * @param time string
+     * @param id integer
+     * @return pagination Pagination Service
+     */
+
     @Override
     public Pagination<FeedbackDTO> getAllCustomerFeedback(int pageIndex, int pageSize, String time, int id) {
         Pagination<FeedbackDTO> pagination = new Pagination<>();
@@ -265,7 +318,7 @@ public class FeedbackDAOImpl extends DBContext implements FeedbackDAO {
         ResultSet rs = null;
         try {
             connecion = getConnection();
-            int totalItem = count(); // 
+            int totalItem = count(0, time); // 
             pagination.setCurrentPage(pageIndex);
             pagination.setItemPerPage(pageSize);
             pagination.setTotalItem(totalItem);
@@ -280,8 +333,8 @@ public class FeedbackDAOImpl extends DBContext implements FeedbackDAO {
                         + "  join examinations e\n"
                         + "  on f.examination_id = e.examination_id\n"
                         + "                          ) AS RowConstrainedResult\n"
-                        + "                    WHERE   RowNum >= ?\n"
-                        + "                       AND RowNum < ?\n"
+                        + "                    WHERE   RowNum > ?\n"
+                        + "                       AND RowNum <= ?\n"
                         + "                    ORDER BY RowNum";
             } else {
                 sql = "SELECT * FROM  ( SELECT  ROW_NUMBER() OVER ( ORDER BY  f.feedback_id ) "
@@ -293,8 +346,8 @@ public class FeedbackDAOImpl extends DBContext implements FeedbackDAO {
                         + "  join examinations e\n"
                         + "  on f.examination_id = e.examination_id\n"
                         + "                          ) AS RowConstrainedResult\n"
-                        + "                    WHERE   RowNum >= ?\n"
-                        + "                       AND RowNum < ?\n"
+                        + "                    WHERE   RowNum > ?\n"
+                        + "                       AND RowNum <= ?\n"
                         + "                    ORDER BY RowNum";
             }
 
@@ -336,6 +389,20 @@ public class FeedbackDAOImpl extends DBContext implements FeedbackDAO {
         return pagination;
     }
 
+    /**
+     * Method: Get All Customer Feedback
+     *
+     * - get all feedback customer by pageIndex and pageSize and service and
+     * time and id
+     *
+     * @param pageIndex integer
+     * @param pageSize integer
+     * @param time string
+     * @param service integer
+     * @param id integer
+     * @return pagination Pagination Service
+     */
+
     @Override
     public Pagination<FeedbackDTO> getAllCustomerFeedback(int pageIndex, int pageSize, int service, String time, int id) {
         Pagination<FeedbackDTO> pagination = new Pagination<>();
@@ -345,7 +412,7 @@ public class FeedbackDAOImpl extends DBContext implements FeedbackDAO {
         ResultSet rs = null;
         try {
             connecion = getConnection();
-            int totalItem = count(); // 
+            int totalItem = count(service, time); // 
             pagination.setCurrentPage(pageIndex);
             pagination.setItemPerPage(pageSize);
             pagination.setTotalItem(totalItem);

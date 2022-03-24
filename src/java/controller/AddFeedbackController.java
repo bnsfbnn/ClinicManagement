@@ -5,7 +5,7 @@
  *
  * Record of change:
  * DATE            Version             AUTHOR           DESCRIPTION
- * 2022-03-08     1.0                 TrangCT          Controller Add Feedback 
+ * 2022-03-22     1.0                 TrangCT          Controller Add Feedback 
  */
 package controller;
 
@@ -38,7 +38,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author TrangCT
  * @version 1.0
- * @since 2022-03-08
+ * @since 2022-02-22
  */
 public class AddFeedbackController extends HttpServlet {
 
@@ -60,7 +60,7 @@ public class AddFeedbackController extends HttpServlet {
             request.getRequestDispatcher("./jsp/login.jsp").forward(request, response);
             return;
         }
-        int serviceId = Integer.parseInt(request.getParameter("serviceId"));
+        int serviceId = Integer.parseInt(request.getParameter("service"));
         int examinationId = Integer.parseInt(request.getParameter("examinationId"));
         String content = request.getParameter("content");
         java.sql.Date date = new java.sql.Date(Calendar.getInstance().getTime().getTime());

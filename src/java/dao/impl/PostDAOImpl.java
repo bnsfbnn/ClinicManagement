@@ -1,7 +1,11 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Copyright(C) 20022, FPT University
+ * CMS:
+ * Clinic Management System
+ *
+ * Record of change:
+ * DATE            Version             AUTHOR           DESCRIPTION
+ * 2022-02-28      1.0                 TrangCT          Post Dao Ipml
  */
 package dao.impl;
 
@@ -18,10 +22,24 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
+ * <h1>Post DAO</h1>
+ * Data access object connect database and access data. - count : count list
+ * post - getAllPost : get list post  - getById : get
+ * get post by id
+ * searchPost: search post for title post 
+ * <p>
  *
- * @author TrangCT
+ 
  */
 public class PostDAOImpl extends DBContext implements PostDAO {
+    
+    /**
+     * - Get all post of post
+     *
+     * @return a list of <code>PostEntity</code> objects. <br>
+     * -It is a <code>java.util.ArrayList</code> object
+     * @throws SQLException
+     */
 
     @Override
     public List<PostEntity> getAllPost() {
@@ -40,7 +58,12 @@ public class PostDAOImpl extends DBContext implements PostDAO {
                 p.setId(rs.getInt("id"));
                 p.setUserId(rs.getInt("user_id"));
                 p.setTitle(rs.getString("title"));
-                p.setSummary(rs.getString("summary"));
+
+                String summary = rs.getString("summary");
+                if (summary.length() > 250) {
+                    summary = summary.substring(0, 250) + "...";
+                }
+                p.setSummary(summary);
                 p.setContent(rs.getString("content"));
                 p.setCreateDate(rs.getDate("create_date"));
                 p.setCreateTime(rs.getTime("create_time"));
@@ -56,7 +79,13 @@ public class PostDAOImpl extends DBContext implements PostDAO {
         }
         return posts;
     }
-
+   /**
+     * - Search Post for title post 
+     *
+     * @return a list of <code>PostEntity</code> objects. <br>
+     * -It is a <code>java.util.ArrayList</code> object
+     * @throws SQLException
+     */
     @Override
     public List<PostEntity> searchPost(String value) {
         Connection connecion = null;
@@ -66,14 +95,18 @@ public class PostDAOImpl extends DBContext implements PostDAO {
         try {
 
             connecion = getConnection();
-            preparedStatement = connecion.prepareStatement("select * from posts where title like '%" + value + "%'");
+            preparedStatement = connecion.prepareStatement("select * from posts where title like N'%" + value + "%'");
             rs = preparedStatement.executeQuery();
             while (rs.next()) {
                 PostEntity p = new PostEntity();
                 p.setId(rs.getInt("id"));
                 p.setUserId(rs.getInt("user_id"));
                 p.setTitle(rs.getString("title"));
-                p.setSummary(rs.getString("summary"));
+                String summary = rs.getString("summary");
+                if (summary.length() > 250) {
+                    summary = summary.substring(0, 250) + "...";
+                }
+                p.setSummary(summary);
                 p.setContent(rs.getString("content"));
                 p.setCreateDate(rs.getDate("create_date"));
                 p.setCreateTime(rs.getTime("create_time"));
@@ -89,10 +122,15 @@ public class PostDAOImpl extends DBContext implements PostDAO {
         }
         return posts;
     }
-
+ /**
+     * Method: Get Post By Id - Get and return data of post by an id
+     *
+     * @param id
+     * @return post Post
+     */
     @Override
     public PostEntity getPostById(int id) {
-             Connection connecion = null;
+        Connection connecion = null;
         PreparedStatement preparedStatement = null;
         ResultSet rs = null;
         List<PostEntity> posts = new ArrayList<>();

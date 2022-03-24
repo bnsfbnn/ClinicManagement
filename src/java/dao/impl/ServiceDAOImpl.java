@@ -86,7 +86,11 @@ public class ServiceDAOImpl extends DBContext implements ServiceDAO {
                 service.setServiceId(rs.getInt("service_id"));
                 service.setServiceName(rs.getString("service_name"));
                 service.setServiceBrief(rs.getString("service_brief"));
-                service.setServiceDescription(rs.getString("service_description"));
+                   String service_description = rs.getString("service_description");
+                if (service_description.length() > 100) {
+                    service_description = service_description.substring(0, 100) + "...";
+                }
+                service.setServiceDescription(service_description);
                 service.setServiceImage(rs.getString("service_image"));
                 services.add(service);
             }

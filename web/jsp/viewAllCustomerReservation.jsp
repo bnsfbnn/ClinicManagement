@@ -116,6 +116,7 @@
                         <option value="Chờ duyệt">Chờ duyệt</option>
                         <option value="Đặt thành công">Đặt thành công</option>
                         <option value="Đã hủy">Đã hủy</option>
+                        <option value="Tất cả">Tất cả</option>
                     </select>
                     <button class="btn-primary" type="submit">Lọc</button>
                 </form>
@@ -179,7 +180,7 @@
                                                                 <input name="examinationId"value="${reservation.id}">
                                                             </div>
                                                             <div hidden>
-                                                                <input name="serviceId"value="${reservation.serviceId}">
+                                                                <input name="service"value="${reservation.serviceId}">
                                                             </div>
                                                             <button class="btn btn-primary float-right mt-3" type="submit">Phản hồi</button>
                                                         </div>

@@ -5,7 +5,7 @@
  *
  * Record of change:
  * DATE            Version             AUTHOR           DESCRIPTION
- * 2022-03-08     1.0                 TrangCT          Controller View Feedback List
+ * 2022-02-22     1.0                 TrangCT          Controller View Feedback List
  */
 package controller;
 

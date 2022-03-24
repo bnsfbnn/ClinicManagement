@@ -400,6 +400,11 @@ public class ReservationDAOImpl extends DBContext implements ReservationDAO {
         return check;
     }
 
+    /**
+     * Method : count - count total reservation in database
+     *
+     * @return an integer
+     */
     public int count(int id, String status) {
         Connection connecion = null;
         PreparedStatement countPreparedStatement = null;
@@ -440,7 +445,14 @@ public class ReservationDAOImpl extends DBContext implements ReservationDAO {
         }
         return 0;
     }
-
+   /**
+     * - Get all reservation of customer for customer_id
+     *
+     * @return a list of <code>CustomerReservation</code> objects. <br>
+     * -It is a <code>java.util.ArrayList</code> object
+     * @throws SQLException
+     * @throws Exception
+     */
     @Override
     public Pagination<CustomerReservation> getAllCustomerReservation(int pageIndex, int pageSize, int id, String status) {
         Pagination<CustomerReservation> pagination = new Pagination<>();
@@ -502,6 +514,14 @@ public class ReservationDAOImpl extends DBContext implements ReservationDAO {
         pagination.setData(customerReservations);
         return pagination;
     }
+    /**
+     * - Get reservation by id of customer 
+     *
+     * @return a list of <code>CustomerReservation</code> objects. <br>
+     * -It is a <code>java.util.ArrayList</code> object
+     * @throws SQLException
+     * @throws Exception
+     */
 
     @Override
     public CustomerReservation getCustomerReservationById(int id) {
