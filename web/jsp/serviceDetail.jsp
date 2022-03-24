@@ -23,6 +23,15 @@
         <link rel="stylesheet" href="./assets/css/custom.css" />
         <link href="./assets/css/header.css" rel="stylesheet" type="text/css"/>
     </head>
+    <style>
+        .price{
+            font-size: 25px;
+        }
+        .rounded{
+            background-color: lightgrey;
+        }
+       
+    </style>
     <body>
         <jsp:include page="./components/customerHeader.jsp" />
         <div class="container-fuild">
@@ -30,39 +39,34 @@
                 <img class="col-lg-12 p-0" src="./assets/images/banner.jpg" alt="Banner"/>
             </div>
             <div class="row my-5">
-                <div class="col-md-8 mx-auto bg-primary p-5 rounded">
+                <div class="col-md-8 mx-auto p-5 rounded">
                     <h2 class="text-white">Giới thiệu về ${service.serviceName}</h2>
                     <div class="row">
                         <div class="col-md-6 mt-5">
                             <img src="./assets/images/${service.serviceImage}" class="d-block w-100">
                         </div>
                         <div class="col-md-6 mt-5 p-5">
-                            <h4 class="text-white">${service.serviceDescription}</h3>
+                            <h5 class="text-white">${service.serviceDescription}</h5>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="row my-5">
+            <div class="row my-5 d-flex justify-content-center">
                 <c:set var = "count" scope = "page" value = "0"/>
                 <c:forEach var="i" items="${packages}">
                     <c:set var = "count" scope = "page" value = "${count+1}"/>
-                    <div class="col-md-2 mx-auto border rounded">
-                        <div class="row">
-                            <img src="./assets/images/gói ${count}.png" class="d-block w-100"/>
-                        </div>
-                        <div class="row pl-1 my-1">
-                            <b>${i.packageTitle}</b>
-                        </div>
-                        <div class="row pl-1 my-1">
+
+                    <div class="card ml-3 mr-3" style="width: 18rem;">
+                        <img class="card-img-top"  src="./assets/images/gói ${count}.png" alt="Card image cap">
+                        <div class="card-body">
+                            <b class="card-title">${i.packageTitle}</b>
                             <span><b>Thời gian khám: </b><span class="font-italic">${i.examinationDuration}</span></span>
-                        </div>
-                        <div class="row pl-1 my-1">
-                            <span class="justify-content-center"><b>Giá: </b><h3 class="font-weight-bold text-primary">${i.price} VND</h3></span>
-                        </div>
-                        <div class="row-fluid px-auto ml-5 my-1">
+                            <br>
+                            <span class="justify-content-center"><b>Giá: </b><span class="font-weight-bold text-primary price mb-3">${i.price} VND</h3></span>
                             <a href="./jsp/bookAReservation.jsp?serviceId=${service.serviceId}&packageId=${i.packageId}" class="button">
-                                <button type="button" class="btn btn-primary w-75">Đăng ký</button>
+                                <button type="button" class="btn btn-primary w-75 mt-4">Đăng ký</button>
                             </a>
+
                         </div>
                     </div>
                 </c:forEach>
