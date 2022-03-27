@@ -6,16 +6,18 @@
  *
  * Record of change:
  * DATE            Version             AUTHOR           DESCRIPTION
- * 2022-03-08     1.0                 MinhVT          Controller View Feedback Management List
+ * 2022-03-08     1.0                 MinhVT          ViewFeedbackManagedListController
  */
 package controller;
 
 import dao.FeedbackDAO;
 import dao.impl.FeedbackDAOImpl;
 import entity.FeedbackDTO;
+import entity.FeedbackReply;
 import entity.Pagination;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -23,7 +25,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  * <h1>View Feedback Management List Controller </h1>
- * Controller to view feedback management  list. Method process data form
+ * Controller to view feedback management list. Method process data form
  * FeedbackDAO and forward data to file view
  * <p>
  *
@@ -47,6 +49,9 @@ public class ViewFeedbackManagedListController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String page = request.getParameter("page");
+        if (page != null) {
+            request.getSession().setAttribute("pageIndex", page);
+        }
         int pageIndex = 1;
         if (page != null) {
             try {
@@ -61,15 +66,26 @@ public class ViewFeedbackManagedListController extends HttpServlet {
             pageIndex = 1;
         }
 
-
         int pageSize = 5;
 
         FeedbackDAO feedbackDAO = new FeedbackDAOImpl();
-        
+        if (request.getSession().getAttribute("pageIndex") != null) {
+            pageIndex = Integer.parseInt(request.getSession().getAttribute("pageIndex").toString());
+        }
         Pagination<FeedbackDTO> feedbacks = feedbackDAO.getAllFeedback(pageIndex, pageSize, "");
-        
+        List<FeedbackReply> feedbackReply = feedbackDAO.getAllReply();
+        for (FeedbackDTO feedback : feedbacks.getData()) {
+            List<String> listFB = new ArrayList<>();
+            for (FeedbackReply f : feedbackReply) {
+                if (f.getFeedback() == feedback.getFeedbackId()) {
+                    listFB.add(f.getContent());
+                }
+            }
+            feedback.setFeedbackReply(listFB);
+        }
+
         request.setAttribute("feedbacks", feedbacks);
-       request.getRequestDispatcher("./jsp/feedbackManagement.jsp").forward(request, response);
+        request.getRequestDispatcher("./jsp/feedbackManagement.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

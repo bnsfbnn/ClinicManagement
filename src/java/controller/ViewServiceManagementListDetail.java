@@ -1,26 +1,28 @@
 /*
- * Copyright(C) 20022, FPT University
- * CMS:
- * Clinic Management System
- *
- * Record of change:
- * DATE            Version             AUTHOR           DESCRIPTION
- * 2022-02-26      1.0                 MinhVT          Controller Delete Service
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
 package controller;
 
 import dao.ServiceDAO;
+import dao.UserDAO;
 import dao.impl.ServiceDAOImpl;
+import dao.impl.UserDAOImpl;
+import entity.Doctor;
+import entity.Service;
 import java.io.IOException;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
+
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * <h1>Delete Service Controller </h1>
- * Controller to delete service. Method process data form
- * ServiceDAO and forward data to file view
+ * <h1>View Feedback Management List Controller </h1>
+ * Controller to view feedback management list. Method process data form
+ * FeedbackDAO and forward data to file view
  * <p>
  *
  *
@@ -28,7 +30,7 @@ import javax.servlet.http.HttpServletResponse;
  * @version 1.0
  * @since 2022-03-08
  */
-public class DeleteServiceController extends HttpServlet {
+public class ViewServiceManagementListDetail extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -42,12 +44,19 @@ public class DeleteServiceController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        int id = Integer.parseInt(request.getParameter("service_id"));
-        
+        int id = Integer.parseInt(request.getParameter("Id"));
+        String page = request.getParameter("page").toString();
+        request.getSession().setAttribute("page", page);
         ServiceDAO serviceDAO = new ServiceDAOImpl();
-        serviceDAO.deleteService(id);
-        ServiceManagementController controller = new ServiceManagementController();
-        controller.processRequest(request, response);
+        Service service = serviceDAO.getById(id);
+
+        UserDAO userDAO = new UserDAOImpl();
+        List<Doctor> doctors = userDAO.getDoctorByServiceId(service.getServiceId());
+        request.setAttribute("service", service);
+        request.setAttribute("doctors", doctors);
+        List<Doctor> allDoctors = userDAO.getAllDoctor();
+        request.setAttribute("allDoctors", allDoctors);
+        request.getRequestDispatcher("./jsp/viewService.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

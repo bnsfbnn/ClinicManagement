@@ -10,6 +10,8 @@
 package entity;
 
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * <h1>FeedbackDTO </h1>
@@ -32,6 +34,7 @@ public class FeedbackDTO {
     private Date feedbackTime;
     private int examinationId;
     private int serviceId;
+    List<String> feedbackReply = new ArrayList<>();
 
     /**
      * Creates a service with specified parameters.
@@ -76,7 +79,6 @@ public class FeedbackDTO {
      *
      * @param feedbackId
      */
-
     public void setFeedbackId(int feedbackId) {
         this.feedbackId = feedbackId;
     }
@@ -225,4 +227,11 @@ public class FeedbackDTO {
         this.serviceId = serviceId;
     }
 
+    public List<String> getFeedbackReply() {
+        return feedbackReply;
+    }
+
+    public void setFeedbackReply(List<String> feedbackReply) {
+        this.feedbackReply = feedbackReply;
+    }
 }

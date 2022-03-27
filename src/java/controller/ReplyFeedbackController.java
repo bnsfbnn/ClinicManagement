@@ -9,19 +9,12 @@
  */
 package controller;
 
-import dao.FeedbackDAO;
 import dao.FeedbackReplyDAO;
-import dao.impl.FeedbackDAOImpl;
 import dao.impl.FeedbackReplyDAOImpl;
 import entity.FeedbackReply;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.Date;
-import java.text.DateFormat;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Locale;
-import java.util.TimeZone;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -30,8 +23,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
+ * <h1>Reply Feedback Controller </h1>
+ * Controller to reply feedback. Method process data form FeedbackReplyDAO and
+ * forward data to file view
+ * <p>
  *
- * @author MinhVu
+ *
+ * @author MinhVT
+ * @version 1.0
+ * @since 2022-03-08
  */
 public class ReplyFeedbackController extends HttpServlet {
 
@@ -48,21 +48,14 @@ public class ReplyFeedbackController extends HttpServlet {
             throws ServletException, IOException, ParseException {
         response.setContentType("text/html;charset=UTF-8");
 
-        int id = Integer.parseInt(request.getParameter("id"));
-        int feedback = Integer.parseInt(request.getParameter("feedback"));
-        String content = request.getParameter("feedback");
+        int feedback = Integer.parseInt(request.getParameter("serviceId"));
+        String content = request.getParameter("content");
 
-        DateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
-        String date = request.getParameter("date");
-        format.setTimeZone(TimeZone.getTimeZone("Etc/UTC"));
-        java.util.Date jdate = format.parse(date);
-        java.sql.Date sdate = new java.sql.Date(jdate.getTime());
-
-        FeedbackReply feedbackReply = new FeedbackReply(id, feedback, content, sdate);
-
+        FeedbackReply feedbackReply = new FeedbackReply(feedback, content, new Date(System.currentTimeMillis()));
         FeedbackReplyDAO feedbackReplyDAO = new FeedbackReplyDAOImpl();
         feedbackReplyDAO.addFeedbackReply(feedbackReply);
-
+        ViewFeedbackManagedListController controller = new ViewFeedbackManagedListController();
+        controller.processRequest(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

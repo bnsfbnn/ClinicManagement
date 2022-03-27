@@ -32,7 +32,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <div class="non-block"></div>
-                    <h5 class="modal-title" id="staticBackdropLabel">Chỉnh sửa dịch vụ</h5>
+                    <h5 class="modal-title" id="staticBackdropLabel">Xem chi tiết dịch vụ</h5>
 
                     <a href="../ClinicManagement/ServiceManagementController?page=${page}">
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
@@ -47,23 +47,21 @@
                                     <label for="serviceCode" class="col-4 col-form-label">Mã dịch vụ</label>
                                     <div class="col-8">
                                         <input type="text" class="form-control" name="service_code" readonly
-                                               id="serviceCode" value="${service.serviceId}" required maxlength="50"> 
+                                               id="serviceCode" value="${service.serviceId}" required maxlength="50">
                                     </div>
                                 </div>
                                 <div class="row mb-3">
                                     <label for="serviceName" class="col-4 col-form-label">Tên dịch vụ</label>
                                     <div class="col-8">
-                                        <input type="text" class="form-control" name="service_name" required maxlength="50"
+                                        <input type="text" class="form-control" name="service_name"  required maxlength="50" readonly
                                                id="serviceName" value="${service.serviceName}">
-                                        <span id='error_name' class="text-danger d-none"></span>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <label for="serviceDesc" class="col-4 col-form-label">Mô tả</label>
                                     <div class="col-8">
-                                        <textarea class="form-control" name="service_desc" id="serviceDesc"  required maxlength="50"
+                                        <textarea class="form-control" name="service_desc" id="serviceDesc"  required maxlength="50" readonly
                                                   rows="3">${service.serviceDescription}</textarea>
-                                                  <span id='error_desc' class="text-danger d-none"></span>
                                     </div>
                                 </div>
                             </div>
@@ -72,11 +70,6 @@
                                     <div class="col-7 col-form-label">
                                         Bác sĩ
                                     </div>
-                                    <button id="add-btn" type="button" class="btn btn-light col-5"
-                                            onclick="showSelectDoctorModal('#editServiceModal')">
-                                        Thêm bác sĩ
-                                        <i class="bi bi-plus-circle-fill ms-1"></i>
-                                    </button>
                                 </div>
                                 <div class="row list-doctors">
                                     <div class="list-doctors-scroll">
@@ -84,12 +77,6 @@
                                 </div>
                             </div>
                             <div class="col-auto mx-auto text-center">
-                                <button 
-                                    type='button'
-                                    class="btn btn-primary" 
-                                    data-bs-dismiss="modal"
-                                    onclick="editServiceSubmit()"
-                                    >Lưu thay đổi </button>
                             </div>
                         </form>
                     </div>
@@ -230,7 +217,7 @@
                                                         showDeleteDoctorModal({doctor, from})
                                                         }
                                                 let icon = document.createElement('i')
-                                                        icon.setAttribute('class', 'bi bi-dash-circle-fill')
+                                                        icon.setAttribute('class', 'bi')
                                                         button.appendChild(icon)
 
                                                         doctorCard.appendChild(imgCover)
@@ -366,37 +353,8 @@
                                         function editServiceSubmit () {
                                         const idModal = '#editServiceModal'
                                                 const service_id = $(idModal + ' #serviceCode').val()
-                                                const service_name = $(idModal + ' #serviceName').val().trim()
-                                                const service_desc = $(idModal + ' #serviceDesc').val().trim()
-                                                const nameError = document.getElementById('error_name')
-                                                const descError = document.getElementById('error_desc')
-                                                const textError = 'Khong duoc de trong truong nay'
-                                                                    
-                                                if (service_name.length === 0) {
-                                                    nameError.classList.remove('d-none')
-                                                    nameError.classList.add('d-block')
-                                                    nameError.innerHTML = textError
-                                                    return;
-                                                } else {
-                                                    if (nameError.innerHTML === textError) {
-                                                        nameError.classList.add('d-none')
-                                                        nameError.classList.remove('d-block')
-                                                        nameError.innerHTML = ''
-                                                    }
-                                                }
-                                                               
-                                                if (service_desc.length === 0) {
-                                                    descError.classList.remove('d-none')
-                                                    descError.classList.add('d-block')
-                                                    descError.innerHTML = textError
-                                                    return
-                                                } else {
-                                                    if (descError.innerHTML === textError) {
-                                                        descError.classList.add('d-none')
-                                                        descError.classList.remove('d-block')
-                                                        descError.innerHTML = ''
-                                                    }
-                                                }
+                                                const service_name = $(idModal + ' #serviceName').val()
+                                                const service_desc = $(idModal + ' #serviceDesc').val()
 
                                                 let doctorCards = $(idModal + ' .list-doctors-scroll > .doctor-card')
                                                 let listId = []

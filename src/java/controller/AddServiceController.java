@@ -15,7 +15,6 @@ import dao.impl.ServiceDAOImpl;
 import dao.impl.UserDAOImpl;
 import entity.Service;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.ServletException;
@@ -23,6 +22,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+/**
+ * <h1>Add Service Controller </h1>
+ * Controller to add service. Method process data form
+ * ServiceDAO and forward data to file view
+ * <p>
+ *
+ *
+ * @author MinhVT
+ * @version 1.0
+ * @since 2022-03-08
+ */
 
 public class AddServiceController extends HttpServlet {
 
@@ -38,32 +48,37 @@ public class AddServiceController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String[] ids = request.getParameter("list_doctors").split("-");
+        request.setCharacterEncoding("UTF-8");
+            String[] ids = new String[10];
+        if (request.getParameter("list_doctors") != null) {
+            ids = request.getParameter("list_doctors").split("-");
+        }
         List<Integer> idList = new ArrayList<>();
         
-        if (ids != null) {
+        if (request.getParameter("list_doctors") != null) {
             for (String i : ids) {
                 idList.add(Integer.parseInt(i));
             }
         }
-
+        
         String serviceName = request.getParameter("service_name");
         String serviceBrief = request.getParameter("service_desc");
         Service service = new Service();
         service.setServiceName(serviceName);
+        service.setServiceBrief(serviceBrief);
         service.setServiceDescription(serviceBrief);
         ServiceDAO serviceDAO = new ServiceDAOImpl();
         serviceDAO.addService(service);
-
+        
         UserDAO userDAO = new UserDAOImpl();
         int key = serviceDAO.getIdInserted();
         for (int k : idList) {
             userDAO.addDoctorForService(k, key);
         }
-
+        
         ServiceManagementController controller = new ServiceManagementController();
         controller.processRequest(request, response);
-
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

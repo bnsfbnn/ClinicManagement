@@ -12,12 +12,22 @@ package controller;
 import dao.UserDAO;
 import dao.impl.UserDAOImpl;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+/**
+ * <h1>Delete Doctor From Service Controller </h1>
+ * Controller to delete doctor. Method process data form
+ * UserDAO and forward data to file view
+ * <p>
+ *
+ *
+ * @author MinhVT
+ * @version 1.0
+ * @since 2022-03-08
+ */
 
 public class DeleteDoctorFromService extends HttpServlet {
 
