@@ -7,6 +7,8 @@
 package entity;
 
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -23,6 +25,7 @@ public class FeedbackDTO {
     private Date feedbackTime;
     private int examinationId;
     private int serviceId;
+    List<String> feedbackReply = new ArrayList<>();
 
     public FeedbackDTO(int feedbackId, String customer, String service, String examination, String feedbackContent, Date feedbackTime, int examinationId, int serviceId) {
         this.feedbackId = feedbackId;
@@ -108,6 +111,14 @@ public class FeedbackDTO {
 
     public void setServiceId(int serviceId) {
         this.serviceId = serviceId;
+    }
+
+    public List<String> getFeedbackReply() {
+        return feedbackReply;
+    }
+
+    public void setFeedbackReply(List<String> feedbackReply) {
+        this.feedbackReply = feedbackReply;
     }
     
     

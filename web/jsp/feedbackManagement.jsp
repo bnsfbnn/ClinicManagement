@@ -145,18 +145,14 @@
                     </button>
                     <div class="collapse navbar-collapse" id="navbarClinicHeader">
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                            
                             <li class="nav-item">
-                                <a class="nav-link" aria-current="page" href="#">Trang chủ</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="../ClinicManagement/ServiceManagementController">Quản lý dịch vụ</a>
+                                <a class="nav-link" href="../ClinicManagement/ServiceManagementController?page=${pageIndex}">Quản lý dịch vụ</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link active" href="#">Quản lý phản hồi</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link p-0" href="#">Xem tất cả lịch khám bệnh</a>
-                            </li>
+                            
                         </ul>
                         <div class="avatar">
                             <img src="https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png" alt="avatar">
@@ -194,13 +190,14 @@
                                 <td>${feedback.feedbackTime}</td>
                                 <td>
                                     <div class="action">
-                                        <button class="btn btn-light border border-secondary" onclick="showFeedbackModal({
+                                        <button class="btn btn-light border border-secondary" onclick="viewFeedbackModal({
                                             id: '${feedback.feedbackId}',
                                                     service_name: '${feedback.service}',
                                                     customer_name: '${feedback.customer}',
                                                     username: '${feedback.username}',
                                                     date_time: '${feedback.feedbackTime}',
-                                                    feedback: '${feedback.feedbackContent}'
+                                                    feedback: '${feedback.feedbackContent}',
+                                                    feedbackDoc: '${feedback.feedbackReply}'
                                             })">
                                             Chi tiết
                                         </button>
@@ -210,7 +207,10 @@
                                                     customer_name: '${feedback.customer}',
                                                     username: '${feedback.username}',
                                                     date_time: '${feedback.feedbackTime}',
-                                                    feedback: '${feedback.feedbackContent}'
+                                                    feedback: '${feedback.feedbackContent}',
+                                                    feedbackDoc: '${feedback.feedbackReply}',
+                                                    serviceId: '${feedback.serviceId}',
+                                                    examinationId: '${feedback.examinationId}'
                                             })">
                                             Trả lời
                                         </button>
@@ -277,11 +277,7 @@
                                             </div>
 
                                         </div>
-                                        <div class="ps-5 col-4">
-                                            <button class="btn btn-light border border-secondary">
-                                                Xem lịch sử khám bệnh của bệnh nhân
-                                            </button>
-                                        </div>
+                                        
                                         <div class="col-12 mb-3">
                                             <textarea class="form-control" readonly rows="5" id="feedback">
                                             </textarea>
@@ -290,16 +286,18 @@
                                     <div class="row my-3 fw-bold">
                                         Nội dung trả lời
                                     </div>
-                                    <form class="row">
+                                    <form class="row" action="/ClinicManagement/ReplyFeedbackController">
+                                        <input name='serviceId' id='serviceId' style='display: none'/>
                                         <div class="form-group col-12 mb-3">
-                                            <textarea id="reply" class="form-control" rows="5" required></textarea>
+                                            <textarea name="content" id="reply" class="form-control" rows="5" required onchange="onChange(event)"></textarea>
+                                            <span id='error' class='text-danger d-none'></span>
                                         </div>
                                         <div class="form-group col-12 text-end">
                                             <button 
-                                                type="button"
+                                                id='btn-reply'
+                                                type="submit"
                                                 class="btn btn-primary" 
-                                                onclick="replySubmit()"
-                                                data-bs-dismiss="modal">
+                                                >
                                                 Trả lời
                                             </button>
                                         </div>
@@ -309,6 +307,51 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="modal fade" id="viewfeedbackModal" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body my-3">
+                                <div class="container-fluid">
+                                    <div class="row g-3 border border-secondary px-3">
+                                        <div class="pe-5 col-8">
+                                            <div class="row mb-3">
+                                                <label class="col-12 col-form-label">Username: <span id="username"></span></label>
+                                            </div>
+                                            <div class="row mb-3">
+                                                <label class="col-12 col-form-label">Họ và tên: <span id="customer_name"></span></label>
+                                            </div>
+                                            <div class="row mb-3">
+                                                <label class="col-12 col-form-label">
+                                                    Thời gian phản hồi: <span id="date_time"></span>
+                                                </label>
+                                            </div>
+                                            <div class="row">
+                                                <label class="col-12 col-form-label">
+                                                    Dịch vụ: <span id="service_name"></span>
+                                                </label>
+                                            </div>
+
+                                        </div>
+                                        
+                                        <div class="col-12 mb-3">
+                                            <div id='feedback'>
+                                               
+                                            </div>
+<!--                                            <textarea class="form-control" readonly rows="5" id="feedback">
+                                            </textarea>-->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
             </div>
 
             <!-- Bootstrap Bundle -->
@@ -326,16 +369,79 @@
                                                             $('#feedbackModal #service_name').html(data?.service_name)
                                                             $('#feedbackModal #date_time').html(data?.date_time)
                                                             $('#feedbackModal #feedback').html(data?.feedback)
+                                                            
+                                                            $('#feedbackModal #serviceId').val(data?.serviceId)
+                                                            $('#feedbackModal #examinationId').val(data?.serviceId)
 
                                                             const fbModal = new bootstrap.Modal(document.getElementById('feedbackModal'), {})
                                                             fbModal.show()
                                                     }
 
-                                                    function replySubmit() {
-                                                    const reply = $('#feedbackModal #reply').val()
-                                                            console.log("🚀 ~ reply", reply)
+                                                    function viewFeedbackModal(data) {
+                                                        
+                                                        
+                                                        
+                                                    $('#viewfeedbackModal #username').html(data?.username)
+                                                            $('#viewfeedbackModal #customer_name').html(data?.customer_name)
+                                                            $('#viewfeedbackModal #service_name').html(data?.service_name)
+                                                            $('#viewfeedbackModal #date_time').html(data?.date_time)
+//                                                            $('#viewfeedbackModal #feedback').html(data?.feedback)
 
+                                                            const customerReply = document.createElement('p')
+                                                        customerReply.innerHTML = 'Customer: ' + data?.feedback
+                                                        $('#viewfeedbackModal #feedback').html('')
+                                                        $('#viewfeedbackModal #feedback').append(customerReply)
+                                                        
+                                                        const listDocReplyStr = data?.feedbackDoc
+                                                        if (listDocReplyStr) {
+                                                            let listDocReplyArr = listDocReplyStr.replaceAll('[', '').replaceAll(']', '').split(', ')
+                                                            if (listDocReplyArr.length > 0) 
+                                                                for(let i = 0; i < listDocReplyArr.length; i++) {
+                                                                    const p = document.createElement('p')
+                                                                    p.innerHTML = 'Doctor: ' + listDocReplyArr[i]
+                                                                    $('#viewfeedbackModal #feedback').append(p)
+                                                                }
+                                                        }
+                                                        
+                                                        
+
+                                                            const fbModal = new bootstrap.Modal(document.getElementById('viewfeedbackModal'), {})
+                                                            fbModal.show()
                                                     }
+                                                    function onChange(e) {
+                                                        const value = e.target.value
+                                                        const spanError = document.getElementById('error')
+                                                        const textLimit = 'Ban da nhap qua 300 ky tu'
+                                                        const textInvalid = 'Khong duoc de trong truong nay'
+                                                       
+                                                        if (value.length > 0 && value.trim().length === 0) {
+                                                            spanError.classList.remove('d-none')
+                                                            spanError.classList.add('d-block')
+                                                            spanError.innerHTML = textInvalid
+                                                            $('#feedbackModal #btn-reply').attr('disabled', true)
+                                                        } else if (value.length > 0 && value.trim().length > 0){
+                                                             if (spanError.innerHTML === textInvalid) {
+                                                                spanError.classList.add('d-none')
+                                                                spanError.classList.remove('d-block')
+                                                                $('#feedbackModal #btn-reply').removeAttr('disabled')
+                                                            }
+                                                        }
+                                                        
+                                                         if (value.length > 300) {
+                                                            spanError.classList.remove('d-none')
+                                                            spanError.classList.add('d-block')
+                                                            spanError.innerHTML = textLimit
+                                                            $('#feedbackModal #btn-reply').attr('disabled', true)
+                                                        } else {
+                                                            if (spanError.innerHTML === textLimit) {
+                                                                spanError.classList.add('d-none')
+                                                                spanError.classList.remove('d-block')
+                                                                $('#feedbackModal #btn-reply').removeAttr('disabled')
+                                                            }
+                                                        }
+                                                        
+                                                    }
+                                                    
             </script>
     </body>
 </html>

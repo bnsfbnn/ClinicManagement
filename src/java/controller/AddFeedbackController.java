@@ -14,13 +14,8 @@ import dao.impl.FeedbackDAOImpl;
 import entity.Feedback;
 import entity.User;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.text.DateFormat;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Locale;
-import java.util.TimeZone;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -54,6 +49,7 @@ public class AddFeedbackController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ParseException {
         response.setContentType("text/html;charset=UTF-8");
+
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
         if (user == null) {
@@ -63,11 +59,12 @@ public class AddFeedbackController extends HttpServlet {
         int serviceId = Integer.parseInt(request.getParameter("serviceId"));
         int examinationId = Integer.parseInt(request.getParameter("examinationId"));
         String content = request.getParameter("content");
+        
         java.sql.Date date = new java.sql.Date(Calendar.getInstance().getTime().getTime());
         Feedback feedback = new Feedback();
         feedback.setCustomerId(user.getUserId());
         feedback.setExaminationId(examinationId);
-        feedback.setFeedbackContent(content.trim());
+        feedback.setFeedbackContent(content);
         feedback.setServiceId(serviceId);
         feedback.setFeedbackTime(date);
 

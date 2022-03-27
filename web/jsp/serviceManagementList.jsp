@@ -6,7 +6,7 @@
  * Record of change:
  * DATE            Version             AUTHOR           DESCRIPTION
  * 2022-02-08      1.0                 MinhVT         Controller Service Management List
- -->
+-->
 
 <!doctype html>
 <html lang="en">
@@ -41,18 +41,14 @@
                     </button>
                     <div class="collapse navbar-collapse" id="navbarClinicHeader">
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                            <li class="nav-item">
-                                <a class="nav-link" aria-current="page" href="#">Trang chủ</a>
-                            </li>
+                            
                             <li class="nav-item">
                                 <a class="nav-link active" href="#">Quản lý dịch vụ</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="../ClinicManagement/ViewFeedbackManagedListController">Quản lý phản hồi</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link p-0" href="#">Xem tất cả lịch khám bệnh</a>
-                            </li>
+                            
                         </ul>
                         <div class="avatar">
                             <img src="https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png" alt="avatar">
@@ -106,8 +102,11 @@
                                                             image: 'https://via.placeholder.com/60',
                                                     }]
                                             })">
+                                            <button class="btn-only-ic" data-bs-target="#detailServiceModal">
+                                                <a href="ViewServiceManagementListDetail?Id=${service.serviceId}&page=${page}" class="bi bi-eye-fill"></a>
+                                            </button>
                                             <button class="btn-only-ic" data-bs-target="#editServiceModal">
-                                                <a href="ServiceManagementDetailController?Id=${service.serviceId}" class="bi bi-pencil-fill"></a>
+                                                <a href="ServiceManagementDetailController?Id=${service.serviceId}&page=${page}" class="bi bi-pencil-fill"></a>
                                             </button>
                                             <button class="btn-only-ic" onclick="showDeleteServiceModal('${service.serviceId}'), '${service.serviceName}'">
                                                 <i class="bi bi-trash-fill"></i>
@@ -208,13 +207,14 @@
                             </div>
                             <div class="modal-body">
                                 <div class="container-fluid">
-                                    <form class="row g-3" onsubmit="addServiceSubmit()">
+                                    <form class="row g-3" action="/ClinicManagement/AddServiceController" onsubmit="addServiceSubmit(event)">
                                         <div class="pe-5 col-6">
                                             <div class="row mb-3">
                                                 <label for="serviceName" class="col-4 col-form-label">Tên dịch vụ</label>
                                                 <div class="col-8">
                                                     <input type="text" class="form-control" name="service_name"
                                                            id="serviceName" required maxlength="50">
+                                                    <span id='error_name' class="text-danger d-none"></span>
                                                 </div>
                                             </div>
                                             <div class="row">
@@ -222,6 +222,7 @@
                                                 <div class="col-8">
                                                     <textarea class="form-control" name="service_desc" id="serviceDesc"
                                                               rows="3"  required maxlength="50"></textarea>
+                                                    <span id='error_desc' class="text-danger d-none"></span>
                                                 </div>
                                             </div>
                                         </div>
@@ -232,8 +233,7 @@
                                                 </div>
                                                 <button id="add-btn" type="button" class="btn btn-light col-5"
                                                         onclick="showSelectDoctorModal('#addServiceModal')">
-                                                    Thêm bác sĩ
-                                                    <i class="bi bi-plus-circle-fill ms-1"></i>
+                                                    Thêm bác s                                                    <i class="bi bi-plus-circle-fill ms-1"></i>
                                                 </button>
                                             </div>
                                             <div class="row list-doctors">
@@ -243,7 +243,8 @@
                                         </div>
                                         <div class="col-auto mx-auto text-center">
                                             <button 
-                                                type="submit"
+                                                type="button"
+                                                onclick='addServiceSubmit()'
                                                 class="btn btn-primary"
                                                 >Thêm dịch vụ</button>
                                         </div>
@@ -256,30 +257,30 @@
 
 
             </div>
-            
-             <!-- Select Doctor Modal -->
-        <div class="modal fade" id="selectDoctorModal" data-bs-keyboard="false" tabindex="-1"
-             aria-labelledby="staticBackdropLabel" aria-hidden="true">
-            <div class="modal-dialog modal-doctor">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <div class="non-block"></div>
-                        <h5 class="modal-title" id="staticBackdropLabel">Chọn bác sĩ</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="list-doctors">
-                            <div class="list-doctors-scroll">
-                            </div>
+
+            <!-- Select Doctor Modal -->
+            <div class="modal fade" id="selectDoctorModal" data-bs-keyboard="false" tabindex="-1"
+                 aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog modal-doctor">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <div class="non-block"></div>
+                            <h5 class="modal-title" id="staticBackdropLabel">Chọn bác sĩ</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
                         </div>
-                        <div class="col-auto mx-auto text-center">
-                            <button id="addDoc" type="button" class="btn btn-primary">Thêm</button>
+                        <div class="modal-body">
+                            <div class="list-doctors">
+                                <div class="list-doctors-scroll">
+                                </div>
+                            </div>
+                            <div class="col-auto mx-auto text-center">
+                                <button id="addDoc" type="button" class="btn btn-primary">Thêm</button>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
 
             <!-- Delete Service Modal -->
             <div class="modal fade" id="deleteServiceModal" data-bs-keyboard="false" tabindex="-1"
@@ -397,7 +398,7 @@
 
                                                             function showSelectDoctorModal(from) {
                                                             const selectDoc = new bootstrap.Modal(document.getElementById('selectDoctorModal'), {})
-                                                             console.log('123')
+                                                                    console.log('123')
 
                                                                     let doctors = [];
             <c:forEach items="${doctors}" var="doctor"  varStatus="counter" >
@@ -489,12 +490,49 @@
                                                             const deleteDocModal = new bootstrap.Modal(document.getElementById('deleteDoctorModal'), {})
                                                                     deleteDocModal.show()
                                                             }
+                                                            
+                                                            const setError = (element, message) => {
+                                                                const inputControl = element.parentElement;
+                                                                const errorDisplay = inputControl.querySelector('.error');
 
+                                                                errorDisplay.innerText = message;
+                                                                inputControl.classList.add('error');
+                                                                inputControl.classList.remove('success')
+                                                            }
                                                             function addServiceSubmit () {
-                                                            const idModal = '#addServiceModal'
+                                                                const idModal = '#addServiceModal'
                                                                     const service_id = $(idModal + ' #serviceCode').val()
-                                                                    const service_name = $(idModal + ' #serviceName').val()
-                                                                    const service_desc = $(idModal + ' #serviceDesc').val()
+                                                                    const service_name = $(idModal + ' #serviceName').val().trim()
+                                                                    const service_desc = $(idModal + ' #serviceDesc').val().trim()
+                                                                    const nameError = document.getElementById('error_name')
+                                                                    const descError = document.getElementById('error_desc')
+                                                                    const textError = 'Khong duoc de trong truong nay'
+                                                                    
+                                                                    if (service_name.length === 0) {
+                                                                         nameError.classList.remove('d-none')
+                                                                            nameError.classList.add('d-block')
+                                                                         nameError.innerHTML = textError
+                                                                         return;
+                                                                    } else {
+                                                                        if (nameError.innerHTML === textError) {
+                                                                            nameError.classList.add('d-none')
+                                                                            nameError.classList.remove('d-block')
+                                                                            nameError.innerHTML = ''
+                                                                        }
+                                                                    }
+                                                                    
+                                                                    if (service_desc.length === 0) {
+                                                                        descError.classList.remove('d-none')
+                                                                            descError.classList.add('d-block')
+                                                                         descError.innerHTML = textError
+                                                                         return;
+                                                                    } else {
+                                                                        if (descError.innerHTML === textError) {
+                                                                            descError.classList.add('d-none')
+                                                                            descError.classList.remove('d-block')
+                                                                            descError.innerHTML = ''
+                                                                        }
+                                                                    }
 
                                                                     let doctorCards = $(idModal + ' .list-doctors-scroll > .doctor-card')
                                                                     let listId = []
@@ -512,9 +550,9 @@
                                                             const stringListId = listId.join('-')
                                                                     window.location.href = 'AddServiceController?service_name=' + service_name +
                                                                     '&service_desc=' + service_desc +
-                                                                    '&list_doctors=' + stringListId
+                                                                    (stringListId ? '&list_doctors=' + stringListId : '')
+                                                            
                                                             }
-
 
 
 
@@ -553,8 +591,8 @@
                                                             function selectDoctor(username) {
                                                             const selectingDoctor = $('#selectDoctorModal .list-doctors-scroll > .doctor-card#' + username)
                                                                     if (selectingDoctor.length <= 0) return;
-                                                                 console.log('abcxz')   
-                                                            if (selectingDoctor[0].classList.contains('active')) {
+                                                            console.log('abcxz')
+                                                                    if (selectingDoctor[0].classList.contains('active')) {
                                                             selectingDoctor[0].classList.remove('active')
                                                             } else {
                                                             selectingDoctor[0].classList.add('active')

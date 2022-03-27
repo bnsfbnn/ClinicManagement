@@ -12,13 +12,22 @@ package controller;
 import dao.ServiceDAO;
 import dao.impl.ServiceDAOImpl;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
+/**
+ * <h1>Delete Service Controller </h1>
+ * Controller to delete service. Method process data form
+ * ServiceDAO and forward data to file view
+ * <p>
+ *
+ *
+ * @author MinhVT
+ * @version 1.0
+ * @since 2022-03-08
+ */
 public class DeleteServiceController extends HttpServlet {
 
     /**

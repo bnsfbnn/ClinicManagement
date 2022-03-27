@@ -1,4 +1,12 @@
-
+/*
+ * Copyright(C) 20022, FPT University
+ * CMS:
+ * Clinic Management System
+ *
+ * Record of change:
+ * DATE            Version             AUTHOR           DESCRIPTION
+ * 2022-02-08      1.0                 MinhVT          FeedbackReplyDAOImpl
+ */
 package dao.impl;
 
 import context.DBContext;
@@ -11,8 +19,16 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
+ * <h1>Feedback Reply DAO</h1>
+ * Data access object connect database and access data. - addFeedbackReply : add 
+ *  feedback reply
+ * service by id
+ * <p>
  *
- * @author TrangCT
+ *
+ * @author MinhVT
+ * @version 1.0
+ * @since 2022-02-08
  */
 public class FeedbackReplyDAOImpl extends DBContext implements FeedbackReplyDAO {
 

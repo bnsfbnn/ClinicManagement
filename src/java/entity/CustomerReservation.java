@@ -193,12 +193,4 @@ public class CustomerReservation {
         this.serviceId = serviceId;
     }
 
-    public int getServiceId() {
-        return serviceId;
-    }
-
-    public void setServiceId(int serviceId) {
-        this.serviceId = serviceId;
-    }
-
 }

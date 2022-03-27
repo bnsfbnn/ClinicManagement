@@ -5,6 +5,7 @@ import dao.FeedbackDAO;
 import entity.Account;
 import entity.FeedbackDTO;
 import entity.Feedback;
+import entity.FeedbackReply;
 import entity.Pagination;
 import java.sql.Connection;
 import java.sql.Date;
@@ -415,5 +416,34 @@ public class FeedbackDAOImpl extends DBContext implements FeedbackDAO {
         }
         pagination.setData(feedbacks);
         return pagination;
+    }
+
+    @Override
+    public List<FeedbackReply> getAllReply() {
+             List<FeedbackReply> feedbackReplys = new ArrayList<>();
+        Connection connecion = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet rs = null;
+        try {
+            connecion = getConnection();
+
+            // Get data
+            preparedStatement = connecion.prepareStatement("select * from  feedback_replies");
+            rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                FeedbackReply feedbackReply = new FeedbackReply();
+                feedbackReply.setFeedback(rs.getInt("feedback_id"));
+                feedbackReply.setContent(rs.getString("feedback_reply_content"));
+                feedbackReplys.add(feedbackReply);
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            Logger.getLogger(UserDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            closeResultSet(rs);
+            closePreparedStatement(preparedStatement);
+            closeConnection(connecion);
+        }
+        return feedbackReplys;
     }
 }

@@ -25,20 +25,21 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  * <h1>Service List Controller</h1>
- * Controller to view service management list. Method process data form ServiceDAO and 
- * forward data to file view
+ * Controller to view service management list. Method process data form
+ * ServiceDAO and forward data to file view
  * <p>
- * 
- * 
+ *
+ *
  * @author MinhVT
  * @version 1.0
  * @since 2022-02-08
  */
 public class ServiceManagementController extends HttpServlet {
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     * Get list services and pagging
+     * methods. Get list services and pagging
+     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -47,7 +48,11 @@ public class ServiceManagementController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
         String page = request.getParameter("page");
+        if (page != null) {
+            request.getSession().setAttribute("page", page);
+        }
         int pageIndex = 1;
         if (page != null) {
             try {
@@ -64,6 +69,9 @@ public class ServiceManagementController extends HttpServlet {
 
         int pageSize = 5;
         ServiceDAO serviceDAO = new ServiceDAOImpl();
+        if (request.getSession().getAttribute("page") != null) {
+            pageIndex = Integer.parseInt(request.getSession().getAttribute("page").toString());
+        }
         Pagination<ServiceDTO> services
                 = serviceDAO.getAllService(pageIndex, pageSize);
         UserDAO userDAO = new UserDAOImpl();

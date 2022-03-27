@@ -1,11 +1,7 @@
 /*
- * Copyright(C) 20022, FPT University
- * CMS:
- * Clinic Management System
- *
- * Record of change:
- * DATE            Version             AUTHOR           DESCRIPTION
- * 2022-02-28     1.0                 TrangCT          Controller Post Detail
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
 package controller;
 
@@ -16,23 +12,12 @@ import dao.impl.UserDAOImpl;
 import entity.PostEntity;
 import entity.User;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- * <h1>Post Detail Controller </h1>
- * Controller to post detail . Method process data form PostDAO and
- * forward data to file view
- * <p>
- *
- *
- * @author TrangCT
- * @version 1.0
- * @since 2022-03-28
- */
+
 public class PostDetailController extends HttpServlet {
 
     /**
@@ -53,7 +38,7 @@ public class PostDetailController extends HttpServlet {
         UserDAO userDAO = new UserDAOImpl();
         User user = userDAO.getUserById(post.getUserId());
         request.setAttribute("post", post);
-        request.setAttribute("userPost", user.getFullName());
+        request.setAttribute("user", user.getFullName());
         request.getRequestDispatcher("./jsp/postDetail.jsp").forward(request, response);
     }
 

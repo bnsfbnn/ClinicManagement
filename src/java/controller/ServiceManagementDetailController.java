@@ -13,11 +13,9 @@ import dao.ServiceDAO;
 import dao.UserDAO;
 import dao.impl.ServiceDAOImpl;
 import dao.impl.UserDAOImpl;
-import entity.Account;
 import entity.Doctor;
 import entity.Service;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -26,11 +24,11 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  * <h1>Service List Controller</h1>
- * Controller to view service management detail. Method process data form ServiceDAO and 
- * forward data to file view
+ * Controller to view service management detail. Method process data form
+ * ServiceDAO and forward data to file view
  * <p>
- * 
- * 
+ *
+ *
  * @author MinhVT
  * @version 1.0
  * @since 2022-02-08
@@ -50,6 +48,8 @@ public class ServiceManagementDetailController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         int id = Integer.parseInt(request.getParameter("Id"));
+        String page = request.getParameter("page").toString();
+        request.getSession().setAttribute("page", page);
         ServiceDAO serviceDAO = new ServiceDAOImpl();
         Service service = serviceDAO.getById(id);
 

@@ -1,11 +1,7 @@
 /*
- * Copyright(C) 20022, FPT University
- * CMS:
- * Clinic Management System
- *
- * Record of change:
- * DATE            Version             AUTHOR           DESCRIPTION
- * 2022-02-26      1.0                 MinhVT          Controller Add Service
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
 package controller;
 
@@ -13,19 +9,20 @@ import dao.ServiceDAO;
 import dao.UserDAO;
 import dao.impl.ServiceDAOImpl;
 import dao.impl.UserDAOImpl;
+import entity.Doctor;
 import entity.Service;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
+
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * <h1>Add Service Controller </h1>
- * Controller to add service. Method process data form
- * ServiceDAO and forward data to file view
+ * <h1>View Feedback Management List Controller </h1>
+ * Controller to view feedback management list. Method process data form
+ * FeedbackDAO and forward data to file view
  * <p>
  *
  *
@@ -33,8 +30,7 @@ import javax.servlet.http.HttpServletResponse;
  * @version 1.0
  * @since 2022-03-08
  */
-
-public class AddServiceController extends HttpServlet {
+public class ViewServiceManagementListDetail extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -48,37 +44,19 @@ public class AddServiceController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        request.setCharacterEncoding("UTF-8");
-            String[] ids = new String[10];
-        if (request.getParameter("list_doctors") != null) {
-            ids = request.getParameter("list_doctors").split("-");
-        }
-        List<Integer> idList = new ArrayList<>();
-        
-        if (request.getParameter("list_doctors") != null) {
-            for (String i : ids) {
-                idList.add(Integer.parseInt(i));
-            }
-        }
-        
-        String serviceName = request.getParameter("service_name");
-        String serviceBrief = request.getParameter("service_desc");
-        Service service = new Service();
-        service.setServiceName(serviceName);
-        service.setServiceBrief(serviceBrief);
-        service.setServiceDescription(serviceBrief);
+        int id = Integer.parseInt(request.getParameter("Id"));
+        String page = request.getParameter("page").toString();
+        request.getSession().setAttribute("page", page);
         ServiceDAO serviceDAO = new ServiceDAOImpl();
-        serviceDAO.addService(service);
-        
+        Service service = serviceDAO.getById(id);
+
         UserDAO userDAO = new UserDAOImpl();
-        int key = serviceDAO.getIdInserted();
-        for (int k : idList) {
-            userDAO.addDoctorForService(k, key);
-        }
-        
-        ServiceManagementController controller = new ServiceManagementController();
-        controller.processRequest(request, response);
-        
+        List<Doctor> doctors = userDAO.getDoctorByServiceId(service.getServiceId());
+        request.setAttribute("service", service);
+        request.setAttribute("doctors", doctors);
+        List<Doctor> allDoctors = userDAO.getAllDoctor();
+        request.setAttribute("allDoctors", allDoctors);
+        request.getRequestDispatcher("./jsp/viewService.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

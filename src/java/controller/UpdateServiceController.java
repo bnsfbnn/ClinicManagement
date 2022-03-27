@@ -16,7 +16,6 @@ import dao.impl.UserDAOImpl;
 import entity.Doctor;
 import entity.Service;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.ServletException;
@@ -29,7 +28,8 @@ public class UpdateServiceController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-
+        request.setCharacterEncoding("UTF-8");
+        
         String serviceName = request.getParameter("service_name");
         String serviceBrief = request.getParameter("service_desc");
         int serviceId = Integer.parseInt(request.getParameter("service_id"));

@@ -12,11 +12,19 @@ package controller;
 import dao.UserDAO;
 import dao.impl.UserDAOImpl;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+/**
+ * -This class uses function addDoctorForService in
+ * <code>dao.impl.UserDAOImpl</code> to get list of
+ * <code>entity.User</code>. It's a <code>java.util.ArrayList</code>
+ * object
+ *
+ * @author Vu Tran Minh
+ */
 
 public class AddDoctorForService extends HttpServlet {
     
@@ -30,6 +38,7 @@ public class AddDoctorForService extends HttpServlet {
         userDAO.addDoctorForService(doctor, service);
         ServiceManagementController controller = new ServiceManagementController();
         controller.processRequest(request, response);
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

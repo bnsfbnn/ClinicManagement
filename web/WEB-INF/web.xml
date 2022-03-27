@@ -184,6 +184,10 @@
         <servlet-name>PostDetailController</servlet-name>
         <servlet-class>controller.PostDetailController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ViewServiceManagementListDetail</servlet-name>
+        <servlet-class>controller.ViewServiceManagementListDetail</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>HomeController</servlet-name>
         <url-pattern>/HomeController</url-pattern>
@@ -359,6 +363,10 @@
     <servlet-mapping>
         <servlet-name>PostDetailController</servlet-name>
         <url-pattern>/PostDetailController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewServiceManagementListDetail</servlet-name>
+        <url-pattern>/ViewServiceManagementListDetail</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
