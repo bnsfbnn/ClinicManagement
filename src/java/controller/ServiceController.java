@@ -35,14 +35,20 @@ import javax.servlet.http.HttpServletResponse;
 public class ServiceController extends HttpServlet {
 
     /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     * Get list services and pagging
+     * -Use function getAllService in
+     * <code>dao.impl.ServiceDAOImpl</code> to get all service
+     * <code>java.entity.Pagination</code> object that contains a series of
+     * <code>entity.ServiceDTO</code><br>
+
+     * -Set parameters: services<br/>
+     * -Finally forward user to the <code>serviceList.jsp</code>
+     * page. Processes requests for both HTTP <code>GET</code> and
+     * <code>POST</code> methods.
+     *
      * @param request servlet request
-     * @param response servlet response
+     * @param response servlet response is
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
-     * @throws NumberFormatException if page is not integer
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

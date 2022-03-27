@@ -60,7 +60,7 @@ public class HomeController extends HttpServlet {
                 if (user.getRoleId() == 1) {
                     request.getRequestDispatcher("GetAllAccountController").forward(request, response);
                 } else if (user.getRoleId() == 2) {
-                    request.getRequestDispatcher("ServiceManagementController").forward(request, response);
+                    response.sendRedirect("viewAllReservation");
                 } else if (user.getRoleId() == 3) {
                     response.sendRedirect("viewMyReservation");
                 } else {

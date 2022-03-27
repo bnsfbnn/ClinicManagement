@@ -26,12 +26,14 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
 
         <link rel="stylesheet" href="./assets/service/style.css">
+        <link href="./assets/css/header.css" rel="stylesheet" type="text/css"/>
         <title>Clinic Management</title>
     </head>
 
     <body>
         <div class="container" id="service-container">
             <!-- Header -->
+            <%@include file="components/managerHeader.jsp" %>
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
                 <div class="container-fluid">
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -48,7 +50,6 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="../ClinicManagement/ViewFeedbackManagedListController">Quản lý phản hồi</a>
                             </li>
-                            <li class="nav-item">
                             
                         </ul>
                         <div class="avatar">

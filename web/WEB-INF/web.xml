@@ -61,10 +61,6 @@
         <servlet-class>controller.DeleteDoctorFromService</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>ViewCustomerReservationDetail</servlet-name>
-        <servlet-class>controller.ViewCustomerReservationDetail</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>GetAllPackageController</servlet-name>
         <servlet-class>controller.GetAllPackageController</servlet-class>
     </servlet>
@@ -211,10 +207,6 @@
     <servlet-mapping>
         <servlet-name>DeleteDoctorFromService</servlet-name>
         <url-pattern>/DeleteDoctorFromService</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>ViewCustomerReservationDetail</servlet-name>
-        <url-pattern>/ViewCustomerReservationDetail</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>GetAllPackageController</servlet-name>

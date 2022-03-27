@@ -40,13 +40,17 @@ import javax.servlet.http.HttpSession;
  * @since 2022-03-08
  */
 public class ViewFeedBackListController extends HttpServlet {
-
+    
     /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
+     * -Use function getAllCustomerFeedback in <code>dao.impl.FeedbackDAOImpl</code> to get user
+     * by id return <code>entity.PostEntity</code> object
+     *
+     * -Set parameters: times, services, feedbacks<br/>
+     * -Finally forward user to the <code>feedback.jsp</code> page. Processes
+     * requests for both HTTP <code>GET</code> and <code>POST</code> methods.
      *
      * @param request servlet request
-     * @param response servlet response
+     * @param response servlet response is
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */

@@ -35,11 +35,18 @@ import javax.servlet.http.HttpSession;
 public class ViewCustomerReservationsList extends HttpServlet {
 
     /**
+     * -Use function getAllCustomerReservation in
+     * <code>dao.impl.reservationDAO</code> to get customer reservation list
+     * <code>java.entity.Pagination</code> object that contains a series of
+     * <code>entity.CustomerReservation</code><br>
+     *
+     * -Set parameters: reservations<br/>
+     * -Finally forward user to the <code>viewAllCustomerReservation.jsp</code> page.
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
      *
      * @param request servlet request
-     * @param response servlet response
+     * @param response servlet response is
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
@@ -74,7 +81,7 @@ public class ViewCustomerReservationsList extends HttpServlet {
                 ReservationDAO reservationDAO = new ReservationDAOImpl();
                 Pagination<CustomerReservation> reservations = reservationDAO.getAllCustomerReservation(pageIndex, pageSize, user.getUserId(), status);
                 request.setAttribute("reservations", reservations);
-                if(status == ""){
+                if (status == "") {
                     status = "Tất cả";
                 }
                 request.setAttribute("status", status);

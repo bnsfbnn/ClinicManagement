@@ -34,11 +34,18 @@ import javax.servlet.http.HttpServletResponse;
 public class SearchPostController extends HttpServlet {
 
     /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
+     * -Use function searchPost in
+     * <code>dao.impl.PostDAOImpl</code> to get all service
+     * <code>java.util.List</code> object that contains a series of
+     * <code>entity.PostEntity</code><br>
+
+     * -Set parameters: posts, search<br/>
+     * -Finally forward user to the <code>home.jsp</code>
+     * page. Processes requests for both HTTP <code>GET</code> and
+     * <code>POST</code> methods.
      *
      * @param request servlet request
-     * @param response servlet response
+     * @param response servlet response is
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */

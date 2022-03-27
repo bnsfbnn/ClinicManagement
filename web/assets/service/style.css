@@ -17,28 +17,6 @@
     max-height: 20px;
 }
 
-/* Header */
-.navbar {
-    border: 1px solid #adb5bd;
-    background-color: #fff !important;
-}
-
-.nav-link {
-    border-radius: 5px;
-    border: 1px solid #ebebeb;
-    margin-right: 10px;
-    transition: all 0.3s ease-in-out;
-    font-weight: bold;
-    padding: .75rem 1rem;
-    max-width: 150px;
-    text-align: center;
-}
-
-.nav-link:hover,
-.nav-link.active {
-    background-color: #8AB9FF;
-}
-
 .avatar {
     width: 45px;
     height: 45px;

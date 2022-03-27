@@ -43,11 +43,18 @@ import javax.servlet.http.HttpSession;
 public class AddFeedbackController extends HttpServlet {
 
     /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
+     * -Use function getExamninationByUserId in
+     * <code>dao.impl.FeedbackDAOImpl</code> to get list of
+     * <code>entity.Examination</code>. It's a <code>java.util.ArrayList</code>
+     * object
+     *
+     * -Set parameters: service, examinationId, content<br>
+     * -Finally forward user to the <code>viewReservationDetailPopup.jsp</code>
+     * page. Processes requests for both HTTP <code>GET</code> and
+     * <code>POST</code> methods.
      *
      * @param request servlet request
-     * @param response servlet response
+     * @param response servlet response is
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */

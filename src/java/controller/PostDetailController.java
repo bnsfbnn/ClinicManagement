@@ -23,8 +23,8 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  * <h1>Post Detail Controller </h1>
- * Controller to post detail . Method process data form PostDAO and
- * forward data to file view
+ * Controller to post detail . Method process data form PostDAO and forward data
+ * to file view
  * <p>
  *
  *
@@ -35,11 +35,18 @@ import javax.servlet.http.HttpServletResponse;
 public class PostDetailController extends HttpServlet {
 
     /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
+     * -Use function getUserById in <code>dao.impl.UserDAOImpl</code> to get user 
+     * by id return <code>entity.User</code> object
+     * 
+     * -Use function getPostById in <code>dao.impl.PostDAOImpl</code> to get user
+     * by id return <code>entity.PostEntity</code> object
+     *
+     * -Set parameters: post, userPost<br/>
+     * -Finally forward user to the <code>postDetail.jsp</code> page. Processes
+     * requests for both HTTP <code>GET</code> and <code>POST</code> methods.
      *
      * @param request servlet request
-     * @param response servlet response
+     * @param response servlet response is
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */

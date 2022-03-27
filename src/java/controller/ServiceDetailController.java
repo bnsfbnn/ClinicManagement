@@ -37,11 +37,22 @@ import javax.servlet.http.HttpServletResponse;
 public class ServiceDetailController extends HttpServlet {
 
     /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods. Get Service by id from client or url and forward to view
+     * -Use function getAllPackage in
+     * <code>dao.impl.PackageDAOImpl</code> to get all package
+     * <code>java.util.List</code> object that contains a series of
+     * <code>entity.ServicePackage</code><br>
+     * 
+     * -Use function getById in
+     * <code>dao.impl.ServiceDAOImpl</code> to get an service
+     * <code>java.entity.Service</code> <br/>
+     *
+     * -Set parameters: service, packages<br/>
+     * -Finally forward user to the <code>serviceDetail.jsp</code>
+     * page. Processes requests for both HTTP <code>GET</code> and
+     * <code>POST</code> methods.
      *
      * @param request servlet request
-     * @param response servlet response
+     * @param response servlet response is
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
