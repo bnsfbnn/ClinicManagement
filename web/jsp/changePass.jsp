@@ -1,9 +1,13 @@
-<%-- 
-    Document   : Register
-    Created on : Mar 8, 2022, 8:49:23 AM
-    Author     : nguye
---%>
 
+<!--
+ * Copyright(C) 2022, FPT University
+ * CMS
+ * CLINIC MANAGEMENT SYSTEM
+ *
+ * Record of change:
+ * DATE            Version          AUTHOR           DESCRIPTION
+ * 2022-03-15      1.0              NamNV         First Implement 
+/-->
 <!DOCTYPE html>
 <html>
     <head>
@@ -18,6 +22,13 @@
             .h-custom{
                 height: 960px;
             }
+            .Mật.khẩu.không.trùng.khớp\!\!\!,.Mật.khẩu.hiện.tại.không.chính.xác\!\!\!{
+                color: red;
+            }
+            .Thay.đổi.mật.khẩu.thành.công\!\!\!{
+                color: green;
+            }
+            
         </style>
     </head>
     <body>
@@ -48,7 +59,11 @@
                                     </div>
                                     <button type="submit" class="btn btn-success btn-lg mb-1">Đổi mật khẩu</button>
                                 </form>
-                                <div style="color: red"> ${messageChangePass}</div>
+                                <div class="mt-3 ml-2 ${messageChangePass}" style="font-weight: bold"> ${messageChangePass}</div>
+                               
+
+
+
                             </div>
                         </div>
                     </div>
@@ -56,4 +71,5 @@
             </div>
         </section>
     </body>
+
 </html>

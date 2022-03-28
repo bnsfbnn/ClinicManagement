@@ -81,9 +81,22 @@
             margin-right: 1rem;
         }     
         a{
-
             color: white;
         }
+        a:hover{
+            text-decoration: none;
+            color: white;
+
+
+        }
+        .Ngày.sinh.không.lớn.hơn.ngày.hiện.tại\!\!\!{
+            color:red;
+        }
+        .Cập.nhật.thành.công\!\!\!{
+            color:green;
+        }
+
+
 
     </style>
     <body>
@@ -93,82 +106,69 @@
                 <a class="nav-link active ms-0" href="#" target="__blank">Profile</a>
             </nav>
             <hr class="mt-0 mb-4">
-            <div class="row">
-                <div class="col-xl-4">
-                    <!-- Profile picture card-->
-                    <div class="card mb-4 mb-xl-0">
-                        <div class="card-header">Profile Picture</div>
-                        <div class="card-body text-center">
-                            <!-- Profile picture image-->
-                            <img class="img-account-profile rounded-circle mb-2" src="${user.avatarImage}" alt="">
-                            <!-- Profile picture help block-->
-                            <div class="small font-italic text-muted mb-4">JPG or PNG no larger than 5 MB</div>
-                            <!-- Profile picture upload button-->
-                            <button class="btn btn-primary" type="button">Upload new image</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-8">
-                    <!-- Account details card-->
-                    <div class="card mb-4">
-                        <div class="card-header">Account Details</div>
-                        <div class="card-body">
-                            <form action="../UpdateCustomerProfileController" method="POST">
-                                <!-- Form Group (username)-->
-                                <div class="mb-3">
-                                    <label class="small mb-1" for="inputUsername">Username (how your name will appear to other users on the site)</label>
-                                    <input class="form-control" id="inputUsername" type="text" placeholder="Enter your username" value="${user.username}" disabled name="username">
-                                </div>
-                                <!-- Form Row-->
-                                <div class="row gx-3 mb-3">
-                                    <!-- Form Group (first name)-->
-                                    <div class="col-md-6">
-                                        <label class="small mb-1" for="inputFirstName">Full name</label>
-                                        <input class="form-control" id="inputFirstName" type="text"  maxlength="20" placeholder="Enter your first name" value="${user.fullName}" name="fullName">
-                                    </div>
 
-                                </div>
-                                <!-- Form Row        -->
-                                <div class="row gx-3 mb-3">
-                                    <!-- Form Group (location)-->
-                                    <div class="col-md-6">
-                                        <label class="small mb-1" for="inputLocation">Location</label>
-                                        <input class="form-control" id="inputLocation" type="text" placeholder="Enter your location" maxlength="40" value="${user.address}" name="address">
-                                    </div>
-                                </div>
-                                <!-- Form Group (email address)-->
-                                <div class="mb-3">
-                                    <label class="small mb-1" for="inputEmailAddress">Email address</label>
-                                    <input class="form-control" id="inputEmailAddress" type="email" placeholder="Enter your email address"  maxlength="40"  value="${user.email}" name="email" required>
-                                </div>
-                                <!-- Form Row-->
-                                <div class="row gx-3 mb-3">
-                                    <!-- Form Group (phone number)-->
-                                    <div class="col-md-6">
-                                        <label class="small mb-1" for="inputPhone">Phone number</label>
-                                        <input class="form-control" id="inputPhone" type="tel" placeholder="Enter your phone number"   value="${user.phone}" name="phone" pattern="[0][1-9][0-9]{8}">
-                                    </div>
-                                    <!-- Form Group (birthday)-->
-                                    <div class="col-md-6">
-                                        <label class="small mb-1" for="inputBirthday">Birthday</label>
-                                        <input class="form-control" id="inputBirthday" type="date" placeholder="Enter your birthday" value="${user.birthDate}" name="date">
-                                    </div>
-                                    <div class="col-md-6" hidden="">
-                                        <label class="small mb-1" for="inputBirthday">Birthday</label>
-                                        <input class="form-control" id="inputBirthday" type="text" placeholder="Enter your birthday" value="${user.userId}" name="id">
-                                    </div>
-                                </div>
-                                <!-- Save changes button-->
-                                <button class="btn btn-primary" type="submit">Update</button>
-                                <button class="btn btn-danger" ><a href="home.jsp"> Cancel</a>
-                                </button>
 
-                            </form>
-                            <div style="color: red">${message}</div>
-                        </div>
+            <div class="col-xl-8 container-fluid">
+                <!-- Account details card-->
+                <div class="card mb-4">
+                    <div class="card-header">Thông tin tài khoản</div>
+                    <div class="card-body">
+                        <form action="../UpdateCustomerProfileController" method="POST">
+                            <!-- Form Group (username)-->
+                            <div class="mb-3">
+                                <label class="small mb-1" for="inputUsername">Tên đăng nhập</label>
+                                <input class="form-control" id="inputUsername" type="text" placeholder="Enter your username" value="${user.username}" disabled name="username">
+                            </div>
+                            <!-- Form Row-->
+                            <div class="row gx-3 mb-3">
+                                <!-- Form Group (first name)-->
+                                <div class="col-md-6">
+                                    <label class="small mb-1" for="inputFirstName">Họ và tên</label>
+                                    <input class="form-control" id="inputFirstName" type="text"  maxlength="20" placeholder="Enter your first name" value="${user.fullName}" name="fullName">
+                                </div>
+
+                            </div>
+                            <!-- Form Row        -->
+                            <div class="row gx-3 mb-3">
+                                <!-- Form Group (location)-->
+                                <div class="col-md-6">
+                                    <label class="small mb-1" for="inputLocation">Địa chỉ</label>
+                                    <input class="form-control" id="inputLocation" type="text" placeholder="Enter your location" maxlength="40" value="${user.address}" name="address">
+                                </div>
+                            </div>
+                            <!-- Form Group (email address)-->
+                            <div class="mb-3">
+                                <label class="small mb-1" for="inputEmailAddress">Địa chỉ email</label>
+                                <input class="form-control" id="inputEmailAddress" type="email" placeholder="Enter your email address"  maxlength="40"  value="${user.email}" name="email" required>
+                            </div>
+                            <!-- Form Row-->
+                            <div class="row gx-3 mb-3">
+                                <!-- Form Group (phone number)-->
+                                <div class="col-md-6">
+                                    <label class="small mb-1" for="inputPhone">Số điện thoại</label>
+                                    <input class="form-control" id="inputPhone" type="tel" placeholder="Enter your phone number"   value="${user.phone}" name="phone" pattern="[0][1-9][0-9]{8}">
+                                </div>
+                                <!-- Form Group (birthday)-->
+                                <div class="col-md-6">
+                                    <label class="small mb-1" for="inputBirthday">Ngày sinh</label>
+                                    <input class="form-control" id="inputBirthday" type="date" placeholder="Enter your birthday" value="${user.birthDate}" name="date">
+                                </div>
+                                <div class="col-md-6" hidden="">
+                                    <label class="small mb-1" for="inputBirthday">Birthday</label>
+                                    <input class="form-control" id="inputBirthday" type="text" placeholder="Enter your birthday" value="${user.userId}" name="id">
+                                </div>
+                            </div>
+                            <!-- Save changes button-->
+                            <button class="btn btn-primary" type="submit">Cập nhật</button>
+                            <button class="btn btn-danger" ><a href="../">Quay lại</a>
+                            </button>
+
+                        </form>
+                        <div class="mt-3 ${messageProfile}" style="font-weight: bold"> ${messageProfile}</div>
                     </div>
                 </div>
             </div>
+
         </div>
     </body>
 </html>

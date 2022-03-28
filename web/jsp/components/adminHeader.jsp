@@ -10,6 +10,12 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<style>
+    .button{
+        position: absolute;
+        right: 10px;
+    }
+</style>
 <html>
     <body>
         <!--Start header-->
@@ -19,6 +25,7 @@
                     <img src="./assets/images/logo.png" alt="" width="30" height="30">
                 </a>
             </div>
+            
             <div>
                 <ul class="navbar-nav">
                     <li class="nav-item active">
@@ -26,11 +33,8 @@
                     </li>
                 </ul>
             </div>
-            <div class="dropdown ml-auto">
-                <a class="avatar avatar-md p-0 show" href="">
-                    <img height="45" class="avatar-img rounded-circle" src="./assets/images/avatar01.jpg" alt="avatar">
-                </a>
-            </div>
+            <div class="button"><a class="dropdown-item bg-danger-soft-hover" href="./LogoutController">Đăng xuất</a></div>
+            
             <!--End header-->
         </header>
     </body>

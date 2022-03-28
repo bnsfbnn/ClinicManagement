@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author Dao Van Do
+ * @author 
  */
 public class PostDetailController extends HttpServlet {
 

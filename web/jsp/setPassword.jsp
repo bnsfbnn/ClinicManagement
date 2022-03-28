@@ -19,6 +19,13 @@
         .h-custom{
             height:  960px;
         }
+         a{
+            color:white;
+        }
+        a:hover{
+            color:white;
+            text-decoration: none;
+        }
     </style>
     <body>
         <section class=" h-custom" style="background-color: #8fc4b7;">
@@ -28,25 +35,37 @@
                         <div class="card rounded-3">
                             <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/img3.webp" class="w-100" style="border-top-left-radius: .3rem; border-top-right-radius: .3rem;" alt="Sample photo">
                             <div class="card-body p-4 p-md-5">
-                                <h3 class="mb-4 pb-2 pb-md-0 mb-md-5 px-md-2">Reset mật khẩu</h3>
+                                <h3 class="mb-4 pb-2 pb-md-0 mb-md-5 px-md-2">Lấy lại mật khẩu</h3>
 
-                                <form class="px-md-2" action="../ClinicManagement/ResetPasswordController" method="get">
-
+                                <form class="px-md-2" action="../ClinicManagerment/ResetPasswordController" method="get">
                                     <div class="form-outline mb-4">
-                                        <label class="form-label" for="form3Example1q">Password<span class="text-danger"> *</span></label>
+                                        <label class="form-label" for="form3Example1q">Code<span class="text-danger"> *</span></label>
+
+                                        <input type="text" id="form3Example1q" name="code" class="form-control" value="${codePass}" maxlength="4" required />
+                                    </div>
+                                    <div class="form-outline mb-4">
+                                        <label class="form-label" for="form3Example1q">Mật khẩu<span class="text-danger"> *</span></label>
 
                                         <input type="text" id="form3Example1q" name="password" class="form-control" value="${password}"  maxlength="30" required />
                                     </div>
 
                                     <div class="form-outline mb-4">
-                                        <label class="form-label" for="form3Example1q">Nhập lại Password<span class="text-danger"> *</span></label>
+                                        <label class="form-label" for="form3Example1q">Nhập lại mật khẩu<span class="text-danger"> *</span></label>
 
                                         <input type="text" id="form3Example1q"  name="re-password" value="${rePassword}" class="form-control"  maxlength="30" required />
                                     </div>
 
-                                    <button type="submit" class="btn btn-success btn-lg mb-1">Update mật khẩu</button>
+                                    <button type="submit" class="btn btn-success btn-lg mb-1">Cập nhật mật khẩu</button>
+                                    <button class="btn btn-warning btn-lg mb-1">
+                                        <a href="../ClinicManagerment">
+                                            Login
+                                        </a>
+                                    </button>
+
+
                                 </form>
-                                <div style="color: red"> ${message}</div>
+                                <div style="color: red;font-weight: bold" class="mt-3 ml-2"> ${messageReset}</div>
+
 
                             </div>
                         </div>

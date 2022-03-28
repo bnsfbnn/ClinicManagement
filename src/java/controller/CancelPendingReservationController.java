@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author Nguyễn Văn Nam
+ * @author 
  */
 public class CancelPendingReservationController extends HttpServlet {
 

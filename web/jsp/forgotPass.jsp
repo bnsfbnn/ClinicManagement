@@ -1,8 +1,13 @@
-<%-- 
-    Document   : Register
-    Created on : Mar 8, 2022, 8:49:23 AM
-    Author     : nguye
---%>
+
+<!--
+ * Copyright(C) 2022, FPT University
+ * CMS
+ * CLINIC MANAGEMENT SYSTEM
+ *
+ * Record of change:
+ * DATE            Version          AUTHOR           DESCRIPTION
+ * 2022-03-15      1.0              NamNV         First Implement 
+/-->
 
 <!DOCTYPE html>
 <html>
@@ -18,6 +23,13 @@
     <style>
         .h-custom{
             height:  960px;
+        }
+         a{
+            color:white;
+        }
+        a:hover{
+            color:white;
+            text-decoration: none;
         }
     </style>
     <body>
@@ -35,8 +47,10 @@
                                         <input type="text" id="form3Example1q" name="email" class="form-control"  maxlength="30" required />
                                     </div>
                                     <button type="submit" class="btn btn-success btn-lg mb-1">Đổi mật khẩu</button>
+                                    <button class="btn btn-danger btn-lg mb-1" ><a href="../">Quay lại</a></button>
+
                                 </form>
-                                <div style="color: red"> ${message}</div>
+                                <div style="color: red;font-weight: bold" class="mt-3 ml-2"> ${message}</div>
                             </div>
                         </div>
                     </div>

@@ -1,8 +1,13 @@
-<%-- 
-    Document   : login.jsp
-    Created on : Feb 11, 2022, 9:03:56 PM
-    Author     : nguye
---%>
+
+<!--
+ * Copyright(C) 2022, FPT University
+ * CMS
+ * CLINIC MANAGEMENT SYSTEM
+ *
+ * Record of change:
+ * DATE            Version          AUTHOR           DESCRIPTION
+ * 2022-03-08      1.0              NamNV         First Implement 
+/-->
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -19,6 +24,7 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
     </head>
+    
     <body style="background-color: #A9DFFD;">
         <section class="ftco-section">
             <div class="container">
@@ -30,7 +36,7 @@
                             <div class="login-wrap p-4 p-md-5">
                                 <div class="d-flex">
                                     <div class="w-100">
-                                        <h3 class="mb-4">Đăng nhập</h3>
+                                        <h2 class="mb-4">Đăng nhập</h2>
                                     </div>
                                 </div>
                                 <form action="LoginController" method="POST" class="signin-form">
@@ -52,7 +58,7 @@
                                 <c:if test="${messageLogin != null}">
                                     <p class="text-center">Quên mật khẩu? <a  href="./jsp/forgotPass.jsp">Quên mật khẩu</a></p>
                                 </c:if>
-                                <p style="color: red"> ${messageLogin}</p>
+                               <p style="font-weight: bold;color: red"> ${messageLogin}</p>
                             </div>
                         </div>
                     </div>

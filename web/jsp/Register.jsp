@@ -1,9 +1,13 @@
-<%-- 
-    Document   : Register
-    Created on : Mar 8, 2022, 8:49:23 AM
-    Author     : nguye
---%>
 
+<!--
+ * Copyright(C) 2022, FPT University
+ * CMS
+ * CLINIC MANAGEMENT SYSTEM
+ *
+ * Record of change:
+ * DATE            Version          AUTHOR           DESCRIPTION
+ * 2022-03-08      1.0              NamNV         First Implement 
+/-->
 <!DOCTYPE html>
 <html>
     <head>
@@ -15,6 +19,21 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <title>JSP Page</title>
     </head>
+    <style>
+        .Ngày.sinh.không.lớn.hơn.ngày.hiện.tại\!\!\!,.Mật.khẩu.không.khớp\!\!\!,.Tên.đăng.nhập.đã.tồn.tại\!\!\!{
+            color:red;
+        }
+        .Đăng.kí.tài.khoản.thành.công\!\!\!{
+            color: green
+        }
+        a{
+            color:white;
+        }
+        a:hover{
+            color:white;
+            text-decoration: none;
+        }
+    </style>
     <body>
         <section class="h-100 h-custom" style="background-color: #8fc4b7;">
             <div class="container py-5 h-100">
@@ -28,7 +47,7 @@
                                 <form class="px-md-2" action="../RegisterForCustomerController" method="get">
 
                                     <div class="form-outline mb-4">
-                                        <label class="form-label" for="form3Example1q">Username<span class="text-danger"> *</span></label>
+                                        <label class="form-label" for="form3Example1q">Tên đăng nhập<span class="text-danger"> *</span></label>
                                         <input type="text" id="form3Example1q" class="form-control"  maxlength="30" required name="username" value="${username}" />
                                     </div>
                                     <div class="form-outline mb-4">
@@ -70,7 +89,7 @@
                                     <div class="form-outline mb-4">
                                         <label class="form-label" for="form3Example1q">Điện thoại<span class="text-danger"> *</span></label>
 
-                                        <input type="tel" id="form3Example1q" class="form-control" maxlength="10" value="${phone}"  required name="phone" pattern="[0][0-9]{9}"/>
+                                        <input type="tel" id="form3Example1q" class="form-control" maxlength="10" value="${phone}"  required name="phone" pattern="[0][1-9][0-9]{8}"/>
                                     </div>
                                     <div class="form-outline mb-4">
                                         <label class="form-label" for="form3Example1q">Email<span class="text-danger"> *</span></label>
@@ -94,9 +113,10 @@
                                     </div>
 
                                     <button type="submit" class="btn btn-success btn-lg mb-1">Đăng kí</button>
+                                    <button class="btn btn-danger btn-lg mb-1" ><a href="../">Quay lại</a>
+                            </button>
                                 </form>
-                                <div style="color: red"> ${message}</div>
-
+                                        <div class="${messageRegister} mt-3 ml-2" style="font-weight: bold"> ${messageRegister}</div>
                             </div>
                         </div>
                     </div>

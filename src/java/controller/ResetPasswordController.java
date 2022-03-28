@@ -1,7 +1,11 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Copyright(C) 2022, FPT University
+ * CMS
+ * CLINIC MANAGEMENT SYSTEM
+ *
+ * Record of change:
+ * DATE            Version             AUTHOR           DESCRIPTION
+ * 2022-03-15      1.0                 namnv           First Implement 
  */
 package controller;
 
@@ -17,17 +21,34 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
+ * * -This class uses function getReservations in
+ * <code>dao.impl.reservationDAOImpl</code> to get an
+ * <code>java.util.ArrayList</code> object that contains a series of
+ * <code>entity.Reservation</code>
  *
- * @author Nguyễn Văn Nam
+ * @author Nguyen Van Nam
  */
 public class ResetPasswordController extends HttpServlet {
 
     /**
+     * -Use function getReservations in <code>dao.impl.ReservationDAOImpl</code>
+     * to get an <code>java.util.ArrayList</code> object that contains a series
+     * of <code>entity.Reservation</code><br>
+     * -Use function getDoctorsHasReservation in
+     * <code>dao.impl.ReservationDAOImpl</code> to get an
+     * <code>java.util.ArrayList</code> object that contains a series of
+     * <code>entity.User</code><br> represent for a doctor -Use function
+     * getServices in <code>dao.impl.ServiceDAOImpl</code> to get an
+     * <code>java.util.ArrayList</code> object that contains a series of
+     * <code>entity.Service</code><br>
+     *
+     * -Set parameters: viewDay, doctors, services, reservations<br>
+     * -Finally forward user to the <code>viewAllReservation.jsp</code> page.
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
      *
      * @param request servlet request
-     * @param response servlet response
+     * @param response servlet response is
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
@@ -36,23 +57,30 @@ public class ResetPasswordController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String password = request.getParameter("password");
         String rePassword = request.getParameter("re-password");
+        String code = request.getParameter("code");
 
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
 
         request.setAttribute("password", password);
+        request.setAttribute("codePass", code);
         request.setAttribute("rePassword", rePassword);
-
+        String codeSended = session.getAttribute("code").toString();
+        if (!codeSended.equals(code)) {
+            request.setAttribute("messageReset", "Code không chính xác!!!");
+            request.getRequestDispatcher("./jsp/setPassword.jsp").forward(request, response);
+            return;
+        }
         if (!password.equals(rePassword)) {
-            request.setAttribute("message", "Pass word not match!!!");
+            request.setAttribute("messageReset", "Mật khẩu không khớp!!!");
             request.getRequestDispatcher("./jsp/setPassword.jsp").forward(request, response);
             return;
         }
         UserDAO userDAO = new UserDAOImpl();
         userDAO.updatePassword(user.getUsername(), rePassword);
         session.invalidate();
-        request.setAttribute("message", "Password update success!!!");
-        request.getRequestDispatcher("./jsp/login.jsp").forward(request, response);
+        request.setAttribute("messageReset", "Cập nhật mật khẩu thành công!!!");
+        request.getRequestDispatcher("./jsp/setPassword.jsp").forward(request, response);
 
     }
 

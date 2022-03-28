@@ -1,15 +1,22 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Copyright(C) 2022, FPT University
+ * CMS
+ * CLINIC MANAGEMENT SYSTEM
+ *
+ * Record of change:
+ * DATE            Version             AUTHOR           DESCRIPTION
+ * 2022-03-15      1.0                 namnv           First Implement 
  */
 package controller;
 
+import config.EmailUtility;
 import dao.UserDAO;
 import dao.impl.UserDAOImpl;
 import entity.User;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Random;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -17,17 +24,39 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
+ * * -This class uses function getReservations in
+ * <code>dao.impl.reservationDAOImpl</code> to get an
+ * <code>java.util.ArrayList</code> object that contains a series of
+ * <code>entity.Reservation</code>
  *
- * @author Nguyễn Văn Nam
+ * @author Nguyen Van Nam
  */
 public class ForgotPasswordController extends HttpServlet {
 
+    private String host;
+    private String port;
+    private String pass;
+    private String userMail;
+
     /**
+     * -Use function getReservations in <code>dao.impl.ReservationDAOImpl</code>
+     * to get an <code>java.util.ArrayList</code> object that contains a series
+     * of <code>entity.Reservation</code><br>
+     * -Use function getDoctorsHasReservation in
+     * <code>dao.impl.ReservationDAOImpl</code> to get an
+     * <code>java.util.ArrayList</code> object that contains a series of
+     * <code>entity.User</code><br> represent for a doctor -Use function
+     * getServices in <code>dao.impl.ServiceDAOImpl</code> to get an
+     * <code>java.util.ArrayList</code> object that contains a series of
+     * <code>entity.Service</code><br>
+     *
+     * -Set parameters: viewDay, doctors, services, reservations<br>
+     * -Finally forward user to the <code>viewAllReservation.jsp</code> page.
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
      *
      * @param request servlet request
-     * @param response servlet response
+     * @param response servlet response is
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
@@ -38,13 +67,32 @@ public class ForgotPasswordController extends HttpServlet {
         UserDAO userDAO = new UserDAOImpl();
         User user = userDAO.getUserByEmail(email);
         if (user == null) {
-            request.setAttribute("message", "Email not existed !!!");
+            request.setAttribute("message", "Email không tồn tại!!!");
             request.getRequestDispatcher("./jsp/forgotPass.jsp").forward(request, response);
             return;
         }
+        ServletContext context = getServletContext();
+        userMail = context.getInitParameter("user");
+        host = context.getInitParameter("host");
+        port = context.getInitParameter("port");
+        pass = context.getInitParameter("pass");
+        String resultMessage = "";
+        Random rand = new Random();
+        String code = String.format("%04d", rand.nextInt(10000));
         HttpSession session = request.getSession();
-        session.setAttribute("user", user);
-        request.getRequestDispatcher("./jsp/setPassword.jsp").forward(request, response);
+        session.setAttribute("code", code);
+        try {
+            EmailUtility.sendEmail(host, port, userMail, pass, email, "Quên mật khẩu!!!",
+                    code);
+            resultMessage = "The e-mail was sent successfully";
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            resultMessage = "There were an error: " + ex.getMessage();
+        } finally {
+            request.setAttribute("Message", resultMessage);
+            session.setAttribute("user", user);
+            request.getRequestDispatcher("./jsp/setPassword.jsp").forward(request, response);
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

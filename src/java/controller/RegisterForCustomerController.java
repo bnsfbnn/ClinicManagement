@@ -1,7 +1,11 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Copyright(C) 2022, FPT University
+ * CMS
+ * CLINIC MANAGEMENT SYSTEM
+ *
+ * Record of change:
+ * DATE            Version             AUTHOR           DESCRIPTION
+ * 2022-02-11      1.0                 namnv           First Implement 
  */
 package controller;
 
@@ -25,10 +29,29 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
+ * * -This class uses function createAccount in
+ * <code>dao.impl.UserIml</code> to get an
+ * <code>java.util.ArrayList</code> object that contains a series of
+ * <code>entity.User</code>
  *
  * @author Nguyen Van Nam
  */
 public class RegisterForCustomerController extends HttpServlet {
+    /**
+     * -Use function createAccount in <code>dao.impl.UserIml</code> to
+     * get an <code>java.util.ArrayList</code> object that contains a series of
+     * <code>entity.User</code><br>
+     
+     * 
+     * -Set parameters: username, email, password, repassword, fullname, phone, address, date<br>
+     * -Finally forward user to the <code>viewAllReservation.jsp</code> page. Processes
+     * requests for both HTTP <code>GET</code> and <code>POST</code> methods.
+     *
+     * @param request servlet request
+     * @param response servlet response is
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ParseException {
@@ -63,15 +86,15 @@ public class RegisterForCustomerController extends HttpServlet {
                 session.setAttribute("date", date);
 
         
-        session.removeAttribute("message");
+        session.removeAttribute("messageRegister");
         if (jdate.after(today)) {
-            session.setAttribute("message", "Date invalid");
+            session.setAttribute("messageRegister", "Ngày sinh không lớn hơn ngày hiện tại!!!");
             response.sendRedirect("./jsp/Register.jsp");
             return;
         }
         
         if (!password.equals(rePassword)) {
-            session.setAttribute("message", "Password not match");
+            session.setAttribute("messageRegister", "Mật khẩu không khớp!!!");
             response.sendRedirect("./jsp/Register.jsp");
             return;
         }
@@ -90,11 +113,11 @@ public class RegisterForCustomerController extends HttpServlet {
         User user = new User(4, 0, username, email, password, fullName, sdate, gender, phone, address, "", 0);
         UserDAO userDAO = new UserDAOImpl();
         
-        if (userDAO.login(username, password) != null) {
-            session.setAttribute("message", "Username existed");
+        if (userDAO.checkAccount(username)) {
+            session.setAttribute("messageRegister", "Tên đăng nhập đã tồn tại!!!");
         } else {
             userDAO.createAccount(user);
-            session.setAttribute("message", "Register Successfully");
+            session.setAttribute("messageRegister", "Đăng kí tài khoản thành công!!!");
         }
         response.sendRedirect("./jsp/Register.jsp");
     }

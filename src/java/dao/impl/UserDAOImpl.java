@@ -183,7 +183,12 @@ public class UserDAOImpl extends DBContext implements UserDAO {
             closeConnection(connecion);
         }
     }
-
+ /*
+    * Update user from database. 
+    * 
+    * @return a list of <code>User</code> objects. It is
+    * a <code>java.util.List</code> object 
+     */
     @Override
     public void updateAccount(User user) {
         Connection connecion = null;
@@ -210,7 +215,12 @@ public class UserDAOImpl extends DBContext implements UserDAO {
             closeConnection(connecion);
         }
     }
-
+ /*
+    * Create user from database. 
+    * 
+    * @return a list of <code>User</code> objects. It is
+    * a <code>java.util.List</code> object 
+     */
     @Override
     public void createAccount(User user) {
         logger.log(Level.INFO, "Create account");
@@ -441,7 +451,12 @@ public class UserDAOImpl extends DBContext implements UserDAO {
         return false;
 
     }
-
+ /*
+    * update password from database. 
+    * 
+    * @return a list of <code>User</code> objects. It is
+    * a <code>java.util.List</code> object 
+     */
     @Override
     public void updatePassword(String username, String password) {
         Connection connecion = null;
@@ -503,5 +518,32 @@ public class UserDAOImpl extends DBContext implements UserDAO {
             closeConnection(connecion);
         }
         return null;
+    }
+
+    @Override
+    public boolean checkAccount(String account) {
+       logger.log(Level.INFO, "Login Controller");
+        Connection connecion = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet rs = null;
+
+        try {
+            connecion = getConnection();
+            // Get data
+            preparedStatement = connecion.prepareStatement("select * from users where username = ?");
+            preparedStatement.setNString(1, account);
+            rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                return true;
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            Logger.getLogger(UserDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            closeResultSet(rs);
+            closePreparedStatement(preparedStatement);
+            closeConnection(connecion);
+        }
+        return false;
     }
 }

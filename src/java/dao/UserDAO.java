@@ -58,4 +58,6 @@ public interface UserDAO {
     void updatePassword(String username, String password);
 
     User getUserByEmail(String email);
+    
+    boolean checkAccount(String account);
 }

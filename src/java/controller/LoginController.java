@@ -28,23 +28,30 @@ import javax.servlet.http.HttpSession;
  * get an <code>java.util.String</code> object that contains a series of
  * <code>entity.User</code>
  *
- * @author Nguyen Thanh Tung
+ * @author Nguyen Van Nam
  */
 public class LoginController extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
+   /**
+     * -Use function login in
+     * <code>dao.impl.userDAOImpl</code> to get user of
+     * <code>entity.User</code>. It's a <code>java.util.ArrayList</code>
+     * object
+     *
+     * -Set parameters: examination<br>
+     * -Finally forward user to the <code>login.jsp</code>
+     * page. Processes requests for both HTTP <code>GET</code> and
+     * <code>POST</code> methods.
      *
      * @param request servlet request
-     * @param response servlet response
+     * @param response servlet response is
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String username = request.getParameter("username");
+       String username = request.getParameter("username");
         String password = request.getParameter("password");
 
         UserDAO userDAO = new UserDAOImpl();
@@ -56,6 +63,11 @@ public class LoginController extends HttpServlet {
             PostDAO postDAO = new PostDAOImpl();
             List<PostEntity> posts = postDAO.getAllPost();
             request.setAttribute("posts", posts);
+            if(user.getRoleId() == 1){
+                GetAllAccountController accountController = new GetAllAccountController();
+                accountController.processRequest(request, response);
+                return;
+            }
             request.getRequestDispatcher("./jsp/home.jsp").forward(request, response);
         } else {
             request.setAttribute("messageLogin", "Tên đăng nhập hoặc mật khẩu không đúng!!!");

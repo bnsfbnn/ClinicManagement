@@ -24,7 +24,7 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author Nguyễn Văn Nam
+ * @author 
  */
 public class BookScheduleController extends HttpServlet {
 

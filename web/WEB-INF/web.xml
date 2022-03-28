@@ -149,10 +149,6 @@
         <servlet-class>controller.ForgotPasswordController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>ResetPasswordController</servlet-name>
-        <servlet-class>controller.ResetPasswordController</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>SearchPostController</servlet-name>
         <servlet-class>controller.SearchPostController</servlet-class>
     </servlet>
@@ -167,6 +163,10 @@
     <servlet>
         <servlet-name>RegisterForCustomerController</servlet-name>
         <servlet-class>controller.RegisterForCustomerController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ResetPasswordController</servlet-name>
+        <servlet-class>controller.ResetPasswordController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
@@ -317,10 +317,6 @@
         <url-pattern>/ForgotPasswordController</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>ResetPasswordController</servlet-name>
-        <url-pattern>/ResetPasswordController</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>SearchPostController</servlet-name>
         <url-pattern>/SearchPostController</url-pattern>
     </servlet-mapping>
@@ -335,6 +331,10 @@
     <servlet-mapping>
         <servlet-name>RegisterForCustomerController</servlet-name>
         <url-pattern>/RegisterForCustomerController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ResetPasswordController</servlet-name>
+        <url-pattern>/ResetPasswordController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
@@ -366,6 +366,22 @@
         <env-entry-type>java.lang.String</env-entry-type>
         <env-entry-value>123456</env-entry-value>
     </env-entry>
+    <context-param>
+        <param-name>host</param-name>
+        <param-value>smtp.gmail.com</param-value>
+    </context-param>
+    <context-param>
+        <param-name>port</param-name>
+        <param-value>587</param-value>
+    </context-param>
+    <context-param>
+        <param-name>user</param-name>
+        <param-value>haidvhe140159@fpt.edu.vn</param-value>
+    </context-param>
+    <context-param>
+        <param-name>pass</param-name>
+        <param-value>abcd18042</param-value>
+    </context-param>
     <welcome-file-list>
         <welcome-file>./jsp/login.jsp</welcome-file>
     </welcome-file-list>
