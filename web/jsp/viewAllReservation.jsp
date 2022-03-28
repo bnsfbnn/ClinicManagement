@@ -17,6 +17,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Clinic Management System</title>
         <link href="./assets/css/header.css" rel="stylesheet" type="text/css"/>
+        <link href="./assets/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
         <link href="./assets/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <link href="./assets/css/jquery-ui.min.css" rel="stylesheet" type="text/css"/>
         <link href="./assets/css/jquery-ui.structure.min.css" rel="stylesheet" type="text/css"/>
@@ -168,8 +169,10 @@
             <!--End main content-->
         </div>
         <!--Import js lib-->
+        <script src="./assets/js/jquery-3.6.0.min.js" crossorigin="anonymous"></script>
         <script src="./assets/js/jquery-3.6.0.min.js" type="text/javascript"></script>
         <script src="./assets/js/popper.js" type="text/javascript"></script>
+        <script src="./assets/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="./assets/js/bootstrap.min.js" type="text/javascript"></script>
         <script src="./assets/js/jquery-ui.min.js" type="text/javascript"></script>
         <!--Import js code-->

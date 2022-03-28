@@ -23,20 +23,20 @@
             </div>
             <div>
                 <ul class="navbar-nav">
-                    <li class="nav-item active">
-                        <a class="nav-link py-3" href="./viewAllReservation">Xem tất danh sách đặt chỗ<span class="sr-only">(current)</span></a>
+                    <li class="nav-item">
+                        <a class="nav-link py-3" href="./viewAllReservation">Xem tất danh sách đặt chỗ</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link py-3" href="#">Xác nhận lịch đặt chỗ</a>
+                        <a class="nav-link py-3" href="">Xác nhận lịch đặt chỗ</a>
                     </li>
                     <li class=nav-item">
-                        <a class="nav-link py-3" href="#">Quản lý dịch vụ</a>
+                        <a class="nav-link py-3" href="../ClinicManagement/ServiceManagementController">Quản lý dịch vụ</a>
                     </li>
                     <li class=nav-item">
-                        <a class="nav-link py-3" href="#">Quản lý Phản hồi</a>
+                        <a class="nav-link py-3" href="../ClinicManagement/ViewFeedbackManagedListController">Quản lý Phản hồi</a>
                     </li>
                     <li class=nav-item">
-                        <a class="nav-link py-3" href="#">Duyệt lịch đặt chỗ</a>
+                        <a class="nav-link py-3" href="">Duyệt lịch đặt chỗ</a>
                     </li>
                 </ul>
             </div>

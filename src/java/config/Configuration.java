@@ -10,9 +10,9 @@
 package config;
 
 /**
- *
+ * 
  * @author Thanh Tung
  */
 public class Configuration {
-    public static final int PAGE_SIZE = 5;
+    public static final int PAGE_SIZE = 1; // size of one page
 }

@@ -15,13 +15,12 @@
         <!-- Required meta tags -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-
         <!-- Bootstrap CSS -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
               integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
         <!-- Bootstrap Icon -->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
-
+        <link href="./assets/css/header.css" rel="stylesheet" type="text/css"/>
         <title>Clinic Management</title>
     </head>
 
@@ -44,42 +43,6 @@
                 border-color: transparent;
                 padding: 0 0;
                 max-height: 20px;
-            }
-
-            /* Header */
-            .navbar {
-                border: 1px solid #adb5bd;
-                background-color: #fff !important;
-            }
-
-            .nav-link {
-                border-radius: 5px;
-                border: 1px solid #ebebeb;
-                margin-right: 10px;
-                transition: all 0.3s ease-in-out;
-                font-weight: bold;
-                padding: .75rem 1rem;
-                max-width: 150px;
-                text-align: center;
-            }
-
-            .nav-link:hover,
-            .nav-link.active {
-                background-color: #8AB9FF;
-            }
-
-            .avatar {
-                width: 45px;
-                height: 45px;
-                line-height: 45px;
-                border-radius: 50%;
-            }
-
-            .avatar > img {
-                display: block;
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
             }
 
             /* Title */
@@ -134,33 +97,9 @@
             }
 
         </style>
+        <%@include file="components/managerHeader.jsp" %>   
         <div class="container" id="service-container">
             <!-- Header -->
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                <div class="container-fluid">
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#navbarClinicHeader" aria-controls="navbarClinicHeader" aria-expanded="false"
-                            aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarClinicHeader">
-                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                            
-                            <li class="nav-item">
-                                <a class="nav-link" href="../ClinicManagement/ServiceManagementController?page=${pageIndex}">Quản lý dịch vụ</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link active" href="#">Quản lý phản hồi</a>
-                            </li>
-                            
-                        </ul>
-                        <div class="avatar">
-                            <img src="https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png" alt="avatar">
-                        </div>
-                    </div>
-                </div>
-            </nav>
-
             <h1 id="title">
                 Dach sách phản hồi
             </h1>
@@ -277,7 +216,7 @@
                                             </div>
 
                                         </div>
-                                        
+
                                         <div class="col-12 mb-3">
                                             <textarea class="form-control" readonly rows="5" id="feedback">
                                             </textarea>
@@ -336,13 +275,13 @@
                                             </div>
 
                                         </div>
-                                        
+
                                         <div class="col-12 mb-3">
                                             <div id='feedback'>
-                                               
+
                                             </div>
-<!--                                            <textarea class="form-control" readonly rows="5" id="feedback">
-                                            </textarea>-->
+                                            <!--                                            <textarea class="form-control" readonly rows="5" id="feedback">
+                                                                                        </textarea>-->
                                         </div>
                                     </div>
                                 </div>
@@ -353,7 +292,6 @@
 
 
             </div>
-
             <!-- Bootstrap Bundle -->
             <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
                     integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
@@ -361,87 +299,90 @@
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
                     integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
             crossorigin="anonymous"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js" integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
+
+            <script src="./index.js"></script>
 
             <script>
-                                                    function showFeedbackModal(data) {
-                                                    $('#feedbackModal #username').html(data?.username)
-                                                            $('#feedbackModal #customer_name').html(data?.customer_name)
-                                                            $('#feedbackModal #service_name').html(data?.service_name)
-                                                            $('#feedbackModal #date_time').html(data?.date_time)
-                                                            $('#feedbackModal #feedback').html(data?.feedback)
-                                                            
-                                                            $('#feedbackModal #serviceId').val(data?.serviceId)
-                                                            $('#feedbackModal #examinationId').val(data?.serviceId)
+                                                function showFeedbackModal(data) {
+                                                $('#feedbackModal #username').html(data?.username)
+                                                        $('#feedbackModal #customer_name').html(data?.customer_name)
+                                                        $('#feedbackModal #service_name').html(data?.service_name)
+                                                        $('#feedbackModal #date_time').html(data?.date_time)
+                                                        $('#feedbackModal #feedback').html(data?.feedback)
 
-                                                            const fbModal = new bootstrap.Modal(document.getElementById('feedbackModal'), {})
-                                                            fbModal.show()
-                                                    }
+                                                        $('#feedbackModal #serviceId').val(data?.serviceId)
+                                                        $('#feedbackModal #examinationId').val(data?.serviceId)
 
-                                                    function viewFeedbackModal(data) {
-                                                        
-                                                        
-                                                        
-                                                    $('#viewfeedbackModal #username').html(data?.username)
-                                                            $('#viewfeedbackModal #customer_name').html(data?.customer_name)
-                                                            $('#viewfeedbackModal #service_name').html(data?.service_name)
-                                                            $('#viewfeedbackModal #date_time').html(data?.date_time)
+                                                        const fbModal = new bootstrap.Modal(document.getElementById('feedbackModal'), {})
+                                                        fbModal.show()
+                                                }
+
+                                                function viewFeedbackModal(data) {
+
+
+
+                                                $('#viewfeedbackModal #username').html(data?.username)
+                                                        $('#viewfeedbackModal #customer_name').html(data?.customer_name)
+                                                        $('#viewfeedbackModal #service_name').html(data?.service_name)
+                                                        $('#viewfeedbackModal #date_time').html(data?.date_time)
 //                                                            $('#viewfeedbackModal #feedback').html(data?.feedback)
 
-                                                            const customerReply = document.createElement('p')
+                                                        const customerReply = document.createElement('p')
                                                         customerReply.innerHTML = 'Customer: ' + data?.feedback
                                                         $('#viewfeedbackModal #feedback').html('')
                                                         $('#viewfeedbackModal #feedback').append(customerReply)
-                                                        
+
                                                         const listDocReplyStr = data?.feedbackDoc
                                                         if (listDocReplyStr) {
-                                                            let listDocReplyArr = listDocReplyStr.replaceAll('[', '').replaceAll(']', '').split(', ')
-                                                            if (listDocReplyArr.length > 0) 
-                                                                for(let i = 0; i < listDocReplyArr.length; i++) {
-                                                                    const p = document.createElement('p')
-                                                                    p.innerHTML = 'Doctor: ' + listDocReplyArr[i]
-                                                                    $('#viewfeedbackModal #feedback').append(p)
-                                                                }
-                                                        }
-                                                        
-                                                        
+                                                let listDocReplyArr = listDocReplyStr.replaceAll('[', '').replaceAll(']', '').split(', ')
+                                                        if (listDocReplyArr.length > 0)
+                                                        for (let i = 0; i < listDocReplyArr.length; i++) {
+                                                const p = document.createElement('p')
+                                                        p.innerHTML = 'Doctor: ' + listDocReplyArr[i]
+                                                        $('#viewfeedbackModal #feedback').append(p)
+                                                }
+                                                }
 
-                                                            const fbModal = new bootstrap.Modal(document.getElementById('viewfeedbackModal'), {})
-                                                            fbModal.show()
-                                                    }
-                                                    function onChange(e) {
-                                                        const value = e.target.value
+
+
+                                                const fbModal = new bootstrap.Modal(document.getElementById('viewfeedbackModal'), {})
+                                                        fbModal.show()
+                                                }
+                                                function onChange(e) {
+                                                const value = e.target.value
                                                         const spanError = document.getElementById('error')
                                                         const textLimit = 'Ban da nhap qua 300 ky tu'
                                                         const textInvalid = 'Khong duoc de trong truong nay'
-                                                       
+
                                                         if (value.length > 0 && value.trim().length === 0) {
-                                                            spanError.classList.remove('d-none')
-                                                            spanError.classList.add('d-block')
-                                                            spanError.innerHTML = textInvalid
-                                                            $('#feedbackModal #btn-reply').attr('disabled', true)
-                                                        } else if (value.length > 0 && value.trim().length > 0){
-                                                             if (spanError.innerHTML === textInvalid) {
-                                                                spanError.classList.add('d-none')
-                                                                spanError.classList.remove('d-block')
-                                                                $('#feedbackModal #btn-reply').removeAttr('disabled')
-                                                            }
-                                                        }
-                                                        
-                                                         if (value.length > 300) {
-                                                            spanError.classList.remove('d-none')
-                                                            spanError.classList.add('d-block')
-                                                            spanError.innerHTML = textLimit
-                                                            $('#feedbackModal #btn-reply').attr('disabled', true)
-                                                        } else {
-                                                            if (spanError.innerHTML === textLimit) {
-                                                                spanError.classList.add('d-none')
-                                                                spanError.classList.remove('d-block')
-                                                                $('#feedbackModal #btn-reply').removeAttr('disabled')
-                                                            }
-                                                        }
-                                                        
-                                                    }
-                                                    
+                                                spanError.classList.remove('d-none')
+                                                        spanError.classList.add('d-block')
+                                                        spanError.innerHTML = textInvalid
+                                                        $('#feedbackModal #btn-reply').attr('disabled', true)
+                                                } else if (value.length > 0 && value.trim().length > 0){
+                                                if (spanError.innerHTML === textInvalid) {
+                                                spanError.classList.add('d-none')
+                                                        spanError.classList.remove('d-block')
+                                                        $('#feedbackModal #btn-reply').removeAttr('disabled')
+                                                }
+                                                }
+
+                                                if (value.length > 300) {
+                                                spanError.classList.remove('d-none')
+                                                        spanError.classList.add('d-block')
+                                                        spanError.innerHTML = textLimit
+                                                        $('#feedbackModal #btn-reply').attr('disabled', true)
+                                                } else {
+                                                if (spanError.innerHTML === textLimit) {
+                                                spanError.classList.add('d-none')
+                                                        spanError.classList.remove('d-block')
+                                                        $('#feedbackModal #btn-reply').removeAttr('disabled')
+                                                }
+                                                }
+
+                                                }
+
             </script>
     </body>
 </html>

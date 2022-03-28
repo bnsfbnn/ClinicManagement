@@ -31,34 +31,10 @@
     </head>
 
     <body>
+        <%@include file="components/managerHeader.jsp" %>
         <div class="container" id="service-container">
             <!-- Header -->
-            <%@include file="components/managerHeader.jsp" %>
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                <div class="container-fluid">
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#navbarClinicHeader" aria-controls="navbarClinicHeader" aria-expanded="false"
-                            aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarClinicHeader">
-                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                            
-                            <li class="nav-item">
-                                <a class="nav-link active" href="#">Quản lý dịch vụ</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="../ClinicManagement/ViewFeedbackManagedListController">Quản lý phản hồi</a>
-                            </li>
-                            
-                        </ul>
-                        <div class="avatar">
-                            <img src="https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png" alt="avatar">
-                        </div>
-                    </div>
-                </div>
-            </nav>
-
+            
             <h1 id="title">
                 Dach sách dịch vụ
             </h1>
